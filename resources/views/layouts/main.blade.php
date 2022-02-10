@@ -35,15 +35,15 @@
             <li class="nav-item active">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Admin Dashboard</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="/employees">
-                    <span>Employee Management</span></a>
+                <a class="nav-link" href="/frontend/home">
+                    <span>User Dashboard</span></a>
             </li>
 
             <!-- Divider -->
@@ -58,13 +58,14 @@
                 </a>
                 <div id="collapseSystem" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('countries.index') }}">Country</a>
-                        <a class="collapse-item" href="{{ route('states.index') }}">State</a>
+                        <a class="collapse-item" href="{{ route('countries.index') }}">Indicators Templates</a>
+                        <a class="collapse-item" href="{{ route('states.index') }}">View Reports</a>
                         <a class="collapse-item" href="{{ route('departments.index') }}">Department</a>
                         <a class="collapse-item" href="{{ route('cities.index') }}">City</a>
                     </div>
                 </div>
             </li>
+            
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -145,7 +146,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; Judiciary {{date('Y')}}</span>
                     </div>
                 </div>
             </footer>

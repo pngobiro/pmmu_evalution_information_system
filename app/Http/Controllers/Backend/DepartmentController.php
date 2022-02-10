@@ -20,7 +20,7 @@ class DepartmentController extends Controller
         if ($request->has('search')) {
             $departments = Department::where('name', 'like', "%{$request->search}%")->get();
         }
-        return view('departments.index', compact('departments'));
+        return view('admin.departments.index', compact('departments'));
     }
 
     /**

@@ -22,7 +22,7 @@ class CityController extends Controller
             $cities = City::where('name', 'like', "%{$request->search}%")->get();
         }
 
-        return view('cities.index', compact('cities'));
+        return view('admin.cities.index', compact('cities'));
     }
 
     /**

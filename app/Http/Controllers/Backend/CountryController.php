@@ -16,7 +16,7 @@ class CountryController extends Controller
             $countries = Country::where('name', 'like', "%{$request->search}%")->orWhere('country_code', 'like', "%{$request->search}%")->get();
         }
 
-        return view('countries.index', compact('countries'));
+        return view('admin.countries.index', compact('countries'));
     }
 
     public function create()

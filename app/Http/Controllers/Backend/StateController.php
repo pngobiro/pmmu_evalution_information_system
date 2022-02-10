@@ -22,7 +22,7 @@ class StateController extends Controller
             $states = State::where('name', 'like', "%{$request->search}%")->get();
         }
 
-        return view('states.index', compact('states'));
+        return view('admin.states.index', compact('states'));
     }
 
     /**
