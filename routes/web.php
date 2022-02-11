@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\CityController;
 use App\Http\Controllers\Backend\CountryController;
 use App\Http\Controllers\Backend\DepartmentController;
 use App\Http\Controllers\Backend\StateController;
+use App\Http\Controllers\Backend\ReportsController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\AdminHomeController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -30,6 +31,7 @@ Auth::routes();
 
 Route::get('admin-dashboard', [AdminHomeController::class, 'index'])->name('admin-dashboard');
 Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
+Route::get('reports', [ReportsController::class, 'index'])->name('reports');
 Route::resource('users', UserController::class);
 Route::resource('countries', CountryController::class);
 Route::resource('states', StateController::class);

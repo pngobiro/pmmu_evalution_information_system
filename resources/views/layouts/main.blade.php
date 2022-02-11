@@ -33,7 +33,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Admin Dashboard</span></a>
             </li>
@@ -59,7 +59,7 @@
                 <div id="collapseSystem" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('countries.index') }}">Indicators Templates</a>
-                        <a class="collapse-item" href="{{ route('states.index') }}">View Reports</a>
+                        <a class="collapse-item" href="{{ route('reports') }}">View Reports</a>
                         <a class="collapse-item" href="{{ route('departments.index') }}">Manage Court Rank</a>
                         <a class="collapse-item" href="{{ route('cities.index') }}">Manage Units</a>
                     </div>
