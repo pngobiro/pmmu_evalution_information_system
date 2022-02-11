@@ -7,6 +7,8 @@ use App\Http\Controllers\Backend\CountryController;
 use App\Http\Controllers\Backend\DepartmentController;
 use App\Http\Controllers\Backend\StateController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\AdminHomeController;
+use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,8 +28,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('admin/home', [App\Http\Controllers\AdminHomeController::class, 'index'])->name('admin-home');
-Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('admin-dashboard', [AdminHomeController::class, 'index'])->name('admin-dashboard');
+Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
 Route::resource('users', UserController::class);
 Route::resource('countries', CountryController::class);
 Route::resource('states', StateController::class);

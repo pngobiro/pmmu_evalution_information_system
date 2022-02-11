@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
@@ -22,7 +23,7 @@ class UserController extends Controller
         if ($request->has('search')) {
             $users = User::where('username', 'like', "%{$request->search}%")->orWhere('email', 'like', "%{$request->search}%")->get();
         }
-        return view('users.index', compact('users'));
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -32,7 +33,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('admin.users.create');
     }
 
     /**
@@ -51,7 +52,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('users.index')->with('message', 'User Register Succesfully');
+        return redirect()->route('admin.users.index')->with('message', 'User Register Succesfully');
     }
 
     /**
@@ -62,7 +63,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        return view('admin.users.edit', compact('user'));
     }
 
     /**

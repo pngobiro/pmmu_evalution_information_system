@@ -35,15 +35,15 @@
             <li class="nav-item active">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Admin Dashboard</span></a>
+                    <span>Dashboard</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="dashboard">
-                    <span>User Dashboard</span></a>
+                <a class="nav-link" href="admin-dashboard">
+                    <span>Go to Admin Dashboard</span></a>
             </li>
 
             <!-- Divider -->
@@ -54,14 +54,13 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSystem"
                     aria-expanded="true" aria-controls="collapseSystem">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>System Management</span>
+                    <span>Menu</span>
                 </a>
                 <div id="collapseSystem" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('countries.index') }}">Indicators Templates</a>
+            
                         <a class="collapse-item" href="{{ route('states.index') }}">View Reports</a>
-                        <a class="collapse-item" href="{{ route('departments.index') }}">Manage Court Rank</a>
-                        <a class="collapse-item" href="{{ route('cities.index') }}">Manage Units</a>
+                    
                     </div>
                 </div>
             </li>
@@ -71,18 +70,8 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser"
-                    aria-expanded="true" aria-controls="collapseUser">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Users Management</span>
-                </a>
-                <div id="collapseUser" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('users.index') }}">Users</a>
-                        <a class="collapse-item" href="cards.html">Role</a>
-                        <a class="collapse-item" href="cards.html">Permission</a>
-                    </div>
-                </div>
+            
+             
             </li>
         </ul>
         <!-- End of Sidebar -->
