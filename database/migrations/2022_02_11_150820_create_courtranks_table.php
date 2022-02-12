@@ -15,6 +15,7 @@ class CreateCourtranksTable extends Migration
     {
         Schema::create('courtranks', function (Blueprint $table) {
             $table->id();
+            $table -> string('name')
             $table->timestamps();
         });
     }
