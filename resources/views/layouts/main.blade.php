@@ -60,7 +60,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('countries.index') }}">Indicators Templates</a>
                         <a class="collapse-item" href="{{ route('reports') }}">View Reports</a>
-                        <a class="collapse-item" href="{{ route('departments.index') }}">Manage Court Rank</a>
+                        <a class="collapse-item" href="{{ route('departments.index') }}">Manage Unit Rank</a>
                         <a class="collapse-item" href="{{ route('cities.index') }}">Manage Units</a>
                     </div>
                 </div>
@@ -146,7 +146,8 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Judiciary {{date('Y')}}</span>
+                        <span>Copyright &copy; {{date('Y')}} The Chief Registrar of The Judiciary, Supreme Court of Kenya,
+                            City Hall Way, P.O. BOX 30041-00100, Nairobi-Kenya. info@judiciary.go.ke  </span>
                     </div>
                 </div>
             </footer>

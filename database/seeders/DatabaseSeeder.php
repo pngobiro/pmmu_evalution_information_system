@@ -16,6 +16,11 @@ class DatabaseSeeder extends Seeder
        
         $this->call([
             UserSeeder::class,
+            FinancialYearSeeder::class,
+            UnitRankSeeder::class,
+            UnitSeeder::class,
+            IndicatorTypeSeeder::class,
+            UnitOfMeasureSeeder::class
         ]);
 
     }

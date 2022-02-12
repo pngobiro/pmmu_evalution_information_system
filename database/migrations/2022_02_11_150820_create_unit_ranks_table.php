@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCourtranksTable extends Migration
+class CreateUnitRanksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateCourtranksTable extends Migration
      */
     public function up()
     {
-        Schema::create('courtranks', function (Blueprint $table) {
+        Schema::create('unit_ranks', function (Blueprint $table) {
             $table->id();
-            $table -> string('name')
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateCourtranksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('courtranks');
+        Schema::dropIfExists('unit_ranks');
     }
 }

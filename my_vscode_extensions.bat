@@ -1,0 +1,14 @@
+code --install-extension afmicc.GetterAndSetterGenerator
+code --install-extension amiralizadeh9480.laravel-extra-intellisense
+code --install-extension austenc.laravel-blade-spacer
+code --install-extension codingyu.laravel-goto-view
+code --install-extension CoenraadS.bracket-pair-colorizer
+code --install-extension CoenraadS.bracket-pair-colorizer-2
+code --install-extension emmanuelbeziat.vscode-great-icons
+code --install-extension michelemelluso.code-beautifier
+code --install-extension onecentlin.laravel-blade
+code --install-extension onecentlin.laravel5-snippets
+code --install-extension ryannaddy.laravel-artisan
+code --install-extension xabikos.JavaScriptSnippets
+code --install-extension ysemeniuk.emmet-live
+code --install-extension zobo.php-intellisense

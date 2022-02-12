@@ -99,7 +99,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span
-                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->username }}</span>
+                                    class="mr-2 d-none d-lg-inline text-gray-600 big">{{ Auth::user()->username }}</span>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -109,6 +109,8 @@
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     {{ __('Logout') }}
                                 </a>
+
+                                
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
@@ -135,7 +137,8 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Judiciary {{date('Y')}}</span>
+                        <span>Copyright &copy; {{date('Y')}} The Chief Registrar of The Judiciary, Supreme Court of Kenya,
+                            City Hall Way, P.O. BOX 30041-00100, Nairobi-Kenya. info@judiciary.go.ke  </span>
                     </div>
                 </div>
             </footer>
