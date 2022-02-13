@@ -10,6 +10,13 @@ use App\Http\Controllers\Backend\ReportsController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\AdminHomeController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Backend\UnitRankController;
+use App\Http\Controllers\Backend\UnitController;
+use App\Http\Controllers\Backend\FinancialYearController ;
+use App\Http\Controllers\Backend\IndicatorGroupController ;
+
+
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,11 +40,11 @@ Route::get('admin-dashboard', [AdminHomeController::class, 'index'])->name('admi
 Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
 Route::get('reports', [ReportsController::class, 'index'])->name('reports');
 Route::resource('users', UserController::class);
-Route::resource('countries', CountryController::class);
-Route::resource('states', StateController::class);
-Route::resource('cities', CityController::class);
-Route::resource('departments', DepartmentController::class);
+Route::resource('unit-ranks', UnitRankController::class);
 
+Route::resource('unit', UnitController::class);
+Route::resource('fy', FinancialYearController::class);
+Route::resource('indicator-groups', IndicatorGroupController::class);
 
 
 Route::post('users/{user}/change-password', [ChangePasswordController::class, 'change_password'])->name('users.change.password');

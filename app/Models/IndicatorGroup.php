@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class IndicatorGroup extends Model
 {
     use HasFactory;
+
+
+
+    public function indicators()
+    {
+        return $this->hasMany(indicators::class);
+    }
+
+
 }

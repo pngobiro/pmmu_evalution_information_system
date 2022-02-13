@@ -58,10 +58,10 @@
                 </a>
                 <div id="collapseSystem" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('countries.index') }}">Indicators Templates</a>
+                        <a class="collapse-item" href="{{ route('reports') }}">Indicators Templates</a>
                         <a class="collapse-item" href="{{ route('reports') }}">View Reports</a>
-                        <a class="collapse-item" href="{{ route('departments.index') }}">Manage Unit Rank</a>
-                        <a class="collapse-item" href="{{ route('cities.index') }}">Manage Units</a>
+                        <a class="collapse-item" href="{{ route('unit-ranks.index') }}">Manage Unit Rank</a>
+                        <a class="collapse-item" href="{{ route('reports') }}">Manage Units</a>
                     </div>
                 </div>
             </li>

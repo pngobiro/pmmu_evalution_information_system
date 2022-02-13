@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Unit;
 
 class CreateIndicatorGroupsTable extends Migration
 {
@@ -15,9 +16,11 @@ class CreateIndicatorGroupsTable extends Migration
     {
         Schema::create('indicator_groups', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('name');
             $table->mediumText('description');
+            $table->integer('order');
+            $table->foreignIdFor(Unit::class);
+            $table->timestamps();
         
         });
     }
