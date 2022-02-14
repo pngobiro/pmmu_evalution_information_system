@@ -41,12 +41,12 @@
                         <tr>
                             <th scope="col">#Id</th>
                             <th scope="col">Indicator </th>
-                            <th scope="col">Indicator Type</th>
+                            <th scope="col">IndicatorType</th>
                             <th scope="col">Unit of Meaure</th>
                             <th scope="col">Weight</th>
                             <th scope="col">Target </th>
                             <th scope="col">Achivement</th>
-                            <th scope="col">Add Remarks </th>
+                            <th scope="col">Remarks </th>
   
               
                         </tr>
