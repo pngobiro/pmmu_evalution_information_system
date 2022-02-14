@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             UnitSeeder::class,
             IndicatorTypeSeeder::class,
             UnitOfMeasureSeeder::class
+            IndicatorGroupSeeder::class
         ]);
 
     }

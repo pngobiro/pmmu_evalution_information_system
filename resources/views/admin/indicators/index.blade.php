@@ -4,7 +4,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Indicator Groups</h1>
+        <h1 class="h3 mb-0 text-gray-800">Indicators</h1>
     </div>
     <div class="row">
         <div class="card  mx-auto">
@@ -18,11 +18,11 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <form method="GET" action="{{ route('indicator-groups.index') }}">
+                        <form method="GET" action="{{ route('indicators.index') }}">
                             <div class="form-row align-items-center">
                                 <div class="col">
                                     <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
-                                        placeholder="Search Indicator Group">
+                                        placeholder="Search Indicator" >
                                 </div>
                                 <div class="col">
                                     <button type="submit" class="btn btn-primary mb-2">Search</button>
@@ -31,7 +31,7 @@
                         </form>
                     </div>
                     <div>
-                        <a href="{{ route('indicator-groups.create') }}" class="btn btn-primary mb-2">Create</a>
+                        <a href="{{ route('fy.create') }}" class="btn btn-primary mb-2">Create</a>
                     </div>
                 </div>
             </div>
@@ -40,20 +40,32 @@
                     <thead>
                         <tr>
                             <th scope="col">#Id</th>
-                            <th scope="col">Indicator</th>
-                            <th scope="col">View</th>
+                            <th scope="col">Indicator </th>
+                            <th scope="col">Indicator Type</th>
+                            <th scope="col">Unit of Meaure</th>
+                            <th scope="col">Weight</th>
+                            <th scope="col">Target </th>
+                            <th scope="col">Achivement</th>
+                            <th scope="col">Add Remarks </th>
+  
               
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($indicatorgroups as $indicator)
+                        @foreach ($indicators as $indicator)
                             <tr>
                                 <th scope="row">{{ $indicator->id }}</th>
                                 <td>{{ $indicator->name }}</td>
+                                <td>{{ $indicator->indicator_type_id }}</td>
+                                <td>{{ $indicator->indicator_unit_of_measure_id }}</td>
+                                <td>{{ $indicator->indicator_weight }}</td>
+                                <td>{{ $indicator->indicator_target  }}</td>
+                                <td>{{ $indicator->indicator_achivement }}</td>
+                                <td>{{ $indicator->remarks }}</td>
                              
                              
                         
-                                <td><a href="{{ route('indicators.index' , $indicator->id) }}" class="btn btn-success">Indicators</a></td>
+                             
                             </tr>
                         @endforeach
                     </tbody>

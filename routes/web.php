@@ -12,8 +12,11 @@ use App\Http\Controllers\Backend\AdminHomeController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Backend\UnitRankController;
 use App\Http\Controllers\Backend\UnitController;
-use App\Http\Controllers\Backend\FinancialYearController ;
-use App\Http\Controllers\Backend\IndicatorGroupController ;
+use App\Http\Controllers\Backend\FinancialYearController;
+use App\Http\Controllers\Backend\IndicatorGroupController;
+use App\Http\Controllers\Backend\IndicatorController;
+
+
 
 
 
@@ -45,6 +48,7 @@ Route::resource('unit-ranks', UnitRankController::class);
 Route::resource('unit', UnitController::class);
 Route::resource('fy', FinancialYearController::class);
 Route::resource('indicator-groups', IndicatorGroupController::class);
+Route::resource('indicators', IndicatorController::class);
 
 
 Route::post('users/{user}/change-password', [ChangePasswordController::class, 'change_password'])->name('users.change.password');
