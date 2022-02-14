@@ -41,6 +41,8 @@ Auth::routes();
 
 Route::get('admin-dashboard', [AdminHomeController::class, 'index'])->name('admin-dashboard');
 Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
+
+
 Route::get('reports', [ReportsController::class, 'index'])->name('reports');
 Route::resource('users', UserController::class);
 Route::resource('unit-ranks', UnitRankController::class);

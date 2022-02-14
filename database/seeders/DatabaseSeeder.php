@@ -20,8 +20,9 @@ class DatabaseSeeder extends Seeder
             UnitRankSeeder::class,
             UnitSeeder::class,
             IndicatorTypeSeeder::class,
-            UnitOfMeasureSeeder::class
-            IndicatorGroupSeeder::class
+            UnitOfMeasureSeeder::class,
+            IndicatorGroupSeeder::class,
+            IndicatorSeeder::class
         ]);
 
     }

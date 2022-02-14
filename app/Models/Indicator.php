@@ -10,17 +10,17 @@ class Indicator extends Model
     use HasFactory;
 
 
-    public function indicator_group()
+    public function group()
     {
         return $this->belongsTo(IndicatorGroup::class);
     }
 
-    public function indicator_type()
+    public function type()
     {
         return $this->belongsTo(IndicatorType::class);
     }
 
-    public function indicator_unit_of_measure()
+    public function unit_of_measure()
     {
         return $this->belongsTo(IndicatorUnitOfMeasure::class);
     }

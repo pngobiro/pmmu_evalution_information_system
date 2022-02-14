@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Indicator;
+use App\Models\IndicatorGroup;
+
 use Illuminate\Http\Request;
 
 class IndicatorController extends Controller
@@ -14,11 +16,15 @@ class IndicatorController extends Controller
      */
     public function index(Request $request)
     {
-        $indicators = Indicator::all();
+
+        $indicators = IndicatorGroup::find(1)->indicators;
 
         if ($request->has('search')) {
 
-            $indicators = Indicator::where('name', 'like', "%{$request->search}%")->get();
+
+            $indicators = IndicatorGroup::find(1)->indicators()
+            ->where('name', 'like', "%{$request->search}%")
+            ->get();
 
         }
 
