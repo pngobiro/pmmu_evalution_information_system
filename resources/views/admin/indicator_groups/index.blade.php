@@ -6,6 +6,38 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Indicator Groups</h1>
     </div>
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+       
+        <table border=2 class="table">
+            <thead>
+                <tr>
+            
+                    <th scope="col">  Unit Type </th>
+                    <th> Unit </th>
+                    <th> Unit </th>
+      
+                </tr>
+            </thead>
+            <tbody>
+
+            <tbody>
+
+            <tr>
+
+                <th>Magistate </th>
+                <th>Unit </th>
+                <th> Financial Year </th>
+
+            </tr>    
+
+        </tbody>
+    </table>
+
+
+
+    </div>
+
     <div class="row">
         <div class="card  mx-auto">
             <div>
@@ -36,24 +68,80 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="table">
+                <table border=2 class="table">
                     <thead>
                         <tr>
-                            <th scope="col">#Id</th>
-                            <th scope="col">Indicator</th>
-                            <th scope="col">View</th>
+                          
+                            <th scope="col"> </th>
+       
               
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($indicatorgroups as $indicator)
+                        @forelse ($indicatorgroups as $group)
                             <tr>
-                                <th scope="row">{{ $indicator->id }}</th>
-                                <td>{{ $indicator->name }}</td>
+                           
+                                <th><b>{{ $group->name }} </b></th>
+
+                                        <table border=2 class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#Id</th>
+                                                    <th scope="col">Indicator </th>
+                                                    <th scope="col">Indicator Type</th>
+                                                    <th scope="col">Unit of Meaure</th>
+                                                    <th scope="col">Weight</th>
+                                                    <th scope="col">Target </th>
+                                                    <th scope="col">Achivement (%)</th>
+                                                    <th scope="col">Score</th>
+                                                  
+                              
+                                      
+                                                </tr>
+                                            </thead>     
+
+                                            <tbody>
+
+                                                @forelse ($group->indicators as $indicator)
+
+                                                <tr>
+
+                                                    <th scope="row">{{ $indicator->id }}</th>
+                                                    <td>{{ $indicator->name }}</td>
+                                                    <td>{{ $indicator->indicator_type_id }}</td>
+                                                    <td>{{ $indicator->indicator_unit_of_measure_id }}</td>
+                                                    <td>{{ $indicator->indicator_weight }}</td>
+                                                    <td>{{ $indicator->indicator_target  }}</td>
+                                                    <td> {{  Form::number('name', 'value')}}</td>
+                                                    <td> </td>
+                                                   
+                                            
+
+                                                </tr>
+
+                                                @empty
+
+                                                <p> No Indicators </p>
+                                              
+         
+         
+                                                @endforelse
+         
+
+                                            </tbody>
+                                        </table>
+
+                                    
+                                
+                              
+                                
+                                </td>
+
+                               
                              
                              
                         
-                                <td><a href="{{ route('indicators.index' , $indicator->id) }}" class="btn btn-success">Indicators</a></td>
+                               
                             </tr>
                         @endforeach
                     </tbody>

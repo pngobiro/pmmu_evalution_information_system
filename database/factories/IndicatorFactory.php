@@ -17,7 +17,7 @@ class IndicatorFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence(),
-            'indicator_group_id' => 1,
+            'indicator_group_id' => 5,
             'indicator_type_id' => 1,
             'indicator_unit_of_measure_id' =>1,
             'indicator_weight' =>5,

@@ -54,7 +54,7 @@
                              
                                 <td><a href="{{ route('unit-ranks.edit', $rank->id) }}" class="btn btn-success">Edit</a></td>
                         
-                                <td><a href="{{ route('unit.index', $rank->id) }}" class="btn btn-success">Units</a></td>
+                                <td><a href="{{ route('unit-ranks.units.index', $rank->id) }}" class="btn btn-success">Units</a></td>
                             </tr>
                         @endforeach
                     </tbody>

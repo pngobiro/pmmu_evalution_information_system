@@ -52,6 +52,16 @@ Route::resource('fy', FinancialYearController::class);
 Route::resource('indicator-groups', IndicatorGroupController::class);
 Route::resource('indicators', IndicatorController::class);
 
+Route::resource('unit-ranks.units',UnitController::class);
+
+Route::resource('unit-ranks.units.fy',FinancialYearController::class);
+
+Route::resource('unit-ranks.units.fy.indicator-groups',IndicatorGroupController::class);
+
+Route::resource('unit-ranks.units.fy.indicator-groups.indicators',IndicatorController::class);
+
+//Route::resource('unit-ranks.units.fy.indicator-groups', IndicatorGroupController::class);
+
 
 Route::post('users/{user}/change-password', [ChangePasswordController::class, 'change_password'])->name('users.change.password');
 
