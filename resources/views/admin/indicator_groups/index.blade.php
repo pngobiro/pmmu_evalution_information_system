@@ -9,8 +9,8 @@
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
        
-        <table border=2 class="table">
-            <thead>
+        <table class="table">
+            <thead class="table-dark">
                 <tr>
             
                     <th scope="col">  Unit Type </th>
@@ -68,8 +68,8 @@
                 </div>
             </div>
             <div class="card-body">
-                <table border=2 class="table">
-                    <thead>
+                <table class="table table-striped">
+                    <thead  class="table-dark">
                         <tr>
                           
                             <th scope="col"> </th>
@@ -81,9 +81,9 @@
                         @forelse ($indicatorgroups as $group)
                             <tr>
                            
-                                <th><b>{{ $group->name }} </b></th>
+                                <th ><b>{{ $group->name }} </b></th>
 
-                                        <table border=2 class="table">
+                                        <table class="table table-bordered border-primary">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">#Id</th>
