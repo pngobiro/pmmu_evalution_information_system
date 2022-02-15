@@ -62,6 +62,7 @@
                         <a class="collapse-item" href="{{ route('reports') }}">View Reports</a>
                         <a class="collapse-item" href="{{ route('unit-ranks.index') }}">Manage Unit Rank</a>
                         <a class="collapse-item" href="{{ route('reports') }}">Manage Units</a>
+                        <a class="collapse-item" href="{{ route('templates') }}">Manage PMMU Templates</a>
                     </div>
                 </div>
             </li>

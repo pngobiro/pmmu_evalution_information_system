@@ -14,13 +14,21 @@ class UnitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request,$id)
+
+
     {
-        $units = Unit::all();
+        $rank_id = $id;
+
+        $units = Unit::where('unit_rank_id',$rank_id)->get();
+
         if ($request->has('search')) {
-            $units= Unit::where('name', 'like', "%{$request->search}%")->get();
+
+            $units= Unit::where('name', 'like', "%{$request->search}%")->where('unit_rank_id',$id)->get();
+
         }
-        return view('admin.units.index',compact('units'));
+
+        return view('admin.units.index',compact('units','rank_id'));
     }
 
     /**

@@ -2,20 +2,16 @@
 
 @section('content')
 
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Indicator Groups</h1>
-    </div>
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
        
-        <table class="table">
+        <table class="table table-striped">
             <thead class="table-dark">
                 <tr>
             
                     <th scope="col">  Unit Type </th>
                     <th> Unit </th>
-                    <th> Unit </th>
+                    <th>  Financial Year </th>
       
                 </tr>
             </thead>
@@ -26,8 +22,8 @@
             <tr>
 
                 <th>Magistate </th>
-                <th>Unit </th>
-                <th> Financial Year </th>
+                <th> Ukwala Magistrate Court </th>
+                <th> 2020/2021 </th>
 
             </tr>    
 
@@ -62,9 +58,7 @@
                             </div>
                         </form>
                     </div>
-                    <div>
-                        <a href="{{ route('indicator-groups.create') }}" class="btn btn-primary mb-2">Create</a>
-                    </div>
+                  
                 </div>
             </div>
             <div class="card-body">
@@ -81,7 +75,7 @@
                         @forelse ($indicatorgroups as $group)
                             <tr>
                            
-                                <th ><b>{{ $group->name }} </b></th>
+                                <th  class="table-primary"><b>{{ $group->name }} </b></th>
 
                                         <table class="table table-bordered border-primary">
                                             <thead>
@@ -108,11 +102,11 @@
 
                                                     <th scope="row">{{ $indicator->id }}</th>
                                                     <td>{{ $indicator->name }}</td>
-                                                    <td>{{ $indicator->indicator_type_id }}</td>
-                                                    <td>{{ $indicator->indicator_unit_of_measure_id }}</td>
+                                                    <td>{{ $indicator->type->name }}</td>
+                                                    <td>{{ $indicator->measure->name }}</td>
                                                     <td>{{ $indicator->indicator_weight }}</td>
                                                     <td>{{ $indicator->indicator_target  }}</td>
-                                                    <td> {{  Form::number('name', 'value')}}</td>
+                                                    <td> {{  Form::number('name', 'value') }}</td>
                                                     <td> </td>
                                                    
                                             

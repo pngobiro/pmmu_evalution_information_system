@@ -17,13 +17,15 @@ class Indicator extends Model
 
     public function type()
     {
-        return $this->belongsTo(IndicatorType::class);
+        return $this->belongsTo(IndicatorType::class,'indicator_type_id' );
     }
 
-    public function unit_of_measure()
+    public function measure()
     {
-        return $this->belongsTo(IndicatorUnitOfMeasure::class);
+        return $this->belongsTo(IndicatorUnitOfMeasure::class,'indicator_unit_of_measure_id');
     }
+
+   
   
 }
 

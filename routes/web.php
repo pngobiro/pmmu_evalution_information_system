@@ -15,6 +15,10 @@ use App\Http\Controllers\Backend\UnitController;
 use App\Http\Controllers\Backend\FinancialYearController;
 use App\Http\Controllers\Backend\IndicatorGroupController;
 use App\Http\Controllers\Backend\IndicatorController;
+use App\Http\Controllers\Backend\TemplatesController;
+
+
+
 
 
 
@@ -40,16 +44,23 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('admin-dashboard', [AdminHomeController::class, 'index'])->name('admin-dashboard');
+
 Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
 
+Route::get('templates', [TemplatesController::class, 'index'])->name('templates');
 
 Route::get('reports', [ReportsController::class, 'index'])->name('reports');
+
 Route::resource('users', UserController::class);
+
 Route::resource('unit-ranks', UnitRankController::class);
 
 Route::resource('unit', UnitController::class);
+
 Route::resource('fy', FinancialYearController::class);
+
 Route::resource('indicator-groups', IndicatorGroupController::class);
+
 Route::resource('indicators', IndicatorController::class);
 
 Route::resource('unit-ranks.units',UnitController::class);

@@ -56,8 +56,8 @@
                             <tr>
                                 <th scope="row">{{ $indicator->id }}</th>
                                 <td>{{ $indicator->name }}</td>
-                                <td>{{ $indicator->indicator_type_id }}</td>
-                                <td>{{ $indicator->indicator_unit_of_measure_id }}</td>
+                                <td>{{ $indicator->type->name }}</td>
+                                <td>{{ $indicator->indicator_unit_of_measure- }}</td>
                                 <td>{{ $indicator->indicator_weight }}</td>
                                 <td>{{ $indicator->indicator_target  }}</td>
                                 <td>{{ $indicator->indicator_achivement }}</td>
