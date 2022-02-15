@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Unit;
+use App\Models\FinancialYear;
 
 class CreateIndicatorGroupsTable extends Migration
 {
@@ -20,6 +21,7 @@ class CreateIndicatorGroupsTable extends Migration
             $table->mediumText('description');
             $table->integer('order');
             $table->foreignIdFor(Unit::class);
+            $table->foreignIdFor(FinancialYear::class);
             $table->timestamps();
         
         });
