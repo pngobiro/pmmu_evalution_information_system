@@ -53,7 +53,7 @@
                              
                              
                         
-                                <td><a href="{{ route('unit-ranks.units.fy.indicator-groups.index', [1,1,1 ,$fy->id]) }}" class="btn btn-success">Indicator Groups</a></td>
+                                <td><a href="{{ route('unit-ranks.units.fy.indicator-groups.index', [$rank_id,$unit_id,$fy->id]) }}" class="btn btn-success">Indicator Groups</a></td>
                             </tr>
                         @endforeach
                     </tbody>

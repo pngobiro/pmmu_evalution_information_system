@@ -14,12 +14,12 @@ class UnitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request,$id)
+    public function index(Request $request , $rank_id)
 
 
     {
-        $rank_id = $id;
-
+       
+    
         $units = Unit::where('unit_rank_id',$rank_id)->get();
 
         if ($request->has('search')) {

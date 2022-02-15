@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\IndicatorGroup;
-
+use App\Models\UnitRank;
+use App\Models\Unit;
+use App\Models\FinancialYear;
 
 
 use Illuminate\Http\Request;
@@ -16,17 +18,23 @@ class IndicatorGroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request , $rank_id, $unit_id, $fy_id)
+
+
     {
+        $fy_name = FinancialYear::find($fy_id)->name;
 
-        $indicatorgroups = IndicatorGroup::all();
+        $unit_name= Unit::find($unit_id)->name;
 
-        if ($request->has('search')) {
-            
-            $indicatorgroups= IndicatorGroup::where('name', 'like', "%{$request->search}%")->get();
-        }
+        $rank_name = UnitRank::find($rank_id)->name;
 
-        return view('admin.indicator_groups.index',compact('indicatorgroups'));
+        $indicatorgroups = IndicatorGroup::where('unit_id',$unit_id)
+                                        ->where('fy_id',$fy_id)
+                                        ->get();
+
+      
+
+        return view('admin.indicator_groups.index',compact('indicatorgroups','fy_name','unit_name','rank_name'));
     }
 
     /**

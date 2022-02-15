@@ -21,9 +21,9 @@
 
             <tr>
 
-                <th>Magistate </th>
-                <th> Ukwala Magistrate Court </th>
-                <th> 2020/2021 </th>
+                <th> {{ $rank_name }}</th>
+                <th> {{ $unit_name }} </th>
+                <th> {{ $fy_name  }} </th>
 
             </tr>    
 
@@ -43,24 +43,7 @@
                     </div>
                 @endif
             </div>
-            <div class="card-header">
-                <div class="row">
-                    <div class="col">
-                        <form method="GET" action="{{ route('indicator-groups.index') }}">
-                            <div class="form-row align-items-center">
-                                <div class="col">
-                                    <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
-                                        placeholder="Search Indicator Group">
-                                </div>
-                                <div class="col">
-                                    <button type="submit" class="btn btn-primary mb-2">Search</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                  
-                </div>
-            </div>
+            
             <div class="card-body">
                 <table class="table table-striped">
                     <thead  class="table-dark">

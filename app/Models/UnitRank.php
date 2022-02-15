@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class UnitRank extends Model
 {
     use HasFactory;
+
+
+    public function units()
+    {
+        return $this->hasMany(Indicator::class);
+    }
 }

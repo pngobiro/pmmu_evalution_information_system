@@ -16,8 +16,11 @@ class FinancialYearController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request , $rank_id, $unit_id)
+
     {
+
+       
         $fys = FinancialYear::all();
 
         if ($request->has('search')) {
@@ -26,7 +29,7 @@ class FinancialYearController extends Controller
             
         }
 
-        return view('admin.fy.index',compact('fys'));
+        return view('admin.fy.index',compact('fys','rank_id','unit_id'));
     }
 
     /**
