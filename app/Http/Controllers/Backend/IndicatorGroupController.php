@@ -16,7 +16,7 @@ class IndicatorGroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request,$id)
+    public function index(Request $request)
     {
 
         $indicatorgroups = IndicatorGroup::all();
