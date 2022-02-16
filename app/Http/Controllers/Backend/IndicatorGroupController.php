@@ -29,8 +29,19 @@ class IndicatorGroupController extends Controller
         $rank_name = UnitRank::find($rank_id)->name;
 
         $indicatorgroups = IndicatorGroup::where('unit_id',$unit_id)
-                                        ->where('financial_year_id',$fy_id)
-                                        ->get();
+                                            ->where('financial_year_id',$fy_id)
+                                            ->get();
+
+        if ($request->has('search')) {
+
+            $indicatorgroups = IndicatorGroup::where('unit_id',$unit_id)
+            
+                    ->where('financial_year_id',$fy_id)
+                    ->where('name', 'like', "%{$request->search}%")
+                    ->get();
+        }
+
+        
 
       
 

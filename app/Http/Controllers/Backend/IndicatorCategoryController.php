@@ -21,11 +21,18 @@ class IndicatorCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($rank_id)
+    public function index(Request $request ,$rank_id)
     {
         $rank_name = UnitRank::find($rank_id)->name;
 
         $indicators = CategoryIndicator::where('unit_rank_id',$rank_id)->get();
+
+        if ($request->has('search')) {
+
+            $indicators = CategoryIndicator::where('unit_rank_id',$rank_id)
+                        ->where('name', 'like', "%{$request->search}%")
+                        ->get();
+        }
 
 
         return view('admin.indicators-categories.index',compact('indicators','rank_id','rank_name'));
@@ -41,13 +48,13 @@ class IndicatorCategoryController extends Controller
     {
         $types = IndicatorType::all();
 
-        $units = IndicatorUnitOfMeasure::all();
+        $measures = IndicatorUnitOfMeasure::all();
 
         $rank_name = UnitRank::find($rank_id)->name;
 
     
         
-        return view('admin.indicators-categories.create',compact('rank_id','rank_name','types','units'));
+        return view('admin.indicators-categories.create',compact('rank_id','rank_name','types','measures'));
     }
 
     /**
@@ -86,9 +93,18 @@ class IndicatorCategoryController extends Controller
      * @param  \App\Models\CategoryIndicator  $categoryIndicator
      * @return \Illuminate\Http\Response
      */
-    public function edit(CategoryIndicator $categoryIndicator)
+    public function edit(CategoryIndicator $categoryIndicator, $rank_id, $id)
     {
-        //
+        $rank_name = UnitRank::find($rank_id)->name;
+
+        $indicator = CategoryIndicator::find($id);
+
+        $types = IndicatorType::all();
+
+        $measures = IndicatorUnitOfMeasure::all();
+  
+
+        return view('admin.indicators-categories.edit',compact('indicator','rank_id','rank_name','types','measures','id'));
     }
 
     /**

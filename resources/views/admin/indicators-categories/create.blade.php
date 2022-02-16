@@ -27,7 +27,7 @@
                                 <div class="col-md-12">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
                                     name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                                    @error('country_code')
+                                    @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -61,8 +61,8 @@
                                 <div class="col-md-6">
                                     <select name="indicator_unit_of_measure_id" class="form-control" aria-label="Default select example">
                                         <option selected>Select Unit of Measure</option>
-                                        @foreach ($units as $unit)
-                                            <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                        @foreach ($measures as $measure)
+                                            <option value="{{ $measure->id }}">{{ $measure->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('indicator_unit_of_measure_id')

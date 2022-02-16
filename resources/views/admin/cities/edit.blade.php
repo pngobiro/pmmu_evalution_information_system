@@ -27,8 +27,7 @@
                                         <select name="state_id" class="form-control" aria-label="Default select example">
                                             <option selected>Open this select menu</option>
                                             @foreach ($states as $state)
-                                                <option value="{{ $state->id }}"
-                                                    {{ $state->id == $city->state_id ? 'selected' : '' }}>
+                                                <option value="{{ $state->id }}"{{ $state->id == $city->state_id ? 'selected' : '' }}>
                                                     {{ $state->name }}</option>
                                             @endforeach
                                         </select>

@@ -22,7 +22,7 @@
                             <div class="form-row align-items-center">
                                 <div class="col">
                                     <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
-                                        placeholder="Jane Doe">
+                                        placeholder="Search Indicator">
                                 </div>
                                 <div class="col">
                                     <button type="submit" class="btn btn-primary mb-2">Search</button>
@@ -51,9 +51,8 @@
                             <tr>
                                 <th scope="row">{{ $indicator->id }}</th>
                                 <td>{{ $indicator->name }}</td>
-                                <td>{{ $indicator->indicator_type_id  }}</td>
-                                <td>{{ $indicator->indicator_unit_of_measure_id }}</td>
-                                <td>{{ $indicator->unit_rank_id }}</td>
+                                <td>{{ $indicator->type->name}}</td>
+                                <td>{{ $indicator->measure->name }}</td>
                                 <td>
                                     <a href="{{ route('unit-ranks.indicator-categories.edit',[$rank_id,$indicator->id]) }}" class="btn btn-success">Edit</a>
                                 </td>

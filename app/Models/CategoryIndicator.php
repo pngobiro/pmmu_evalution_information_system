@@ -10,7 +10,7 @@ class CategoryIndicator extends Model
     use HasFactory;
 
 
-    protected $fillable = ['name','indicator_type_id','indicator_unit_of_measure_id','unit_rank_id'];
+    protected $fillable = ['name','indicator_type_id','indicator_unit_of_measure_id','unit_rank_id','rank_id'];
 
 
 
