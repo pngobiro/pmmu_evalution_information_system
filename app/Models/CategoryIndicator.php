@@ -5,15 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Indicator extends Model
+class CategoryIndicator extends Model
 {
     use HasFactory;
 
 
-    public function group()
+    protected $fillable = ['name','indicator_type_id','indicator_unit_of_measure_id','unit_rank_id'];
+
+
+
+  
+    public function unit()
     {
-        return $this->belongsTo(IndicatorGroup::class,'indicator_group_id');
+        return $this->belongsTo(Unit::class,'unit_id' );
     }
+
+    public function rank()
+    {
+        return $this->belongsTo(UnitRank::class,'unit_rank_id' );
+    }
+
+
 
     public function type()
     {
@@ -24,11 +36,4 @@ class Indicator extends Model
     {
         return $this->belongsTo(IndicatorUnitOfMeasure::class,'indicator_unit_of_measure_id');
     }
-
-   
-  
 }
-
-
-
-

@@ -14,4 +14,12 @@ class UnitRank extends Model
     {
         return $this->hasMany(Indicator::class);
     }
+
+
+    public function indicators()
+    {
+        return $this->hasMany(CategoryIndicator::class);
+    }
+
+
 }

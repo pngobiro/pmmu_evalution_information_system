@@ -21,7 +21,7 @@ class CreateIndicatorGroupsTable extends Migration
             $table->mediumText('description');
             $table->integer('order');
             $table->foreignIdFor(Unit::class);
-            $table->foreignIdFor(FinancialYear::class);
+            $table->foreignIdFor(FinancialYear::class)->nullable();
             $table->timestamps();
         
         });

@@ -29,7 +29,7 @@ class IndicatorGroupController extends Controller
         $rank_name = UnitRank::find($rank_id)->name;
 
         $indicatorgroups = IndicatorGroup::where('unit_id',$unit_id)
-                                        ->where('fy_id',$fy_id)
+                                        ->where('financial_year_id',$fy_id)
                                         ->get();
 
       

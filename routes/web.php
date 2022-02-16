@@ -16,7 +16,7 @@ use App\Http\Controllers\Backend\FinancialYearController;
 use App\Http\Controllers\Backend\IndicatorGroupController;
 use App\Http\Controllers\Backend\IndicatorController;
 use App\Http\Controllers\Backend\TemplatesController;
-
+use App\Http\Controllers\Backend\IndicatorCategoryController;
 
 
 
@@ -70,6 +70,8 @@ Route::resource('unit-ranks.units.fy',FinancialYearController::class);
 Route::resource('unit-ranks.units.fy.indicator-groups',IndicatorGroupController::class);
 
 Route::resource('unit-ranks.units.fy.indicator-groups.indicators',IndicatorController::class);
+
+Route::resource('unit-ranks.indicator-categories',IndicatorCategoryController::class);
 
 //Route::resource('unit-ranks.units.fy.indicator-groups', IndicatorGroupController::class);
 

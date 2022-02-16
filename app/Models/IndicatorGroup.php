@@ -18,5 +18,6 @@ class IndicatorGroup extends Model
         return $this->hasMany(Indicator::class);
     }
 
+   
 
 }
