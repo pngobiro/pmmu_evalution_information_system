@@ -114,9 +114,18 @@ class IndicatorCategoryController extends Controller
      * @param  \App\Models\CategoryIndicator  $categoryIndicator
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoryIndicatorRequest $request, CategoryIndicator $categoryIndicator)
+    public function update(Request $request , $rank_id , $id)
     {
-        //
+      
+        $indicator = CategoryIndicator::find($id);
+
+        $indicator->update([
+            'indicator_unit_of_measure_id' => $request->indicator_unit_of_measure_id,
+            'indicator_type_id' => $request->indicator_type_id,
+            'name'     => $request->name,
+
+        ]);
+        return redirect()->route('unit-ranks.indicator-categories.index',$rank_id)->with('message', 'Indicator Updated Successfully');
     }
 
     /**

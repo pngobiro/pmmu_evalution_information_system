@@ -26,7 +26,7 @@ class UpdateCategoryIndicatorRequest extends FormRequest
         return [
             'name'                          => ['required', 'max:20'],
             'indicator_type_id'             => ['required'],
-            'indicator_unit_of_measure_id'  => ['required'],
+            'indicator_unit_of_measure_id'  => ['required']
         ];
     }
 }

@@ -4,7 +4,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Financial Years</h1>
+        <h1 class="h3 mb-0 text-gray-800">{{ $rank_name }} {{ $fy_name }} Template</h1>
     </div>
     <div class="row">
         <div class="card  mx-auto">
@@ -18,11 +18,11 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <form method="GET" action="{{ route('fy.index') }}">
+                        <form method="GET" action="{{ route('users.index') }}">
                             <div class="form-row align-items-center">
                                 <div class="col">
                                     <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
-                                        placeholder="e.g 2018/2019">
+                                        placeholder="Jane Doe">
                                 </div>
                                 <div class="col">
                                     <button type="submit" class="btn btn-primary mb-2">Search</button>
@@ -31,31 +31,35 @@
                         </form>
                     </div>
                     <div>
-                        <a href="{{ route('fy.create') }}" class="btn btn-primary mb-2">Create</a>
+                        <a href="{{ route('users.create') }}" class="btn btn-primary mb-2">Create Group Indicator</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <table class="table">
+                <table class="table table-bordered" >
                     <thead>
                         <tr>
-                            <th scope="col">#Id</th>
-                            <th scope="col">Period</th>
-                            <th scope="col">View</th>
-                            <th scope="col">View</th>
-              
+                            <th scope="col">Id </th>
+                            <th scope="col"> Indicator Group Name</th>
+                            <th scope="col"> Description</th>
+                            <th scope="col"> Edit</th>
+                            <th scope="col"> Indicators</th>
+                
+                
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($fys as $fy)
+                        @forelse ($indicatorgroups as $group)
                             <tr>
-                                <th scope="row">{{ $fy->id }}</th>
-                                <td>{{ $fy->name }}</td>
-                                <td><a href="{{ route('unit-ranks.units.fy.indicator-groups.index', [$rank_id,$unit_id,$fy->id]) }}" class="btn btn-success">Indicator Groups</a></td>
-                                <td><a href="{{ route('unit-ranks.units.fy.indicator-groups.index', [$rank_id,$unit_id,$fy->id]) }}" class="btn btn-success">PMMU</a></td>
+                                <th> <b>{{ $group->id }} </b></th>
+                                <th> <b>{{ $group->name }} </b></th> 
+                                <th> <b>{{ substr($group->description,0,30)}} </b></th> 
+                                <th> <a href="{{ route('unit-ranks.fy.indicator-groups.edit', [$rank_id,$fy_id , $group->id]) }}", class="btn btn-success">Edit</a>  </th>
+                                <th> <a href="{{ route('unit-ranks.fy.indicator-groups.indicators.index', [$rank_id,$fy_id,$group->id]) }}", class="btn btn-success">Indicators</a>  </th>
                             </tr>
-                        @endforeach
-                    </tbody>
+                            @endforeach
+                    </tbody>    
+                    
                 </table>
             </div>
         </div>

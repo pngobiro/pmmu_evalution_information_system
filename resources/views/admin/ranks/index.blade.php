@@ -43,11 +43,11 @@
 
                             <th scope="col">Unit Rank</th>
 
-                            <th scope="col">Manage</th>
+                            <th scope="col">Templates</th>
 
-                            <th scope="col">View Units</th>
+                            <th scope="col">View</th>
 
-                            <th scope="col"></th>
+                            <th scope="col">Master</th>
 
                             
                         </tr>
@@ -58,12 +58,12 @@
                                 <th scope="row">{{ $rank->id }}</th>
 
                                 <td>{{ $rank->name }}</td>
-                             
-                                <td><a href="{{ route('unit-ranks.edit', $rank->id) }}" class="btn btn-success">Edit</a></td>
+
+                                <td><a href="{{ route('unit-ranks.fy.index',$rank->id) }}" class="btn btn-success">Template</a></td>
                         
                                 <td><a href="{{ route('unit-ranks.units.index', $rank->id) }}" class="btn btn-success">Units</a></td>
 
-                                <td><a href="{{ route('unit-ranks.indicator-categories.index', $rank->id) }}" class="btn btn-success">Master Indicators</a></td>
+                                <td><a href="{{ route('unit-ranks.indicator-categories.index', $rank->id) }}" class="btn btn-success">Indicators</a></td>
                             </tr>
                         @endforeach
                     </tbody>

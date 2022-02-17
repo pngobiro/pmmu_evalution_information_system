@@ -24,7 +24,7 @@ class StoreCategoryIndicatorRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                          => ['required', 'max:100','min:15','string'],
+            'name'                          => ['required','string'],
             'indicator_type_id'             => ['required'],
             'indicator_unit_of_measure_id'  => ['required'],
             

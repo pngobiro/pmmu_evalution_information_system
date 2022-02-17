@@ -54,7 +54,7 @@
                             
                                     <th  class="table-primary"><b>{{ $group->name }} </b></th>
 
-                                            <table class="table table-bordered border-primary">
+                                            <table>
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">#Id</th>
