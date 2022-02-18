@@ -67,6 +67,9 @@ Route::resource('unit-ranks.units',UnitController::class);
 
 Route::resource('unit-ranks.fy',TemplatesController::class);
 
+
+Route::resource('unit-ranks.fy.indicator-groups.indicators',TemplatesController::class);
+
 Route::resource('unit-ranks.fy.indicator-groups',TemplatesController::class);
 
 //Route::resource('unit-ranks.fy.indicator-groups.indicators',TemplatesController::class);

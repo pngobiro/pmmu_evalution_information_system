@@ -38,4 +38,10 @@ class TemplatesController extends Controller
         return view('admin.template.show',compact('rank_name','rank_id','indicatorgroups','fy_name','rank_name','fy_id'));
 
     }
+
+    public function indicators(){
+
+
+        
+    }
 }
