@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
-use App\Models\Indicator;
+use App\Models\UnitRank;
+use App\Models\Unit;
+use App\Models\FinancialYear;
 use App\Models\IndicatorGroup;
-
 use Illuminate\Http\Request;
 
 class IndicatorController extends Controller
@@ -14,23 +15,30 @@ class IndicatorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request,$rank_id ,$unit_id , $fy_id )
     {
 
-        $indicators = IndicatorGroup::find(1)->indicators;
+        $rank_name = UnitRank::find($rank_id)->name;
+
+        $unit_name = Unit::find($unit_id)->name;
+
+        $fy_name = FinancialYear::find($fy_id)->name;
+
+        $indicatorgroups = IndicatorGroup::all();
 
         if ($request->has('search')) {
+            
 
+            $indicatorgroups = IndicatorGroup::all()-get()
 
-            $indicators = IndicatorGroup::find(1)->indicators()
             ->where('name', 'like', "%{$request->search}%")
             ->get();
 
         }
 
-        return view('admin.indicators.index',compact('indicators'));
+        return view('admin.indicators.index',compact('indicatorgroups','rank_name','fy_name','unit_name')) ;
+    
     }
-
     /**
      * Show the form for creating a new resource.
      *

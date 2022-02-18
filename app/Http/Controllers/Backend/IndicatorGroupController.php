@@ -18,22 +18,19 @@ class IndicatorGroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request , $rank_id, $unit_id, $fy_id)
+    public function index(Request $request , $rank_id, $unit_id)
 
 
     {
-        $fy_name = FinancialYear::find($fy_id)->name;
+        
         $unit_name= Unit::find($unit_id)->name;
         $rank_name = UnitRank::find($rank_id)->name;
-        $indicatorgroups = IndicatorGroup::where('unit_id',$unit_id)
-                                            ->where('financial_year_id',$fy_id)
-                                            ->get();
+        $indicatorgroups = IndicatorGroup::where('unit_id',$unit_id)->get();
 
         if ($request->has('search')) {
 
             $indicatorgroups = IndicatorGroup::where('unit_id',$unit_id)
             
-                    ->where('financial_year_id',$fy_id)
                     ->where('name', 'like', "%{$request->search}%")
                     ->get();
         }
@@ -42,7 +39,7 @@ class IndicatorGroupController extends Controller
 
       
 
-        return view('admin.indicator_groups.index',compact('indicatorgroups','fy_name','unit_name','rank_name'));
+        return view('admin.indicator_groups.index',compact('indicatorgroups','unit_name','rank_name'));
     }
 
     /**
