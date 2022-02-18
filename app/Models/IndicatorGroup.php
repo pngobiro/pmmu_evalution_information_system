@@ -11,15 +11,9 @@ class IndicatorGroup extends Model
 
 
 
-    public function category_indicators( )
-    {
-
-    
-        return $this->hasMany(Indicator::class);
-    }
 
 
-    public function template_indicators( )
+    public function indicators( )
     {
 
     

@@ -59,11 +59,11 @@
 
                                 <td>{{ $rank->name }}</td>
 
-                                <td><a href="{{ route('unit-ranks.fy.index',$rank->id) }}" class="btn btn-success">Template</a></td>
+                                <td><a href="{{ route('unit-ranks.fy.index',$rank->id) }}" class="btn btn-info">Template</a></td>
                         
                                 <td><a href="{{ route('unit-ranks.units.index', $rank->id) }}" class="btn btn-success">Units</a></td>
 
-                                <td><a href="{{ route('unit-ranks.indicator-categories.index', $rank->id) }}" class="btn btn-success">Indicators</a></td>
+                                <td><a href="{{ route('unit-ranks.indicator-categories.index', $rank->id) }}" class="btn btn-secondary">Indicators</a></td>
                             </tr>
                         @endforeach
                     </tbody>

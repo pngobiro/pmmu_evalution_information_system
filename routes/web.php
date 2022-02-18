@@ -78,7 +78,7 @@ Route::resource('unit-ranks.units',UnitController::class);
 Route::resource('unit-ranks.units.fy', FinancialYearController::class);
 
 
-Route::resource('unit-ranks.units.fy.indicator-groups', IndicatorGroupController::class);
+//Route::resource('unit-ranks.units.fy.indicator-groups', IndicatorGroupController::class);
 
 Route::resource('unit-ranks.indicator-categories',IndicatorCategoryController::class);
 

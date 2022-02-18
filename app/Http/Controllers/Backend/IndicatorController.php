@@ -24,13 +24,14 @@ class IndicatorController extends Controller
 
         $fy_name = FinancialYear::find($fy_id)->name;
 
-        $indicatorgroups = IndicatorGroup::all();
+        $indicatorgroups = IndicatorGroup::where('unit_id',$unit_id )
+                            ->where('financial_year_id',$fy_id)->get();
 
         if ($request->has('search')) {
             
 
-            $indicatorgroups = IndicatorGroup::all()-get()
-
+            $indicatorgroups = IndicatorGroup::where('unit_id',$unit_id)
+            ->where('financial_year_id',$fy_id)
             ->where('name', 'like', "%{$request->search}%")
             ->get();
 
