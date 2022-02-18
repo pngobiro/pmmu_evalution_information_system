@@ -17,7 +17,7 @@ use App\Http\Controllers\Backend\IndicatorGroupController;
 use App\Http\Controllers\Backend\IndicatorController;
 use App\Http\Controllers\Backend\TemplatesController;
 use App\Http\Controllers\Backend\IndicatorCategoryController;
-
+use App\Http\Controllers\Backend\TemplateIndicatorsController;
 
 
 
@@ -68,7 +68,9 @@ Route::resource('unit-ranks.units',UnitController::class);
 Route::resource('unit-ranks.fy',TemplatesController::class);
 
 
-Route::resource('unit-ranks.fy.indicator-groups.indicators',TemplatesController::class);
+
+
+Route::resource('unit-ranks.fy.indicator-groups.indicators',TemplateIndicatorsController::class);
 
 Route::resource('unit-ranks.fy.indicator-groups',TemplatesController::class);
 
