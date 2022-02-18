@@ -27,8 +27,8 @@ class CreateTemplateIndicatorsTable extends Migration
             $table->foreignIdFor(IndicatorType::class);
             $table->foreignIdFor(IndicatorUnitOfMeasure::class);
             $table->integer('indicator_weight');
-            $table->integer('indicator_target');
-            $table->integer('indicator_achivement');
+            $table->integer('indicator_target')->nullable();
+            $table->integer('indicator_achivement')->nullable();
             $table->mediumText('remarks')->nullable();
             $table->integer('order');
             $table->timestamps();

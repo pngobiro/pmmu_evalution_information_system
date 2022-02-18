@@ -3,9 +3,19 @@
 @section('content')
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">{{ $rank_name }} {{ $fy_name }} Template</h1>
+
+    
+    <div class="d-flex justify-content-between">
+        <div class="row ">
+            <h1 class="h3 mb-0 text-gray-800">{{ $rank_name }} {{ $fy_name }} Template</h1>
+        </div>
+        <div class="row">
+            <a href="{{ route('unit-ranks.fy.show', [$rank_id,$fy_id]) }}" class="btn btn-success">Preview PMMU Template </a>
+        </div>
     </div>
+        
+  
+
     <div class="row">
         <div class="card  mx-auto">
             <div>
@@ -18,11 +28,11 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <form method="GET" action="{{ route('users.index') }}">
+                        <form method="GET" action="{{ route('unit-ranks.fy.show',[$rank_id,$fy_id ]) }}">
                             <div class="form-row align-items-center">
                                 <div class="col">
                                     <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
-                                        placeholder="Jane Doe">
+                                        placeholder="Serach Indicator Group">
                                 </div>
                                 <div class="col">
                                     <button type="submit" class="btn btn-primary mb-2">Search</button>
@@ -31,7 +41,7 @@
                         </form>
                     </div>
                     <div>
-                        <a href="{{ route('users.create') }}" class="btn btn-primary mb-2">Create Group Indicator</a>
+                        <a href="{{ route('unit-ranks.fy.indicator-groups.create',[$rank_id,$fy_id ]) }}" class="btn btn-primary mb-2">Create New Group </a>
                     </div>
                 </div>
             </div>

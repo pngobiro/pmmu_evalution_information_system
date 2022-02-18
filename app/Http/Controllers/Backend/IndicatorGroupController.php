@@ -23,11 +23,8 @@ class IndicatorGroupController extends Controller
 
     {
         $fy_name = FinancialYear::find($fy_id)->name;
-
         $unit_name= Unit::find($unit_id)->name;
-
         $rank_name = UnitRank::find($rank_id)->name;
-
         $indicatorgroups = IndicatorGroup::where('unit_id',$unit_id)
                                             ->where('financial_year_id',$fy_id)
                                             ->get();

@@ -3,13 +3,25 @@
 @section('content')
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="row ">
         <h1 class="h3 mb-0 text-gray-800">{{ $rank_name }} - {{ $fy_name  }} </h1>
     </div>
 
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800"> {{ $group_name  }}</h1>
+    <div class="d-flex justify-content-between">
+
+        <div class="row ">
+            <h1 class="h3 mb-0 text-gray-800"> Group : {{  $group_name  }} </h1>
+        </div>
+
+        <div class="row ">
+            <a href="{{ route('unit-ranks.fy.show', [$rank_id,$fy_id]) }}" class="btn btn-success">View All Groups</a>
+        </div>
+        
     </div>
+        
+      
+
+
     <div class="row">
         <div class="card  mx-auto">
             <div>
@@ -22,14 +34,14 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <form method="GET" action="{{ route('users.index') }}">
+                        <form method="GET" action="{{ route('unit-ranks.fy.indicator-groups.indicators.index',[$rank_id,$fy_id,$group_id]) }}">
                             <div class="form-row align-items-center">
                                 <div class="col">
                                     <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
                                         placeholder="Search Indicator">
                                 </div>
                                 <div class="col">
-                                    <button type="submit" class="btn btn-primary mb-2">Search</button>
+                                    <button type="submit" class="btn btn-primary mb-2">Search Indicator</button>
                                 </div>
                             </div>
                         </form>
@@ -43,19 +55,30 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">#Id</th>
-                            <th scope="col">name</th>
+                           
+                            <th scope="col">Order</th>
+                            <th scope="col">Indicator</th>
+                            <th scope="col">Indicator Type</th>
+                            <th scope="col">Indicator Unit of Measure</th>
+                            <th scope="col">Indicator Weight</th>
+                            <th scope="col">Edit</th>
                          
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($template_indicators  as $indicator)
                             <tr>
-                                <th scope="row">{{ $indicator->id }}</th>
-                                <td>{{ $indicator->name }}</td>
+                                
+                                <td>{{ $indicator->order  }}</td>
+                                <td>{{ $indicator->name  }}</td>
+                                <td>{{ $indicator->type->name }}</td>
+                                <td>{{ $indicator->measure->name }}</td>
+                                <td>{{ $indicator->indicator_weight }}</td>
                            
+
+
                                 <td>
-                                    <a href="{{ route('users.edit', $indicator->id) }}" class="btn btn-success">Edit</a>
+                                    <a href="{{ route('unit-ranks.fy.indicator-groups.indicators.edit', [$rank_id,$fy_id,$group_id,$indicator->id]) }}" class="btn btn-success">Edit</a>
                                 </td>
                             </tr>
                         @endforeach

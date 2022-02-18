@@ -74,7 +74,6 @@ Route::resource('unit-ranks.fy.indicator-groups.indicators',TemplateIndicatorsCo
 
 Route::resource('unit-ranks.fy.indicator-groups',TemplatesController::class);
 
-//Route::resource('unit-ranks.fy.indicator-groups.indicators',TemplatesController::class);
 
 
 
@@ -83,7 +82,7 @@ Route::resource('unit-ranks.units.fy.indicator-groups.indicators',IndicatorContr
 
 Route::resource('unit-ranks.indicator-categories',IndicatorCategoryController::class);
 
-//Route::resource('unit-ranks.units.fy.indicator-groups', IndicatorGroupController::class);
+Route::resource('unit-ranks.units.fy.indicator-groups', IndicatorGroupController::class);
 
 
 Route::post('users/{user}/change-password', [ChangePasswordController::class, 'change_password'])->name('users.change.password');
