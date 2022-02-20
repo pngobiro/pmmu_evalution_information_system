@@ -9,7 +9,7 @@ use App\Models\IndicatorUnitOfMeasure;
 use App\Models\UnitRank;
 use App\Models\Unit;
 
-class CreateCategoryIndicatorsTable extends Migration
+class CreateMasterIndicatorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,11 +18,9 @@ class CreateCategoryIndicatorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('category_indicators', function (Blueprint $table) {
+        Schema::create('master_indicators', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignIdFor(IndicatorType::class);
-            $table->foreignIdFor(IndicatorUnitOfMeasure::class);
             $table->foreignIdFor(UnitRank::class);
             $table->foreignIdFor(Unit::class)->nullable();
             $table->timestamps();
@@ -36,6 +34,6 @@ class CreateCategoryIndicatorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_indicators');
+        Schema::dropIfExists('master_indicators');
     }
 }

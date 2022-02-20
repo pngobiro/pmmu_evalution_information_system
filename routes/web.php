@@ -18,8 +18,8 @@ use App\Http\Controllers\Backend\IndicatorController;
 use App\Http\Controllers\Backend\TemplatesController;
 use App\Http\Controllers\Backend\IndicatorCategoryController;
 use App\Http\Controllers\Backend\TemplateIndicatorsController;
-
-
+use App\Http\Controllers\Backend\TemplateIndicatorGroupController;
+use App\Http\Controllers\Backend\MasterIndicatorController;
 
 
 
@@ -43,6 +43,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
 Route::get('admin-dashboard', [AdminHomeController::class, 'index'])->name('admin-dashboard');
 
 Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
@@ -53,6 +54,8 @@ Route::get('reports', [ReportsController::class, 'index'])->name('reports');
 
 Route::resource('users', UserController::class);
 
+Route::resource('indicators', IndicatorController::class);
+
 Route::resource('unit-ranks', UnitRankController::class);
 
 Route::resource('unit', UnitController::class);
@@ -61,31 +64,44 @@ Route::resource('fy', FinancialYearController::class);
 
 Route::resource('indicator-groups', IndicatorGroupController::class);
 
-Route::resource('indicators', IndicatorController::class);
+
+
+//templates
+
+
+Route::resource('template-groups',TemplateIndicatorGroupController::class);
+
+Route::resource('template-indicators',TemplateIndicatorsController::class);
+
+
 
 Route::resource('unit-ranks.fy',TemplatesController::class);
 
-Route::resource('unit-ranks.fy.indicator-groups',TemplatesController::class);
 
-Route::resource('unit-ranks.fy.indicator-groups.indicators',TemplateIndicatorsController::class);
+Route::resource('unit-ranks.fy.template-groups',TemplateIndicatorGroupController::class);
+
+Route::resource('unit-ranks.fy.template-groups.template-indicators',TemplateIndicatorsController::class);
 
 
 
-Route::resource('unit-ranks.units',UnitController::class);
+Route::resource('unit-ranks.units',UnitController::class)->shallow();;
 
 //Route::resource('unit-ranks.units.fy',UnitController::class);
 
-Route::resource('unit-ranks.units.fy', FinancialYearController::class);
+Route::resource('unit-ranks.units.fy', FinancialYearController::class)->shallow();;
 
 
 //Route::resource('unit-ranks.units.fy.indicator-groups', IndicatorGroupController::class);
 
-Route::resource('unit-ranks.indicator-categories',IndicatorCategoryController::class);
+Route::resource('master-indicator',MasterIndicatorController::class);
+
+Route::resource('unit-ranks.master-indicator',MasterIndicatorController::class);
 
 
-Route::resource('unit-ranks.units.fy.indicator-groups',IndicatorController::class);
+Route::resource('unit-ranks.units.fy.indicator-groups',IndicatorController::class)->shallow();;
 
 
 Route::post('users/{user}/change-password', [ChangePasswordController::class, 'change_password'])->name('users.change.password');
+
 
 

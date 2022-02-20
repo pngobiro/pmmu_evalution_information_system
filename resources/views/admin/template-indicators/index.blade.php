@@ -14,7 +14,7 @@
         </div>
 
         <div class="row ">
-            <a href="{{ route('unit-ranks.fy.show', [$rank_id,$fy_id]) }}" class="btn btn-success">View All Groups</a>
+            <a href="{{ route('unit-ranks.fy.template-groups.index', [$rank_id,$fy_id]) }}" class="btn btn-success">View All Groups</a>
         </div>
         
     </div>
@@ -34,7 +34,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <form method="GET" action="{{ route('unit-ranks.fy.indicator-groups.indicators.index',[$rank_id,$fy_id,$group_id]) }}">
+                        <form method="GET" action="{{ route('unit-ranks.fy.template-groups.template-indicators.index',[$rank_id,$fy_id,$group_id]) }}">
                             <div class="form-row align-items-center">
                                 <div class="col">
                                     <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
@@ -47,7 +47,7 @@
                         </form>
                     </div>
                     <div>
-                        <a href="{{ route('unit-ranks.fy.indicator-groups.indicators.create',[$rank_id,$fy_id,$group_id]) }}" class="btn btn-primary mb-2">Create New Master Indicator</a>
+                        <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.create',[$rank_id,$fy_id,$group_id]) }}" class="btn btn-primary mb-2">Create New Template Indicator</a>
                     </div>
                 </div>
             </div>
@@ -78,13 +78,19 @@
 
 
                                 <td>
-                                    <a href="{{ route('unit-ranks.fy.indicator-groups.indicators.edit', [$rank_id,$fy_id,$group_id,$indicator->id]) }}" class="btn btn-success">Edit</a>
+                                    <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.edit', [$rank_id,$fy_id,$group_id,$indicator->id]) }}" class="btn btn-success">Edit</a>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        <div class="row"  class="d-flex justify-content-center">
+            <button type="button" class="btn btn-primary">
+                Total Weight<span class="badge bg-secondary">4</span>
+              </button>
         </div>
     </div>
 @endsection

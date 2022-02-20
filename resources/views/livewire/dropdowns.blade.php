@@ -1,23 +1,57 @@
 <div>
-    <div class="mb-8">
-        <label class="inline-block w-32 font-bold">Country:</label>
-        <select name="rank" wire:model="rank" class="border shadow p-2 bg-white">
-            <option value=''>Choose a Rank</option>
-            @foreach($rank as $r)
-                <option value={{ $r->id }}>{{ $r->name }}</option>
-            @endforeach
-        </select>
-    </div>
-    @if(count($units) > 0)
-        <div class="mb-8">
-            <label class="inline-block w-32 font-bold">Unit:</label>
-            <select name="unit" wire:model="unit" 
-                class="p-2 px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline">
-                <option value=''>Choose a Unit</option>
-                @foreach($units as $unit)
-                    <option value={{ $unit->id }}>{{ $unit->name }}</option>
+
+    <h1>Laravel Livewire Dependant Dropdown - ItSolutionStuff.com</h1>
+
+    <div class="form-group row">
+
+        <label for="rank" class="col-md-4 col-form-label text-md-right">State</label>
+
+        <div class="col-md-6">
+
+            <select wire:model="selectedState" class="form-control">
+
+                <option value="" selected>Choose state</option>
+
+                @foreach($states as $state)
+
+                    <option value="{{ $state->id }}">{{ $state->name }}</option>
+
                 @endforeach
+
             </select>
+
         </div>
+
+    </div>
+
+  
+
+    @if (!is_null($selectedRank))
+
+        <div class="form-group row">
+
+            <label for="unit" class="col-md-4 col-form-label text-md-right">City</label>
+
+  
+
+            <div class="col-md-6">
+
+                <select class="form-control" name="unit_id">
+
+                    <option value="" selected>Choose city</option>
+
+                    @foreach($cities as $city)
+
+                        <option value="{{ $city->id }}">{{ $city->name }}</option>
+
+                    @endforeach
+
+                </select>
+
+            </div>
+
+        </div>
+
     @endif
+
 </div>

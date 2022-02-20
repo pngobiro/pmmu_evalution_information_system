@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCategoryIndicatorRequest extends FormRequest
+class UpdateTemplateIndicatorGroupRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,12 @@ class StoreCategoryIndicatorRequest extends FormRequest
     {
         return [
             'name'                          => ['required','string'],
-            'indicator_type_id'             => ['required'],
-            'indicator_unit_of_measure_id'  => ['required'],
-            
-
+            'description'                   => ['required','string'],
+            'order'                         => ['required','numeric','min:1'],
+            //'unit_id'                      => ['required'],
+            'unit_rank_id'                  => ['required'],
+            'financial_year_id'             => ['required'],
+    
         ];
     }
 

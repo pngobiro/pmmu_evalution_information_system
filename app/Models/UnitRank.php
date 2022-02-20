@@ -18,7 +18,7 @@ class UnitRank extends Model
 
     public function indicators()
     {
-        return $this->hasMany(CategoryIndicator::class);
+        return $this->hasMany(MasterIndicator::class);
     }
 
 

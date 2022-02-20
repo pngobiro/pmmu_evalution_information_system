@@ -29,7 +29,7 @@ class TemplateIndicator extends Model
 
     public function group()
     {
-        return $this->belongsTo(UnitRank::class,'indicator_group_id' );
+        return $this->belongsTo(TemplateIndicatorGroup::class,'indicator_group_id' );
     }
 
     public function type()

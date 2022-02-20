@@ -4,19 +4,23 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Edit Indicator</h1>
+        <h1 class="h3 mb-0 text-gray-800">{{ $unit_rank->name }} - FY {{ $fy->name  }} </h1>
+    </div>
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Edit Group </h1>
     </div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        {{ __('Edit Indicator') }}
-                        <a href="{{ route('unit-ranks.indicator-categories.index', $rank_id , $indicator) }}" class="float-right">Back</a>
+                        {{ __('Edit Group') }}
+                        <a href="{{ route('unit-ranks.fy.template-groups.index', [$unit_rank->id  ,$fy->id]) }}" class="float-right">Back</a>
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('unit-ranks.indicator-categories.update',  [$rank_id , $indicator->id]) }}">
+                        <form method="POST" action="{{ route('unit-ranks.fy.template-groups.update',  [$unit_rank->id , $fy->id,$template_group->id]) }}">
                             @csrf
                             @method('PUT')
 
@@ -26,10 +30,10 @@
                                 <label for="name"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <input id="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ old('name', $indicator ->name) }}" required>
+                                        value="{{ old('name', $template_group->name) }}" required>
 
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -40,20 +44,16 @@
                             </div>
 
 
-
-
                             <div class="form-group row">
-                                <label for="indicator_type_id"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Indicator Type') }}</label>
+                                <label for="description"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Group Description') }}</label>
 
-                                <div class="col-md-6">
-                                    <select name="indicator_type_id" class="form-control" aria-label="Default select example">
-                                        <option selected>Open this select menu</option>
-                                        @foreach ($types as $type)
-                                            <option value="{{ $type->id }}">{{ $type->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('indicator_type_id')
+                                <div class="col-md-12">
+                                    <input id="description" type="text"
+                                        class="form-control @error('description') is-invalid @enderror" name="description"
+                                        value="{{ old('description', $template_group->description) }}" required>
+
+                                    @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -62,30 +62,30 @@
                             </div>
 
 
-                            <div class="form-group row">
-                                <label for="indicator_unit_of_measure_id"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Indicator Unit of Measure ') }}</label>
 
-                                <div class="col-md-6">
-                                    <select name="indicator_unit_of_measure_id" class="form-control" aria-label="Default select example">
-                                        <option selected>Open this select menu</option>
-                                        @foreach ($measures as $m)
-                                            <option value="{{ $m->id }}">{{ $m->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('indicator_unit_of_measure_id')
+                            <div class="form-group row">
+                                <label for="order"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Group Description') }}</label>
+
+                                <div class="col-md-12">
+                                    <input id="order" type="number"
+                                        class="form-control @error('order') is-invalid @enderror" name="order"
+                                        value="{{ old('order', $template_group->order) }}" required>
+
+                                    @error('order')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
+
 
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Update') }}
+                                        {{ __('Update Group') }}
                                     </button>
                                 </div>
                             </div>
@@ -93,14 +93,13 @@
                     </div>
                 </div>
                 <div class="m-2 p-2">
-                    <form method="POST" action="{{ route('unit-ranks.indicator-categories.destroy',  [$rank_id , $id]) }}">
+                    <form method="POST" action="{{ route('unit-ranks.fy.template-groups.destroy',  [$unit_rank->id , $fy->id , $template_group->id]) }}">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger">Disable {{ $indicator->name }}</button>
+                        <button class="btn btn-danger">Disable {{ $template_group->name }}</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 @endsection
-

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreMasterIndicatorRequest extends FormRequest
+class StoreTemplateIndicatorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,11 @@ class StoreMasterIndicatorRequest extends FormRequest
     {
         return [
             'name'                          => ['required','string'],
-
+            'description'                   => ['required','string'],
+            'order'                         => ['required','numeric','min:1'],
+            'indicator_weight'              => ['required','numeric','min:1'],
+            'indicator_type_id'             => ['required','numeric','min:1'],
+            'indicator_unit_of_measure_id'  => ['required'],
             
 
         ];
