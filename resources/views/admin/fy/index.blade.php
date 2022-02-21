@@ -52,7 +52,7 @@
                                 <th scope="row">{{ $fy->id }}</th>
                                 <td>{{ $fy->name }}</td>
                                 <td><a href="{{ route('unit-ranks.units.fy.indicator-groups.index', [$rank_id,$unit_id,$fy->id]) }}" class="btn btn-success">Indicator Groups</a></td>
-                                <td><a href="{{ route('unit-ranks.units.fy.indicator-groups.index', [$rank_id,$unit_id,$fy->id]) }}" class="btn btn-success">PMMU</a></td>
+                                <td><a href="{{ route('pmmu', [$rank_id,$unit_id,$fy->id]) }}" class="btn btn-success">PMMU</a></td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -21,7 +21,7 @@ class TemplateIndicatorGroup extends Model
     {
 
     
-        return $this->hasMany(TemplateIndicator::class);
+        return $this->hasMany(TemplateIndicator::class,'indicator_group_id');
       
     }
 
@@ -31,10 +31,5 @@ class TemplateIndicatorGroup extends Model
         return $this->belongsTo(FinancialYear::class,'financial_year_id');
     }
 
-    public function number_of_indicators(){
-
-        this->template_indicators-count();
-
-
-    }
+   
 }

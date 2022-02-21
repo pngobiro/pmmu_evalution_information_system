@@ -20,6 +20,7 @@ use App\Http\Controllers\Backend\IndicatorCategoryController;
 use App\Http\Controllers\Backend\TemplateIndicatorsController;
 use App\Http\Controllers\Backend\TemplateIndicatorGroupController;
 use App\Http\Controllers\Backend\MasterIndicatorController;
+use App\Http\Controllers\Backend\PmmuController;
 
 
 
@@ -98,7 +99,13 @@ Route::resource('master-indicator',MasterIndicatorController::class);
 Route::resource('unit-ranks.master-indicator',MasterIndicatorController::class);
 
 
-Route::resource('unit-ranks.units.fy.indicator-groups',IndicatorController::class)->shallow();;
+Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/pmmu',[IndicatorController::class,"preview"])->name('pmmu');
+
+
+
+Route::resource('unit-ranks.units.fy.indicator-groups',IndicatorController::class);
+
+Route::resource('unit-ranks.units.fy.indicator-groups.indicators',PmmuController::class);
 
 
 Route::post('users/{user}/change-password', [ChangePasswordController::class, 'change_password'])->name('users.change.password');

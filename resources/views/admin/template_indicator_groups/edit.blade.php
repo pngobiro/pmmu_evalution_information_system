@@ -65,7 +65,7 @@
 
                             <div class="form-group row">
                                 <label for="order"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Group Description') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Group Order') }}</label>
 
                                 <div class="col-md-12">
                                     <input id="order" type="number"

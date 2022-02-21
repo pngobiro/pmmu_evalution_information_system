@@ -19,24 +19,20 @@ use Illuminate\Http\Request;
 
 class TemplateIndicatorsController extends Controller
 {
-    public function index(Request $request ,$rank_id ,$fy_id,$group_id){
+    public function index(UnitRank $unit_rank ,FinancialYear $fy ,TemplateIndicatorGroup $template_group ,Request $request ){
 
-        $group_name = TemplateIndicatorGroup::find($group_id)->name;
-
-        $rank_name = UnitRank::find($rank_id)->name;
-
-        $fy_name = FinancialYear::find($fy_id)->name;
-
-        $template_indicators = TemplateIndicator::where('indicator_group_id',$group_id )->get();
+        $template_indicators = TemplateIndicator::where('indicator_group_id',$template_group->id )->get();
 
         if ($request->has('search')) {
 
-            $template_indicators = TemplateIndicator::where('name', 'like', "%{$request->search}%")->get();
+            $template_indicators = TemplateIndicator::where('name', 'like', "%{$request->search}%")
+            ->where('indicator_group_id',$template_group->id )
+            ->get();
 
         }
 
 
-        return view('admin.template-indicators.index',compact('fy_id','rank_name','rank_id','group_id','fy_name','group_name','template_indicators'));
+        return view('admin.template-indicators.index',compact('unit_rank','template_group','fy','template_indicators'));
 
     }
 

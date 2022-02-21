@@ -25,8 +25,8 @@ class CreateTemplateIndicatorGroupsTable extends Migration
             $table->mediumText('description');
             $table->integer('order');
             $table->foreignIdFor(Unit::class)->nullable();
-            $table->foreignIdFor(UnitRank::class)->nullable();
-            $table->foreignIdFor(FinancialYear::class)->nullable();
+            $table->foreignIdFor(UnitRank::class);
+            $table->foreignIdFor(FinancialYear::class);
             $table->timestamps();
         });
     }

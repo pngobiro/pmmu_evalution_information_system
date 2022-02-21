@@ -5,13 +5,11 @@
     <!-- Page Heading -->
 
     
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-center .mb-15" >
         <div class="row ">
-            <h1 class="h3 mb-0 text-gray-800">{{ $rank_name }} {{ $fy_name }} Template</h1>
+            <h1 class="h3 mb-0 text-gray-800">{{ $unit_rank->name }} {{ $fy->name }} Template</h1>
         </div>
-        <div class="row">
-            <a href="{{ route('unit-ranks.fy.template-groups.index', [$rank_id,$fy_id]) }}" class="btn btn-success">Preview PMMU Template </a>
-        </div>
+       
     </div>
         
   
@@ -28,7 +26,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <form method="GET" action="{{ route('unit-ranks.fy.show',[$rank_id,$fy_id ]) }}">
+                        <form method="GET" action="{{ route('unit-ranks.fy.show',[$unit_rank->id,$fy->id ]) }}">
                             <div class="form-row align-items-center">
                                 <div class="col">
                                     <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
@@ -37,11 +35,15 @@
                                 <div class="col">
                                     <button type="submit" class="btn btn-primary mb-2">Search</button>
                                 </div>
+
+                                <div class="col">
+                                    <a href="{{ route('unit-ranks.fy.template-groups.index', [$unit_rank->id,$fy->id]) }}" class="btn btn-success">Preview PMMU Template </a>
+                                </div>
                             </div>
                         </form>
                     </div>
                     <div>
-                        <a href="{{ route('unit-ranks.fy.template-groups.create',[$rank_id,$fy_id ]) }}" class="btn btn-primary mb-2">Create New Group </a>
+                        <a href="{{ route('unit-ranks.fy.template-groups.create',[$unit_rank->id,$fy->id ]) }}" class="btn btn-primary mb-2">Create New Group </a>
                     </div>
                 </div>
             </div>
@@ -63,25 +65,25 @@
                         @forelse ($templateindicatorgroups as $group)
                             <tr>
                                 <th> <b>{{ $group->order }} </b></th>
-                                <th> <a href="{{ route('unit-ranks.fy.template-groups.edit', [$rank_id,$fy_id , $group->id]) }}">{{ $group->name }}</a>  </th> 
+                                <th> {{ $group->name }} </th> 
                                 <th> <b>{{ substr($group->description,0,10)}} </b></th> 
-                                <th> <b> </b></th> 
-                                <th>  </th>
-                                <th> <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.index', [$rank_id,$fy_id,$group->id]) }}", class="btn btn-success" >Template Indicators <span class="badge bg-secondary">4</span> </th>
+                                <th> <b> {{ $group->template_indicators->sum('indicator_weight')}}</b></th> 
+                                <th> <a href="{{ route('unit-ranks.fy.template-groups.edit', [$unit_rank->id,$fy->id , $group->id]) }}"> Edit</a>   </th>
+                                <th> <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.index', [$unit_rank->id,$fy->id,$group->id]) }}", class="btn btn-success" >Template Indicators <span class="badge bg-secondary">{{ $group->template_indicators->count() }}</span> </th>
                             </tr>
                             @endforeach
                     </tbody>    
                     
                 </table>
 
-              
-            </div>
+           
+                <div  class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary">
+                        Total Weight<span class="badge bg-secondary">4</span>
+                    </button>
+                </div>
         </div>
     </div>
 
-    <div class="row">
-        <button type="button" class="btn btn-primary">
-            Total Weight<span class="badge bg-secondary">4</span>
-          </button>
-    </div>
+  
 @endsection

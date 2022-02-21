@@ -1,77 +1,89 @@
 @extends('layouts.main')
 
 @section('content')
+
+    <!-- Page Heading -->
+
+    
+    <div class="d-flex justify-content-center .mb-15" >
+        <div class="row ">
+            <h1 class="h3 mb-0 text-gray-800">{{ $unit->name }} {{ $fy->name }}</h1>
+        </div>
+       
+    </div>
         
-                <div class="container">
-                    <div class="row">
-                      <div class="col-sm-4">Unit Type</div>
-                      <div class="col-sm-4">Unit</div>
-                      <div class="col-sm-4">Financial Year</div>
-
-                    </div>
-                    <div class="row">
-                      <div class="col-sm"> {{ $rank_name }}</div>
-                      <div class="col-sm"> {{ $unit_name }}</div>
-                      <div class="col-sm"> {{ $fy_name  }} </div>
-                    </div>
-                  </div>
-  
-            @forelse($indicatorgroups as $group)
-                    
-                        <h3> <b> {{ $group->id }}- {{ $group->name }} </b></h3>
- 
-                                    <table class="table table-bordered border-primary">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">#Id</th>
-                                                    <th scope="col">Indicator </th>
-                                                    <th scope="col">Indicator Type</th>
-                                                    <th scope="col">Unit of Meaure</th>
-                                                    <th scope="col">Weight</th>
-                                                    <th scope="col">Target </th>
-                                                    <th scope="col">Achivement (%)</th>
-                                                    <th scope="col">Score</th>
-                                                </tr>
-                                            </thead>     
-                                        <tbody>
-                                        @forelse ($group->indicators as $indicator)
-                                            <tr>
-                                                <th scope="row">{{ $indicator->id }}</th>
-                                                    <td>{{ $indicator->name }}</td>
-                                                    <td>{{ $indicator->type->name }}</td>
-                                                    <td>{{ $indicator->measure->name }}</td>
-                                                    <td>{{ $indicator->indicator_weight }}</td>
-                                                    <td>{{ $indicator->indicator_target  }}</td>
-                                                    <td> {!! Form::number('integer', $value = $indicator->indicator_achivement , ['class' => 'form-control']) !!}</td>
-                                                    <td> </td>
-                                            </tr>
-                                          
-                                          
-                                        </tbody>
-                                        @empty
-                                        @endforelse 
-                                    </table>
-                                           
-
-
-                                        
-        @endforeach    
   
 
     <div class="row">
-        <div class="form-group">
-                <div class="col-lg-10 col-lg-offset-2">
-                {!! Form::submit('Download Complete PDF Scoresheet', ['class' => 'btn btn-lg btn-info pull-right'] ) !!}
-        </div>
-
-        </div>
-
-        <div class="form-group">
-            <div class="col-lg-10 col-lg-offset-2">
-                {!! Form::submit('Download Simple PDF Scoresheet ', ['class' => 'btn btn-lg btn-info pull-right'] ) !!}
+        <div class="card  mx-auto">
+            <div>
+                @if (session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session('message') }}
+                    </div>
+                @endif
             </div>
-        </div>
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <form method="GET" action="{{ route('unit-ranks.fy.show',[$unit_rank->id,$fy->id ]) }}">
+                            <div class="form-row align-items-center">
+                                <div class="col">
+                                    <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
+                                        placeholder="Search Indicator Group">
+                                </div>
+                                <div class="col">
+                                    <button type="submit" class="btn btn-primary mb-2">Search</button>
+                                </div>
 
+                                <div class="col">
+                                    <a href="{{ route('pmmu', [$unit_rank->id,$unit->id , $fy->id]) }}" class="btn btn-success">Preview PMMU </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div>
+                        <a href="{{ route('unit-ranks.units.fy.indicator-groups.create',[$unit_rank->id,$unit->id,$fy->id ]) }}" class="btn btn-primary mb-2">Create New Group </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered" >
+                    <thead>
+                        <tr>
+                            <th scope="col"># </th>
+                            <th scope="col"> Indicator Group Name</th>
+                            <th scope="col"> Description</th>
+                            <th scope="col"> Weight</th>
+                            <th scope="col"> Edit</th>
+                            <th scope="col"> Indicators</th>
+                
+                
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($indicatorgroups  as $group)
+                            <tr>
+                                <th> <b>{{ $group->order }} </b></th>
+                                <th> {{ $group->name }} </th> 
+                                <th> <b>{{ substr($group->description,0,10)}} </b></th> 
+                                <th> <b> {{ $group->indicators->sum('indicator_weight')}}</b></th> 
+                                <th> <a href="{{ route('unit-ranks.units.fy.indicator-groups.edit', [$unit_rank->id ,$unit->id,$fy->id , $group->id]) }}"> Edit</a>   </th>
+                                <th> <a href="{{ route('unit-ranks.units.fy.indicator-groups.indicators.index', [$unit_rank->id ,$unit->id,$fy->id,$group->id]) }}", class="btn btn-success" >Indicators <span class="badge bg-secondary">{{ $group->indicators->count() }}</span> </th>
+                            </tr>
+                            @endforeach
+                    </tbody>    
+                    
+                </table>
+
+           
+                <div  class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary">
+                        Total Weight<span class="badge bg-secondary">4</span>
+                    </button>
+                </div>
+        </div>
     </div>
 
+  
 @endsection

@@ -4,13 +4,13 @@
 
     <!-- Page Heading -->
     <div class="row ">
-        <h1 class="h3 mb-0 text-gray-800">{{ $unit_rank->name }} - {{ $fy->name  }} </h1>
+        <h1 class="h3 mb-0 text-gray-800">{{ $unit->name }}- {{ $fy->name  }} </h1>
     </div>
 
     <div class="d-flex justify-content-between">
 
         <div class="row ">
-            <h2 class="h5 mb-0 text-gray-800"> Group : {{  $template_group->name }} </h2>
+            <h2 class="h5 mb-0 text-gray-800"> Group : {{  $indicator_group->name }} </h2>
         </div>
 
 
@@ -20,7 +20,7 @@
     </div>
 
     <div class="row ">
-        <h4 class="h6 mb-0 text-gray-800"> Group Description: {{  $template_group->description  }} </h4>
+        <h4 class="h6 mb-0 text-gray-800"> Group Description: {{  $indicator_group->description  }} </h4>
     </div>
 
         
@@ -36,7 +36,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <form method="GET" action="{{ route('unit-ranks.fy.template-groups.template-indicators.index',[$unit_rank->id,$fy->id,$template_group->id]) }}">
+                        <form method="GET" action="{{ route('unit-ranks.fy.template-groups.template-indicators.index',[$unit_rank->id,$fy->id,$indicator_group->id]) }}">
                             <div class="form-row align-items-center">
                                 <div class="col">
                                     <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
@@ -49,7 +49,7 @@
                         </form>
                     </div>
                     <div>
-                        <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.create',[$unit_rank->id,$fy->id,$template_group->id]) }}" class="btn btn-primary mb-2">Create New Template Indicator</a>
+                        <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.create',[$unit_rank->id,$fy->id,$indicator_group->id]) }}" class="btn btn-primary mb-2">Create New Indicator</a>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($template_indicators  as $indicator)
+                        @foreach ($indicators  as $indicator)
                             <tr>
                                 
                                 <td>{{ $indicator->order  }}</td>
@@ -80,7 +80,7 @@
 
 
                                 <td>
-                                    <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.edit', [$unit_rank->id,$fy->id,$template_group->id,$indicator->id]) }}" class="btn btn-success">Edit</a>
+                                    <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.edit', [$unit_rank->id,$fy->id,$indicator_group->id,$indicator->id]) }}" class="btn btn-success">Edit</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -93,7 +93,7 @@
 
     <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-primary">
-            Total Weight<span class="badge bg-secondary">{{ $template_group->template_indicators->sum('indicator_weight')}}</span>
+            Total Weight<span class="badge bg-secondary">{{ $indicator_group->indicators->sum('indicator_weight')}}</span>
           </button>
     </div>
        

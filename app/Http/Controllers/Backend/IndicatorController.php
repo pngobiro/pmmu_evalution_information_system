@@ -15,29 +15,24 @@ class IndicatorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request,$rank_id ,$unit_id , $fy_id )
+    public function index(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy )
     {
 
-        $rank_name = UnitRank::find($rank_id)->name;
 
-        $unit_name = Unit::find($unit_id)->name;
-
-        $fy_name = FinancialYear::find($fy_id)->name;
-
-        $indicatorgroups = IndicatorGroup::where('unit_id',$unit_id )
-                            ->where('financial_year_id',$fy_id)->get();
+        $indicatorgroups = IndicatorGroup::where('unit_id',$unit->id )
+                            ->where('financial_year_id',$fy->id)->get();
 
         if ($request->has('search')) {
             
 
-            $indicatorgroups = IndicatorGroup::where('unit_id',$unit_id)
-            ->where('financial_year_id',$fy_id)
+            $indicatorgroups = IndicatorGroup::where('unit_id',$unit->id)
+            ->where('financial_year_id',$fy->id)
             ->where('name', 'like', "%{$request->search}%")
             ->get();
 
         }
 
-        return view('admin.indicators.index',compact('indicatorgroups','rank_name','fy_name','unit_name')) ;
+        return view('admin.indicators.index',compact('indicatorgroups','unit_rank','fy','unit')) ;
     
     }
     /**
@@ -104,5 +99,17 @@ class IndicatorController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function preview(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy){
+
+
+        $indicatorgroups = IndicatorGroup::where('unit_id',$unit-> id )
+                            ->where('financial_year_id',$fy->id)->get();
+
+
+        return view('admin.indicators.preview',compact('indicatorgroups','unit_rank','fy','unit')) ;
+
     }
 }
