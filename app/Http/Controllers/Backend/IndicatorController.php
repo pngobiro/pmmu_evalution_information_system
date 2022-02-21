@@ -17,14 +17,10 @@ class IndicatorController extends Controller
      */
     public function index(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy )
     {
-
-
         $indicatorgroups = IndicatorGroup::where('unit_id',$unit->id )
                             ->where('financial_year_id',$fy->id)->get();
 
         if ($request->has('search')) {
-            
-
             $indicatorgroups = IndicatorGroup::where('unit_id',$unit->id)
             ->where('financial_year_id',$fy->id)
             ->where('name', 'like', "%{$request->search}%")
@@ -40,9 +36,11 @@ class IndicatorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy)
     {
-        //
+
+
+        return view('admin.indicators.create',compact('unit_rank','fy','unit')) ;
     }
 
     /**
@@ -51,9 +49,22 @@ class IndicatorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy)
     {
-        //
+        IndicatorGroup::create([
+
+            'name' =>               $request->name,
+            'description' =>        $request->description,
+            'order' =>              $request->order,
+            'unit_rank_id' =>       $unit_rank->id,
+            'unit_id'     =>        $unit->id,
+            'financial_year_id' =>  $fy->id,
+        ]);
+
+        return redirect()->route('unit-ranks.units.fy.indicator-groups.index',[$unit_rank->id ,$unit->id,$fy->id])->with('message', 'Group Registered Succesfully');
+
+
+
     }
 
     /**
@@ -73,9 +84,12 @@ class IndicatorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(UnitRank $unit_rank,Unit $unit ,FinancialYear $fy,IndicatorGroup $indicator_group)
     {
-        //
+
+
+
+        return view('admin.indicators.edit',compact('unit_rank','unit','fy','indicator_group'));
     }
 
     /**
@@ -85,9 +99,19 @@ class IndicatorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UnitRank $unit_rank,Unit $unit,FinancialYear $fy,IndicatorGroup $indicator_group,Request $request)
     {
-        //
+        
+        $indicator_group->update([
+
+            'name' =>               $request->name,
+            'description' =>        $request->description,
+            'order' =>              $request->order,
+        
+        
+        ]);
+
+        return redirect()->route('unit-ranks.units.fy.indicator-groups.index',[$unit_rank->id, $unit->id, $fy->id])->with('message', 'Group Updated Successfully');
     }
 
     /**

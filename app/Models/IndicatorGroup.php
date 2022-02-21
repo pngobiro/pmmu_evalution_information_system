@@ -10,7 +10,14 @@ class IndicatorGroup extends Model
     use HasFactory;
 
 
-
+    protected $fillable = [
+        'name',
+        'unit_rank_id',
+        'financial_year_id',
+        'description',
+        'order',
+        'unit_id'
+    ];
 
 
     public function indicators( )

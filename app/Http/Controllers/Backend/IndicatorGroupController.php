@@ -18,19 +18,14 @@ class IndicatorGroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request , $rank_id, $unit_id)
-
-
+    public function index(Request $request ,UnitRank $unit_rank, Unit $unit)
     {
         
-        $unit_name= Unit::find($unit_id)->name;
-        $rank_name = UnitRank::find($rank_id)->name;
-        $indicatorgroups = IndicatorGroup::where('unit_id',$unit_id)->get();
+        $indicatorgroups = IndicatorGroup::where('unit_id',$unit->id)->get();
 
         if ($request->has('search')) {
 
-            $indicatorgroups = IndicatorGroup::where('unit_id',$unit_id)
-            
+            $indicatorgroups = IndicatorGroup::where('unit_id',$unit->id)
                     ->where('name', 'like', "%{$request->search}%")
                     ->get();
         }
@@ -39,7 +34,7 @@ class IndicatorGroupController extends Controller
 
       
 
-        return view('admin.indicator_groups.index',compact('indicatorgroups','unit_name','rank_name'));
+        return view('admin.indicator_groups.index',compact('indicatorgroups','unit_rank','unit'));
     }
 
     /**
@@ -47,9 +42,9 @@ class IndicatorGroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request ,UnitRank $unit_rank,FinancialYear $fy)
     {
-        //
+        return view('admin.indicator_groups.create',compact('indicatorgroups','unit_rank','unit'));
     }
 
     /**

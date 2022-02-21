@@ -15,7 +15,7 @@
 
 
         <div class="row ">
-            <a href="{{ route('unit-ranks.fy.template-groups.index', [$unit_rank->id,$fy->id]) }}" class="btn btn-success">View All Groups</a>
+            <a href="{{ route('unit-ranks.units.fy.indicator-groups.index', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-success">View All Groups</a>
         </div>
     </div>
 
@@ -36,7 +36,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <form method="GET" action="{{ route('unit-ranks.fy.template-groups.template-indicators.index',[$unit_rank->id,$fy->id,$indicator_group->id]) }}">
+                        <form method="GET" action="{{ route('unit-ranks.units.fy.indicator-groups.indicators.index',[$unit_rank->id,$unit->id,$fy->id,$indicator_group->id]) }}">
                             <div class="form-row align-items-center">
                                 <div class="col">
                                     <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
@@ -49,7 +49,7 @@
                         </form>
                     </div>
                     <div>
-                        <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.create',[$unit_rank->id,$fy->id,$indicator_group->id]) }}" class="btn btn-primary mb-2">Create New Indicator</a>
+                        <a href="{{ route('unit-ranks.units.fy.indicator-groups.indicators.create',[$unit_rank->id,$unit->id,$fy->id,$indicator_group->id]) }}" class="btn btn-primary mb-2">Create New Indicator</a>
                     </div>
                 </div>
             </div>
@@ -70,17 +70,13 @@
                     <tbody>
                         @foreach ($indicators  as $indicator)
                             <tr>
-                                
                                 <td>{{ $indicator->order  }}</td>
                                 <td>{{ $indicator->name  }}</td>
                                 <td>{{ $indicator->type->name }}</td>
                                 <td>{{ $indicator->measure->name }}</td>
                                 <td>{{ $indicator->indicator_weight }}</td>
-                           
-
-
                                 <td>
-                                    <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.edit', [$unit_rank->id,$fy->id,$indicator_group->id,$indicator->id]) }}" class="btn btn-success">Edit</a>
+                                    <a href="{{ route('unit-ranks.units.fy.indicator-groups.indicators.edit', [$unit_rank->id,$unit->id,$fy->id,$indicator_group->id,$indicator->id]) }}" class="btn btn-success">Edit</a>
                                 </td>
                             </tr>
                         @endforeach

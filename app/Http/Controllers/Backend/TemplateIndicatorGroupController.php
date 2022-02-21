@@ -39,14 +39,12 @@ class TemplateIndicatorGroupController extends Controller
 
 
 
-    public function create(Request $request , $rank_id,$fy_id){
+    public function create(Request $request ,UnitRank $unit_rank,FinancialYear $fy){
 
-        $fy_name = FinancialYear::find($fy_id)->name;
-
-        $rank_name = UnitRank::find($rank_id)->name;
+     
       
 
-        return view('admin.template_indicator_groups.create',compact('rank_name','fy_name','rank_id','rank_id','fy_id'));
+        return view('admin.template_indicator_groups.create',compact('unit_rank','fy'));
 
     }
 
