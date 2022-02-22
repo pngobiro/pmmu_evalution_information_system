@@ -13,12 +13,9 @@ class Rankunitdropdown extends Component
     public $ranks;
     public $units;
     public $fys;
-    public $rank;
-    public $unit;
-    public $fy;
-    public $selectedRank = NULL;
-    public $selectedFY = NULL;
-    public $selectedUnit = NULL;
+    public $selectedRank ;
+    public $selectedFY ;
+    public $selectedUnit ;
 
     /**
 
@@ -37,7 +34,9 @@ class Rankunitdropdown extends Component
         $this->units = collect();
         $this->fys = collect();
 
-        $this->rank = 3;
+        $this->selectedRank = NULL;
+        $this->selectedUnit = NULL;
+        $this->selectedFY = NULL;
     }
 
   
@@ -75,7 +74,7 @@ class Rankunitdropdown extends Component
     {
         if (!is_null($selectedRank)) {
             $this->units = Unit::where('unit_rank_id', $selectedRank)->get();
-            $this->rank = $selectedRank;
+            $this->selectedRank = $selectedRank;
         }
     }
 
@@ -86,6 +85,7 @@ class Rankunitdropdown extends Component
         if (!is_null($selectedUnit)) {
             $this->unit = $selectedUnit;
             $this->fys = FinancialYear::all();
+            $this->selectedUnit = $selectedUnit;
         }
     }
 
@@ -93,11 +93,12 @@ class Rankunitdropdown extends Component
     public function updatedSelectedFY($selectedFY){
 
         if (!is_null($selectedFY)){
-            $this->fy = $selectedFY;
+            $this->selectedFY = $selectedFY;
         
         }
 
-        return redirect()->route('unit-ranks.units.fy.indicator-groups.indicators.index',[$rank , $unit ,$fy])->with('message', 'Indicator Created Successfully');
+        return redirect()->route('pmmu',[$this->selectedRank , $this->selectedUnit ,$this->selectedFY])->with('message', 'Unit Found Successfully');
+
 
     }
 
