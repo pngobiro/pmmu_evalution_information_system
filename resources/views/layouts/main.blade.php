@@ -102,7 +102,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-
+                   <b> PERFORMANCE MANAGEMENT & MEASUREMENT UNDERSTANDING ANALYSIS </b>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">

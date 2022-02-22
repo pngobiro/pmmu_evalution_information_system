@@ -42,7 +42,7 @@
                                         <tbody>
                                         @forelse ($group->indicators as $indicator)
                                             <tr>
-                                                <th scope="row">{{ $indicator->id }}</th>
+                                                <th scope="row">{{ $indicator->order }}</th>
                                                     <td>{{ $indicator->name }}</td>
                                                     <td>{{ $indicator->type->name }}</td>
                                                     <td>{{ $indicator->measure->name }}</td>

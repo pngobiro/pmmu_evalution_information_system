@@ -3,6 +3,9 @@
 @section('content')
 
     <!-- Page Heading -->
+
+    <div class="card">
+        <div class="card-body">
     <div class="row ">
         <h1 class="h3 mb-0 text-gray-800">{{ $unit->name }}- {{ $fy->name  }} </h1>
     </div>
@@ -23,9 +26,13 @@
         <h4 class="h6 mb-0 text-gray-800"> Group Description: {{  $indicator_group->description  }} </h4>
     </div>
 
-        
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
     <div class="row">
-        <div class="card  mx-auto">
+      
             <div>
                 @if (session()->has('message'))
                     <div class="alert alert-success">
@@ -37,7 +44,8 @@
                 <div class="row">
                     <div class="col">
                         <form method="GET" action="{{ route('unit-ranks.units.fy.indicator-groups.indicators.index',[$unit_rank->id,$unit->id,$fy->id,$indicator_group->id]) }}">
-                            <div class="form-row align-items-center">
+
+                            <div class="form-row align-items-between">
                                 <div class="col">
                                     <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
                                         placeholder="Search Indicator">
@@ -45,16 +53,19 @@
                                 <div class="col">
                                     <button type="submit" class="btn btn-primary mb-2">Search Indicator</button>
                                 </div>
+                                <div>
+                                    <a href="{{ route('unit-ranks.units.fy.indicator-groups.indicators.create',[$unit_rank->id,$unit->id,$fy->id,$indicator_group->id]) }}" class="btn btn-primary mb-2">Create New Indicator</a>
+                                </div>
                             </div>
+
+                            
                         </form>
                     </div>
-                    <div>
-                        <a href="{{ route('unit-ranks.units.fy.indicator-groups.indicators.create',[$unit_rank->id,$unit->id,$fy->id,$indicator_group->id]) }}" class="btn btn-primary mb-2">Create New Indicator</a>
-                    </div>
+                  
                 </div>
             </div>
             <div class="card-body">
-                <table class="table">
+                <table   class="table table-striped">
                     <thead>
                         <tr>
                            
@@ -83,15 +94,20 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        
     </div>
 
+</div>
+</div>
 
+<div class="card">
+    <div class="card-body">
     <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-primary">
             Total Weight<span class="badge bg-secondary">{{ $indicator_group->indicators->sum('indicator_weight')}}</span>
           </button>
     </div>
        
-   
+</div>
+</div>
 @endsection

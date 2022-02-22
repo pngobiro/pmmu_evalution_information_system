@@ -9,6 +9,16 @@ class Indicator extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'indicator_group_id',
+        'indicator_type_id',
+        'indicator_unit_of_measure_id',
+        'indicator_weight',
+        'indicator_target',
+        'indicator_unit_of_measure_id',
+        'order'
+    ];
 
     public function group()
     {
