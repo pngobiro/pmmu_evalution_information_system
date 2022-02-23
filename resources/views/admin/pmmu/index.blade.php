@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.frontend')
 
 @section('content')
 
@@ -59,7 +59,7 @@
                         @foreach ($indicators  as $indicator)
                             <tr>
                                 <td>{{ $indicator->order  }}</td>
-                                <td style="word-wrap: break-word;min-width: 200px;max-width: 160px;">{{ $indicator->name  }}</td>
+                                <td style="word-wrap: break-word;min-width: 100px;max-width: 200px;">{{ $indicator->name  }}</td>
                                 <td>{{ $indicator->type->name }}</td>
                                 <td>{{ $indicator->measure->name }}</td>
                                 <td>{{ $indicator->indicator_weight }}</td>

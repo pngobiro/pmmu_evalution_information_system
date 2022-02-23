@@ -3,7 +3,7 @@
 @section('content')
         
 <div class="card bg-light">
-    <div class="card-body">
+    <div class="card-body fs-3">
                 <div class="row">
                       <div class="col-sm-4">Unit Type</div>
                       <div class="col-sm-4">Unit</div>
@@ -22,56 +22,9 @@
 
 
 
-<div class="card ">
-    <div  class="card-body ">
-            @forelse($indicatorgroups as $group)
-
-             
-                        <div class="card-title"> {{ $group->id }}- {{ $group->name }}
-                        
-                                    <table class="table table-bordered table table-sm">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">#Id</th>
-                                                    <th scope="col">Indicator </th>
-                                                    <th scope="col">Indicator Type</th>
-                                                    <th scope="col">Unit of Meaure</th>
-                                                    <th scope="col">Weight</th>
-                                                    <th scope="col">Target </th>
-                                                    <th scope="col">Achivement (%)</th>
-                                                    <th scope="col">Score</th>
-                                                </tr>
-                                            </thead>     
-                                        <tbody>
-                                        @forelse ($group->indicators as $indicator)
-                                            <tr>
-                                                <th scope="row">{{ $indicator->order }}</th>
-                                                    <td>{{ $indicator->name }}</td>
-                                                    <td>{{ $indicator->type->name }}</td>
-                                                    <td>{{ $indicator->measure->name }}</td>
-                                                    <td>{{ $indicator->indicator_weight }}</td>
-                                                    <td>{{ $indicator->indicator_target  }}</td>
-                                                    <td> {!! Form::number('integer', $value = $indicator->indicator_achivement , ['class' => 'form-control']) !!}</td>
-                                                    <td> {{ $indicator->score }}</td>
-                                            </tr>
-                                          
-                                          
-                                        </tbody>
-                                        @empty
 
 
-                                        
-                                        @endforelse 
-                                    </table>
-                                           
-                        </div>
-
-                                        
-        @endforeach    
-    </div>
-</div>
-
-
+<livewire:update-pmmu />
 
 <div class="card bg-light">
     <div class="card-body">
