@@ -2,7 +2,7 @@
 
 @section('content')
         
-<div class="card card bg-light">
+<div class="card bg-light">
     <div class="card-body">
                 <div class="row">
                       <div class="col-sm-4">Unit Type</div>
@@ -22,10 +22,13 @@
 
 
 
-<div class="card text-white ">
-    <div  class="card-body text-primary">
+<div class="card ">
+    <div  class="card-body ">
             @forelse($indicatorgroups as $group)
-                        <h4> <b> {{ $group->id }}- {{ $group->name }} </b></h4>
+
+             
+                        <div class="card-title"> {{ $group->id }}- {{ $group->name }}
+                        
                                     <table class="table table-bordered table table-sm">
                                             <thead>
                                                 <tr>
@@ -49,36 +52,41 @@
                                                     <td>{{ $indicator->indicator_weight }}</td>
                                                     <td>{{ $indicator->indicator_target  }}</td>
                                                     <td> {!! Form::number('integer', $value = $indicator->indicator_achivement , ['class' => 'form-control']) !!}</td>
-                                                    <td> </td>
+                                                    <td> {{ $indicator->score }}</td>
                                             </tr>
                                           
                                           
                                         </tbody>
                                         @empty
+
+
+                                        
                                         @endforelse 
                                     </table>
                                            
-
+                        </div>
 
                                         
         @endforeach    
     </div>
 </div>
 
-<div class="card card bg-light">
+
+
+<div class="card bg-light">
     <div class="card-body">
         <div class="d-flex justify-content-center">
             <div class="row">
                  <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
-                            {!! Form::submit('Download Complete PDF Scoresheet', ['class' => 'btn btn-lg btn-primary pull-right'] ) !!}
+                            {!! Form::submit('Download Complete PDF Scoresheet', ['class' => 'btn btn-sm btn-primary pull-right'] ) !!}
                         </div>
                 </div>
 
          
             <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
-                {!! Form::submit('Download Simple PDF Scoresheet ', ['class' => 'btn btn-lg btn-info pull-right'] ) !!}
+                {!! Form::submit('Download Simple PDF Scoresheet ', ['class' => 'btn btn-sm btn-info pull-right'] ) !!}
             </div>
             </div>
         </div>

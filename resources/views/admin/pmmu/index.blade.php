@@ -5,8 +5,7 @@
 <div class="d-flex flex-column bd-highlight mb-3 .p-3">
     <h1 class="h3 mb-0 text-gray-800">{{ $unit->name }}- FY {{ $fy->name  }} </h1>
     <h2 class="h5 mb-0 text-gray-800"> Group : {{  $indicator_group->name }} </h2>
-    <h4 class="h6 mb-0 text-gray-800"> Group Description: {{  $indicator_group->description  }} </h4>
-  </div>
+</div>
 
 <div class="row">
     <div class="card  mx-auto">
@@ -51,6 +50,7 @@
                             <th scope="col">Indicator Type</th>
                             <th scope="col">Indicator Unit of Measure</th>
                             <th scope="col">Indicator Weight</th>
+                            <th scope="col">Indicator Target</th>
                             <th scope="col">Edit</th>
                          
                         </tr>
@@ -59,27 +59,30 @@
                         @foreach ($indicators  as $indicator)
                             <tr>
                                 <td>{{ $indicator->order  }}</td>
-                                <td>{{ $indicator->name  }}</td>
+                                <td style="word-wrap: break-word;min-width: 200px;max-width: 160px;">{{ $indicator->name  }}</td>
                                 <td>{{ $indicator->type->name }}</td>
                                 <td>{{ $indicator->measure->name }}</td>
                                 <td>{{ $indicator->indicator_weight }}</td>
+                                <td>{{ $indicator->indicator_target }}</td>
                                 <td>
                                     <a href="{{ route('unit-ranks.units.fy.indicator-groups.indicators.edit', [$unit_rank->id,$unit->id,$fy->id,$indicator_group->id,$indicator->id]) }}" class="btn btn-success">Edit</a>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td class="right" colspan="4">Total Weights:</td>
+                            <td class="right">{{ $indicator_group->indicators->sum('indicator_weight')}}</span></td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         
     </div>
 </div>
 
-<div class="d-flex justify-content-end">
-    <button type="button" class="btn btn-primary">
-        Total Weight<span class="badge bg-secondary">{{ $indicator_group->indicators->sum('indicator_weight')}}</span>
-      </button>
-</div>
 
 
  

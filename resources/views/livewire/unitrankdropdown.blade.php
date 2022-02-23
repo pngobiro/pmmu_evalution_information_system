@@ -39,11 +39,7 @@
                 </div>
             @endif
 
-        {{ $selectedRank }} 
-
-        {{ $selectedUnit }} 
-
-        {{ $selectedFY }} 
+    
     
     
 </div>

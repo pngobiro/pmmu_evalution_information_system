@@ -14,6 +14,7 @@ use App\Models\IndicatorType;
 use App\Models\IndicatorUnitOfMeasure;
 use App\Models\FinancialYear;
 
+
 use Illuminate\Http\Request;
 
 class PmmuController extends Controller
@@ -59,8 +60,11 @@ class PmmuController extends Controller
                  'indicator_unit_of_measure_id'  => $request->indicator_unit_of_measure_id,
                  'indicator_type_id'             => $request->indicator_type_id,
                  'indicator_weight'              => $request->indicator_weight,
+                 'indicator_target'            =>   $request->indicator_target,
                  'unit_rank_id'                  => $unit_rank->id,
                  'indicator_group_id'            => $indicator_group->id,
+                 
+
         ]);
  
          return redirect()->route('unit-ranks.units.fy.indicator-groups.indicators.index',[$unit_rank->id, $unit->id, $fy->id,$indicator_group->id])->with('message', 'Indicator Created Successfully');
@@ -93,6 +97,8 @@ class PmmuController extends Controller
         return redirect()->route('unit-ranks.units.fy.indicator-groups.indicators.index',[$unit_rank->id,$unit->id ,$fy->id,$indicator_group->id])->with('message', 'Indicator Updated Successfully');
 
     }
+
+
      
 
 }

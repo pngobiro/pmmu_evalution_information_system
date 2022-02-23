@@ -19,6 +19,7 @@ class CreateIndicatorsTable extends Migration
     {
         Schema::create('indicators', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(MasterIndicator::class);
             $table->mediumText('name');
             $table->foreignIdFor(IndicatorGroup::class);
             $table->foreignIdFor(IndicatorType::class);

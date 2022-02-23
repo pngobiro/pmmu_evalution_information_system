@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\FinancialYear;
-
+use App\Models\UnitRank;
+use App\Models\Unit;
 
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class FinancialYearController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request , $rank_id, $unit_id)
+    public function index(Request $request ,UnitRank $unit_rank, Unit $unit)
 
     {
 
@@ -29,7 +30,7 @@ class FinancialYearController extends Controller
             
         }
 
-        return view('admin.fy.index',compact('fys','rank_id','unit_id'));
+        return view('admin.fy.index',compact('fys','unit_rank','unit'));
     }
 
     /**

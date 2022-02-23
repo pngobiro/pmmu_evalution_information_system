@@ -7,6 +7,7 @@ use App\Models\Unit;
 use App\Models\FinancialYear;
 use App\Models\IndicatorGroup;
 use Illuminate\Http\Request;
+use PDF;
 
 class IndicatorController extends Controller
 {
@@ -136,4 +137,15 @@ class IndicatorController extends Controller
         return view('admin.indicators.preview',compact('indicatorgroups','unit_rank','fy','unit')) ;
 
     }
+
+    public function createPDF(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy) {
+        // retreive all records from db
+        $group = IndicatorGroup::where('unit_id',$unit-> id )
+                                ->where('financial_year_id',$fy->id)->get();
+        // share data to view
+        
+        $pdf = PDF::loadView('admin.indicators.pdf', $group);
+        // download PDF file with download method
+        return $pdf->download('pdf_file.pdf');
+      }
 }

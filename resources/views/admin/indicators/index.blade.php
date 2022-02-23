@@ -73,15 +73,17 @@
                             </tr>
                             @endforeach
                     </tbody>    
+
+                    <tfoot>
+                        <tr>
+                            <td class="right" colspan="3">Total Weights:</td>
+                            <td class="right">{{$unit->groupindicators->sum('indicator_weight')}}</span></td>
+                            {{-- <td class="right">{{ $group->indicators->sum('indicator_weight')}}</span></td> --}}
+                        </tr>
+                    </tfoot>
                     
                 </table>
 
-           
-                <div  class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-primary">
-                        Total Weight<span class="badge bg-secondary">4</span>
-                    </button>
-                </div>
         </div>
     </div>
 

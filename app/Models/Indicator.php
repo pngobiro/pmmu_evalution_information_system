@@ -16,7 +16,6 @@ class Indicator extends Model
         'indicator_unit_of_measure_id',
         'indicator_weight',
         'indicator_target',
-        'indicator_unit_of_measure_id',
         'order'
     ];
 
@@ -33,6 +32,16 @@ class Indicator extends Model
     public function measure()
     {
         return $this->belongsTo(IndicatorUnitOfMeasure::class,'indicator_unit_of_measure_id');
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(IndicatorUnitOfMeasure::class,'indicator_unit_of_measure_id');
+    }
+
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['name'] = strtolower($value);
     }
 
    

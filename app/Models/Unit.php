@@ -12,9 +12,17 @@ class Unit extends Model
 
     public function rank()
     {
-        return $this->belongsTo(IndicatorType::class,'unit_rank_id');
+        return $this->belongsTo(UnitRank::class,'unit_rank_id');
     }
 
+
+    public function groupindicators()
+    {
+            return $this->hasManyThrough(Indicator::class,IndicatorGroup::class,'unit_id','indicator_group_id');
+  
+  // return $this->hasManyThrough('Log', 'Task', 'project_id', 'task_id');
+
+    }
 
     
 

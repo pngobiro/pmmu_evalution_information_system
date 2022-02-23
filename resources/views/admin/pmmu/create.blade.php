@@ -27,6 +27,23 @@
                             @csrf
 
                             <div class="form-group row">
+                                <label for="order"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Indicator Order') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="order" type="number" class="form-control @error('order') is-invalid @enderror"
+                                        name="order" value="{{ old('order') }}" required autocomplete="order">
+
+                                    @error('order')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                   
+
+                            <div class="form-group row">
                                 <label for="name"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Indicator Name') }}</label>
 
@@ -99,22 +116,25 @@
                                 </div>
                             </div>
 
+
+
                             <div class="form-group row">
-                                <label for="order"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Indicator Order') }}</label>
+                                <label for="indicator_target"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Indicator Target') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="order" type="number" class="form-control @error('order') is-invalid @enderror"
-                                        name="order" value="{{ old('order') }}" required autocomplete="order">
+                                    <input id="indicator_target" type="number" class="form-control @error('indicator_target') is-invalid @enderror"
+                                        name="indicator_target" value="{{ old('indicator_target') }}" required autocomplete="indicator_target">
 
-                                    @error('order')
+                                    @error('indicator_target')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
-                   
+
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

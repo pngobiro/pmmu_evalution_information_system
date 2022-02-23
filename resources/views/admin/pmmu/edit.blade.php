@@ -8,7 +8,6 @@
     <div class="d-flex flex-column">
         <h1 class="h3 mb-0 text-gray-800 p-2">{{ $unit_rank->name }} - FY {{ $fy->name  }} </h1>
         <h1 class="h3 mb-0 text-gray-800 p-2"> {{ $indicator_group->name  }}</h1>
-        <h1 class="h3 mb-0 text-gray-800 p-2"> {{ $indicator_group->description  }}</h1>
       </div>
 
     <div class="container">
@@ -25,7 +24,22 @@
                             @csrf
                             @method('PUT')
                         
+                            <div class="form-group row">
+                                <label for="order"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Indicator Order') }}</label>
 
+                                <div class="col-md-6">
+                                    <input id="order" type="number" class="form-control @error('order') is-invalid @enderror"
+                                        name="order" value="{{ old('order',$indicator->order) }}" required autocomplete="order">
+
+                                    @error('order')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            
                             <div class="form-group row">
                                 <label for="name"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Indicator Name') }}</label>
@@ -33,7 +47,7 @@
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ old('name',$indicator_group->name )}}" required autocomplete="name" autofocus>
+                                        value="{{ old('name',$indicator->name )}}" required autocomplete="name" autofocus>
 
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -103,21 +117,24 @@
                                 </div>
                             </div>
 
+
+
                             <div class="form-group row">
-                                <label for="order"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Indicator Order') }}</label>
+                                <label for="indicator_target"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Indicator Target') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="order" type="number" class="form-control @error('order') is-invalid @enderror"
-                                        name="order" value="{{ old('order',$indicator->order) }}" required autocomplete="order">
+                                    <input id="indicator_target" type="number" class="form-control @error('indicator_target') is-invalid @enderror"
+                                        name="indicator_target" value="{{ old('indicator_target') }}" required autocomplete="indicator_target">
 
-                                    @error('order')
+                                    @error('indicator_target')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
+
                    
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">

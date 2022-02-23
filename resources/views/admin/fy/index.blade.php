@@ -4,8 +4,26 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Financial Years</h1>
+                <table class="table table-striped">
+                    <thead >
+                        <tr>
+                            <th scope="col">Unit Type</th>
+                            <th> Unit</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                    <th> {{ $unit_rank->name }}</th>
+                    <th> {{ $unit->name }} </th>
+                   
+                </tr>    
+            </tbody>
+            </table>
+  
+
     </div>
+
     <div class="row">
         <div class="card  mx-auto">
             <div>
@@ -51,8 +69,8 @@
                             <tr>
                                 <th scope="row">{{ $fy->id }}</th>
                                 <td>{{ $fy->name }}</td>
-                                <td><a href="{{ route('unit-ranks.units.fy.indicator-groups.index', [$rank_id,$unit_id,$fy->id]) }}" class="btn btn-success">Indicator Groups</a></td>
-                                <td><a href="{{ route('pmmu', [$rank_id,$unit_id,$fy->id]) }}" class="btn btn-success">PMMU</a></td>
+                                <td><a href="{{ route('unit-ranks.units.fy.indicator-groups.index', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-success">Indicator Groups</a></td>
+                                <td><a href="{{ route('pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-success">PMMU</a></td>
                             </tr>
                         @endforeach
                     </tbody>

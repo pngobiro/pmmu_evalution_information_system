@@ -8,6 +8,8 @@ use App\Models\IndicatorType;
 use App\Models\IndicatorUnitOfMeasure;
 use App\Models\UnitRank;
 use App\Models\Unit;
+use App\Models\MasterIndicator;
+
 
 class CreateTemplateIndicatorsTable extends Migration
 {
@@ -20,6 +22,7 @@ class CreateTemplateIndicatorsTable extends Migration
     {
         Schema::create('template_indicators', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(MasterIndicator::class);
             $table->mediumText('name');
             $table->foreignIdFor(UnitRank::class);
             $table->foreignIdFor(Unit::class)->nullable();
