@@ -6,6 +6,8 @@ use App\Models\UnitRank;
 use App\Models\Unit;
 use App\Models\FinancialYear;
 use App\Models\IndicatorGroup;
+use App\Models\Indicator;
+use App\Models\TemplateIndicatorGroup;
 use Illuminate\Http\Request;
 use PDF;
 
@@ -152,8 +154,42 @@ class IndicatorController extends Controller
     public function download_template(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy ){
 
 
-        \App\Jobs\GeneratePmmu::dispatch($unit_rank , $unit_rank ,$fy);
+        $template_group = TemplateIndicatorGroup::where('unit_rank_id',$unit_rank->id)
+        ->where('financial_year_id',$fy->id)->get();
 
+     if (!$template_group->isEmpty()){
+
+        foreach ($template_group as $group ){
+
+                $new_group                     = new IndicatorGroup();
+                $new_group->name               = $group->name;
+                $new_group->description        = $group->description;
+                $new_group->order              = $group->order;
+                $new_group->unit_rank_id       = $unit_rank->id;
+                $new_group->unit_id            = $unit->id;
+                $new_group->financial_year_id  = $fy->id;
+
+            $new_group->save();
+
+        
+                
+            foreach ($group->template_indicators as $indicator){
+
+                    $new_indicator                                  = new Indicator();
+                    $new_indicator->indicator_group_id              = $new_group->id;
+                    $new_indicator->order                           = $indicator->order;
+                    $new_indicator->name                            = $indicator->name;
+                    $new_indicator->indicator_type_id               = $indicator->indicator_type_id;
+                    $new_indicator->indicator_weight                = $indicator->indicator_weight;
+                    $new_indicator->indicator_unit_of_measure_id    = $indicator->indicator_unit_of_measure_id;
+                    $new_indicator->order                           = $indicator->order;
+
+            $new_group->indicators()->save($new_indicator);
+
+            };
+        };
+        };
+    
         return redirect()->route('unit-ranks.units.fy.indicator-groups.index',[$unit_rank->id ,$unit->id,$fy->id])->with('message', 'Template Created Succesfully');
 
       }

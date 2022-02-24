@@ -24,7 +24,7 @@
 <div class="card ">
     <div  class="card-body ">
         @forelse($indicatorgroups as $group)
-        <p class="fs-2 text-uppercase font-weight-bold font-monospace"> {{ $group->id }}- {{ $group->name }} </p>
+        <p class="fs-4 text-uppercase font-weight-bold font-monospace"> {{ $group->order }}- {{ $group->name }} </p>
         <div>
             <table class="table table-bordered table table-sm text-dark">
                 <thead>
