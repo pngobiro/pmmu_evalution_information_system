@@ -21,7 +21,7 @@ class UnitOfMeasureSeeder extends Seeder
             ['id' => '2','name' => 'No. of Days'],
             ['id' => '3','name' => 'Report'],
             ['id' => '4','name' => 'Number'],
-    
+            ['id' => '5','name' => 'Register'],
         
             ];
         DB::table('indicator_unit_of_measures')->insert($unit_of_measure);

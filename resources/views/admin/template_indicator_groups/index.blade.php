@@ -3,7 +3,8 @@
 @section('content')
 
     <!-- Page Heading -->
-
+    <div class="card">
+        <div class="card-body">
     
     <div class="d-flex justify-content-center .mb-15" >
         <div class="row ">
@@ -12,8 +13,11 @@
        
     </div>
         
-  
+</div>
+</div>
 
+<div class="card">
+    <div class="card-body">
     <div class="row">
         <div class="card  mx-auto">
             <div>
@@ -72,18 +76,24 @@
                                 <th> <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.index', [$unit_rank->id,$fy->id,$group->id]) }}", class="btn btn-success" >Template Indicators <span class="badge bg-secondary">{{ $group->template_indicators->count() }}</span> </th>
                             </tr>
                             @endforeach
-                    </tbody>    
+                    </tbody>  
+                    
+                    <tfoot>
+                        <tr>
+                            <td class="right font-weight-bold" colspan="3">Grand Total: </td>
+                            <td class="right"> </td>
+                            {{-- <td class="right">{{ $group->indicators->sum('indicator_weight')}}</span></td> --}}
+                        </tr>
+                    </tfoot>
                     
                 </table>
-
-           
-                <div  class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-primary">
-                        Total Weight<span class="badge bg-secondary">4</span>
-                    </button>
-                </div>
+            </div>
         </div>
+
     </div>
+
+</div>
+</div>
 
   
 @endsection

@@ -3,14 +3,22 @@
 @section('content')
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">{{ $rank_name }} - FY {{ $fy_name  }} </h1>
+    <div class="card">
+        <div class="card-body">
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">{{ $rank_name }} - FY {{ $fy_name  }} </h1>
+                </div>
+
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h4 mb-0 text-gray-800"> {{ $group_name  }}</h1>
+                </div>
+
+        </div>
     </div>
 
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800"> {{ $group_name  }}</h1>
-    </div>
-    <div class="container">
+<div class="card">
+    <div class="card-body">
+
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -126,5 +134,8 @@
                 </div>
             </div>
         </div>
+    
+
     </div>
+</div>  
 @endsection

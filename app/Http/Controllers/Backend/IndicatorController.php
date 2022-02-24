@@ -139,13 +139,22 @@ class IndicatorController extends Controller
     }
 
     public function createPDF(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy) {
-        // retreive all records from db
-        $group = IndicatorGroup::where('unit_id',$unit-> id )
-                                ->where('financial_year_id',$fy->id)->get();
-        // share data to view
-        
-        $pdf = PDF::loadView('admin.indicators.pdf', $group);
-        // download PDF file with download method
-        return $pdf->download('pdf_file.pdf');
+      
+
+
+
+
+
+      }
+
+
+
+    public function download_template(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy ){
+
+
+        \App\Jobs\GeneratePmmu::dispatch($unit_rank , $unit_rank ,$fy);
+
+        return redirect()->route('unit-ranks.units.fy.indicator-groups.index',[$unit_rank->id ,$unit->id,$fy->id])->with('message', 'Template Created Succesfully');
+
       }
 }

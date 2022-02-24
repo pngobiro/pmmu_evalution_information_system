@@ -4,7 +4,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">{{ $rank_name }} - FY {{ $fy_name  }} </h1>
+        <h1 class="h3 mb-0 text-gray-800">{{ $unit_rank->name }} - FY {{ $fy->name  }} </h1>
     </div>
 
    
@@ -14,11 +14,11 @@
                 <div class="card">
                     <div class="card-header">
                         {{ __('Create New Group') }}
-                        <a href="{{ route('unit-ranks.fy.template-groups.index',[$rank_id,$fy_id]) }}" class="float-right">Back</a>
+                        <a href="{{ route('unit-ranks.fy.template-groups.index',[$unit_rank->id,$fy->id]) }}" class="float-right">Back</a>
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('unit-ranks.fy.template-groups.store',[$rank_id,$fy_id]) }}">
+                        <form method="POST" action="{{ route('unit-ranks.fy.template-groups.store',[$unit_rank->id,$fy->id]) }}">
                             @csrf
 
                         

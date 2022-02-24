@@ -2,35 +2,26 @@
 
 @section('content')
 
-    <!-- Page Heading -->
-    <div class="row ">
-        <h1 class="h3 mb-0 text-gray-800">{{ $unit_rank->name }} - {{ $fy->name  }} </h1>
-    </div>
-
-    <div class="d-flex justify-content-between">
-
-        <div class="row ">
-            <h2 class="h5 mb-0 text-gray-800"> Group : {{  $template_group->name }} </h2>
-        </div>
-
-
-        <div class="row ">
-            <a href="{{ route('unit-ranks.fy.template-groups.index', [$unit_rank->id,$fy->id]) }}" class="btn btn-success">View All Groups</a>
+    <div class="card ">
+        <div class="card-body text-monospace">
+            <div class="d-flex flex-column bd-highlight mb-3">
+                <h1 class="h3 mb-0 text-gray-800">{{ $unit_rank->name }} - {{ $fy->name  }} </h1>
+                <h2 class="h5 mb-0 text-gray-800"> Group : {{  $template_group->name }} </h2>
+                <h4 class="h6 mb-0 text-gray-800"> Group Description: {{  $template_group->description  }} </h4>
         </div>
     </div>
 
-    <div class="row ">
-        <h4 class="h6 mb-0 text-gray-800"> Group Description: {{  $template_group->description  }} </h4>
-    </div>
+    
 
-        
-    <div class="row">
-        <div class="card  mx-auto">
-            <div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="card  mx-auto">
+                    <div>
                 @if (session()->has('message'))
-                    <div class="alert alert-success">
-                        {{ session('message') }}
-                    </div>
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
                 @endif
             </div>
             <div class="card-header">
@@ -44,6 +35,9 @@
                                 </div>
                                 <div class="col">
                                     <button type="submit" class="btn btn-primary mb-2">Search Indicator</button>
+                                </div>
+                                <div class="col ">
+                                    <a href="{{ route('unit-ranks.fy.template-groups.index', [$unit_rank->id,$fy->id]) }}" class="btn btn-success">View All Groups</a>
                                 </div>
                             </div>
                         </form>
@@ -85,17 +79,25 @@
                             </tr>
                         @endforeach
                     </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td class="right font-weight-bold" colspan="4">Grand Total: </td>
+                            <td class="right font-weight-bold">{{ $template_group->template_indicators->sum('indicator_weight')}} </td>
+                            {{-- <td class="right">{{ $group->indicators->sum('indicator_weight')}}</span></td> --}}
+                        </tr>
+                    </tfoot>
+
                 </table>
             </div>
+     
+
         </div>
     </div>
 
-
-    <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-primary">
-            Total Weight<span class="badge bg-secondary">{{ $template_group->template_indicators->sum('indicator_weight')}}</span>
-          </button>
-    </div>
        
-   
+
+</div>
+</div>
+
 @endsection
