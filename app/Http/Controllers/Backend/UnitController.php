@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Unit;
+use App\Models\UnitRank;
 use Illuminate\Http\Request;
 
 class UnitController extends Controller
@@ -14,21 +15,18 @@ class UnitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request , $rank_id)
-
-
-    {
-       
+    public function index(Request $request , UnitRank $unit_rank) {
+        
     
-        $units = Unit::where('unit_rank_id',$rank_id)->get();
+        $units = Unit::where('unit_rank_id',$unit_rank->id)->get();
 
         if ($request->has('search')) {
 
-            $units= Unit::where('name', 'like', "%{$request->search}%")->where('unit_rank_id',$id)->get();
+            $units= Unit::where('name', 'like', "%{$request->search}%")->where('unit_rank_id',$unit_rank->id)->get();
 
         }
 
-        return view('admin.units.index',compact('units','rank_id'));
+        return view('admin.units.index',compact('units','unit_rank'));
     }
 
     /**

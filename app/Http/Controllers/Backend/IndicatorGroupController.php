@@ -23,6 +23,8 @@ class IndicatorGroupController extends Controller
         
         $indicatorgroups = IndicatorGroup::where('unit_id',$unit->id)->get();
 
+        $sum_of_indicators = Unit::find($unit->id)->groupindicators->where('financial_year_id',$fy->id)->sum('indicator_weight');  
+
         if ($request->has('search')) {
 
             $indicatorgroups = IndicatorGroup::where('unit_id',$unit->id)
@@ -34,7 +36,7 @@ class IndicatorGroupController extends Controller
 
       
 
-        return view('admin.indicator_groups.index',compact('indicatorgroups','unit_rank','unit'));
+        return view('admin.indicator_groups.index',compact('indicatorgroups','unit_rank','unit'.'sum_of_indicators'));
     }
 
     /**

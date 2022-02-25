@@ -67,7 +67,7 @@
                                 <th> <b>{{ $group->order }} </b></th>
                                 <th> {{ $group->name }} </th> 
                                 <th> <b>{{ substr($group->description,0,10)}} </b></th> 
-                                <th> <b> {{ $group->indicators->sum('indicator_weight')}}</b></th> 
+                                <th> <b> {{ $group->total_indicators}}</b></th> 
                                 <th> <a href="{{ route('unit-ranks.units.fy.indicator-groups.edit', [$unit_rank->id ,$unit->id,$fy->id , $group->id]) }}"> Edit</a>   </th>
                                 <th> <a href="{{ route('unit-ranks.units.fy.indicator-groups.indicators.index', [$unit_rank->id ,$unit->id,$fy->id,$group->id]) }}", class="btn btn-success" >Indicators <span class="badge bg-secondary">{{ $group->indicators->count() }}</span> </th>
                             </tr>
@@ -76,9 +76,8 @@
 
                     <tfoot>
                         <tr>
-                            <td class="right" colspan="3">Total Weights:</td>
-                            <td class="right">{{$unit->groupindicators->sum('indicator_weight')}}</span></td>
-                            {{-- <td class="right">{{ $group->indicators->sum('indicator_weight')}}</span></td> --}}
+                            <td class="right font-weight-bold" colspan="3">Total Weights:</td>
+                            <td class="right font-weight-bold">{{ $indicatorgroups->sum('total_indicators')}}</span></td>
                         </tr>
                     </tfoot>
                     

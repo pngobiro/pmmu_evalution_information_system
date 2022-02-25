@@ -49,7 +49,7 @@
                         <td>{{ $indicator->indicator_weight }}</td>
                         <td>{{ $indicator->indicator_target  }}</td>
                         <td> <input type="text"  class="form-control"  value="{{ $indicator->indicator_achivement }}"></td>
-                        <td> </td>
+                        <td> {{ $indicator->indicator_score }}</td>
                     </tr>
                 </tbody>
                 @empty
@@ -57,19 +57,22 @@
                 <tfoot>
                     <tr>
                         <td class="right font-weight-bold" colspan="4">Group Total Weights:</td>
-                        <td class="right">{{$group->indicators->sum('indicator_weight')}}</span></td>
+                        <td class="right font-weight-bold">{{ $group->total_indicators }}</span></td>
                     </tr>
                 </tfoot>
             </table>
+
+
         </div>
 
 @endforeach    
 </div>
-</div>
- 
+
+<button type="button" class="btn btn-info">
+    Grand Weights Total: <span class="badge badge-light">{{ $indicatorgroups->sum('total_indicators')}}</span>
+  </button>
  
  {{-- <button wire:click="doSomething">Do Something</button> --}}
- 
  
 
 
@@ -88,12 +91,15 @@
                         </div>
                     </div>
 
+                    @if(empty($indicatorgroups->toArray()))
+
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
                            <button> <a href="{{ route('download_template', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-sm btn-secondary pull-right">Download Template </a> </button>
                         </div>
                     </div>
 
+            @endif  
 
 
                 </div>

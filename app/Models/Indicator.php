@@ -39,10 +39,19 @@ class Indicator extends Model
         return $this->belongsTo(IndicatorUnitOfMeasure::class,'indicator_unit_of_measure_id');
     }
 
-    public function setFirstNameAttribute($value)
-    {
-        $this->attributes['name'] = strtolower($value);
+   
+
+    public function getIndicatorScoreAttribute(){
+
+       return "hello";
+
     }
+
+
+//
+   //     return $this->cart()->products()->sum('price');
+        
+  //  }
 
    
   

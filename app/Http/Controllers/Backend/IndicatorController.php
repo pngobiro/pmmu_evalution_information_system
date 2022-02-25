@@ -20,8 +20,13 @@ class IndicatorController extends Controller
      */
     public function index(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy )
     {
-        $indicatorgroups = IndicatorGroup::where('unit_id',$unit->id )
-                            ->where('financial_year_id',$fy->id)->get();
+    
+
+        $indicatorgroups = IndicatorGroup::withSum('indicators as total_indicators', 'indicator_weight')
+                                            ->where('unit_id',$unit->id)
+                                            ->where('financial_year_id',$fy->id)
+                                            ->get(); 
+
 
         if ($request->has('search')) {
             $indicatorgroups = IndicatorGroup::where('unit_id',$unit->id)
@@ -132,13 +137,22 @@ class IndicatorController extends Controller
     public function preview(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy){
 
 
-        $indicatorgroups = IndicatorGroup::where('unit_id',$unit-> id )
-                            ->where('financial_year_id',$fy->id)->get();
-
+       
+        $indicatorgroups = IndicatorGroup::withSum('indicators as total_indicators', 'indicator_weight')
+                                            ->where('unit_id',$unit->id)
+                                            ->where('financial_year_id',$fy->id)
+                                            ->get(); 
+         
 
         return view('admin.indicators.preview',compact('indicatorgroups','unit_rank','fy','unit')) ;
 
     }
+
+    public function products(){
+        
+        return Products::where('id_buyer', Auth::user()->id)->get();
+      }
+
 
     public function createPDF(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy) {
       

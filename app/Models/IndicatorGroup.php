@@ -27,6 +27,8 @@ class IndicatorGroup extends Model
         return $this->hasMany(Indicator::class,'indicator_group_id');
     }
 
+    
+
     public function fy()
     {
         return $this->belongsTo(FinancialYear::class,'financial_year_id');

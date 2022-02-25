@@ -85,7 +85,7 @@ Route::resource('unit-ranks.fy.template-groups.template-indicators',TemplateIndi
 
 
 
-Route::resource('unit-ranks.units',UnitController::class)->shallow();;
+Route::resource('unit-ranks.units',UnitController::class);
 
 //Route::resource('unit-ranks.units.fy',UnitController::class);
 
