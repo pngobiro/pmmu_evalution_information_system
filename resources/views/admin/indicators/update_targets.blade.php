@@ -42,7 +42,7 @@
                         <th scope="col">Unit of Meaure</th>
                         <th scope="col">Weight</th>
                         <th scope="col">Target </th>
-                        <th scope="col">Achivement (%)</th>
+                       
                 
                     </tr>
                 </thead>     
@@ -54,9 +54,8 @@
                         <td>{{ $indicator->type->name }}</td>
                         <td>{{ $indicator->measure->name }}</td>
                         <td>{{ $indicator->indicator_weight }}</td>
-                        <td>{{ $indicator->indicator_target  }}</td>
                         {{--  <td>{{ $indicator->indicator_achivement }}</td> --}}
-                        <td> <livewire:indicator-form :indicator_id="$indicator->id" >  </td>
+                        <td> <livewire:indicator-target-form :indicator_id="$indicator->id" >  </td>
                      
                      
 
@@ -85,36 +84,5 @@
  {{-- <button wire:click="doSomething">Do Something</button> --}}
  
 
-
-<div class="card bg-light">
-    <div class="card-body">
-        <div class="d-flex justify-content-center">
-            <div class="row">
-                 <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            {!! Form::submit('Download Complete PDF Scoresheet', ['class' => 'btn btn-sm btn-primary pull-right'] ) !!}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            {!! Form::submit('Download Simple PDF Scoresheet ', ['class' => 'btn btn-sm btn-info pull-right'] ) !!}
-                        </div>
-                    </div>
-
-                    @if(empty($indicatorgroups->toArray()))
-
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                           <button> <a href="{{ route('download_template', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-sm btn-secondary pull-right">Download Template </a> </button>
-                        </div>
-                    </div>
-
-            @endif  
-      
-
-                </div>
-            </div>
-        </div>
-</div>
 
 @endsection

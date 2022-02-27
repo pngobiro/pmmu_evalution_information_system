@@ -15,6 +15,14 @@ class ReportsController extends Controller
         return view('admin.reports.index');
     }
 
+    public function excel_reports(){
+
+
+        return view('admin.reports.excel_reports');
+
+
+    }
+
 
 
 

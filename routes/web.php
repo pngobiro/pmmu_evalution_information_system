@@ -53,6 +53,8 @@ Route::get('templates', [TemplatesController::class, 'index'])->name('templates'
 
 Route::get('reports', [ReportsController::class, 'index'])->name('reports');
 
+Route::get('reports/excel_reports', [ReportsController::class, 'excel_reports'])->name('excel_reports');
+
 Route::resource('users', UserController::class);
 
 Route::resource('indicators', IndicatorController::class);
@@ -102,7 +104,7 @@ Route::resource('unit-ranks.master-indicator',MasterIndicatorController::class);
 Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/pmmu',[IndicatorController::class,"preview"])->name('pmmu');
 Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/pdf',[IndicatorController::class,"createPDF"])->name('pdf');
 Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/download_template',[IndicatorController::class,"download_template"])->name('download_template');
-
+Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/update_targets',[IndicatorController::class,"update_targets"])->name('update_targets');
 
 
 

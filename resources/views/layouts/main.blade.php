@@ -58,11 +58,7 @@
                 </a>
                 <div id="collapseSystem" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('reports') }}">Indicators Templates</a>
-                        <a class="collapse-item" href="{{ route('reports') }}">View Reports</a>
                         <a class="collapse-item" href="{{ route('unit-ranks.index') }}">Manage Unit Rank</a>
-                        <a class="collapse-item" href="{{ route('reports') }}">Manage Units</a>
-                        <a class="collapse-item" href="{{ route('templates') }}">Manage PMMU Templates</a>
                     </div>
                 </div>
             </li>
@@ -82,6 +78,23 @@
                         <a class="collapse-item" href="{{ route('users.index') }}">Users</a>
                         <a class="collapse-item" href="cards.html">Role</a>
                         <a class="collapse-item" href="cards.html">Permission</a>
+                    </div>
+                </div>
+            </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReports"
+                    aria-expanded="true" aria-controls="collapseReports">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Reports</span>
+                </a>
+                <div id="collapseReports" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('excel_reports') }}">Excel Reports</a>
+                        <a class="collapse-item" href="cards.html">Trends</a>
+                      
                     </div>
                 </div>
             </li>
@@ -170,6 +183,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.1.2/dist/alpine.js" defer></script>
     @livewireScripts
 </body>
 

@@ -43,7 +43,7 @@ class Indicator extends Model
 
     public function getIndicatorScoreAttribute(){
 
-       return "hello";
+       return $this->indicator_achivement*5;
 
     }
 

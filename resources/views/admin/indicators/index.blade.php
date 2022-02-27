@@ -39,6 +39,11 @@
                                 <div class="col">
                                     <a href="{{ route('pmmu', [$unit_rank->id,$unit->id , $fy->id]) }}" class="btn btn-success">Preview PMMU </a>
                                 </div>
+
+                                <div class="col">
+                                    <a href="{{ route('update_targets', [$unit_rank->id,$unit->id , $fy->id]) }}" class="btn btn-info">Update Targets </a>
+                                </div>
+
                             </div>
                         </form>
                     </div>

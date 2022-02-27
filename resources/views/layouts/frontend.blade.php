@@ -42,7 +42,7 @@
             <hr class="sidebar-divider">
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="admin-dashboard">
+                <a class="nav-link" href="{{ route('admin-dashboard') }}">
                     <span>Go to Admin Dashboard</span></a>
             </li>
 
@@ -160,6 +160,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.1.2/dist/alpine.js" defer></script>
     @livewireScripts
 </body>
 

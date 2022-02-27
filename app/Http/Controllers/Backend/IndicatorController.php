@@ -171,7 +171,10 @@ class IndicatorController extends Controller
         $template_group = TemplateIndicatorGroup::where('unit_rank_id',$unit_rank->id)
         ->where('financial_year_id',$fy->id)->get();
 
-     if (!$template_group->isEmpty()){
+        $indicatorgroups = IndicatorGroup::where('unit_id',$unit->id)
+        ->where('financial_year_id',$fy->id)->get();
+
+     if (!$template_group->isEmpty() &&    ($indicatorgroups->isEmpty())){
 
         foreach ($template_group as $group ){
 
@@ -205,6 +208,22 @@ class IndicatorController extends Controller
         };
     
         return redirect()->route('unit-ranks.units.fy.indicator-groups.index',[$unit_rank->id ,$unit->id,$fy->id])->with('message', 'Template Created Succesfully');
+
+      }
+
+      public function update_targets(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy){
+
+  
+        $indicatorgroups = IndicatorGroup::withSum('indicators as total_indicators', 'indicator_weight')
+                                            ->where('unit_id',$unit->id)
+                                            ->where('financial_year_id',$fy->id)
+                                            ->get(); 
+         
+
+        return view('admin.indicators.update_targets',compact('indicatorgroups','unit_rank','fy','unit')) ;
+
+
+
 
       }
 }
