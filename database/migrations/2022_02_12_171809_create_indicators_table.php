@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use App\Models\IndicatorGroup;
 use App\Models\IndicatorType;
 use App\Models\IndicatorUnitOfMeasure;
+use App\Models\MasterIndicator;
 
 
 class CreateIndicatorsTable extends Migration

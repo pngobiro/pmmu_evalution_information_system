@@ -48,6 +48,7 @@ class MasterIndicatorController extends Controller
     {
         $types = IndicatorType::all();
 
+
         $measures = IndicatorUnitOfMeasure::all();
 
         $rank_name = UnitRank::find($rank_id)->name;

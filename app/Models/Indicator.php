@@ -11,6 +11,7 @@ class Indicator extends Model
 
     protected $fillable = [
         'name',
+        'master_id',
         'indicator_group_id',
         'indicator_type_id',
         'indicator_unit_of_measure_id',
@@ -39,13 +40,29 @@ class Indicator extends Model
         return $this->belongsTo(IndicatorUnitOfMeasure::class,'indicator_unit_of_measure_id');
     }
 
+    public function master()
+    {
+        return $this->belongsTo(MasterIndicator::class,'master_id');
+    }
+
+
+
    
 
     public function getIndicatorScoreAttribute(){
 
-       return $this->indicator_achivement*5;
+        if (!$this->indicator_target==NULL)
 
-    }
+                    return ($this->indicator_achivement/$this->indicator_target)*100 ;
+         
+
+            // cap special indicators
+    
+        }
+
+    
+
+    
 
 
 //

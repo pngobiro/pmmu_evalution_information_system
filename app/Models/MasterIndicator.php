@@ -25,4 +25,15 @@ class MasterIndicator extends Model
         return $this->belongsTo(UnitRank::class,'unit_rank_id' );
     }
 
+    public function template_indicators()
+    {
+        return $this->hasMany(TemplateIndicator::class);
+    }
+
+
+    public function indicators()
+    {
+        return $this->hasMany(Indicator::class);
+    }
+   
 }

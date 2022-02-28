@@ -11,6 +11,7 @@ class TemplateIndicator extends Model
 
     protected $fillable = [
         'name',
+        'master_id',
         'unit_rank_id',
         'indicator_group_id',
         'indicator_type_id',
@@ -41,6 +42,12 @@ class TemplateIndicator extends Model
     {
         return $this->belongsTo(IndicatorUnitOfMeasure::class,'indicator_unit_of_measure_id');
     }
+
+    public function master()
+    {
+        return $this->belongsTo(MasterIndicator::class,'master_id');
+    }
+
 
 
 }

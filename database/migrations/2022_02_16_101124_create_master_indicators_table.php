@@ -22,7 +22,7 @@ class CreateMasterIndicatorsTable extends Migration
             $table->id();
             $table->string('name');
             $table->foreignIdFor(UnitRank::class);
-            $table->foreignIdFor(Unit::class)->nullable();
+            $table->foreignIdFor(Unit::class)->default(100);
             $table->timestamps();
         });
     }

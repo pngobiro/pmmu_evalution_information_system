@@ -24,6 +24,27 @@
                             @csrf
                             @method('PUT')
                         
+                            <div class="form-group row">
+                                <label for="master_id"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Master ID') }}</label>
+
+                                <div class="col-md-12">
+
+                                    <select name="master_id" class="form-control" aria-label="Default select example">
+                                        <option selected>Select Indicator Category</option>
+                                        @foreach ($master_indicators  as $master)
+                                            <option value="{{ $master->id }}" {{ $master->id == $template_indicator->master_id  ? 'selected' : '' }}>{{ $master->name }}</option>
+                                        @endforeach
+                                    </select>
+
+
+                                    @error('master_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <label for="name"

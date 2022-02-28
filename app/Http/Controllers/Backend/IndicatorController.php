@@ -194,6 +194,7 @@ class IndicatorController extends Controller
 
                     $new_indicator                                  = new Indicator();
                     $new_indicator->indicator_group_id              = $new_group->id;
+                    $new_indicator->master_indicator_id             = $indicator->master_indicator_id ;
                     $new_indicator->order                           = $indicator->order;
                     $new_indicator->name                            = $indicator->name;
                     $new_indicator->indicator_type_id               = $indicator->indicator_type_id;

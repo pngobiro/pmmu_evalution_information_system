@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateTemplateIndicatorRequest;
 
 use App\Models\FinancialYear;
 use App\Models\UnitRank;
+use App\Models\MasterIndicator;
 use App\Models\TemplateIndicatorGroup;
 use App\Models\TemplateIndicator;
 use App\Models\IndicatorType;
@@ -38,6 +39,8 @@ class TemplateIndicatorsController extends Controller
 
     public function create ($rank_id ,$fy_id,$group_id){
 
+        $master_indicators = MasterIndicator::where('unit_rank_id',$rank_id)->get();
+
         $group_name = TemplateIndicatorGroup::find($group_id)->name;
 
         $rank_name = UnitRank::find($rank_id)->name;
@@ -48,7 +51,7 @@ class TemplateIndicatorsController extends Controller
 
         $measures = IndicatorUnitOfMeasure::all();
        
-        return view('admin.template-indicators.create' ,compact('fy_id','rank_name','rank_id','group_id','fy_name','group_name','measures','types'));
+        return view('admin.template-indicators.create' ,compact('fy_id','rank_name','rank_id','group_id','fy_name','group_name','measures','types','master_indicators'));
 
 
     }
@@ -58,6 +61,7 @@ class TemplateIndicatorsController extends Controller
 
        TemplateIndicator::create([
                 'name'                          => $request->name,
+                'master_id'                     => $request->master_id,
                 'indicator_type_id'             => $request->indicator_type_id,
                 'order'                         => $request->order,
                 'indicator_unit_of_measure_id'  => $request->indicator_unit_of_measure_id,
@@ -73,6 +77,8 @@ class TemplateIndicatorsController extends Controller
 
     public function edit ($rank_id ,$fy_id,$group_id,TemplateIndicator $template_indicator){
 
+        $master_indicators = MasterIndicator::where('unit_rank_id',$rank_id)->get();
+
         $group_name = TemplateIndicatorGroup::find($group_id)->name;
 
         $rank_name = UnitRank::find($rank_id)->name;
@@ -85,7 +91,7 @@ class TemplateIndicatorsController extends Controller
 
 
        
-        return view('admin.template-indicators.edit' ,compact('fy_id','rank_name','rank_id','group_id','fy_name','group_name','measures','types','template_indicator'));
+        return view('admin.template-indicators.edit' ,compact('fy_id','rank_name','rank_id','group_id','fy_name','group_name','measures','types','template_indicator','master_indicators'));
 
 
     }
