@@ -1,4 +1,4 @@
-@extends('layouts.frontend')
+@extends('layouts.main')
 
 @section('content')
 
@@ -17,7 +17,7 @@
 </div>
 
 <div>
-     <livewire:reportsdropdown /> 
+     <livewire:excel-reports-dropdown/> 
 </div>
 
 
