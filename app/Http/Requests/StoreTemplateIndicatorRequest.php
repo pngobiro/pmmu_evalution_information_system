@@ -30,6 +30,7 @@ class StoreTemplateIndicatorRequest extends FormRequest
             'indicator_weight'              => ['required','numeric','min:1'],
             'indicator_type_id'             => ['required','numeric','min:1'],
             'indicator_unit_of_measure_id'  => ['required'],
+            'master_indicator_id'           => ['required'],
             
 
         ];

@@ -22,6 +22,7 @@ class TemplateIndicatorsSeeder extends Seeder
             if (!$firstline) {
                 TemplateIndicator::create([
                     "id" =>                             $data['0'],
+                    "master_indicator_id" =>            5,
                     "name" =>                           $data['1'],
                     "unit_rank_id" =>                   $data['2'],
                     "unit_id" =>                        $data['3'],

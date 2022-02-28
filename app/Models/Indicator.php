@@ -42,7 +42,7 @@ class Indicator extends Model
 
     public function master()
     {
-        return $this->belongsTo(MasterIndicator::class,'master_id');
+        return $this->belongsTo(MasterIndicator::class,'master_indicator_id');
     }
 
 

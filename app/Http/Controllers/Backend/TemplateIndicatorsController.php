@@ -61,7 +61,7 @@ class TemplateIndicatorsController extends Controller
 
        TemplateIndicator::create([
                 'name'                          => $request->name,
-                'master_id'                     => $request->master_id,
+                'master_indicator_id'           => $request->master_indicator_id,
                 'indicator_type_id'             => $request->indicator_type_id,
                 'order'                         => $request->order,
                 'indicator_unit_of_measure_id'  => $request->indicator_unit_of_measure_id,
@@ -98,7 +98,6 @@ class TemplateIndicatorsController extends Controller
 
 
     public function update(UpdateTemplateIndicatorRequest $request,$rank_id ,$fy_id,$group_id,TemplateIndicator $template_indicator){
-
 
 
         $template_indicator->update($request->validated());

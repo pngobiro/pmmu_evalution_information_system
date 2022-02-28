@@ -60,9 +60,10 @@ class PmmuController extends Controller
                  'indicator_unit_of_measure_id'  => $request->indicator_unit_of_measure_id,
                  'indicator_type_id'             => $request->indicator_type_id,
                  'indicator_weight'              => $request->indicator_weight,
-                 'indicator_target'            =>   $request->indicator_target,
+                 'indicator_target'              => $request->indicator_target,
                  'unit_rank_id'                  => $unit_rank->id,
                  'indicator_group_id'            => $indicator_group->id,
+                 'master_indicator_id'           => $indicator_group->master_indicator_id,
                  
 
         ]);

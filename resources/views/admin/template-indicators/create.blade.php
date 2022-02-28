@@ -32,19 +32,19 @@
                             @csrf
 
                             <div class="form-group row">
-                                <label for="master_id"
+                                <label for="master_indicator_id"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Master ID') }}</label>
 
                                 <div class="col-md-12">
 
-                                    <select name="master_id" class="form-control" aria-label="Default select example">
+                                    <select name="master_indicator_id" class="form-control" aria-label="Default select example">
                                         <option selected>Select Indicator Category</option>
                                         @foreach ($master_indicators  as $master)
                                             <option value="{{ $master->id }}">{{ $master->name }}</option>
                                         @endforeach
                                     </select>
 
-                                    @error('master_id')
+                                    @error('master_indicator_id')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

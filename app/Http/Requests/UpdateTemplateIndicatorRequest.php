@@ -27,7 +27,7 @@ class UpdateTemplateIndicatorRequest extends FormRequest
             'name'                          => ['required','string'],
             'order'                         => ['required','numeric','min:1'],
             'indicator_weight'              => ['required','numeric','min:1'],
-            'master_id'                     => ['required','numeric','min:1'],
+            'master_indicator_id'           => ['required'],
             'indicator_type_id'             => ['required','numeric','min:1'],
             'indicator_unit_of_measure_id'  => ['required','numeric','min:1'],
         ];
