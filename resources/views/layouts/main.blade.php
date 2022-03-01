@@ -93,7 +93,7 @@
                 <div id="collapseReports" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('excel_reports') }}">Excel Reports</a>
-                        <a class="collapse-item" href="cards.html">Trends</a>
+                        <a class="collapse-item" href="{{ route('test_report') }}">Test Reports</a>
                       
                     </div>
                 </div>

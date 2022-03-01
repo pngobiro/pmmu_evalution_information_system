@@ -55,6 +55,8 @@ Route::get('reports', [ReportsController::class, 'index'])->name('reports');
 
 Route::get('reports/excel_reports', [ReportsController::class, 'excel_reports'])->name('excel_reports');
 
+Route::get('reports/test_reports', [ReportsController::class, 'test_report'])->name('test_report');
+
 Route::resource('users', UserController::class);
 
 Route::resource('indicators', IndicatorController::class);

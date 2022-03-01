@@ -11,7 +11,7 @@ class Indicator extends Model
 
     protected $fillable = [
         'name',
-        'master_id',
+        'master_indicator_id ',
         'indicator_group_id',
         'indicator_type_id',
         'indicator_unit_of_measure_id',
@@ -37,7 +37,7 @@ class Indicator extends Model
 
     public function unit()
     {
-        return $this->belongsTo(IndicatorUnitOfMeasure::class,'indicator_unit_of_measure_id');
+        return $this->belongsTo(Unit::class,'unit_id');
     }
 
     public function master()
