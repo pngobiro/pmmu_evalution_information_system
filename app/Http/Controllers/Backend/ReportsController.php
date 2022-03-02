@@ -6,7 +6,8 @@ use App\Models\UnitRank;
 use App\Models\Unit;
 use App\Models\FinancialYear;
 use App\Models\IndicatorGroup;
-
+use App\Models\MasterIndicator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ReportsController extends Controller
@@ -30,32 +31,32 @@ class ReportsController extends Controller
 
     public function test_report(){
 
-        $units = Unit::where('unit_rank_id',6);
+    $units = Unit::where('unit_rank_id',6)->get();
 
-        $fy = FinancialYear::find(4);
+     
+    $indicatorgroups = IndicatorGroup::with('unit')->where('unit_rank_id',6)->where('financial_year_id',4)->get();
 
+    foreach ( $indicatorgroups as $group){
 
-        // DB::table('indicators')
-        //  ->select('*')
-        //  ->join('units', function ($join) {
-        //     $join->on('students.std_id', '=', 'results.student_results_id')->groupBy('results.academic_year'); 
-        //  })
-        // ->where('student_results_id', $std_id)
-        //->get();
+            foreach ($group->indicators as $indicator){
 
 
+                echo $group->unit->name ; 
+                
+                echo $indicator;
+            
 
+            }
 
-        
-        $indicatorgroups = IndicatorGroup::where('unit_rank_id',6)->where('financial_year_id',4)->get();
-
-
-          
-                                            
+    }
 
 
 
-                    return view('admin.reports.test_report',compact('units','indicatorgroups','units','fy'));
+  
+
+
+
+      //return view('admin.reports.test_report',compact('units','indicatorgroups','units','unit'));
     
     
     }

@@ -10,9 +10,9 @@
                 <div class="col-sm-4 font-weight-bold">Financial Year</div>
             </div>
             <div class="row">
-                <div class="col-sm"> {{ $unit_rank->name }}</div>
-                <div class="col-sm"> {{ $unit->name }}</div>
-                <div class="col-sm"> {{ $fy->name  }} </div>
+                <div class="col-sm m-0 font-weight-bold text-primary"> {{ $unit_rank->name }}</div>
+                <div class="col-sm m-0 font-weight-bold text-primary"> {{ $unit->name }}</div>
+                <div class="col-sm m-0 font-weight-bold text-primary"> {{ $fy->name  }} </div>
             </div>
     </div>
 </div>
@@ -31,7 +31,9 @@
 <div class="card ">
     <div  class="card-body ">
         @forelse($indicatorgroups as $group)
-        <p class="fs-4 text-uppercase font-weight-bold font-monospace"> {{ $group->order }}- {{ $group->name }} </p>
+
+        <h6 class="m-0 font-weight-bold text-primary"> {{ $group->order }} - {{ $group->name }}</h6>
+      
         <div>
             <table class="table table-bordered table table-sm text-dark">
                 <thead>

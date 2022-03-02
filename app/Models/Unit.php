@@ -20,7 +20,23 @@ class Unit extends Model
     {
             return $this->hasManyThrough(Indicator::class,IndicatorGroup::class,'unit_id','indicator_group_id');
   
-  // return $this->hasManyThrough('Log', 'Task', 'project_id', 'task_id');
+  
+
+    }
+
+
+    
+
+
+    public function  getIndicatorsAttribute($value=4){
+
+       if ( ! array_key_exists('groupindicators', $this->relations)) 
+
+       $this->load('groupindicators');
+
+        return $this->groupindicators->where('master_indicator_id',1)->first()->indicator_score;
+
+
 
     }
 

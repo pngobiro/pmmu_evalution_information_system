@@ -20,6 +20,8 @@ class Indicator extends Model
         'order'
     ];
 
+    protected $appends = ['indicator_score'];
+
     public function group()
     {
         return $this->belongsTo(IndicatorGroup::class,'indicator_group_id');
@@ -52,26 +54,9 @@ class Indicator extends Model
     public function getIndicatorScoreAttribute(){
 
         if (!$this->indicator_target==NULL)
-
-                    return ($this->indicator_achivement/$this->indicator_target)*100 ;
-         
-
+                return ($this->indicator_achivement/$this->indicator_target)*100 ;
             // cap special indicators
-    
         }
-
-    
-
-    
-
-
-//
-   //     return $this->cart()->products()->sum('price');
-        
-  //  }
-
-   
-  
 }
 
 

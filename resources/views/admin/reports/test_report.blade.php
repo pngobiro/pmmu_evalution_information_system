@@ -1,7 +1,26 @@
 @extends('layouts.main')
 
 @section('content')
+<style> 
+th.rotated-text {
+    height: 140px;
+    white-space: nowrap;
+    padding: 0 !important;
+}
 
+th.rotated-text > div {
+    transform:
+        translate(5px, 0px)
+        rotate(90deg);
+    width: 30px;
+}
+
+th.rotated-text > div > span {
+    padding: 5px 10px;
+}
+
+
+</style>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -19,35 +38,26 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
-                                        <tr>
-                                            <th>Unit Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
+                                       
+                                        
+                                         <th> Court Name</th>
+
+                                     
+                                        <th> Court Name</th>
+                                        
+                                   
                                     </thead>
                     
                                     <tbody>
-                                        @foreach($indicatorgroups   as $group)
-
-
-                                        @foreach ( $group->indicators as $indicator )
-                                        
-                                            
-                                  
-                                        
+                                       {{--  @foreach($units  as $unit)--}} 
                                         <tr>
-                                            <td>{{$group->unit->name }}</td>
-                                            <td>{{ $indicator->name }}</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
+                                            <td>{{$unit->name }} </td>
+                                            <td>{{$unit->indicators }} </td>
+                                       
+                                    
                                         </tr>
-                                        @endforeach
-                                        @endforeach
+                                       {{--  @endforeach --}}
+                                       
                                     </tbody>
                                 </table>
                             </div>
