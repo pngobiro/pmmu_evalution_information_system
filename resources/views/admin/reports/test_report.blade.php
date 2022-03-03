@@ -56,20 +56,21 @@ th.rotated-text > div > span {
                                          <th>Percentage reduction of backlog </th>
                                          <th>Merit Productivity </th>
                                          <th> Other productivity</th>
-                                         <th> </th>
-                                         <th> </th>
-                                         <th> </th>
-                                         <th> </th>
-                                         <th> </th>
-                                         <th> </th>
-                                         <th> </th>
-                                         <th> </th>
-                                         <th> </th>
-                                         <th> </th>
-                                         <th> </th>
-                                         <th> </th>
+                                         <th>Advance communication of adjournments of trials & hearings and date of judgment of delivery of judgments/rulings </th>
+                                         <th> Percentage of trial/hearings held when first cause listed</th>
+                                         <th> Percentage of pre-trial events held when first listed – mentions and supervision for compliance by parties in filing pleadings/exhibits</th>
+                                         <th>  	Submission of Court proceedings for appealed Matters within 60 days from date of receipt of no</th>
+                                         <th> Adoption of Alternative Dispute Resolutions - % of Filed Cases referred for Alternative Dispute Resolution (ADR/CAM/AJS)</th>
+                                         <th> Publish daily cause lists and posting on the notice board/online - seven days in advance</th>
+                                         <th>Stakeholder Engagement </th>
+                                         <th>  	Timely Submission of accurate monthly court returns</th>
+                                         <th> Implement the Registry Manual procedures</th>
+                                         <th>Maintain and update all registers </th>
+                                         <th>Maintenance of asset and equipment register </th>
+                                         <th>Disposal of idle assets (Where applicable) </th>
+                                         <th> Compliance with the budget</th>
+                                         <th> Revenue Management</th>
                                          
-                                        
                                    
                                     </thead>
                     
@@ -100,6 +101,13 @@ th.rotated-text > div > span {
                                             <td>{{ $collection[20]['score']}} </td>
                                             <td>{{ $collection[21]['score']}} </td>
                                             <td>{{ $collection[22]['score']}} </td>
+                                            <td>{{ $collection[23]['score']}} </td>
+                                            <td>{{ $collection[24]['score']}} </td>      
+                                            <td>{{ $collection[25]['score']}} </td>
+                                            <td>{{ $collection[26]['score']}} </td>
+                                            <td>{{ $collection[27]['score']}} </td>
+                                            <td>{{ $collection[28]['score']}} </td>
+                                            <td>{{ $collection[29]['score']}} </td>
 
                                          
                                        
