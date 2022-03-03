@@ -60,12 +60,6 @@ class TemplatesController extends Controller
     }
 
 
-    public function financial_years (){
 
 
-
-        
-    }
-
- 
 }

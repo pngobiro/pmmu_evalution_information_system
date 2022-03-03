@@ -45,3 +45,14 @@ $keyed = $indicator->mapWithKeys(function ($item, $key) {
 
 
                 https://laravel.com/docs/8.x/collections#method-mapwithkeys
+
+
+                <tr>
+                                            <td>{{$item}} </td>
+
+                                            <td>{{ $collection}} </td>
+                                            <td>{{ $collection ->keyBy('score')}} </td>
+                                         
+                                       
+                                    
+                                        </tr>

@@ -33,7 +33,7 @@
                                     <select name="master_indicator_id" class="form-control" aria-label="Default select example">
                                         <option selected>Select Indicator Category</option>
                                         @foreach ($master_indicators  as $master)
-                                            <option value="{{ $master->id }}" {{ $master->id == $template_indicator->master_indicator_id ? 'selected' : '' }}>{{ $master->name }}</option>
+                                            <option value="{{ $master->id }}" {{ $master->id == $template_indicator->master_indicator_id? 'selected' : '' }}>{{ $master->name }}</option>
                                         @endforeach
                                     </select>
 

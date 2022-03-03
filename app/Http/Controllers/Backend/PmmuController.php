@@ -93,7 +93,19 @@ class PmmuController extends Controller
 
 
 
-        $indicator->update($request->validated());
+        $indicator->update([
+
+            'name'                          => $request->name,
+            'indicator_type_id'             => $request->indicator_type_id,
+            'order'                         => $request->order,
+            'indicator_unit_of_measure_id'  => $request->indicator_unit_of_measure_id,
+            'indicator_type_id'             => $request->indicator_type_id,
+            'indicator_weight'              => $request->indicator_weight,
+            'master_indicator_id'           => $request->master_indicator_id,
+        ]);
+
+
+      
 
         return redirect()->route('unit-ranks.units.fy.indicator-groups.indicators.index',[$unit_rank->id,$unit->id ,$fy->id,$indicator_group->id])->with('message', 'Indicator Updated Successfully');
 
