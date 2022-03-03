@@ -1,26 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<style> 
-th.rotated-text {
-    height: 140px;
-    white-space: nowrap;
-    padding: 0 !important;
-}
 
-th.rotated-text > div {
-    transform:
-        translate(5px, 0px)
-        rotate(90deg);
-    width: 30px;
-}
-
-th.rotated-text > div > span {
-    padding: 5px 10px;
-}
-
-
-</style>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -28,11 +9,12 @@ th.rotated-text > div > span {
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Tables</h1>
                  
-
+                    
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                        
+                          <h6 class="m-0 font-weight-bold text-primary">  <a href="{{ route('file-export') }}"> Download Excel</a> 
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -41,15 +23,15 @@ th.rotated-text > div > span {
                                        
                                         
                                          <th> Court Name</th>
-                                         <th> Certified Urgent Applications - % of certified urgent applications concluded within 30 days from the date of certification</th>
-                                         <th> Injunction applications -% of injunction applications heard and determined within 90 days of filing</th>
-                                         <th> All Other Applications -% of other applications heard and determined within 180 days of filing</th>
-                                         <th>Hearing and determination of Criminal cases -% of cases concluded within 360 days of filing </th>
-                                         <th> Hearing and determination of Civil cases -% of cases concluded within 360 days of filing</th>
-                                         <th> Percentage of judgments/rulings delivered on the date first scheduled for delivery</th>
-                                         <th> Delivery of Judgments & Rulings -% of judgments & rulings delivered within 60 days of conclusion of the hearing</th>
-                                         <th> Applications in criminal matters -% of applications concluded within 90 days of filing</th>
-                                         <th> Reduced no. of days spent in remand custody from the “Date of plea” to the “Date of first hearing” (where bail has been denied or where the remandees are unable to meet the bail terms)</th>
+                                         <th > Certified Urgent Applications - % of certified urgent applications concluded within 30 days from the date of certification</th>
+                                         <th > Injunction applications -% of injunction applications heard and determined within 90 days of filing</th>
+                                         <th > All Other Applications -% of other applications heard and determined within 180 days of filing</th>
+                                         <th >Hearing and determination of Criminal cases -% of cases concluded within 360 days of filing </th>
+                                         <th > Hearing and determination of Civil cases -% of cases concluded within 360 days of filing</th>
+                                         <th > Percentage of judgments/rulings delivered on the date first scheduled for delivery</th>
+                                         <th > Delivery of Judgments & Rulings -% of judgments & rulings delivered within 60 days of conclusion of the hearing</th>
+                                         <th > Applications in criminal matters -% of applications concluded within 90 days of filing</th>
+                                         <th > Reduced no. of days spent in remand custody from the “Date of plea” to the “Date of first hearing” (where bail has been denied or where the remandees are unable to meet the bail terms)</th>
                                          <th> Case clearance rate for Criminal Cases</th>
                                          <th> Case clearance rate for Civil Cases</th>
                                          <th> Case Clearance Rate for Traffic Cases</th>
@@ -67,10 +49,17 @@ th.rotated-text > div > span {
                                          <th> Implement the Registry Manual procedures</th>
                                          <th>Maintain and update all registers </th>
                                          <th>Maintenance of asset and equipment register </th>
+                                         <th> 	Supervision of construction (Where applicable) </th>
                                          <th>Disposal of idle assets (Where applicable) </th>
                                          <th> Compliance with the budget</th>
                                          <th> Revenue Management</th>
-                                         
+                                         <th>  Implementation of Audit report recommendations.</th>
+                                         <th>Compliance with Service Delivery Charter Standards</th>
+                                         <th>Service improvement Innovations</th>  
+                                         <th>Competency development</th>
+                                         <th>Corruption Prevention & Eradication</th>
+                                         <th>Improve Employee wellness and work environment</th>
+                                         <th >Implement court user survey recommendations</th>
                                    
                                     </thead>
                     
@@ -78,9 +67,9 @@ th.rotated-text > div > span {
                                         @foreach ($grouped as $item=> $collection)
                                         <tr>
                                             <td>{{$item}} </td>
-
                                             <td>{{ $collection[0]['score']}} </td>
                                             <td>{{ $collection[1]['score']}} </td>
+                                            <td>{{ $collection[2]['score']}} </td>
                                             <td>{{ $collection[3]['score']}} </td>
                                             <td>{{ $collection[4]['score']}} </td>
                                             <td>{{ $collection[5]['score']}} </td>
@@ -108,6 +97,15 @@ th.rotated-text > div > span {
                                             <td>{{ $collection[27]['score']}} </td>
                                             <td>{{ $collection[28]['score']}} </td>
                                             <td>{{ $collection[29]['score']}} </td>
+                                            <td>{{ $collection[30]['score']}} </td>
+                                            <td>{{ $collection[31]['score']}} </td>
+                                            <td>{{ $collection[32]['score']}} </td>
+                                            <td>{{ $collection[33]['score']}} </td>
+                                            <td>{{ $collection[34]['score']}} </td>      
+                                            <td>{{ $collection[35]['score']}} </td>
+                                            <td>{{ $collection[36]['score']}} </td>
+                                         
+                                         
 
                                          
                                        
