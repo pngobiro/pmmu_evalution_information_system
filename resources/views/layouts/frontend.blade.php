@@ -64,6 +64,23 @@
                     </div>
                 </div>
             </li>
+
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUserAccount"
+                    aria-expanded="true" aria-controls="collapseUserAccount">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>My Account</span>
+                </a>
+                <div id="collapseUserAccount" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('users.index') }}">Change Password</a>
+                 
+                    </div>
+                </div>
+            </li>
             
             <!-- Divider -->
             <hr class="sidebar-divider">

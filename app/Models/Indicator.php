@@ -20,7 +20,14 @@ class Indicator extends Model
         'order'
     ];
 
-    protected $appends = ['indicator_score'];
+    protected $appends = [
+        'indicator_performance_score',
+        'indicator_raw_score',
+        'indicator_graded_score',
+        'indicator_weighted_score',
+    ];
+
+
 
     public function group()
     {
@@ -49,14 +56,74 @@ class Indicator extends Model
 
 
 
-   
+    public function getIndicatorRawScoreAttribute(){
 
-    public function getIndicatorScoreAttribute(){
 
-        if (!$this->indicator_target==NULL)
-                return ($this->indicator_achivement/$this->indicator_target)*100 ;
-            // cap special indicators
+    }
+
+
+    public function getIndicatorGradedScoreAttribute(){
+
+
+    }
+
+
+    public function getIndicatorWeightedScoreAttribute(){
+
+
+    }
+
+
+
+    public function getIndicatorPerformanceScoreAttribute(){
+
+        if (!$this->indicator_target==NULL){
+
+            $score = $this->indicator_achivement/$this->indicator_target*100;
         }
+        
+
+        $target = $this->indicator_target;
+
+        switch ( $this->indicator_type_id) {
+            case 1:
+            //special indicator. Score Not above 100%
+                if (!$target==NULL){
+                    if ($score >= 100){
+                        return 100;
+                    }else{
+                        return $score;
+                    }        
+                }
+              break;
+            case 2:
+            // Normal Indicator . Score Not not than 2T
+                if (!$this->indicator_target==NULL){
+                    if ($score >= $target*2){
+                        return $target*2;
+                    }else{
+                        return $score;
+                    }        
+                }
+              
+              break;
+            case 3:
+            // Declining Indicator. Score Not less than 0.5T
+
+            if (!$this->indicator_target==NULL){
+                if ($target <= $score*0.5){
+                    return $target;
+                }else{
+                    return $score;
+                }        
+            }
+              break;
+          }
+        }
+
+
+
+
 }
 
 

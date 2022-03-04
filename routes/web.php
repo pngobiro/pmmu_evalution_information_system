@@ -104,7 +104,8 @@ Route::resource('master-indicator',MasterIndicatorController::class);
 
 Route::resource('unit-ranks.master-indicator',MasterIndicatorController::class);
 
-
+Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/simple_pmmu',[IndicatorController::class,"createSimplePmmuPDF"])->name('simple_pmmu');
+Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/complex_pmmu',[IndicatorController::class,"createComplexPmmuPDF"])->name('complex_pmmu');
 Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/pmmu',[IndicatorController::class,"preview"])->name('pmmu');
 Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/pdf',[IndicatorController::class,"createPDF"])->name('pdf');
 Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/download_template',[IndicatorController::class,"download_template"])->name('download_template');
