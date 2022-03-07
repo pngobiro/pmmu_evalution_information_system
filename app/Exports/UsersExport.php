@@ -18,9 +18,9 @@ class UsersExport implements  FromView
         $indicatorgroups = IndicatorGroup::with('unit')->where('unit_rank_id',6)->where('financial_year_id',4)->get();
         $keyed= collect();
         foreach ( $indicatorgroups as $group){
-                foreach ($group->indicators as $indicator){
-                    $keyed->push(['court_name' => $group->unit->name ,'indicator' => $indicator->master->name ,'score'=> $indicator->indicator_score]);
-                }    
+            foreach ($group->indicators as $indicator){
+                $keyed->push(['court_name'=>$group->unit->name, 'performance_score'=> $indicator->indicator_performance_score,'indicator_name'=>$indicator->master->name,'indicator_target'=> $indicator->indicator_target,'indicator_achievement'=>$indicator->indicator_achivement]);
+            }
         }
         $grouped = $keyed->groupBy('court_name')->all();
 

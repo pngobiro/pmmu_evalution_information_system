@@ -33,19 +33,24 @@ class ReportsController extends Controller
     public function test_report(){
 
     $units = Unit::where('unit_rank_id',6)->get();
-    $indicatorgroups = IndicatorGroup::with('unit')->where('unit_rank_id',6)->where('financial_year_id',4)->get();
-    $keyed= collect();
-    foreach ( $indicatorgroups as $group){
-            foreach ($group->indicators as $indicator){
-                $keyed->push(['court_name' => $group->unit->name ,'indicator' => $indicator->master->name ,'score'=> $indicator->indicator_score]);
-            }    
-    }
-    $grouped = $keyed->groupBy('court_name')->all();
 
-    return view('admin.reports.test_report',compact('grouped','indicatorgroups'));
-    
-    
-    }
+    $indicatorgroups = IndicatorGroup::with('unit')->where('unit_rank_id',6)->where('financial_year_id',4)->get();
+
+    $keyed= collect([]);
+
+
+                        foreach ( $indicatorgroups as $group){
+                            foreach ($group->indicators as $indicator){
+                                $keyed->push(['court_name'=>$group->unit->name, 'performance_score'=> $indicator->indicator_performance_score,'indicator_name'=>$indicator->master->name,'indicator_target'=> $indicator->indicator_target,'indicator_achievement'=>$indicator->indicator_achivement]);
+                            }
+                        }
+                
+                $grouped = $keyed->groupBy('court_name');
+                
+                $indicators_names_list = $keyed->pluck('indicator')->unique();
+
+                return view('admin.reports.test_report',compact('grouped','indicatorgroups','indicators_names_list'));
+            }
 
 
    

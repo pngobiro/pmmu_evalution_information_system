@@ -34,7 +34,7 @@ class Unit extends Model
 
        $this->load('groupindicators');
 
-        return $this->groupindicators->where('master_indicator_id',1)->first()->indicator_score;
+        return $this->groupindicators->where('master_indicator_id',1)->first()->indicator_performance_score;
 
 
 

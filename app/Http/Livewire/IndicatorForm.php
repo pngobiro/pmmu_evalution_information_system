@@ -12,12 +12,12 @@ class IndicatorForm extends Component
 
     public $indicator_achivement;
 
-    public $indicator_score;
+    public $indicator_performance_score;
 
     public function mount($indicator_id) {
         $this->indicator = Indicator::find($indicator_id);
         $this->indicator_achivement = $this->indicator->indicator_achivement ;
-        $this->indicator_score = $this->indicator->indicator_score;
+        $this->indicator_performance_score = $this->indicator->indicator_performance_score;
     }
 
     public function render()
@@ -29,7 +29,7 @@ class IndicatorForm extends Component
         $this->indicator->indicator_achivement = $value;
         $this->indicator->save();
         $this->indicator_achivement = $this->indicator->indicator_achivement ;
-        $this->indicator_score = $this->indicator->indicator_score;
+        $this->indicator_performance_score = $this->indicator->indicator_performance_score;
  
         session()->flash('message', 'Indicator successfully updated.');
     }
