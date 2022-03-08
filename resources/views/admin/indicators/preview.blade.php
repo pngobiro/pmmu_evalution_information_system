@@ -57,7 +57,6 @@
                         <td>{{ $indicator->measure->name }}</td>
                         <td>{{ $indicator->indicator_weight }}</td>
                         <td>{{ $indicator->indicator_target  }}</td>
-                        {{--  <td>{{ $indicator->indicator_achivement }}</td> --}}
                         <td> <livewire:indicator-form :indicator_id="$indicator->id" >  </td>
                      
                      

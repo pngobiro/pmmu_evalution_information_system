@@ -121,12 +121,7 @@ class Rankunitdropdown extends Component
             }
 
 
-            if ($selectedActivity=='update-weights')  {
-
-                return redirect()->route('pmmu',[$this->selectedRank , $this->selectedUnit ,$this->selectedFY])->with('message', 'Unit Found Successfully');
-                  
-                
-                }
+            
 
 
 

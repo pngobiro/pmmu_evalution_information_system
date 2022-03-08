@@ -5,6 +5,8 @@
         Score: {{  round($indicator_performance_score)}}
 
         </div>
+
+        
     </div
 
    

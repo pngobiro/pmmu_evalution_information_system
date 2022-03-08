@@ -48,7 +48,6 @@
                         
                             <option value="view-pmmu">View PMMU</option>
                             <option value="update-targets">Update Targets</option>
-                            <option value="update-weights">Update Weights</option>
                             <option value="download-scoresheet">Download Scoresheet</option>
                             
                         

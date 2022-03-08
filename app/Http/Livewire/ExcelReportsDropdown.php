@@ -41,6 +41,9 @@ class ExcelReportsDropdown extends Component
 
         if (!is_null($selectedFY)){
             $this->selectedFY = $selectedFY;
+
+
+            return redirect()->route('unit_excel',[$this->selectedRank  ,$this->selectedFY])->with('message', 'Unit Found Successfully');
         
         }
 

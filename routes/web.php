@@ -95,7 +95,10 @@ Route::resource('unit-ranks.units',UnitController::class);
 
 //Route::resource('unit-ranks.units.fy',UnitController::class);
 
-Route::resource('unit-ranks.units.fy', FinancialYearController::class)->shallow();;
+Route::resource('unit-ranks.units.fy', FinancialYearController::class)->shallow();
+
+Route::get('unit-ranks/{unit_rank}/fy/{fy}/unit_excel',[ReportsController::class,"unit_excel"])->name('unit_excel');
+
 
 
 //Route::resource('unit-ranks.units.fy.indicator-groups', IndicatorGroupController::class);

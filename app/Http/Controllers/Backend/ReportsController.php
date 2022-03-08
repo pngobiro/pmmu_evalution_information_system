@@ -32,9 +32,9 @@ class ReportsController extends Controller
 
     public function test_report(){
 
-    $units = Unit::where('unit_rank_id',6)->get();
+        $units = Unit::where('unit_rank_id',6)->get();
 
-    $indicatorgroups = IndicatorGroup::with('unit')->where('unit_rank_id',6)->where('financial_year_id',4)->get();
+        $indicatorgroups = IndicatorGroup::with('unit')->where('unit_rank_id',6)->where('financial_year_id',4)->get();
 
     $keyed= collect([]);
 
@@ -57,6 +57,14 @@ class ReportsController extends Controller
     public function fileExport() 
     {
         return Excel::download(new UsersExport, 'Magistrate Court FY 2021-22.xlsx');
+    }
+
+
+    public function unit_excel(){
+
+        return Excel::download(new UsersExport, 'Magistrate Court FY 2021-22.xlsx');
+
+
     }
 
 }
