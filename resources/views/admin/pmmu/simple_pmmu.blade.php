@@ -39,7 +39,7 @@
                 <td>{{ $indicator->indicator_weight }}</td>
                 <td>{{ $indicator->indicator_target  }}</td>
                 <td>{{ $indicator->indicator_achivement }}</td> 
-                <td><b>{{ $indicator->indicator_performance_score }}</b> </td>
+                <td><b>{{ round($indicator->indicator_performance_score) }}</b> </td>
 
                 
             </tr>

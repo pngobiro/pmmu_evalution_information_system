@@ -29,13 +29,15 @@
 
                                             <td colspan="3">{{ $c['indicator_name'] }} </td>
                                      
-
                                        
                                           
                                             @endforeach
 
                                     
                                        
+                                        
+                                            @break
+                                        
                                        
                                            
                                     @endforeach
@@ -53,7 +55,8 @@
                                          <td> Performance  Score</td>
                                     
                                         @endforeach
-                                        
+                                    
+                                        @break
                                         @endforeach
                                     </tr>
 
@@ -69,15 +72,15 @@
                                 
                                             <td>{{ $c['indicator_target'] }} </td>
                                             <td>{{ $c['indicator_achievement'] }} </td>
-                                            <td>{{ $c['performance_score'] }} </td>
+                                            <td>{{ round($c['performance_score']) }} </td>
                                           
                                             @endforeach
-                                
+                                        
                                    
                                       </tr>
-
+                                      
                                       @endforeach
-                                
+                                     
                                 </table>
                             </div>
                         </div>

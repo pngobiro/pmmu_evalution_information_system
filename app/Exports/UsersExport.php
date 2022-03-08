@@ -22,7 +22,7 @@ class UsersExport implements  FromView
                 $keyed->push(['court_name'=>$group->unit->name, 'performance_score'=> $indicator->indicator_performance_score,'indicator_name'=>$indicator->master->name,'indicator_target'=> $indicator->indicator_target,'indicator_achievement'=>$indicator->indicator_achivement]);
             }
         }
-        $grouped = $keyed->groupBy('court_name')->all();
+        $grouped = $keyed->sortBy('court_name')->groupBy('court_name');
 
 
         return view('exports.indicators', ['grouped'=>$grouped]);

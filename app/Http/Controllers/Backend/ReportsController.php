@@ -45,11 +45,10 @@ class ReportsController extends Controller
                             }
                         }
                 
-                $grouped = $keyed->groupBy('court_name');
+                $grouped = $keyed->sortBy('court_name')->groupBy('court_name');
                 
-                $indicators_names_list = $keyed->pluck('indicator')->unique();
-
-                return view('admin.reports.test_report',compact('grouped','indicatorgroups','indicators_names_list'));
+               
+                return view('admin.reports.test_report',compact('grouped','indicatorgroups'));
             }
 
 

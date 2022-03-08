@@ -16,6 +16,7 @@ class Rankunitdropdown extends Component
     public $selectedRank ;
     public $selectedFY ;
     public $selectedUnit ;
+    public $selectedActivity ;
 
     /**
 
@@ -73,7 +74,7 @@ class Rankunitdropdown extends Component
 
     {
         if (!is_null($selectedRank)) {
-            $this->units = Unit::where('unit_rank_id', $selectedRank)->get();
+            $this->units = Unit::where('unit_rank_id', $selectedRank)->orderBy('name', 'asc')->get();
             $this->selectedRank = $selectedRank;
         }
     }
@@ -97,7 +98,47 @@ class Rankunitdropdown extends Component
         
         }
 
+
+
+    }
+
+
+    public function updatedSelectedActivity($selectedActivity){
+
+        if ($selectedActivity=='view-pmmu')  {
+
         return redirect()->route('pmmu',[$this->selectedRank , $this->selectedUnit ,$this->selectedFY])->with('message', 'Unit Found Successfully');
+          
+        
+        }
+
+
+        if ($selectedActivity=='update-targets')  {
+
+            return redirect()->route('update_targets',[$this->selectedRank , $this->selectedUnit ,$this->selectedFY])->with('message', 'Unit Found Successfully');
+              
+            
+            }
+
+
+            if ($selectedActivity=='update-weights')  {
+
+                return redirect()->route('pmmu',[$this->selectedRank , $this->selectedUnit ,$this->selectedFY])->with('message', 'Unit Found Successfully');
+                  
+                
+                }
+
+
+
+                if ($selectedActivity=='download-scoresheet')  {
+
+                    return redirect()->route('simple_pmmu',[$this->selectedRank , $this->selectedUnit ,$this->selectedFY])->with('message', 'Unit Found Successfully');
+                      
+                    
+                    }
+        
+    
+
 
 
     }

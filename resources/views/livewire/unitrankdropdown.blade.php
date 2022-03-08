@@ -39,6 +39,24 @@
                 </div>
             @endif
 
+            @if (!is_null($selectedFY))
+            <div class="form-group row">
+                <label for="fy" class="col-md-4 col-form-label text-md-right">Choose Activity</label>
+                <div class="col-md-4">
+                    <select  wire:model="selectedActivity" class="form-control" name="activity">
+                        <option value="" selected>Choose Activity</option>
+                        
+                            <option value="view-pmmu">View PMMU</option>
+                            <option value="update-targets">Update Targets</option>
+                            <option value="update-weights">Update Weights</option>
+                            <option value="download-scoresheet">Download Scoresheet</option>
+                            
+                        
+                    </select>
+                </div>
+            </div>
+        @endif
+
     
     
     
