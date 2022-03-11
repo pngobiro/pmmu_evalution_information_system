@@ -2,23 +2,21 @@
 
 @section('content')
 
-<div>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Download Excel Report</h6>
 
-    @if (session()->has('message'))
 
-        <div class="alert alert-success">
-
-            {{ session('message') }}
-
-        </div>
-
-    @endif
-
+    </div>
+    <div class="card-body">
+        <livewire:excel-reports-dropdown/> 
+    </div>
 </div>
 
-<div>
-     <livewire:excel-reports-dropdown/> 
-</div>
+
+
+
+
 
 
 

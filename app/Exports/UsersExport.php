@@ -9,13 +9,24 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 class UsersExport implements  FromView
 {
+    public $view;
+    public $data;
 
+    public function __construct($unit_rank,$fy)
+{
+
+    $this->rank= $unit_rank;
+    $this->fy= $fy;
+
+
+
+}
 
     public function view(): View
 
     {
 
-        $indicatorgroups = IndicatorGroup::with('unit')->where('unit_rank_id',6)->where('financial_year_id',4)->get();
+        $indicatorgroups = IndicatorGroup::with('unit')->where('unit_rank_id',$this->rank)->where('financial_year_id',$this->fy)->get();
         $keyed= collect();
         foreach ( $indicatorgroups as $group){
             foreach ($group->indicators as $indicator){
@@ -26,14 +37,6 @@ class UsersExport implements  FromView
 
 
         return view('exports.indicators', ['grouped'=>$grouped]);
-    }
-
-
-    public function unit_excel() :View {
-
-
-
-
     }
 
 

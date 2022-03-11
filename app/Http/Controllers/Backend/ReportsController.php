@@ -60,9 +60,14 @@ class ReportsController extends Controller
     }
 
 
-    public function unit_excel(){
+    public function unit_excel(UnitRank $unit_rank , FinancialYear $fy){
 
-        return Excel::download(new UsersExport, 'Magistrate Court FY 2021-22.xlsx');
+      
+
+        $file_name = $unit_rank->name .".xlsx";
+
+
+        return Excel::download(new UsersExport($unit_rank->id,$fy->id),$file_name );
 
 
     }
