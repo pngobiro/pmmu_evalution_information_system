@@ -71,7 +71,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUserAccount"
                     aria-expanded="true" aria-controls="collapseUserAccount">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="fas fa-fw fa-user "></i>
                     <span>My Account</span>
                 </a>
                 <div id="collapseUserAccount" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -116,7 +116,17 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span
-                                    class="mr-2 d-none d-lg-inline text-gray-600 big">{{ Auth::user()->username }} </span>
+                                    class="mr-2 d-none d-lg-inline text-gray-600 big">
+                                    
+                                    @if (Auth::user()==null)
+                                    
+                                    @else
+                                    {{ Auth::user()->username }}
+                                    @endif
+                                
+                                
+                                
+                                </span>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

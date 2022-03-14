@@ -17,6 +17,7 @@ class Indicator extends Model
         'indicator_unit_of_measure_id',
         'indicator_weight',
         'indicator_target',
+        'indicator_achievement',
         'order'
     ];
 
@@ -77,13 +78,17 @@ class Indicator extends Model
 
     public function getIndicatorPerformanceScoreAttribute(){
 
-        if (!$this->indicator_target==NULL){
-
-            $score = $this->indicator_achivement/$this->indicator_target*100;
-        }
+        $target         = $this->indicator_target;
+        $achivement     = $this->indicator_achivement;
         
+        if (!$target==NULL){
+            $score = $achivement/$target*100;
+        }
 
-        $target = $this->indicator_target;
+
+        if (!$achivement==NULL){
+            $declining_score = $target/$achivement*100;
+        }
 
         switch ( $this->indicator_type_id) {
             case 1:
@@ -97,8 +102,8 @@ class Indicator extends Model
                 }
               break;
             case 2:
-            // Normal Indicator . Score Not not than 2T
-                if (!$this->indicator_target==NULL){
+            // Normal Indicator . Score Not more than 2T
+                if (!$target==NULL){
                     if ($score >= $target*2){
                         return $target*2;
                     }else{
@@ -108,13 +113,13 @@ class Indicator extends Model
               
               break;
             case 3:
-            // Declining Indicator. Score Not less than 0.5T
+            // Declining Indicator. Score Not less more than 0.5T
 
-            if (!$this->indicator_target==NULL){
-                if ($target <= $score*0.5){
-                    return $target;
+            if (!$achivement==NULL){
+                if ($declining_score >= $target*2 ){
+                    return $target*2 ;
                 }else{
-                    return $score;
+                    return $declining_score;
                 }        
             }
               break;
