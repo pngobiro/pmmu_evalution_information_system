@@ -21,6 +21,7 @@ use App\Http\Controllers\Backend\TemplateIndicatorsController;
 use App\Http\Controllers\Backend\TemplateIndicatorGroupController;
 use App\Http\Controllers\Backend\MasterIndicatorController;
 use App\Http\Controllers\Backend\PmmuController;
+use App\Http\Controllers\Auth\LoginController;
 
 
 
@@ -38,9 +39,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
+
+
 
 Auth::routes();
 
