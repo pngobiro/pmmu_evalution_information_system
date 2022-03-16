@@ -12,15 +12,15 @@
                             @csrf
 
                             <div class="form-group row">
-                                <label for="username"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+                                <label for="jsg_number"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('JSG Number') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="username" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="username"
-                                        value="{{ old('name') }}" required autocomplete="username" autofocus>
+                                    <input id="jsg_number" type="text"
+                                        class="form-control @error('jsg_number') is-invalid @enderror" name="jsg_number"
+                                        value="{{ old('jsg_number') }}" required autocomplete="jsg_number" autofocus>
 
-                                    @error('username')
+                                    @error('jsg_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -34,8 +34,8 @@
 
                                 <div class="col-md-6">
                                     <input id="first_name" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="first_name"
-                                        value="{{ old('name') }}" required autocomplete="first_name" autofocus>
+                                        class="form-control @error('first_name') is-invalid @enderror" name="first_name"
+                                        value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
 
                                     @error('first_name')
                                         <span class="invalid-feedback" role="alert">
@@ -51,10 +51,27 @@
 
                                 <div class="col-md-6">
                                     <input id="last_name" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="last_name"
-                                        value="{{ old('name') }}" required autocomplete="last_name" autofocus>
+                                        class="form-control @error('last_name') is-invalid @enderror" name="last_name"
+                                        value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
 
                                     @error('last_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="phone_number"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="phone_number" type="text"
+                                        class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
+                                        value="{{ old('phone_number') }}" required autocomplete="phone_number" autofocus>
+
+                                    @error('phone_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
