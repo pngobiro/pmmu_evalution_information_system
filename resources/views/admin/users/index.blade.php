@@ -40,23 +40,27 @@
                     <thead>
                         <tr>
                             <th scope="col">#Id</th>
-                            <th scope="col">Username</th>
+                            <th scope="col">PJ</th>
                             <th scope="col">First Name</th>
                             <th scope="col">Last Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Manage</th>
+                            <th scope="col">Role</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
                             <tr>
                                 <th scope="row">{{ $user->id }}</th>
-                                <td>{{ $user->username }}</td>
+                                <td>{{ $user->jsg_number }}</td>
                                 <td>{{ $user->first_name }}</td>
                                 <td>{{ $user->last_name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
                                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-success">Edit</a>
+                                </td>
+                                <td>
+                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">Edit</a>
                                 </td>
                             </tr>
                         @endforeach

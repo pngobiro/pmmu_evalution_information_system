@@ -12,7 +12,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="jsg_number" class="col-md-4 col-form-label text-md-right">{{ __('JSG Number') }}</label>
+                            <label for="jsg_number" class="col-md-4 col-form-label text-md-right">{{ __('PJ Number') }}</label>
 
                             <div class="col-md-6">
                                 <input id="jsg_number" type="number" class="form-control @error('jsg_number') is-invalid @enderror" name="jsg_number" value="{{ old('jsg_number') }}" required autocomplete="jsg_number" autofocus>

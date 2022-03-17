@@ -9,7 +9,17 @@ use Illuminate\Support\Facades\Hash;
 
 class ChangePasswordController extends Controller
 {
-    public function change_password(Request $request, User $user)
+   
+  public function change_password_form(Request $request, User $user){
+
+
+
+    return view('admin.users.change_password_form',compact('user'));
+
+
+  }
+  
+  public function change_password(Request $request, User $user)
     {
         $request->validate([
           'password' => ['required', 'string', 'confirmed'],
@@ -19,6 +29,6 @@ class ChangePasswordController extends Controller
           'password' => Hash::make($request->password)
       ]);
 
-        return redirect()->route('users.index')->with('message', 'User Password Updated Succesfully');
+        return redirect()->route('dashboard')->with('message', 'User Password Updated Succesfully');
     }
 }

@@ -50,22 +50,9 @@
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSystem"
-                    aria-expanded="true" aria-controls="collapseSystem">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Menu</span>
-                </a>
-                <div id="collapseSystem" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-            
-                        <a class="collapse-item" href="{{ route('indicators.index') }}">View Reports</a>
-                    
-                    </div>
-                </div>
-            </li>
+           
 
-            <hr class="sidebar-divider">
+           
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -76,7 +63,7 @@
                 </a>
                 <div id="collapseUserAccount" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('users.index') }}">Change Password</a>
+                        <a class="collapse-item" href="{{ route('user_change_password_form',Auth::user()->id) }}">Change Password</a>
                  
                     </div>
                 </div>
@@ -121,11 +108,12 @@
                                     @if (Auth::user()==null)
                                     
                                     @else
-                                    <p>  JSG: {{ Auth::user()->jsg_number }} </p>
+                                    <p>  PJ: {{ Auth::user()->jsg_number }} </p>
                                     @endif
                                 
                                 
                                 </span>
+                                
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>

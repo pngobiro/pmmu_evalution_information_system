@@ -25,6 +25,11 @@ class User extends Authenticatable
         'jsg_number'
     ];
 
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -44,4 +49,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'phone_verified_at' => 'datetime',
     ];
+
+    public function isAdmin()
+    {
+        foreach ($this->roles()->get() as $role)
+        {
+            if ($role->name == 'Admin')
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

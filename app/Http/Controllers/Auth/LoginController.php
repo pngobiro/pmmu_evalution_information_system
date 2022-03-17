@@ -46,16 +46,17 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+            // check if user is admin and redirect accordigly
+            if ($request->user()->IsAdmin()) {
 
+                    return redirect('/admin-dashboard')->with('message', 'Logged In Successfully');;
+            }
 
-    return redirect('/dashboard');
-
-            //$user_type = UserType::find($request->user_type_id);
+            else{
+                   
+                    return redirect('/dashboard')->with('message', 'Logged In Successfully');;
+            }
             
-            //  if ($user_type->name == 'Admin') {
-            //  return '/dashboard';
-            // }
-            // return '/home';
 
     }
 
