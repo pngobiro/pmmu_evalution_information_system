@@ -17,12 +17,18 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username',
         'last_name',
         'first_name',
         'email',
         'password',
+        'phone_number',
+        'jsg_number'
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
 
     /**
      * The attributes that should be hidden for arrays.
@@ -41,5 +47,19 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'phone_verified_at' => 'datetime',
     ];
+
+    public function isAdmin()
+    {
+        foreach ($this->roles()->get() as $role)
+        {
+            if ($role->name == 'Admin')
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

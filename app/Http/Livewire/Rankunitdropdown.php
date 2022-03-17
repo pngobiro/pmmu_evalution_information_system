@@ -107,34 +107,21 @@ class Rankunitdropdown extends Component
 
         if ($selectedActivity=='view-pmmu')  {
 
-        return redirect()->route('pmmu',[$this->selectedRank , $this->selectedUnit ,$this->selectedFY])->with('message', 'Unit Found Successfully');
+        return redirect()->route('pmmu',[$this->selectedRank , $this->selectedUnit ,$this->selectedFY]);
           
         
         }
-
-
-        if ($selectedActivity=='update-targets')  {
-
-            return redirect()->route('update_targets',[$this->selectedRank , $this->selectedUnit ,$this->selectedFY])->with('message', 'Unit Found Successfully');
-              
-            
-            }
-
-
-            
-
-
-
-                if ($selectedActivity=='download-scoresheet')  {
-
-                    return redirect()->route('simple_pmmu',[$this->selectedRank , $this->selectedUnit ,$this->selectedFY])->with('message', 'Unit Found Successfully');
-                      
-                    
-                    }
         
-    
+        if ($selectedActivity=='update-targets')  {
+            return redirect()->route('update_targets',[$this->selectedRank , $this->selectedUnit ,$this->selectedFY]);
+              
+            }
+            
+            if ($selectedActivity=='download-scoresheet')  {
 
-
+                    return redirect()->route('simple_pmmu',[$this->selectedRank , $this->selectedUnit ,$this->selectedFY]);
+                      
+                    }
 
     }
 

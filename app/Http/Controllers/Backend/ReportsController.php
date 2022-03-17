@@ -62,12 +62,9 @@ class ReportsController extends Controller
 
     public function unit_excel(UnitRank $unit_rank , FinancialYear $fy){
 
-      
+        $file_name = "{$unit_rank->name} - FY {$fy->name} .xlsx";
 
-        $file_name = $unit_rank->name .".xlsx";
-
-
-        return Excel::download(new UsersExport($unit_rank->id,$fy->id),$file_name );
+        return Excel::download(new UsersExport($unit_rank->id,$fy->id),str_replace("/","-",$file_name) );
 
 
     }

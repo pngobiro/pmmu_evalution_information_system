@@ -50,33 +50,20 @@
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSystem"
-                    aria-expanded="true" aria-controls="collapseSystem">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Menu</span>
-                </a>
-                <div id="collapseSystem" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-            
-                        <a class="collapse-item" href="{{ route('indicators.index') }}">View Reports</a>
-                    
-                    </div>
-                </div>
-            </li>
+           
 
-            <hr class="sidebar-divider">
+           
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUserAccount"
                     aria-expanded="true" aria-controls="collapseUserAccount">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="fas fa-fw fa-user "></i>
                     <span>My Account</span>
                 </a>
                 <div id="collapseUserAccount" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('users.index') }}">Change Password</a>
+                        <a class="collapse-item" href="{{ route('user_change_password_form',Auth::user()->id) }}">Change Password</a>
                  
                     </div>
                 </div>
@@ -107,7 +94,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-
+                    <b> PERFORMANCE MANAGEMENT & MEASUREMENT UNDERSTANDING ANALYSIS </b>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -115,20 +102,42 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span
-                                    class="mr-2 d-none d-lg-inline text-gray-600 big">{{ Auth::user()->username }} </span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                    
+                        
+                                    @if (Auth::user()==null)
+                                    
+                                    @else
+                                    <p>  PJ: {{ Auth::user()->jsg_number }} </p>
+                                    @endif
+                                
+                                
+                                </span>
+                                
+                                <img class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    {{ __('Logout') }}
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
                                 </a>
-
-                                
-
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
