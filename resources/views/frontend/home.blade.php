@@ -3,22 +3,17 @@
 @section('content')
 
 <div>
-
-    @if (session()->has('message'))
-
-        <div class="alert alert-success">
-
-            {{ session('message') }}
-
-        </div>
-
-    @endif
-
+    
 </div>
 
-<div>
-     <livewire:rankunitdropdown /> 
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary"></h6>
+    </div>
+    <div class="card-body text-center">
+       <p> Select Rank , Implementing Unit and Financial Year</p>
+
+        <livewire:rankunitdropdown /> 
+    </div>
 </div>
-
-
 @endsection
