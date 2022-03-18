@@ -60,7 +60,7 @@
                                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-success">Edit</a>
                                 </td>
                                 <td>
-                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">Edit</a>
+                                    <a href="{{ route('user.permissions', $user->id) }}" class="btn btn-warning">Permissions</a>
                                 </td>
                             </tr>
                         @endforeach

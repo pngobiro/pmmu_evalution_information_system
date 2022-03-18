@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -98,5 +99,12 @@ class UserController extends Controller
         }
         $user->delete();
         return redirect()->route('users.index')->with('message', 'User Deleted Succesfully');
+    }
+
+    public function permissions_form(User $user){
+
+        $roles = Role::all();
+        return view('admin.users.permissions_form', compact('user','roles'));
+
     }
 }

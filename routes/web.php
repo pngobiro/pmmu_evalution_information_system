@@ -89,6 +89,8 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::resource('unit-ranks.units.fy.indicator-groups.indicators',PmmuController::class);
     Route::post('users/{user}/change-password', [ChangePasswordController::class, 'change_password'])->name('users.change.password');
     Route::get('users/{user}/change-password', [ChangePasswordController::class, 'change_password_form'])->name('user_change_password_form');
+    Route::get('users/{user}/permissions', [UserController::class, 'permissions_form'])->name('user.permissions');
+
 
   
 
