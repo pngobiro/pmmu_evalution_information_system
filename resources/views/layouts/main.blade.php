@@ -129,7 +129,7 @@
                                 @if (Auth::user()==null)
                                 
                                 @else
-                                <p>  PJ: {{ Auth::user()->jsg_number }} </p>
+                                <p>  PJ: {{ Auth::user()->pj_number }} </p>
                                 @endif
                             
                             

@@ -12,15 +12,15 @@
                             @csrf
 
                             <div class="form-group row">
-                                <label for="jsg_number"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('JSG Number') }}</label>
+                                <label for="pj_number"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('PJ Number') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="jsg_number" type="text"
-                                        class="form-control @error('jsg_number') is-invalid @enderror" name="jsg_number"
-                                        value="{{ old('jsg_number') }}" required autocomplete="jsg_number" autofocus>
+                                    <input id="pj_number" type="text"
+                                        class="form-control @error('pj_number') is-invalid @enderror" name="pj_number"
+                                        value="{{ old('pj_number') }}" required autocomplete="pj_number" autofocus>
 
-                                    @error('jsg_number')
+                                    @error('pj_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

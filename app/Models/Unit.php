@@ -25,8 +25,6 @@ class Unit extends Model
     }
 
 
-    
-
 
     public function  getIndicatorsAttribute($value=4){
 

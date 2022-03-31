@@ -57,6 +57,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('unit-ranks.fy.template-groups.template-indicators',TemplateIndicatorsController::class);
     Route::resource('master-indicator',MasterIndicatorController::class);
     Route::resource('unit-ranks.master-indicator',MasterIndicatorController::class);
+    Route::post('update-permissions', [UserController::class, 'permisionUpdate'])->name('update-permissions');
 
 });
 

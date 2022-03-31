@@ -22,7 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'phone_number',
-        'jsg_number'
+        'pj_number'
     ];
 
     public function roles()
@@ -68,4 +68,31 @@ class User extends Authenticatable
 
         return false;
     }
+
+    public function isSuperAdmin()
+    {
+        foreach ($this->roles()->get() as $role)
+        {
+            if ($role->name == 'Employee')
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // user has role to access the resource
+
+    public function hasRole($role)
+    {
+        if ($this->roles()->where('name', $role)->first())
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    
 }

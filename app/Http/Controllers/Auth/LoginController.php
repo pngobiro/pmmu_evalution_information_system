@@ -42,8 +42,46 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-   
+    
 
+    public function username(){
+
+        return 'pj_number';
+        
+    }
+
+
+    public function login(Request $request){
+
+        $this->validateLogin($request);
+
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
+        if ($this->attemptLogin($request)) {
+            return $this->sendLoginResponse($request);
+        }
+
+        $this->incrementLoginAttempts($request);
+
+        return $this->sendFailedLoginResponse($request);
+    }
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return $this->loggedOut($request) ?: redirect('/');
+    }
+
+  
+
+   
     protected function authenticated(Request $request, $user)
     {
             // check if user is admin and redirect accordigly
@@ -59,5 +97,6 @@ class LoginController extends Controller
             
 
     }
+
 
 }

@@ -1307,7 +1307,7 @@ CREATE TABLE `users` (
   `last_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `verification_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `jsg_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pj_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone_verified_at` timestamp NULL DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
@@ -1321,7 +1321,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `phone_number`, `verification_code`, `jsg_number`, `phone_verified_at`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `phone_number`, `verification_code`, `pj_number`, `phone_verified_at`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Patrick', 'Ngobiro', '0718952129', NULL, '59431', NULL, 'pngobiro@gmail.com', NULL, '$2y$10$WHLGkRDOme8ssrEV/LBK..7bvLyTM9ImIgynnXcItifrwlEqQ66Ku', NULL, '2022-03-16 11:24:44', '2022-03-16 11:24:44');
 
 --
@@ -1421,7 +1421,7 @@ ALTER TABLE `unit_ranks`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_phone_number_unique` (`phone_number`),
-  ADD UNIQUE KEY `users_jsg_number_unique` (`jsg_number`),
+  ADD UNIQUE KEY `users_pj_number_unique` (`pj_number`),
   ADD UNIQUE KEY `users_email_unique` (`email`),
   ADD UNIQUE KEY `users_verification_code_unique` (`verification_code`);
 
