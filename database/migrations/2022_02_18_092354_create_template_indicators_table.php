@@ -33,6 +33,7 @@ class CreateTemplateIndicatorsTable extends Migration
             $table->integer('indicator_target')->nullable();
             $table->integer('indicator_achivement')->nullable();
             $table->mediumText('remarks')->nullable();
+            $table->dateTime('deleted_at')->nullable();
             $table->integer('order');
             $table->timestamps();
         });

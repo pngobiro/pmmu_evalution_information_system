@@ -21,6 +21,7 @@ class CreateIndicatorGroupsTable extends Migration
             $table->string('name');
             $table->mediumText('description');
             $table->integer('order');
+            $table->dateTime('deleted_at')->nullable();
             $table->foreignIdFor(Unit::class)->nullable();
             $table->foreignIdFor(UnitRank::class)->nullable();
             $table->foreignIdFor(FinancialYear::class)->nullable();

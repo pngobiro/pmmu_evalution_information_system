@@ -27,6 +27,7 @@ class CreateTemplateIndicatorGroupsTable extends Migration
             $table->foreignIdFor(Unit::class)->nullable();
             $table->foreignIdFor(UnitRank::class);
             $table->foreignIdFor(FinancialYear::class);
+            $table->dateTime('deleted_at')->nullable();
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIndicatorTypesTable extends Migration
+class CreateDivisionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateIndicatorTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('indicator_types', function (Blueprint $table) {
+        Schema::create('divisions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('is_active')->nullable();
             $table->dateTime('deleted_at')->nullable();
+            $table->foreignIdFor(Unit::class)->constrained();
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateIndicatorTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('indicator_types');
+        Schema::dropIfExists('divisions');
     }
 }

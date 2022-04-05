@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIndicatorTypesTable extends Migration
+class CreateCountiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateIndicatorTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('indicator_types', function (Blueprint $table) {
+        Schema::create('counties', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->dateTime('deleted_at')->nullable();
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ class CreateIndicatorTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('indicator_types');
+        Schema::dropIfExists('counties');
     }
 }

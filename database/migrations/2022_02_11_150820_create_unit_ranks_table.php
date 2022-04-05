@@ -16,6 +16,7 @@ class CreateUnitRanksTable extends Migration
         Schema::create('unit_ranks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->dateTime('deleted_at')->nullable();
             $table->timestamps();
         });
     }
