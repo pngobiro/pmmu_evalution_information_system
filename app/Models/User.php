@@ -73,7 +73,20 @@ class User extends Authenticatable
     {
         foreach ($this->roles()->get() as $role)
         {
-            if ($role->name == 'Employee')
+            if ($role->name == 'Super Admin')
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isUser()
+    {
+        foreach ($this->roles()->get() as $role)
+        {
+            if ($role->name == 'User')
             {
                 return true;
             }
@@ -86,6 +99,7 @@ class User extends Authenticatable
 
     public function hasRole($role)
     {
+        
         if ($this->roles()->where('name', $role)->first())
         {
             return true;
@@ -94,5 +108,6 @@ class User extends Authenticatable
         return false;
     }
 
+    
     
 }

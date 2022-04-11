@@ -18,18 +18,20 @@ class UnitRankSeeder extends Seeder
             ['id' => '1','name' => 'Supreme Court'],
             ['id' => '2','name' => 'Court of Appeal'],
             ['id' => '3','name' => 'High Court'],
-            ['id' => '4','name' => 'ELC'],
-            ['id' => '5','name' => 'ELRC'],
+            ['id' => '4','name' => 'Employment and Labour Relations Court'],
+            ['id' => '5','name' => 'Environment and Land Court'],
             ['id' => '6','name' => 'Magistrate Court'],
             ['id' => '7','name' => 'Kadhi Court'],
-            ['id' => '8','name' => 'Small Claims Court'],
-            ['id' => '9','name' => 'Tribunals'],
-            ['id' => '10','name' => 'Directorates'],
-            ['id' => '11','name' => 'Registers'],
-        
+            ['id' => '8','name' => 'Tribunal'],
+            ['id' => '9','name' => 'Committee'],
+            ['id' => '10','name' => 'Library'],
+            ['id' => '11','name' => 'Directorate'],
+            ['id' => '12','name' => 'Other Office'],
+            ['id' => '13','name' => 'Small Claim'],
             ];
+
         DB::table('unit_ranks')->insert($unit_ranks);
-       
+      
     
     }
 }

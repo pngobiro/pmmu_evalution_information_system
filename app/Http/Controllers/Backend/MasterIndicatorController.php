@@ -46,6 +46,8 @@ class MasterIndicatorController extends Controller
     public function create($rank_id)
 
     {
+    
+        
         $types = IndicatorType::all();
 
 

@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Unit;
 
-class UnitSeeder extends Seeder
+class DivisionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,11 +13,11 @@ class UnitSeeder extends Seeder
      */
     public function run()
     {
-       // Unit::truncate();
+        Divsion::truncate();
 
   
 
-        $csvFile = fopen(base_path("database/data/unit.csv"), "r");
+        $csvFile = fopen(base_path("database/data/division.csv"), "r");
 
   
 
@@ -32,12 +31,9 @@ class UnitSeeder extends Seeder
 
                     "id"            =>   $data['0'],
                     "name"          =>   $data['1'],
-                    "unique_id"     =>   $data['2'],
-                    "unique_code"   =>   $data['3'],
-                    "has_division"  =>   $data['9'],
-                    "unit_rank_id"  =>   $data['4'],
-                    "head_id_fk"    =>   $data['4'],
-                    "subhead_id_fk" =>   $data['10'],
+                    "active"        =>   $data['2'],
+                    "code"          =>   $data['3'],
+                    "deleted_at"    =>   $data['6'],
 
                 ]);    
 

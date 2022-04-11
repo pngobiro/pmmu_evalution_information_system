@@ -22,7 +22,7 @@ use App\Http\Controllers\Backend\TemplateIndicatorGroupController;
 use App\Http\Controllers\Backend\MasterIndicatorController;
 use App\Http\Controllers\Backend\PmmuController;
 use App\Http\Controllers\Auth\LoginController;
-
+use App\Http\Controllers\Backend\RankCategoryController;
 
 
 
@@ -46,7 +46,7 @@ Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
 
 Auth::routes();
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
+
 
     Route::resource('template-groups',TemplateIndicatorGroupController::class);
     Route::resource('template-indicators',TemplateIndicatorsController::class);
@@ -59,10 +59,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('unit-ranks.master-indicator',MasterIndicatorController::class);
     Route::post('update-permissions', [UserController::class, 'permisionUpdate'])->name('update-permissions');
 
-});
 
 
-Route::middleware(['auth', 'role:user'])->group(function () {
+
+
 
     Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::get('reports', [ReportsController::class, 'index'])->name('reports');
@@ -78,6 +78,9 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::resource('unit-ranks.units',UnitController::class);
     //Route::resource('unit-ranks.units.fy',UnitController::class);
     Route::resource('unit-ranks.units.fy', FinancialYearController::class)->shallow();
+    Route::get('unit-ranks/{unit_rank}/fy/{fy}/rank_categories',[RankCategoryController::class,"index"])->name('rank_categories');
+    Route::get('unit-ranks/{unit_rank}/fy/{fy}/create_rank_category',[RankCategoryController::class,"create"])->name('create_rank_category');
+    Route::post('unit-ranks/{unit_rank}/fy/{fy}/rank_category_store',[RankCategoryController::class,"store"])->name('store_rank_category');
     Route::get('unit-ranks/{unit_rank}/fy/{fy}/unit_excel',[ReportsController::class,"unit_excel"])->name('unit_excel');
     //Route::resource('unit-ranks.units.fy.indicator-groups', IndicatorGroupController::class);
     Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/simple_pmmu',[IndicatorController::class,"createSimplePmmuPDF"])->name('simple_pmmu');
@@ -95,7 +98,6 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 
   
 
-});
 
 
 
