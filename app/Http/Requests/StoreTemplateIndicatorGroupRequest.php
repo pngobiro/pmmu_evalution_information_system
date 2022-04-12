@@ -27,18 +27,50 @@ class StoreTemplateIndicatorGroupRequest extends FormRequest
             'name'                          => ['required','string'],
             'description'                   => ['required','string'],
             'order'                         => ['required','numeric','min:1'],
-            'unit_rank_id'                  => ['required'],
-            'financial_year_id'             => ['required'],
+
+
     
         ];
     }
 
     public function messages()
-{
-    return [
-        'name.required' => 'A name is required',
-        'name.min' => 'The Indicator name is too short',
+        {
+            return [
+                'name.required' => 'A name is required',
+                'name.min' => 'The Indicator name is too short',
+                'description.required' => 'A description is required',
+                'description.min' => 'The Indicator description is too short',
+                'order.required' => 'An order is required',
+                'order.numeric' => 'The order is not valid',
+                'order.min' => 'The order is too short',
+            
+                
+            
+            ];
+        }
+
+
+        public function attributes()
+        {
+            return [
+                'name' => 'Indicator Group Name',
+                'description' => 'Indicator Group Description',
+                'order' => 'Indicator Group Order',
+                'unit_rank_id' => 'Indicator Group Unit Rank',
+                'financial_year_id' => 'Indicator Group Financial Year',
+                'rank_category_id' => 'Indicator Group Rank Category',
+            ];
+        }
+
+        public function response(array $errors)
+        {
+            return redirect()->back()->withErrors($errors)->withInput();
+        }
     
-    ];
-}
+        
+
+
+
+
+
 }

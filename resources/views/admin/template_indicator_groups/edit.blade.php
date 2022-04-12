@@ -16,11 +16,11 @@
                 <div class="card">
                     <div class="card-header">
                         {{ __('Edit Group') }}
-                        <a href="{{ route('unit-ranks.fy.template-groups.index', [$unit_rank->id  ,$fy->id]) }}" class="float-right">Back</a>
+                        <a href="{{ route('unit-ranks.fy.rank_category.template-groups.index', [$unit_rank->id  ,$fy->id , $rank_category]) }}" class="float-right">Back</a>
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('unit-ranks.fy.template-groups.update',  [$unit_rank->id , $fy->id,$template_group->id]) }}">
+                        <form method="POST" action="{{ route('unit-ranks.fy.rank_category.template-groups.update',  [$unit_rank->id , $fy->id,$rank_category,$template_group->id]) }}">
                             @csrf
                             @method('PUT')
 
@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 <div class="m-2 p-2">
-                    <form method="POST" action="{{ route('unit-ranks.fy.template-groups.destroy',  [$unit_rank->id , $fy->id , $template_group->id]) }}">
+                    <form method="POST" action="{{ route('unit-ranks.fy.rank_category.template-groups.destroy',  [$unit_rank->id , $fy->id ,$rank_category, $template_group->id]) }}">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger">Disable {{ $template_group->name }}</button>

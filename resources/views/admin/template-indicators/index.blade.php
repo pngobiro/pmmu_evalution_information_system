@@ -27,7 +27,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <form method="GET" action="{{ route('unit-ranks.fy.template-groups.template-indicators.index',[$unit_rank->id,$fy->id,$template_group->id]) }}">
+                        <form method="GET" action="{{ route('unit-ranks.fy.rank_category.template-groups.template-indicators.index',[$unit_rank->id,$fy->id,$rank_category,$template_group->id]) }}">
                             <div class="form-row align-items-center">
                                 <div class="col">
                                     <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
@@ -37,13 +37,13 @@
                                     <button type="submit" class="btn btn-primary mb-2">Search Indicator</button>
                                 </div>
                                 <div class="col ">
-                                    <a href="{{ route('unit-ranks.fy.template-groups.index', [$unit_rank->id,$fy->id]) }}" class="btn btn-success">View All Groups</a>
+                                    <a href="{{ route('unit-ranks.fy.rank_category.template-groups.index', [$unit_rank->id,$fy->id,$rank_category]) }}" class="btn btn-success">View All Groups</a>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div>
-                        <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.create',[$unit_rank->id,$fy->id,$template_group->id]) }}" class="btn btn-primary mb-2">Create New Template Indicator</a>
+                        <a href="{{ route('unit-ranks.fy.rank_category.template-groups.template-indicators.create',[$unit_rank->id,$fy->id,$rank_category,$template_group->id]) }}" class="btn btn-primary mb-2">Create New Template Indicator</a>
                     </div>
                 </div>
             </div>

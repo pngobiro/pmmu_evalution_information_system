@@ -17,6 +17,7 @@ class CreateRankCategoriesTable extends Migration
         Schema::create('rank_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->string('description')->nullable();
             $table->foreignIdFor(UnitRank::class)->constrained();
             $table->dateTime('deleted_at')->nullable();
             $table->timestamps();

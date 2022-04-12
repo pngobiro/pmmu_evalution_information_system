@@ -8,7 +8,10 @@ use App\Models\UnitRank;
 use App\Models\FinancialYear;
 
 
+use App\Http\Requests\StoreRankCategoryRequest;
 use Illuminate\Http\Request;
+
+
 
 class RankCategoryController extends Controller
 {
@@ -56,9 +59,23 @@ class RankCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+    public function store(StoreRankCategoryRequest $request , UnitRank $unit_rank , FinancialYear $fy)
+    
     {
-        //
+        //dd($request->all());
+       // $this->validate($request, ['name' => 'required|unique:rank_categories','description' => 'required','unit_rank_id' => 'required', ]);
+
+        $rank_category = new RankCategory;
+        $rank_category->name = $request->name;
+        $rank_category->description = $request->description;
+        $rank_category->unit_rank_id = $unit_rank->id;
+    
+        $rank_category->save();
+
+        return redirect()->route('unit-ranks.fy.rank_category.index',[$unit_rank,$fy])->withFlashSuccess('Rank Category successfully created.');
+    
+
     }
 
     /**
@@ -78,9 +95,13 @@ class RankCategoryController extends Controller
      * @param  \App\Models\RankCategory  $rankCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(RankCategory $rankCategory)
+    
+    public function edit(UnitRank $unit_rank , FinancialYear $fy , RankCategory $rank_category)
     {
         //
+
+        return view('admin.rank_categories.edit',compact('rank_category','unit_rank','fy'));
+
     }
 
     /**
@@ -90,9 +111,19 @@ class RankCategoryController extends Controller
      * @param  \App\Models\RankCategory  $rankCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RankCategory $rankCategory)
+    public function update(UnitRank $unit_rank , FinancialYear $fy , RankCategory $rank_category,Request $request)
     {
-        //
+        // dd($request->all()); 
+        $this->validate($request, ['name' => 'required|unique:rank_categories,name,'.$rank_category->id,'description' => 'required', ]);
+     
+
+        $rank_category->name = $request->name;
+        $rank_category->description = $request->description;
+        $rank_category->save();
+
+        return redirect()->route('unit-ranks.fy.rank_category.index',[$unit_rank,$fy])->withFlashSuccess('Rank Category successfully updated.');
+
+
     }
 
     /**
@@ -101,8 +132,15 @@ class RankCategoryController extends Controller
      * @param  \App\Models\RankCategory  $rankCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RankCategory $rankCategory)
+    public function destroy(Request $request, UnitRank $unit_rank , FinancialYear $fy , RankCategory $rank_category)
     {
-        //
+        //function to soft delete rank category
+        $rank_category->delete();
+
+        //redirect to index page
+
+        return redirect()->route('unit-ranks.fy.rank_category.index',[$unit_rank,$fy])->withFlashSuccess('Rank Category successfully deleted.');
+
+        
     }
 }

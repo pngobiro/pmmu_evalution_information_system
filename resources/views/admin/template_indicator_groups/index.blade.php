@@ -8,7 +8,7 @@
     
     <div class="d-flex justify-content-center .mb-15" >
         <div class="row ">
-            <h1 class="h3 mb-0 text-gray-800">{{ $unit_rank->name }} FY {{ $fy->name }} Template</h1>
+            <h1 class="h3 mb-0 text-gray-800">{{ $unit_rank->name }} - {{ $rank_category->name }} -  FY {{ $fy->name }} Template</h1>
         </div>
        
     </div>
@@ -41,13 +41,13 @@
                                 </div>
 
                                 <div class="col">
-                                    <a href="{{ route('unit-ranks.fy.template-groups.index', [$unit_rank->id,$fy->id]) }}" class="btn btn-success">Preview PMMU Template </a>
+                                    <a href="{{ route('unit-ranks.fy.rank_category.template-groups.index', [$unit_rank->id,$fy->id,$rank_category->id]) }}" class="btn btn-success">Preview PMMU Template </a>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div>
-                        <a href="{{ route('unit-ranks.fy.template-groups.create',[$unit_rank->id,$fy->id ]) }}" class="btn btn-primary mb-2">Create New Group </a>
+                        <a href="{{ route('unit-ranks.fy.rank_category.template-groups.create',[$unit_rank->id,$fy->id,$rank_category ]) }}" class="btn btn-primary mb-2">Create New Group </a>
                     </div>
                 </div>
             </div>
@@ -72,8 +72,8 @@
                                 <th> {{ $group->name }} </th> 
                                 <th> <b>{{ substr($group->description,0,10)}} </b></th> 
                                 <th> <b> {{ $group->template_indicators->sum('indicator_weight')}}</b></th> 
-                                <th> <a href="{{ route('unit-ranks.fy.template-groups.edit', [$unit_rank->id,$fy->id , $group->id]) }}"> Edit</a>   </th>
-                                <th> <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.index', [$unit_rank->id,$fy->id,$group->id]) }}", class="btn btn-success" >Template Indicators <span class="badge bg-secondary">{{ $group->template_indicators->count() }}</span> </th>
+                                <th> <a href="{{ route('unit-ranks.fy.rank_category.template-groups.edit', [$unit_rank->id,$fy->id ,$rank_category->id, $group->id]) }}"> Edit</a>   </th>
+                                <th> <a href="{{ route('unit-ranks.fy.rank_category.template-groups.template-indicators.index', [$unit_rank->id,$fy->id,$rank_category->id,$group->id]) }}", class="btn btn-success" >Template Indicators <span class="badge bg-secondary">{{ $group->template_indicators->count() }}</span> </th>
                             </tr>
                             @endforeach
                     </tbody>  

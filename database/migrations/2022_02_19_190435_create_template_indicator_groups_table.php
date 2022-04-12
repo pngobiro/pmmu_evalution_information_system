@@ -9,6 +9,7 @@ use App\Models\IndicatorUnitOfMeasure;
 use App\Models\UnitRank;
 use App\Models\Unit;
 use App\Models\FinancialYear;
+use App\Models\RankCategory;
 
 class CreateTemplateIndicatorGroupsTable extends Migration
 {
@@ -27,6 +28,7 @@ class CreateTemplateIndicatorGroupsTable extends Migration
             $table->foreignIdFor(Unit::class)->nullable();
             $table->foreignIdFor(UnitRank::class);
             $table->foreignIdFor(FinancialYear::class);
+            $table->foreignIdFor(RankCategory::class);
             $table->dateTime('deleted_at')->nullable();
             $table->timestamps();
         });

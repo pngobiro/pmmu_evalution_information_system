@@ -14,26 +14,29 @@ use App\Models\TemplateIndicatorGroup;
 use App\Models\TemplateIndicator;
 use App\Models\IndicatorType;
 use App\Models\IndicatorUnitOfMeasure;
+use App\Models\RankCategory;
 
 
 use Illuminate\Http\Request;
 
 class TemplateIndicatorsController extends Controller
 {
-    public function index(UnitRank $unit_rank ,FinancialYear $fy ,TemplateIndicatorGroup $template_group ,Request $request ){
+    public function index(UnitRank $unit_rank ,FinancialYear $fy ,RankCategory $rank_category ,TemplateIndicatorGroup $template_group ,Request $request ){
 
-        $template_indicators = TemplateIndicator::where('indicator_group_id',$template_group->id )->get();
+        $template_indicators = TemplateIndicator::where('indicator_group_id',$template_group->id)
+                                                ->get();
+
 
         if ($request->has('search')) {
 
             $template_indicators = TemplateIndicator::where('name', 'like', "%{$request->search}%")
-            ->where('indicator_group_id',$template_group->id )
-            ->get();
+                                                ->where('indicator_group_id',$template_group->id)
+                                                ->get();
 
         }
 
 
-        return view('admin.template-indicators.index',compact('unit_rank','template_group','fy','template_indicators'));
+        return view('admin.template-indicators.index',compact('unit_rank','template_group','fy','template_indicators','rank_category'));
 
     }
 
