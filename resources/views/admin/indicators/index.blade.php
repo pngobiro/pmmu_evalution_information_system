@@ -3,19 +3,15 @@
 @section('content')
 
     <!-- Page Heading -->
-
     
-    <div class="d-flex justify-content-center .mb-15" >
-        <div class="row ">
-            <h1 class="h3 mb-0 text-gray-800">{{ $unit->name }} {{ $fy->name }}</h1>
+    <div class="card  ">
+        <div class="jumbotron">
+            <h1 class="display-8">{{ $unit->name }}</h1>
+            <p class="lead">FY {{ $fy->name }}</p>
         </div>
-       
-    </div>
-        
   
 
-    <div class="row">
-        <div class="card  mx-auto">
+   
             <div>
                 @if (session()->has('message'))
                     <div class="alert alert-success">
@@ -26,30 +22,23 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <form method="GET" action="{{ route('unit-ranks.units.fy.indicator-groups.index',[$unit_rank->id,$unit->id,$fy->id ]) }}">
                             <div class="form-row align-items-center">
+
                                 <div class="col">
-                                    <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
-                                        placeholder="Search Indicator Group">
-                                </div>
-                                <div class="col">
-                                    <button type="submit" class="btn btn-primary mb-2">Search</button>
+                                    <a href="{{ route('pmmu', [$unit_rank->id,$unit->id , $fy->id]) }}" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i> Preview PMMU </a>
                                 </div>
 
                                 <div class="col">
-                                    <a href="{{ route('pmmu', [$unit_rank->id,$unit->id , $fy->id]) }}" class="btn btn-success">Preview PMMU </a>
+                                    <a href="{{ route('update_targets', [$unit_rank->id,$unit->id , $fy->id]) }}" class="btn btn-warning"> <i class="fa fa-refresh" aria-hidden="true"></i> Update Targets </a>
                                 </div>
 
                                 <div class="col">
-                                    <a href="{{ route('update_targets', [$unit_rank->id,$unit->id , $fy->id]) }}" class="btn btn-info">Update Targets </a>
+                                    <a href="{{ route('unit-ranks.units.fy.indicator-groups.create',[$unit_rank->id,$unit->id,$fy->id ]) }}" class="btn btn-primary mb-2"><i class="fa fa-plus" aria-hidden="true"></i>Create New Group </a>
                                 </div>
 
                             </div>
-                        </form>
                     </div>
-                    <div>
-                        <a href="{{ route('unit-ranks.units.fy.indicator-groups.create',[$unit_rank->id,$unit->id,$fy->id ]) }}" class="btn btn-primary mb-2">Create New Group </a>
-                    </div>
+                
                 </div>
             </div>
             <div class="card-body">
@@ -58,7 +47,6 @@
                         <tr>
                             <th scope="col"># </th>
                             <th scope="col"> Indicator Group Name</th>
-                            <th scope="col"> Description</th>
                             <th scope="col"> Weight</th>
                             <th scope="col"> Edit</th>
                             <th scope="col"> Indicators</th>
@@ -71,9 +59,8 @@
                             <tr>
                                 <th> <b>{{ $group->order }} </b></th>
                                 <th> {{ $group->name }} </th> 
-                                <th> <b>{{ substr($group->description,0,10)}} </b></th> 
-                                <th> <b> {{ $group->total_indicators}}</b></th> 
-                                <th> <a href="{{ route('unit-ranks.units.fy.indicator-groups.edit', [$unit_rank->id ,$unit->id,$fy->id , $group->id]) }}"> Edit</a>   </th>
+                                <th> <span class="badge badge-primary">{{ $group->total_indicators}}</span> </th> 
+                                <th> <a href="{{ route('unit-ranks.units.fy.indicator-groups.edit', [$unit_rank->id ,$unit->id,$fy->id , $group->id]) }}"> <i class="fas fa-edit"></i> Edit</a>   </th>
                                 <th> <a href="{{ route('unit-ranks.units.fy.indicator-groups.indicators.index', [$unit_rank->id ,$unit->id,$fy->id,$group->id]) }}", class="btn btn-success" >Indicators <span class="badge bg-secondary">{{ $group->indicators->count() }}</span> </th>
                             </tr>
                             @endforeach
@@ -81,15 +68,15 @@
 
                     <tfoot>
                         <tr>
-                            <td class="right font-weight-bold" colspan="3">Total Weights:</td>
-                            <td class="right font-weight-bold">{{ $indicatorgroups->sum('total_indicators')}}</span></td>
+                            <td class="right font-weight-bold" colspan="2"><span class="badge badge-primary">Total Indicator Weights:</span></td>
+                            <td class="right font-weight-bold"><span class="badge badge-danger">{{ $indicatorgroups->sum('total_indicators')}}</span></td>
                         </tr>
                     </tfoot>
                     
                 </table>
 
         </div>
-    </div>
+    
 
   
 @endsection

@@ -6,13 +6,13 @@
     <div class="card-body fs-3">
             <div class="row">
                 <div class="col-sm-4 font-weight-bold">Unit Type</div>
-                <div class="col-sm-4 font-weight-bold">Unit</div>
+                <div class="col-sm-4 font-weight-bold">Implementating Unit</div>
                 <div class="col-sm-4 font-weight-bold">Financial Year</div>
             </div>
             <div class="row">
-                <div class="col-sm m-0 font-weight-bold text-primary"> {{ $unit_rank->name }}</div>
-                <div class="col-sm m-0 font-weight-bold text-primary"> {{ $unit->name }}</div>
-                <div class="col-sm m-0 font-weight-bold text-primary"> {{ $fy->name  }} </div>
+                <div class="col-sm m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-primary">{{ $unit_rank->name }}</span> </div>
+                <div class="col-sm m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-success">{{ $unit->name }}</span> </div>
+                <div class="col-sm m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-warning">{{ $fy->name  }}</span>  </div>
             </div>
     </div>
 </div>
@@ -55,7 +55,7 @@
                         <td style="word-wrap: break-word;min-width: 400px;max-width: 400px;">{{ $indicator->name }}</td>
                         <td>{{ $indicator->type->name }}</td>
                         <td>{{ $indicator->measure->name }}</td>
-                        <td>{{ $indicator->indicator_weight }}</td>
+                        <td><span class="badge badge-pill badge-info">{{ $indicator->indicator_weight }}</span> </td>
                         <td>{{ $indicator->indicator_target  }}</td>
                         <td> <livewire:indicator-form :indicator_id="$indicator->id" >  </td>
                      
@@ -67,8 +67,8 @@
                 @endforelse 
                 <tfoot>
                     <tr>
-                        <td class="right font-weight-bold" colspan="4">Group Total Weights:</td>
-                        <td class="right font-weight-bold">{{ $group->total_indicators }}</span></td>
+                        <td class="right font-weight-bold" colspan="4"><span class="badge badge-pill badge-info">Group Total Weights:</span> </td>
+                        <td class="right font-weight-bold"><span class="badge badge-pill badge-danger"> {{ $group->total_indicators }}</span></span></td>
                     </tr>
                 </tfoot>
             </table>
@@ -80,42 +80,20 @@
 </div>
 
 <button type="button" class="btn btn-info">
-    Grand Weights Total: <span class="badge badge-light">{{ $indicatorgroups->sum('total_indicators')}}</span>
+    Grand Weights Total: <span class="badge badge-danger">{{ $indicatorgroups->sum('total_indicators')}}</span>
   </button>
  
  {{-- <button wire:click="doSomething">Do Something</button> --}}
  
-
-
-<div class="card bg-light">
-    <div class="card-body">
+    
         <div class="d-flex justify-content-center">
             <div class="row">
-                 <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button> <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-sm btn-secondary pull-right">Simple PMMU </a> </button>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button> <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-sm btn-secondary pull-right">Complex PMMU </a> </button>
-                        </div>
-                    </div>
-
-                    @if(empty($indicatorgroups->toArray()))
-
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                           <button> <a href="{{ route('download_template', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-sm btn-secondary pull-right">Download Template </a> </button>
-                        </div>
-                    </div>
-
-            @endif  
-      
-
+                <button> <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-primary btn-lg">Download Simple PMMU </a> </button>
+                <button> <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-secondary btn-lg">Download Complex PMMU </a> </button>
+                @if(empty($indicatorgroups->toArray()))
+                <button> <a href="{{ route('download_template', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-sm btn-secondary pull-right">Download Template </a> </button>
+                @endif  
                 </div>
-            </div>
         </div>
-</div>
 
 @endsection

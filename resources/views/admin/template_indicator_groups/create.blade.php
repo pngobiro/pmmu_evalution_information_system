@@ -2,16 +2,18 @@
 
 @section('content')
 
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">{{ $unit_rank->name }} - {{$rank_category->name  }} -FY {{ $fy->name  }} </h1>
-    </div>
+    <!-- create a jumbroton -->
+
+    <div class="card">
+
+        <div class="jumbotron">
+            <h1 class="display-7">{{ $unit_rank->name }} - FY {{ $fy->name  }} </h1>
+            <p class="lead"><span class="badge badge-primary">Category</span>{{$rank_category->name  }} </p>
+        </div>
+
 
    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
+  
                     <div class="card-header">
                         {{ __('Create New Group') }}
                         <a href="{{ route('unit-ranks.fy.rank_category.template-groups.index',[$unit_rank->id,$fy->id, $rank_category]) }}" class="float-right">Back</a>
@@ -87,7 +89,5 @@
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+ 
 @endsection

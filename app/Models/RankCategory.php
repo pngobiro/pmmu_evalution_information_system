@@ -24,6 +24,15 @@ class RankCategory extends Model
         return $this->belongsTo(UnitRank::class);
     }
 
+    // Create a Relationship Function . Rank Category has many TemplateGroup
+
+    public function template_groups()
+    {
+        return $this->hasMany(TemplateIndicatorGroup::class);
+    }
+    
+   
+
     
 
 

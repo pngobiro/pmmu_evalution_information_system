@@ -31,5 +31,12 @@ class TemplateIndicatorGroup extends Model
         return $this->belongsTo(FinancialYear::class,'financial_year_id');
     }
 
+    //Relationship Function . Template Indicator Group belongs to Rank Category
+
+    public function rank_category()
+    {
+        return $this->belongsTo(RankCategory::class);
+    }
+
    
 }

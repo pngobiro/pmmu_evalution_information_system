@@ -18,8 +18,12 @@ class TemplateIndicatorGroupController extends Controller
 
     {
         //list all template groups where unit_ranks   and rank_category and financial year
+        // sum of all indicators weights in group
+        // sum of all indicators weights in group
 
-        $templateindicatorgroups  = TemplateIndicatorGroup::where('unit_rank_id',$unit_rank->id)
+
+        $templateindicatorgroups  = TemplateIndicatorGroup::withSum('template_indicators as total_indicators', 'indicator_weight')
+                                                ->where('unit_rank_id',$unit_rank->id)
                                                 ->where('rank_category_id',$rank_category->id)
                                                 ->where('financial_year_id',$fy->id)
                                                 ->get();

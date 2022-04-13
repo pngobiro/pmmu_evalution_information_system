@@ -54,7 +54,7 @@ Auth::routes();
     Route::get('templates', [TemplatesController::class, 'index'])->name('templates');
     Route::resource('unit-ranks.fy',TemplatesController::class);
     Route::resource('unit-ranks.fy.rank_category.template-groups',TemplateIndicatorGroupController::class);
-    Route::resource('unit-ranks.fy.rank_category.template-groups.template-indicators',TemplateIndicatorsController::class);
+    Route::resource('unit-ranks.fy.template-groups.template-indicators',TemplateIndicatorsController::class);
     Route::resource('master-indicator',MasterIndicatorController::class);
     Route::resource('unit-ranks.master-indicator',MasterIndicatorController::class);
     Route::post('update-permissions', [UserController::class, 'permisionUpdate'])->name('update-permissions');

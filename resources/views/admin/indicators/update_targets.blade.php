@@ -6,16 +6,17 @@
     <div class="card-body fs-3">
             <div class="row">
                 <div class="col-sm-4 font-weight-bold">Unit Type</div>
-                <div class="col-sm-4 font-weight-bold">Unit</div>
+                <div class="col-sm-4 font-weight-bold">Implementating Unit</div>
                 <div class="col-sm-4 font-weight-bold">Financial Year</div>
             </div>
             <div class="row">
-                <div class="col-sm"> {{ $unit_rank->name }}</div>
-                <div class="col-sm"> {{ $unit->name }}</div>
-                <div class="col-sm"> {{ $fy->name  }} </div>
+                <div class="col-sm m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-primary">{{ $unit_rank->name }}</span> </div>
+                <div class="col-sm m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-success">{{ $unit->name }}</span> </div>
+                <div class="col-sm m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-warning">{{ $fy->name  }}</span>  </div>
             </div>
     </div>
 </div>
+
 
 <div>
     @if (session()->has('message'))

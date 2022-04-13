@@ -3,44 +3,34 @@
 @section('content')
 
     <!-- Page Heading -->
-    <div class="card">
-        <div class="card-body">
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">{{ $rank_name }} - FY {{ $fy_name  }} </h1>
-                </div>
 
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h4 mb-0 text-gray-800"> {{ $group_name  }}</h1>
-                </div>
+    <div class="jumbotron">
+        <h1 class="display-7">{{ $unit_rank->name }} - FY {{ $fy->name  }} </h1>
+        <p class="lead"><span class="badge badge-primary">Group</span>{{ $template_group->name  }}</p>
+      </div>
 
-        </div>
-    </div>
 
-<div class="card">
-    <div class="card-body">
-
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+ 
                 <div class="card">
                     <div class="card-header">
                         {{ __('Create New Template Indicator') }}
-                        <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.index',[$rank_id,$fy_id,$group_id]) }}" class="float-right">Back</a>
+                        <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.index',[$unit_rank->id,$fy->id,$template_group->id]) }}" class="float-right"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back</a>
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('unit-ranks.fy.template-groups.template-indicators.store',[$rank_id,$fy_id,$group_id]) }}">
+                        <form method="POST" action="{{ route('unit-ranks.fy.template-groups.template-indicators.store',[$unit_rank->id,$fy->id,$template_group->id]) }}">
                             @csrf
 
+                            
+                            <!--- Master Indicator dropdown --->
                             <div class="form-group row">
-                                <label for="master_indicator_id"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Master Indicator') }}</label>
+                                <label for="master_indicator_id" class="col-md-4 col-form-label text-md-right">{{ __('Master Indicator') }}</label>
 
-                                <div class="col-md-12">
-
-                                    <select name="master_indicator_id" class="form-control" aria-label="Default select example">
-                                        <option selected>Select Indicator Category</option>
-                                        @foreach ($master_indicators  as $master)
-                                            <option value="{{ $master->id }}">{{ $master->name }}</option>
+                                <div class="col-md-6">
+                                    <select id="master_indicator_id" class="form-control @error('master_indicator_id') is-invalid @enderror" name="master_indicator_id" required>
+                                        <option value="">Select Master Indicator</option>
+                                        @foreach($master_indicators as $master_indicator)
+                                            <option value="{{ $master_indicator->id }}">{{ substr($master_indicator->name, 0, 50)  }}</option>
                                         @endforeach
                                     </select>
 
@@ -51,7 +41,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            
+         
 
 
                             <div class="form-group row">
@@ -145,18 +135,14 @@
                    
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Create') }}
+                                    <button type="submit" class="btn btn-primary"> <i class="fa fa-plus" aria-hidden="true"></i>{{ __('Create New Template') }}
                                     </button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
-    
+     
 
-    </div>
-</div>  
+  
 @endsection

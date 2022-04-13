@@ -2,14 +2,13 @@
 
 @section('content')
 
-    <div class="card ">
-        <div class="card-body text-monospace">
-            <div class="d-flex flex-column bd-highlight mb-3">
-                <h1 class="h3 mb-0 text-gray-800">{{ $unit_rank->name }} - {{ $fy->name  }} </h1>
-                <h2 class="h5 mb-0 text-gray-800"> Group : {{  $template_group->name }} </h2>
-                <h4 class="h6 mb-0 text-gray-800"> Group Description: {{  $template_group->description  }} </h4>
-        </div>
-    </div>
+
+    <div class="jumbotron">
+        <h1 class="display-6">{{ $unit_rank->name }} - FY {{ $fy->name  }}</h1>
+        <p class="lead"> <span class="badge badge-primary">Group</span>  <b> {{  $template_group->name }}</p>
+        <hr class="my-8">
+        <p><span class="badge badge-warning">Group Description:</span>   {{  $template_group->description  }}</p>
+      </div>
 
     
 
@@ -27,23 +26,25 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <form method="GET" action="{{ route('unit-ranks.fy.rank_category.template-groups.template-indicators.index',[$unit_rank->id,$fy->id,$rank_category,$template_group->id]) }}">
+                        <form method="GET" action="{{ route('unit-ranks.fy.template-groups.template-indicators.index',[$unit_rank->id,$fy->id,$template_group->id]) }}">
                             <div class="form-row align-items-center">
                                 <div class="col">
                                     <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
                                         placeholder="Search Indicator">
                                 </div>
                                 <div class="col">
-                                    <button type="submit" class="btn btn-primary mb-2">Search Indicator</button>
+                                    <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search" aria-hidden="true"></i>
+                                        Search Indicator</button>
                                 </div>
                                 <div class="col ">
-                                    <a href="{{ route('unit-ranks.fy.rank_category.template-groups.index', [$unit_rank->id,$fy->id,$rank_category]) }}" class="btn btn-success">View All Groups</a>
+                                    <a href="{{ route('unit-ranks.fy.rank_category.template-groups.index', [$unit_rank->id,$fy->id,$template_group->rank_category]) }}" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i>
+                                        View All Groups</a>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div>
-                        <a href="{{ route('unit-ranks.fy.rank_category.template-groups.template-indicators.create',[$unit_rank->id,$fy->id,$rank_category,$template_group->id]) }}" class="btn btn-primary mb-2">Create New Template Indicator</a>
+                        <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.create',[$unit_rank->id,$fy->id,$template_group->id]) }}" class="btn btn-primary mb-2"><i class="fa fa-plus" aria-hidden="true"></i> Create New Template Indicator</a>
                     </div>
                 </div>
             </div>
@@ -69,12 +70,12 @@
                                 <td>{{ $indicator->name  }}</td>
                                 <td>{{ $indicator->type->name }}</td>
                                 <td>{{ $indicator->measure->name }}</td>
-                                <td>{{ $indicator->indicator_weight }}</td>
+                                <td><span class="badge badge-pill badge-info">{{ $indicator->indicator_weight }}</span></td>
                            
 
 
                                 <td>
-                                    <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.edit', [$unit_rank->id,$fy->id,$template_group->id,$indicator->id]) }}" class="btn btn-success">Edit</a>
+                                    <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.edit', [$unit_rank->id,$fy->id,$template_group->id,$indicator->id]) }}" class="btn btn-success"><i class="fas fa-edit"></i>Edit</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -82,8 +83,8 @@
 
                     <tfoot>
                         <tr>
-                            <td class="right font-weight-bold" colspan="4">Grand Total: </td>
-                            <td class="right font-weight-bold">{{ $template_group->template_indicators->sum('indicator_weight')}} </td>
+                            <td class="right font-weight-bold" colspan="4"><span class="badge badge-success">Group Total Weights</span> </td>
+                            <td class="right font-weight-bold"><span class="badge badge-pill badge-danger">{{ $template_group->template_indicators->sum('indicator_weight')}}</span> </td>
                             {{-- <td class="right">{{ $group->indicators->sum('indicator_weight')}}</span></td> --}}
                         </tr>
                     </tfoot>
