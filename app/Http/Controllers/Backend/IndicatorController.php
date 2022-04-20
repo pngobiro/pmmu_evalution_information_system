@@ -119,10 +119,12 @@ class IndicatorController extends Controller
 
 
     public function preview(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy){
-        $indicatorgroups = IndicatorGroup::withSum('indicators as total_indicators', 'indicator_weight')
+        $indicatorgroups = IndicatorGroup::with('indicators')
+                                            ->withSum('indicators as total_indicators', 'indicator_weight')
                                             ->where('unit_id',$unit->id)
                                             ->where('financial_year_id',$fy->id)
-                                            ->get(); 
+                                            ->get()
+                                            ->sortBy('indicators.indicator_order', SORT_NATURAL, false);
         return view('admin.indicators.preview',compact('indicatorgroups','unit_rank','fy','unit')) ;
 
     }

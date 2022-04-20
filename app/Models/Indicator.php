@@ -85,6 +85,14 @@ class Indicator extends Model
             $score = $achivement/$target*100;
         }
 
+        if (!$target==NULL){
+
+
+
+
+        }
+        
+
 
         if (!$achivement==NULL){
             $declining_score = $target/$achivement*100;
@@ -102,10 +110,12 @@ class Indicator extends Model
                 }
               break;
             case 2:
-            // Normal Indicator . Score Not more than 2T
+            // Normal Indicator . return score Not more than 2 Times the Target
+            //Example if target is 1500 and achivement is 5000 then score is = 200
+            // if target is 1500 and achivement is 1000 then  $score = $achivement/$target*100;
                 if (!$target==NULL){
-                    if ($score >= $target*2){
-                        return $target*2;
+                    if ($score >= 200){
+                        return 200;
                     }else{
                         return $score;
                     }        

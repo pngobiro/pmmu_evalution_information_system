@@ -1,9 +1,8 @@
 
     <div >
-        <input type="text" wire:model.lazy="indicator_achivement" value="{{ $indicator_achivement}}">
-        <div>
-        Score: <span class="badge badge-pill badge-info">{{  round($indicator_performance_score)}} </span>
-        </div>
+        <input  class="form-control input-sm" type="text" wire:model.lazy="indicator_achivement" value="{{ $indicator_achivement}}">
+        
+            <h6>Performance Score:  <span class="label label-primary">{{  round($indicator_performance_score)}} </span></h6>
 
         
     </div

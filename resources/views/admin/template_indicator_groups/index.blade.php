@@ -58,8 +58,10 @@
                             <tr>
                                 <th> <b>{{ $group->order }} </b></th>
                                 <th> {{ $group->name }} </th> 
+                                {{-- order by indicator order field --}}
+
                                           <th> <span class="badge badge-pill badge-info">{{ $group->template_indicators->sum('indicator_weight')}}</span> </th> 
-                                <th> <a href="{{ route('unit-ranks.fy.rank_category.template-groups.edit', [$unit_rank->id,$fy->id ,$rank_category->id, $group->id]) }}"> <i class="fas fa-edit"></i> Edit</a>   </th>
+                                <th> <a href="{{ route('unit-ranks.fy.rank_category.template-groups.edit', [$unit_rank->id,$fy->id ,$rank_category->id, $group->id]) }}"> <i class="fas fa-edit"></i> Edit Group</a>   </th>
                                 <th> <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.index', [$unit_rank->id,$fy->id,$group->id]) }}", class="btn btn-success" >Template Indicators <span class="badge bg-secondary">{{ $group->template_indicators->count() }}</span> </th>
                             </tr>
                             @endforeach
@@ -67,7 +69,7 @@
                     
                     <tfoot>
                         <tr>
-                            <td class="right font-weight-bold" colspan="3"><span class="badge badge-pill badge-danger">Grand Total Weights:</span> </td>
+                            <td class="right font-weight-bold" colspan="2"><span class="badge badge-pill badge-danger">Grand Total Weights:</span> </td>
                             <td class="right"><span class="badge badge-pill badge-danger">{{ $templateindicatorgroups->sum('total_indicators')}}</span></td>
                             {{-- <td class="right">{{ $group->indicators->sum('indicator_weight')}}</span></td> --}}
                         </tr>

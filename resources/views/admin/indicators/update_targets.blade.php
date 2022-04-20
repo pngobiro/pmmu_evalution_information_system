@@ -3,20 +3,21 @@
 @section('content')
         
 <div class="card bg-light">
-    <div class="card-body fs-3">
+    <div class="card-body fs-4" >
             <div class="row">
-                <div class="col-sm-4 font-weight-bold">Unit Type</div>
-                <div class="col-sm-4 font-weight-bold">Implementating Unit</div>
-                <div class="col-sm-4 font-weight-bold">Financial Year</div>
+                <div class="col-sm-3 font-weight-bold">Unit Type</div>
+                <div class="col-sm-3 font-weight-bold">Implementating Unit</div>
+                <div class="col-sm-3 font-weight-bold">Financial Year</div>
+                <div class="col-sm-3 font-weight-bold"></div>
             </div>
             <div class="row">
-                <div class="col-sm m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-primary">{{ $unit_rank->name }}</span> </div>
-                <div class="col-sm m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-success">{{ $unit->name }}</span> </div>
-                <div class="col-sm m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-warning">{{ $fy->name  }}</span>  </div>
+                <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-primary">{{ $unit_rank->name }}</span> </div>
+                <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-success">{{ $unit->name }}</span> </div>
+                <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-warning">{{ $fy->name  }}</span>  </div>
+                <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-danger"><i class="fas fa-edit"></i>  <a href="{{ route('pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}">Go to PMMU</a></span>  </div>
             </div>
     </div>
 </div>
-
 
 <div>
     @if (session()->has('message'))
@@ -54,7 +55,7 @@
                         <td style="word-wrap: break-word;min-width: 400px;max-width: 400px;">{{ $indicator->name }}</td>
                         <td>{{ $indicator->type->name }}</td>
                         <td>{{ $indicator->measure->name }}</td>
-                        <td>{{ $indicator->indicator_weight }}</td>
+                        <td> <livewire:indicator-weight-form :indicator_id="$indicator->id" >  </td>
                         {{--  <td>{{ $indicator->indicator_achivement }}</td> --}}
                         <td> <livewire:indicator-target-form :indicator_id="$indicator->id" >  </td>
                      
@@ -74,9 +75,8 @@
 
 
         </div>
-
-@endforeach    
-</div>
+        @empty
+        @endforelse  
 
 <button type="button" class="btn btn-info">
     Grand Weights Total: <span class="badge badge-light">{{ $indicatorgroups->sum('total_indicators')}}</span>

@@ -21,21 +21,16 @@ class TemplateIndicatorGroupController extends Controller
         // sum of all indicators weights in group
         // sum of all indicators weights in group
 
+        // order by indicator order field
+        // order by indicator order field
 
         $templateindicatorgroups  = TemplateIndicatorGroup::withSum('template_indicators as total_indicators', 'indicator_weight')
                                                 ->where('unit_rank_id',$unit_rank->id)
                                                 ->where('rank_category_id',$rank_category->id)
                                                 ->where('financial_year_id',$fy->id)
-                                                ->get();
+                                                ->get()
+                                                ->sortBy('indicator_order','asc');
 
-        if ($request->has('search')) {
-      
-            $templateindicatorgroups  = TemplateIndicatorGroup::where('unit_rank_id',$unit_rank->id )
-            ->where('rank_category_id',$rank_category->id)
-            ->where('financial_year_id',$fy->id)
-            ->where('name', 'like', "%{$request->search}%")
-            ->get();
-        }
 
 
         return view('admin.template_indicator_groups.index',compact('templateindicatorgroups','unit_rank','fy','rank_category'));
