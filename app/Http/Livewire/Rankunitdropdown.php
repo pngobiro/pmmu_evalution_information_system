@@ -13,10 +13,12 @@ class Rankunitdropdown extends Component
     public $ranks;
     public $units;
     public $fys;
+    public $divisions;
     public $selectedRank ;
     public $selectedFY ;
     public $selectedUnit ;
     public $selectedActivity ;
+    public $selectedDivision ;
 
     /**
 
@@ -34,10 +36,12 @@ class Rankunitdropdown extends Component
         $this->ranks = UnitRank::all();
         $this->units = collect();
         $this->fys = collect();
+        $this->divisions = collect();
 
         $this->selectedRank = NULL;
         $this->selectedUnit = NULL;
         $this->selectedFY = NULL;
+        $this->selectedDivision = NULL;
     }
 
   
@@ -85,10 +89,21 @@ class Rankunitdropdown extends Component
     {
         if (!is_null($selectedUnit)) {
             $this->unit = $selectedUnit;
-            $this->fys = FinancialYear::all();
+            $this->divisions = Unit::find($selectedUnit)->divisions;
             $this->selectedUnit = $selectedUnit;
         }
     }
+
+    public function updatedSelectedDivision($selectedDivision)
+
+    {
+        if (!is_null($selectedDivision)) {
+            $this->unit = $selectedDivision;
+            $this->fys = FinancialYear::all();
+            $this->selectedDivision = $selectedDivision;
+        }
+    }
+
 
 
     public function updatedSelectedFY($selectedFY){

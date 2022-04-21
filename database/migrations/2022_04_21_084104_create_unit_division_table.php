@@ -3,9 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Unit;
 
-class CreateDivisionsTable extends Migration
+class CreateUnitDivisionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +13,10 @@ class CreateDivisionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('divisions', function (Blueprint $table) {
+        Schema::create('unit_division', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('code');
-            $table->boolean('is_active')->default(true)->nullable();
+            $table->unsignedBigInteger('unit_id');
+            $table->unsignedBigInteger('division_id');
             $table->dateTime('deleted_at')->nullable();
             $table->timestamps();
         });
@@ -31,7 +29,9 @@ class CreateDivisionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('divisions');
+        Schema::dropIfExists('unit_division');
     }
 }
 
+//generate unit_division database seeder
+//php artisan make:seeder UnitDivisionSeeder

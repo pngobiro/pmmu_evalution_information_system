@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\Division;
 use Illuminate\Database\Seeder;
 
 class DivisionSeeder extends Seeder
@@ -13,7 +13,7 @@ class DivisionSeeder extends Seeder
      */
     public function run()
     {
-        Divsion::truncate();
+        Division::truncate();
 
   
 
@@ -27,13 +27,13 @@ class DivisionSeeder extends Seeder
 
             if (!$firstline) {
 
-                Unit::create([
+                Division::create([
 
                     "id"            =>   $data['0'],
                     "name"          =>   $data['1'],
-                    "active"        =>   $data['2'],
+                    "is_active"        =>   $data['2'],
                     "code"          =>   $data['3'],
-                    "deleted_at"    =>   $data['6'],
+                    "deleted_at"    =>   NULL,
 
                 ]);    
 
@@ -48,3 +48,6 @@ class DivisionSeeder extends Seeder
         fclose($csvFile);
     }
 }
+
+
+

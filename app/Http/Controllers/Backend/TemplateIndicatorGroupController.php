@@ -28,8 +28,7 @@ class TemplateIndicatorGroupController extends Controller
                                                 ->where('unit_rank_id',$unit_rank->id)
                                                 ->where('rank_category_id',$rank_category->id)
                                                 ->where('financial_year_id',$fy->id)
-                                                ->get()
-                                                ->sortBy('indicator_order','asc');
+                                                ->get();  
 
 
 
