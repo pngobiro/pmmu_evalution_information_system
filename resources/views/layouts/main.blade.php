@@ -122,22 +122,22 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    
-                        
-                                    @if (Auth::user()==null)
-                                    
-                                    @else
-                                    <p>  PJ: {{ Auth::user()->jsg_number }} </p>
-                                    @endif
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                 
+                    
+                                @if (Auth::user()==null)
                                 
-                                </span>
-                                
-                                <img class="img-profile rounded-circle"
+                                @else
+                                <p>  PJ: {{ Auth::user()->pj_number }} </p>
+                                @endif
+                            
+                            
+                            </span>
+                            
+                            <img class="img-profile rounded-circle"
                                 src="img/undraw_profile.svg">
-                            </a>
+                        </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
@@ -208,6 +208,11 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.1.2/dist/alpine.js" defer></script>
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/datatables-demo.js"></script>
     @livewireScripts
 </body>
 

@@ -11,8 +11,7 @@ class TemplateIndicator extends Model
 
     protected $fillable = [
         'name',
-        'master_indicator_id ',
-        'unit_rank_id',
+        'master_indicator_id',
         'indicator_group_id',
         'indicator_type_id',
         'indicator_unit_of_measure_id',

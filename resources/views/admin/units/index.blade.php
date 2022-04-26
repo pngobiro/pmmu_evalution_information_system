@@ -7,7 +7,7 @@
         <h1 class="h3 mb-0 text-gray-800"> {{ $unit_rank->name }} Implementing Units</h1>
     </div>
     <div class="row">
-        <div class="card  mx-auto">
+        <div class="card ">
             <div>
                 @if (session()->has('message'))
                     <div class="alert alert-success">
@@ -41,7 +41,8 @@
                         <tr>
                             <th scope="col">#Id</th>
                             <th scope="col">Unit Rank</th>
-                            <th scope="col">Manage</th>
+                            <th scope="col">Has PMMU Division</th>
+                            <th scope="col">Edit</th>
                             <th scope="col">View</th>
               
                         </tr>
@@ -50,9 +51,16 @@
                         @foreach ($units as $unit)
                             <tr>
                                 <th scope="row">{{ $unit->id }}</th>
+
                                 <td>{{ $unit->name }}</td>
+                                 {{-- create check box update using ajax  --}}
+                                 <td> <input type="checkbox" wire:click="updateHasPMMUDivision({{ $unit->id }})"></td>
+                                 
+                                 <td><a href="{{ route('unit.edit', $unit->id) }}" class="btn btn-success">Edit</a></td>
+
                              
-                                <td><a href="{{ route('unit.edit', $unit->id) }}" class="btn btn-success">Edit</a></td>
+
+                           
                         
                                 <td><a href="{{ route('unit-ranks.units.fy.index', [$unit_rank->id ,$unit->id]) }}" class="btn btn-success">FY</a></td>
                             </tr>

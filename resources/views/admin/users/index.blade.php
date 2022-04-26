@@ -52,7 +52,7 @@
                         @foreach ($users as $user)
                             <tr>
                                 <th scope="row">{{ $user->id }}</th>
-                                <td>{{ $user->jsg_number }}</td>
+                                <td>{{ $user->pj_number }}</td>
                                 <td>{{ $user->first_name }}</td>
                                 <td>{{ $user->last_name }}</td>
                                 <td>{{ $user->email }}</td>
@@ -60,7 +60,7 @@
                                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-success">Edit</a>
                                 </td>
                                 <td>
-                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">Edit</a>
+                                    <a href="{{ route('user.permissions', $user->id) }}" class="btn btn-warning">Permissions</a>
                                 </td>
                             </tr>
                         @endforeach

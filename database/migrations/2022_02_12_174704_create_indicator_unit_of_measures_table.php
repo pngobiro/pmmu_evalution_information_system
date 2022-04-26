@@ -16,6 +16,7 @@ class CreateIndicatorUnitOfMeasuresTable extends Migration
         Schema::create('indicator_unit_of_measures', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->dateTime('deleted_at')->nullable();
             $table->timestamps();
         });
     }

@@ -22,7 +22,7 @@ use App\Http\Controllers\Backend\TemplateIndicatorGroupController;
 use App\Http\Controllers\Backend\MasterIndicatorController;
 use App\Http\Controllers\Backend\PmmuController;
 use App\Http\Controllers\Auth\LoginController;
-
+use App\Http\Controllers\Backend\RankCategoryController;
 
 
 
@@ -46,22 +46,23 @@ Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
 
 Auth::routes();
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
+
 
     Route::resource('template-groups',TemplateIndicatorGroupController::class);
     Route::resource('template-indicators',TemplateIndicatorsController::class);
     Route::get('admin-dashboard', [AdminHomeController::class, 'index'])->name('admin-dashboard');
     Route::get('templates', [TemplatesController::class, 'index'])->name('templates');
     Route::resource('unit-ranks.fy',TemplatesController::class);
-    Route::resource('unit-ranks.fy.template-groups',TemplateIndicatorGroupController::class);
+    Route::resource('unit-ranks.fy.rank_category.template-groups',TemplateIndicatorGroupController::class);
     Route::resource('unit-ranks.fy.template-groups.template-indicators',TemplateIndicatorsController::class);
     Route::resource('master-indicator',MasterIndicatorController::class);
     Route::resource('unit-ranks.master-indicator',MasterIndicatorController::class);
+    Route::post('update-permissions', [UserController::class, 'permisionUpdate'])->name('update-permissions');
 
-});
 
 
-Route::middleware(['auth', 'role:user'])->group(function () {
+
+
 
     Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::get('reports', [ReportsController::class, 'index'])->name('reports');
@@ -77,6 +78,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::resource('unit-ranks.units',UnitController::class);
     //Route::resource('unit-ranks.units.fy',UnitController::class);
     Route::resource('unit-ranks.units.fy', FinancialYearController::class)->shallow();
+    Route::resource('unit-ranks.fy.rank_category', RankCategoryController::class);
     Route::get('unit-ranks/{unit_rank}/fy/{fy}/unit_excel',[ReportsController::class,"unit_excel"])->name('unit_excel');
     //Route::resource('unit-ranks.units.fy.indicator-groups', IndicatorGroupController::class);
     Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/simple_pmmu',[IndicatorController::class,"createSimplePmmuPDF"])->name('simple_pmmu');
@@ -89,10 +91,11 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::resource('unit-ranks.units.fy.indicator-groups.indicators',PmmuController::class);
     Route::post('users/{user}/change-password', [ChangePasswordController::class, 'change_password'])->name('users.change.password');
     Route::get('users/{user}/change-password', [ChangePasswordController::class, 'change_password_form'])->name('user_change_password_form');
+    Route::get('users/{user}/permissions', [UserController::class, 'permissions_form'])->name('user.permissions');
+
 
   
 
-});
 
 
 

@@ -25,8 +25,6 @@ class Unit extends Model
     }
 
 
-    
-
 
     public function  getIndicatorsAttribute($value=4){
 
@@ -39,6 +37,16 @@ class Unit extends Model
 
 
     }
+
+    // divisions that belongs to this unit
+    public function divisions()
+    {
+        return $this->belongsToMany(Division::class,'unit_division','unit_id','division_id');
+    }
+
+    
+
+
 
     
 

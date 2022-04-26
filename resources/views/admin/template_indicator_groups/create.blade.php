@@ -2,30 +2,32 @@
 
 @section('content')
 
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">{{ $unit_rank->name }} - FY {{ $fy->name  }} </h1>
-    </div>
+    <!-- create a jumbroton -->
+
+    <div class="card">
+
+        <div class="jumbotron">
+            <h1 class="display-7">{{ $unit_rank->name }} - FY {{ $fy->name  }} </h1>
+            <p class="lead"><span class="badge badge-primary">Category</span>{{$rank_category->name  }} </p>
+        </div>
+
 
    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
+  
                     <div class="card-header">
                         {{ __('Create New Group') }}
-                        <a href="{{ route('unit-ranks.fy.template-groups.index',[$unit_rank->id,$fy->id]) }}" class="float-right">Back</a>
+                        <a href="{{ route('unit-ranks.fy.rank_category.template-groups.index',[$unit_rank->id,$fy->id, $rank_category]) }}" class="float-right">Back</a>
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('unit-ranks.fy.template-groups.store',[$unit_rank->id,$fy->id]) }}">
+                        <form method="POST" action="{{ route('unit-ranks.fy.rank_category.template-groups.store',[$unit_rank->id,$fy->id,$rank_category]) }}">
                             @csrf
 
                         
 
                             <div class="form-group row">
                                 <label for="name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Indicator Name') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Group Name') }}</label>
 
                                 <div class="col-md-12">
                                     <input id="name" type="text"
@@ -43,7 +45,7 @@
 
                             <div class="form-group row">
                                 <label for="description"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Group Description') }}</label>
 
                                 <div class="col-md-12">
                                     <input id="description" type="text" 
@@ -87,7 +89,5 @@
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+ 
 @endsection

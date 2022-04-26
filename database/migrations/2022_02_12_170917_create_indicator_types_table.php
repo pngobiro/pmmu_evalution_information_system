@@ -16,6 +16,7 @@ class CreateIndicatorTypesTable extends Migration
         Schema::create('indicator_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->dateTime('deleted_at')->nullable();
             $table->timestamps();
         });
     }

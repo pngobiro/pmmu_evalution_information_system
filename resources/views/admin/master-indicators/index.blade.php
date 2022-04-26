@@ -1,13 +1,12 @@
 @extends('layouts.main')
 
 @section('content')
-
+<div class="container-fluid">
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">{{ $rank_name }} Indicators</h1>
-    </div>
-    <div class="row">
-        <div class="card  mx-auto">
+ 
+    <div class="card shadow mb-4">
+   
+      
             <div>
                 @if (session()->has('message'))
                     <div class="alert alert-success">
@@ -22,7 +21,7 @@
                             <div class="form-row align-items-center">
                                 <div class="col">
                                     <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
-                                        placeholder="Search Indicator">
+                                        placeholder="Search Master Indicator">
                                 </div>
                                 <div class="col">
                                     <button type="submit" class="btn btn-primary mb-2">Search</button>
@@ -31,13 +30,17 @@
                         </form>
                     </div>
                     <div>
-                        <a href="{{ route('unit-ranks.master-indicator.create',$rank_id) }}" class="btn btn-primary mb-2">Create Indicator</a>
+                        <a href="{{ route('unit-ranks.master-indicator.create',$rank_id) }}" class="btn btn-primary mb-2">Create Master Indicator</a>
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <table class="table">
-                    <thead>
+           
+                <div class="card-body">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">{{ $rank_name }} Master Indicators</h6>
+                    </div>
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
                         <tr>
                             <th scope="col">#Id</th>
                             <th scope="col">Name</th>
@@ -58,5 +61,10 @@
                 </table>
             </div>
         </div>
-    </div>
+       
+        
+            
+   
+
+</div>
 @endsection

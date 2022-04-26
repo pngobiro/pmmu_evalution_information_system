@@ -34,7 +34,7 @@
                             <tr>
                                 <th scope="row">{{ $fy->id }}</th>
 
-                                <th><a href="{{ route('unit-ranks.fy.template-groups.index', [$rank_id ,$fy->id]) }}" class="btn btn-success">{{ $fy->name }}</a></th>
+                                <th><a href="{{ route('unit-ranks.fy.rank_category.index', [$rank_id ,$fy->id]) }}" class="btn btn-success">{{ $fy->name }}</a></th>
                             </tr>
                         @endforeach
                     </tbody>

@@ -18,6 +18,7 @@ class CreateFinancialYearsTable extends Migration
             $table->string('name');
             $table->date('start_date');
             $table->date('end_date');
+            $table->boolean('is_current')->default(false);
             $table->timestamps();
         });
     }

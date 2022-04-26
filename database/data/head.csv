@@ -1,0 +1,14 @@
+"head_id","head_name","mayan_head_ref_id","created_at","updated_at","deleted_at"
+1,"Supreme Court",1,NULL,NULL,NULL
+2,"Court of Appeal",23336,NULL,NULL,NULL
+3,"High Court",1723,NULL,NULL,NULL
+4,"Employment and Labour Relations Court",23563,NULL,NULL,NULL
+5,"Environment and Land Court",24001,NULL,NULL,NULL
+6,"Magistrate Court",19176,NULL,NULL,NULL
+7,"Kadhi Court",29802,NULL,NULL,NULL
+8,"Tribunal",33841,NULL,NULL,NULL
+9,"committee",0,NULL,NULL,NULL
+10,"Library",17718,NULL,NULL,NULL
+11,"Directorate",0,NULL,NULL,NULL
+12,"Other Offices",0,NULL,NULL,NULL
+13,"Small Claims Court",0,NULL,NULL,NULL

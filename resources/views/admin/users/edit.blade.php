@@ -20,16 +20,16 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
-                                <label for="username"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+                                <label for="pj_number"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('PJ Number') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="username" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="username"
-                                        value="{{ old('username', $user->username) }}" required autocomplete="username"
+                                    <input id="pj_number" type="text"
+                                        class="form-control @error('name') is-invalid @enderror" name="pj_number"
+                                        value="{{ old('pj_number', $user->pj_number) }}" required autocomplete="pj_number"
                                         autofocus>
 
-                                    @error('username')
+                                    @error('pj_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -102,7 +102,7 @@
                     <form method="POST" action="{{ route('users.destroy', $user->id) }}">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger">Delete {{ $user->jsg_number }}</button>
+                        <button class="btn btn-danger">Delete {{ $user->pj_number }}</button>
                     </form>
                 </div>
             </div>

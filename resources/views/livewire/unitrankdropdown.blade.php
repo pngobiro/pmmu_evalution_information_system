@@ -17,15 +17,34 @@
                     <div class="col-md-4">
                         <select wire:model="selectedUnit" class="form-control" name="unit_id">
                             <option value="" selected>Choose Implementing Unit</option>
+                            
                             @foreach($units as $unit)
                                 <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                             @endforeach
+                           
                         </select>
                     </div>
                 </div>
             @endif
 
+
             @if (!is_null($selectedUnit))
+            <div class="form-group row">
+                <label for="fy" class="col-md-4 col-form-label text-md-right">Unit Division</label>
+                <div class="col-md-4">
+                    <select  wire:model="selectedDivision" class="form-control" name="fy_id">
+                        <option value="" selected>Choose a Division</option>
+                        <option value=0>All court</option>
+                        @foreach($divisions as $division)
+                            <option value="{{ $division->id }}">{{ $division->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        @endif
+
+
+            @if (!is_null($selectedDivision))
                 <div class="form-group row">
                     <label for="fy" class="col-md-4 col-form-label text-md-right">Financial Year</label>
                     <div class="col-md-4">
@@ -38,6 +57,8 @@
                     </div>
                 </div>
             @endif
+
+
 
             @if (!is_null($selectedFY))
             <div class="form-group row">

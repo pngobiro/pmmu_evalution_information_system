@@ -14,7 +14,7 @@ class UnitSeeder extends Seeder
      */
     public function run()
     {
-        Unit::truncate();
+       // Unit::truncate();
 
   
 
@@ -30,9 +30,14 @@ class UnitSeeder extends Seeder
 
                 Unit::create([
 
-                    "name" => $data['0'],
-
-                    "unit_rank_id" => $data['1']
+                    "id"            =>   $data['0'],
+                    "name"          =>   $data['1'],
+                    "unique_id"     =>   $data['2'],
+                    "unique_code"   =>   $data['3'],
+                    "has_division"  =>   $data['9'],
+                    "unit_rank_id"  =>   $data['4'],
+                    "head_id_fk"    =>   $data['4'],
+                    "subhead_id_fk" =>   $data['10'],
 
                 ]);    
 
@@ -42,7 +47,7 @@ class UnitSeeder extends Seeder
 
         }
 
-   
+  
 
         fclose($csvFile);
     }

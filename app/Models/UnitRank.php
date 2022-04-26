@@ -21,5 +21,12 @@ class UnitRank extends Model
         return $this->hasMany(MasterIndicator::class);
     }
 
+    // Create a Relationship Function . UnitRank has many RankCategories
+
+    public function rank_categories()
+    {
+        return $this->hasMany(RankCategory::class);
+    }
+
 
 }

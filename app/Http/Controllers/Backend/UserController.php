@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,15 +17,26 @@ class UserController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * 
      */
+
     public function index(Request $request)
     {
         $users = User::all();
+
         if ($request->has('search')) {
-            $users = User::where('username', 'like', "%{$request->search}%")->orWhere('email', 'like', "%{$request->search}%")->get();
-        }
-        return view('admin.users.index', compact('users'));
+
+            $users = User::where('first_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('last_name', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('email', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('phone_number', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('pj_number', 'LIKE', '%' . $request->search . '%')
+                ->paginate(100);
+            }
+    
+            return view('admin.users.index', compact('users'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -99,4 +111,42 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index')->with('message', 'User Deleted Succesfully');
     }
+
+    public function profile()
+    {
+        return view('admin.users.profile');
+    }
+
+
+    public function updateProfile(Request $request)
+    {
+        $user = auth()->user();
+        $user->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'pj_number' => $request->pj_number,
+        ]);
+
+        return redirect()->route('users.profile')->with('message', 'Profile Updated Succesfully');
+    }
+
+
+    public function permissions_form(User $user){
+
+        $roles = Role::all();
+        return view('admin.users.permissions_form', compact('user','roles'));
+
+    }
+
+    // function to update User  Permissions using ajax 
+
+    public function update_permissions(Request $request, User $user){
+
+        $user->roles()->sync($request->roles);
+        return response()->json(['success'=>'Permissions Updated Successfully']);
+
+    }
+
 }

@@ -23,6 +23,7 @@ class CreateMasterIndicatorsTable extends Migration
             $table->string('name');
             $table->foreignIdFor(UnitRank::class);
             $table->foreignIdFor(Unit::class)->default(100);
+            $table->dateTime('deleted_at')->nullable();
             $table->timestamps();
         });
     }

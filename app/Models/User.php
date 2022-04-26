@@ -22,7 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'phone_number',
-        'jsg_number'
+        'pj_number'
     ];
 
     public function roles()
@@ -50,6 +50,12 @@ class User extends Authenticatable
         'phone_verified_at' => 'datetime',
     ];
 
+    public function getFullNameAttribute()
+    {
+      
+        return $this->first_name . " ". $this->last_name;
+    }
+
     public function isAdmin()
     {
         foreach ($this->roles()->get() as $role)
@@ -62,4 +68,46 @@ class User extends Authenticatable
 
         return false;
     }
+
+    public function isSuperAdmin()
+    {
+        foreach ($this->roles()->get() as $role)
+        {
+            if ($role->name == 'Super Admin')
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isUser()
+    {
+        foreach ($this->roles()->get() as $role)
+        {
+            if ($role->name == 'User')
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // user has role to access the resource
+
+    public function hasRole($role)
+    {
+        
+        if ($this->roles()->where('name', $role)->first())
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    
+    
 }

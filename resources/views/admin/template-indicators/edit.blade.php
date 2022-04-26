@@ -3,24 +3,25 @@
 @section('content')
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">{{ $rank_name }} - FY {{ $fy_name  }} </h1>
-    </div>
+  
 
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800"> {{ $group_name  }}</h1>
-    </div>
+    <div class="jumbotron">
+        <h1 class="display-7">{{ $unit_rank->name }} - FY {{ $fy->name  }} </h1>
+        <p class="lead"><span class="badge badge-primary">Group</span>{{ $template_group->name  }}</p>
+      </div>
+
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
                         {{ __('Update Template Indicator') }}
-                        <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.index',[$rank_id,$fy_id,$group_id]) }}" class="float-right">Back</a>
+                        <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.index',[$unit_rank->id,$fy->id,$template_group->id]) }}" class="float-right">Back</a>
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('unit-ranks.fy.template-groups.template-indicators.update',[$rank_id,$fy_id,$group_id,$template_indicator->id]) }}">
+                        <form method="POST" action="{{ route('unit-ranks.fy.template-groups.template-indicators.update',[$unit_rank->id,$fy->id,$template_group->id,$template_indicator->id]) }}">
                             @csrf
                             @method('PUT')
                         

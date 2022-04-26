@@ -12,6 +12,7 @@ class ExcelReportsDropdown extends Component
     public $selectedRank ;
     public $selectedFY ;
 
+
     public function mount()
 
     {
@@ -28,7 +29,6 @@ class ExcelReportsDropdown extends Component
     }
 
     public function updatedSelectedRank($selectedRank)
-
     {
         if (!is_null($selectedRank)) {
             $this->fys = FinancialYear::all();
@@ -38,18 +38,15 @@ class ExcelReportsDropdown extends Component
 
 
     public function updatedSelectedFY($selectedFY){
-
         if (!is_null($selectedFY)){
             $this->selectedFY = $selectedFY;
-
-
             return redirect()->route('unit_excel',[$this->selectedRank  ,$this->selectedFY])->with('message', 'Unit Found Successfully');
-        
+    
         }
-
-       
-
-
     }
 
+    
+
 }
+
+
