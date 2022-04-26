@@ -29,7 +29,6 @@ class ReportsController extends Controller
     }
 
 
-
     public function test_report(){
 
         $units = Unit::where('unit_rank_id',6)->get();
@@ -68,8 +67,9 @@ class ReportsController extends Controller
 
 
     }
-
 }
+
+
 
 
 
