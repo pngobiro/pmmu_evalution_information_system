@@ -24,8 +24,18 @@ class Indicator extends Model
     protected $appends = [
         'indicator_performance_score',
         'indicator_raw_score',
-        'indicator_graded_score',
         'indicator_weighted_score',
+        'indicator_graded_score',
+    ];
+
+    protected $casts = [
+        'indicator_achievement' => 'float',
+        'indicator_target' => 'float',
+        'indicator_weight' => 'float',
+        'indicator_performance_score' => 'float',
+        'indicator_raw_score' => 'float',
+        'indicator_weighted_score' => 'float',
+        'indicator_graded_score' => 'string',
     ];
 
 
@@ -59,23 +69,204 @@ class Indicator extends Model
 
     public function getIndicatorRawScoreAttribute(){
 
+        $target         = $this->indicator_target;
+        $achivement     = $this->indicator_achivement;
 
+        if (!$achivement==NULL){        
+     
+
+        switch ( $this->indicator_type_id) {
+            case 1:
+            //special indicator. Score Not above 100%
+                if (!$target==NULL){
+                    
+                    $raw_score = (((2*$target)-($achivement))/(2*$target-0)*4)+1;
+
+                    if ($raw_score> 5){
+                        return 5;
+                    }elseif ($raw_score< 1){
+                        return 1;
+                    } else{
+                        return $raw_score;
+                    }
+                
+                }
+            
+            case 2:
+            // Normal Indicator . 
+                if (!$target==NULL){
+
+                        $raw_score = (((2*$target)-($achivement))/(2*$target-0)*4)+1;
+
+                        if ($raw_score> 5){
+                            return 5;
+                        }elseif ($raw_score< 1){
+                            return 1;
+                        } else{
+                            return $raw_score;
+                        }
+
+                    }
+        
+        
+            case 3:
+            // Declining Indicator. Score Not less more than 0.5T
+
+            if (!$achivement==NULL){
+
+                $raw_score =  (((2*$achivement))/($target-0))+1;
+
+                if ($raw_score> 5){
+                    return 5;
+                }elseif ($raw_score< 1){
+                    return 1;
+                } else{
+                    return $raw_score;
+                }
+
+
+                   
+            }
+
+        }
     }
+}
 
 
+
+
+   
     public function getIndicatorGradedScoreAttribute(){
 
+        //if indicator is not null
+        if (!$this->indicator_achivement==NULL)
+        {
 
+            switch ( $this->indicator_type_id) 
+            
+            {
+                case 1:
+
+                    //special indicator. 
+
+                    if ($this->indicator_raw_score >= 1 && $this->indicator_raw_score <= 2){
+                        return 'Outstanding';
+                    }
+                   
+                    elseif ($this->indicator_raw_score >= 2.01 && $this->indicator_raw_score <= 2.6){
+                        return 'Excellent';
+                    }
+                 
+                    elseif ($this->indicator_raw_score >= 2.61 && $this->indicator_raw_score <= 3.2){
+                        return 'Very Good';
+                    }
+                
+                    elseif ($this->indicator_raw_score >= 3.21 && $this->indicator_raw_score <= 3.6){
+                        return 'Good';
+                    }
+                 
+                    elseif ($this->indicator_raw_score >= 3.61 && $this->indicator_raw_score <= 4){
+                        return 'Fair';
+                    }
+            
+                    elseif ($this->indicator_raw_score >= 4.02 && $this->indicator_raw_score <= 5){
+                        return 'Poor';
+                    }
+
+
+                    break;
+
+
+                    case 2:
+
+                        //Normal Indicator.
+    
+                        if ($this->indicator_raw_score >= 1 && $this->indicator_raw_score <= 2){
+                            return 'Outstanding';
+                        }
+                       
+                        elseif ($this->indicator_raw_score >= 2.01 && $this->indicator_raw_score <= 2.6){
+                            return 'Excellent';
+                        }
+                     
+                        elseif ($this->indicator_raw_score >= 2.61 && $this->indicator_raw_score <= 3.2){
+                            return 'Very Good';
+                        }
+                    
+                        elseif ($this->indicator_raw_score >= 3.21 && $this->indicator_raw_score <= 3.6){
+                            return 'Good';
+                        }
+                     
+                        elseif ($this->indicator_raw_score >= 3.61 && $this->indicator_raw_score <= 4){
+                            return 'Fair';
+                        }
+                
+                        elseif ($this->indicator_raw_score >= 4.02 && $this->indicator_raw_score <= 5){
+                            return 'Poor';
+                        }
+    
+    
+                        break;
+
+                        case 3:
+
+                            //Declining Indicator.
+
+                            if ($this->indicator_raw_score >= 1 && $this->indicator_raw_score <= 2){
+                                return 'Outstanding';
+                            }
+                           
+                            elseif ($this->indicator_raw_score >= 2.01 && $this->indicator_raw_score <= 2.6){
+                                return 'Excellent';
+                            }
+                         
+                            elseif ($this->indicator_raw_score >= 2.61 && $this->indicator_raw_score <= 3.2){
+                                return 'Very Good';
+                            }
+                        
+                            elseif ($this->indicator_raw_score >= 3.21 && $this->indicator_raw_score <= 3.6){
+                                return 'Good';
+                            }
+                         
+                            elseif ($this->indicator_raw_score >= 3.61 && $this->indicator_raw_score <= 4){
+                                return 'Fair';
+                            }
+                    
+                            elseif ($this->indicator_raw_score >= 4.02 && $this->indicator_raw_score <= 5){
+                                return 'Poor';
+                            }
+        
+        
+                            break;
+
+
+                }
+
+
+
+       
+        }
     }
 
 
-    public function getIndicatorWeightedScoreAttribute(){
+
+    
 
 
+    public function getIndicatorWeightedScoreAttribute()
+    
+    {
+
+            if (!$this->indicator_achivement==NULL)
+            {        
+                    if (!$this->indicator_raw_score==NULL){
+                        return ($this->indicator_raw_score * $this->indicator_weight)/100;
+                    }
+            }
     }
 
 
-
+    
     public function getIndicatorPerformanceScoreAttribute(){
 
         $target         = $this->indicator_target;
@@ -83,14 +274,9 @@ class Indicator extends Model
         
         if (!$target==NULL){
             $score = $achivement/$target*100;
+            $max_score = (2*$target)/($target*100);
         }
 
-        if (!$target==NULL){
-
-
-
-
-        }
         
 
 
@@ -98,7 +284,7 @@ class Indicator extends Model
             $declining_score = $target/$achivement*100;
         }
 
-        switch ( $this->indicator_type_id) {
+        switch ($this->indicator_type_id) {
             case 1:
             //special indicator. Score Not above 100%
                 if (!$target==NULL){
@@ -111,30 +297,46 @@ class Indicator extends Model
               break;
             case 2:
             // Normal Indicator . return score Not more than 2 Times the Target
-            //Example if target is 1500 and achivement is 5000 then score is = 200
-            // if target is 1500 and achivement is 1000 then  $score = $achivement/$target*100;
+            //Example if target is 1500 and actual achivement is 5000 then score is 2 * $target 
+            // Create the function to return the score
+
                 if (!$target==NULL){
-                    if ($score >= 200){
+                    if ($achivement> 2*$target){
+
                         return 200;
-                    }else{
+                        
+                    }elseif ($achivement== NULL){
+                        return 0;
+                    }
+                    else{
                         return $score;
-                    }        
+                    }
                 }
-              
               break;
             case 3:
             // Declining Indicator. Score Not less more than 0.5T
 
             if (!$achivement==NULL){
-                if ($declining_score >= $target*2 ){
-                    return $target*2 ;
-                }else{
+
+                if ($declining_score > 200){
+                    return 200;
+                }
+                elseif ($declining_score < 0){
+                    return 0;
+                } else{
                     return $declining_score;
-                }        
+                }
+
+                   
+                
+                 
             }
               break;
           }
         }
+
+
+ 
 
 
 

@@ -13,6 +13,7 @@ use App\Models\MasterIndicator;
 use App\Models\TemplateIndicatorGroup;
 use App\Models\TemplateIndicator;
 use App\Models\IndicatorType;
+use App\Models\Indicator;
 use App\Models\IndicatorUnitOfMeasure;
 use App\Models\RankCategory;
 
@@ -24,8 +25,10 @@ class TemplateIndicatorsController extends Controller
     public function index(UnitRank $unit_rank ,FinancialYear $fy ,RankCategory $rank_category ,TemplateIndicatorGroup $template_group ,Request $request ){
 
         //order by order
-
-
+        
+        $indicator_types = IndicatorType::all();
+        $measures = IndicatorUnitOfMeasure::all();
+        $master_indicators = MasterIndicator::where('unit_rank_id',$unit_rank->id)->get();
         $template_indicators = TemplateIndicator::where('indicator_group_id',$template_group->id)
                                                 ->orderBy('order','asc')
                                                 ->get();
@@ -40,7 +43,7 @@ class TemplateIndicatorsController extends Controller
         }
 
 
-        return view('admin.template-indicators.index',compact('unit_rank','template_group','fy','template_indicators','rank_category'));
+        return view('admin.template-indicators.index',compact('unit_rank','template_group','fy','template_indicators','rank_category','indicator_types','measures','master_indicators'));
 
     }
 

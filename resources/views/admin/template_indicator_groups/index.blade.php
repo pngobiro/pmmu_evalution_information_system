@@ -38,6 +38,9 @@
                     <div>
                         <a href="{{ route('unit-ranks.fy.rank_category.template-groups.create',[$unit_rank->id,$fy->id,$rank_category ]) }}" class="btn btn-primary mb-2"><i class="fa fa-plus" aria-hidden="true"></i>
                             Create New Group </a>
+                            <!-- open modal --> 
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-indicator-group">
+                              Create New Group
                     </div>
                 </div>
             </div>
@@ -83,3 +86,37 @@
 </div> 
   
 @endsection
+
+<!-- create a modal for creation , editing and deletion of the indicator groups -->
+@section('modals')
+
+<div class="modal fade" id="create-indicator-group" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create Indicator Group</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="{{ route('unit-ranks.fy.rank_category.template-groups.store',[$unit_rank->id,$fy->id,$rank_category->id]) }}">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Indicator Group Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Indicator Group Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="order">Order</label>
+                        <input type="number" class="form-control" id="order" name="order" placeholder="Order">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

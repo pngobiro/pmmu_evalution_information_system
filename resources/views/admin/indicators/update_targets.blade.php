@@ -14,7 +14,7 @@
                 <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-primary">{{ $unit_rank->name }}</span> </div>
                 <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-success">{{ $unit->name }}</span> </div>
                 <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-warning">{{ $fy->name  }}</span>  </div>
-                <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-danger"><i class="fas fa-edit"></i>  <a href="{{ route('pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}">Go to PMMU</a></span>  </div>
+                <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-white"><i class="fas fa-eye"></i>  <a href="{{ route('pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}">Go to PMMU</a></span>  </div>           
             </div>
     </div>
 </div>
@@ -82,7 +82,7 @@
     Grand Weights Total: <span class="badge badge-light">{{ $indicatorgroups->sum('total_indicators')}}</span>
   </button>
  
- {{-- <button wire:click="doSomething">Do Something</button> --}}
+
  
 
 

@@ -124,8 +124,25 @@ class IndicatorController extends Controller
                                             ->where('unit_id',$unit->id)
                                             ->where('financial_year_id',$fy->id)
                                             ->get()
-                                            ->sortBy('indicators.indicator_order', SORT_NATURAL, false);
-        return view('admin.indicators.preview',compact('indicatorgroups','unit_rank','fy','unit')) ;
+                                            ->sortBy('indicators.indicator_order');
+
+
+           // sum of indicator_weighted_score field in all indicators in the all $indicatorgroups.
+        $total_indicator_weighted_score = 0;
+        foreach ($indicatorgroups as $indicatorgroup) {
+            for ($i=0; $i < count($indicatorgroup->indicators); $i++) {
+                $total_indicator_weighted_score += $indicatorgroup->indicators[$i]->indicator_weighted_score;
+                
+            }
+        }
+
+
+
+
+     
+        
+                                            
+        return view('admin.indicators.preview',compact('indicatorgroups','unit_rank','fy','unit','total_indicator_weighted_score'));
 
     }
 

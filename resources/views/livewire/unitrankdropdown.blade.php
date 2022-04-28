@@ -34,7 +34,7 @@
                 <div class="col-md-4">
                     <select  wire:model="selectedDivision" class="form-control" name="fy_id">
                         <option value="" selected>Choose a Division</option>
-                        <option value=0>All court</option>
+                        <option value=0>All Divisions</option>
                         @foreach($divisions as $division)
                             <option value="{{ $division->id }}">{{ $division->name }}</option>
                         @endforeach
@@ -66,7 +66,6 @@
                 <div class="col-md-4">
                     <select  wire:model="selectedActivity" class="form-control" name="activity">
                         <option value="" selected>Choose Activity</option>
-                        
                             <option value="view-pmmu">View PMMU</option>
                             <option value="update-targets">Update Targets</option>
                             <option value="download-scoresheet">Download Scoresheet</option>

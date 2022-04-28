@@ -14,7 +14,7 @@
                 <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-primary">{{ $unit_rank->name }}</span> </div>
                 <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-success">{{ $unit->name }}</span> </div>
                 <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-warning">{{ $fy->name  }}</span>  </div>
-                <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-danger"><i class="fas fa-edit"></i>  <a href="{{ route('update_targets', [$unit_rank->id,$unit->id,$fy->id]) }}">Update Weights and Targets</a></span>  </div>
+                <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-white"><i class="fas fa-eye"></i>  <a href="{{ route('update_targets', [$unit_rank->id,$unit->id,$fy->id]) }}">Update Weights and Targets</a></span>  </div>
             </div>
     </div>
 </div>
@@ -92,18 +92,21 @@
 
 
 <div class="alert alert-success" role="alert">
+
+
 <div class="row">
 
-    <div class="col-sm-4">
-        <p> Grand Total Weights: <span class="badge badge-danger">{{ $indicatorgroups->sum('total_indicators')}}</span> </p>
+    <div class="col-sm-3">
+        <p> Grand Total Weights: <span class="badge badge-primary">{{ $indicatorgroups->sum('total_indicators')}}</span> </p>
     </div>
 
-    <div class="col-sm-4">
-        <p> Overall Performance based on weights of indicators: <span class="badge badge-success">{{ $indicatorgroups->sum('total_indicators')}}</span> </p>
+
+    <div class="col-sm-3">
+        <p> Composite Score: <span class="badge badge-success">{{ round( $total_indicator_weighted_score,3) }}</span> </p>
     </div>
 
-    <div class="col-sm-4">
-        <p> Overall Performance Grade: <span class="badge badge-info">{{ $indicatorgroups->sum('total_indicators')}}</span> </p>
+    <div class="col-sm-3">
+        <p> Overall Performance Grade: <span class="badge badge-danger"></span> </p>
     </div>
 
 
