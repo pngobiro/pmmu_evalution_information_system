@@ -28,6 +28,8 @@ class CreateIndicatorsTable extends Migration
             $table->integer('indicator_weight')->nullable();
             $table->integer('indicator_target')->nullable();
             $table->integer('indicator_achivement')->nullable();
+            $table->boolean('is_backlog_indicator')->default(false);
+            $table->integer('indicator_status')->nullable();
             $table->mediumText('remarks')->nullable();
             $table->dateTime('deleted_at')->nullable();
             $table->integer('order')->nullable();

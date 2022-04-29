@@ -1,0 +1,20 @@
+$actualCompositeScore = 2.75;
+
+        $upperLimitWeigtedScore = 1;
+        $lowerLimitWeightedScore = 2;
+      
+      
+        $upperLimitScore = 200;
+        $lowerLimitScore = 120;
+
+
+       $f=  $actualCompositeScore - $upperLimitWeigtedScore;
+   $percentageSpan = $upperLimitScore- $lowerLimitScore;
+   $spanWeightedScore = $lowerLimitWeightedScore -$upperLimitWeigtedScore;
+   $gradeComposite =($percentageSpan / $spanWeightedScore) *$f;
+
+   
+
+   dd($upperLimitScore -(($actualCompositeScore - $upperLimitWeigtedScore)*(($upperLimitScore- $lowerLimitScore)/($lowerLimitWeightedScore -$upperLimitWeigtedScore))));
+
+   dd($upperLimitScore -(($actualCompositeScore - $upperLimitWeigtedScore)*(($upperLimitScore- $lowerLimitScore)/($lowerLimitWeightedScore -$upperLimitWeigtedScore))));

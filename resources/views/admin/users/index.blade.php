@@ -43,9 +43,11 @@
                             <th scope="col">PJ</th>
                             <th scope="col">First Name</th>
                             <th scope="col">Last Name</th>
+                            <th scope="col">State</th>
                             <th scope="col">Email</th>
                             <th scope="col">Manage</th>
                             <th scope="col">Role</th>
+                            <th scope="col">DeActivate User</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,12 +57,25 @@
                                 <td>{{ $user->pj_number }}</td>
                                 <td>{{ $user->first_name }}</td>
                                 <td>{{ $user->last_name }}</td>
+                                
+                                <td>
+                                  {{ $user->is_active ? 'Active' : 'Inactive' }}
+                    
+                                </td>   
                                 <td>{{ $user->email }}</td>
                                 <td>
                                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-success">Edit</a>
                                 </td>
                                 <td>
                                     <a href="{{ route('user.permissions', $user->id) }}" class="btn btn-warning">Permissions</a>
+                                </td>
+                                <td>
+                              <!-- deactivate user with ajax -->
+                              <button onclick="deactivate_user(<?php echo $user->id ?>);" class="btn btn-danger btn-sm"
+                                data-toggle="tooltip" data-placement="top" title="Deactivate">
+                            <i class="fa fa-user-times"></i>
+                        </button>
+
                                 </td>
                             </tr>
                         @endforeach
@@ -70,3 +85,49 @@
         </div>
     </div>
 @endsection
+
+<!-- javascript -->
+<script>
+
+
+function deactivate_user(id) {
+    var url = "{{ route('users.deactivate', ':id') }}";
+        if (window.confirm('Are you sure you want to deactivate this User?')) {
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    id: id,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(data) {
+                    console.log(data);
+                    location.reload();
+                }
+            });
+        }
+    }
+    function activate_user(id) {
+    var url = "{{ route('users.activate', ':id') }}";
+
+        if (window.confirm('Are you sure you want to activate this User?')) {
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    id: id,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(data) {
+                    console.log(data);
+                    location.reload();
+                }
+            });
+        }
+    }
+</script>
+
+
+
+
+

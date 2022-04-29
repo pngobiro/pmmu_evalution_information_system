@@ -149,4 +149,24 @@ class UserController extends Controller
 
     }
 
+    // deactivate user function
+    public function deactivate(User $user){
+
+        $user->update([
+            'active' => 0,
+        ]);
+
+        return redirect()->route('users.index')->with('message', 'User Deactivated Succesfully');
+    }
+
+    // activate user function
+    public function activate(User $user){
+
+        $user->update([
+            'active' => 1,
+        ]);
+
+        return redirect()->route('users.index')->with('message', 'User Activated Succesfully');
+    }
+
 }

@@ -89,9 +89,63 @@ Auth::routes();
     Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/update_targets',[IndicatorController::class,"update_targets"])->name('update_targets');
     Route::resource('unit-ranks.units.fy.indicator-groups',IndicatorController::class);
     Route::resource('unit-ranks.units.fy.indicator-groups.indicators',PmmuController::class);
+
+    //  user routes
     Route::post('users/{user}/change-password', [ChangePasswordController::class, 'change_password'])->name('users.change.password');
     Route::get('users/{user}/change-password', [ChangePasswordController::class, 'change_password_form'])->name('user_change_password_form');
     Route::get('users/{user}/permissions', [UserController::class, 'permissions_form'])->name('user.permissions');
+    Route::post('users/{user}/permissions', [UserController::class, 'permissions_update'])->name('user.permissions.update');
+    Route::get('users/{user}/permissions/create', [UserController::class, 'permissions_create'])->name('user.permissions.create');
+    Route::post('users/{user}/permissions/create', [UserController::class, 'permissions_store'])->name('user.permissions.store');
+    Route::get('users/{user}/permissions/{permission}/edit', [UserController::class, 'permissions_edit'])->name('user.permissions.edit');
+    Route::put('users/{user}/permissions/{permission}/edit', [UserController::class, 'permissions_update'])->name('user.permissions.update');
+    Route::delete('users/{user}/permissions/{permission}/delete', [UserController::class, 'permissions_destroy'])->name('user.permissions.destroy');
+
+    // user roles
+    Route::get('users/{user}/roles', [UserController::class, 'roles_form'])->name('user.roles');
+    Route::post('users/{user}/roles', [UserController::class, 'roles_update'])->name('user.roles.update');
+    Route::get('users/{user}/roles/create', [UserController::class, 'roles_create'])->name('user.roles.create');
+    Route::post('users/{user}/roles/create', [UserController::class, 'roles_store'])->name('user.roles.store');
+    Route::get('users/{user}/roles/{role}/edit', [UserController::class, 'roles_edit'])->name('user.roles.edit');
+    Route::put('users/{user}/roles/{role}/edit', [UserController::class, 'roles_update'])->name('user.roles.update');
+    Route::delete('users/{user}/roles/{role}/delete', [UserController::class, 'roles_destroy'])->name('user.roles.destroy');
+
+    // user activate and deactivate with ajax route
+    Route::post('users/{user}/activate', [UserController::class, 'activate'])->name('users.activate');
+    Route::post('users/{user}/deactivate', [UserController::class, 'deactivate'])->name('users.deactivate');
+
+    // user profile
+    Route::get('users/{user}/profile', [UserController::class, 'profile_form'])->name('user.profile');
+    Route::post('users/{user}/profile', [UserController::class, 'profile_update'])->name('user.profile.update');
+    Route::get('users/{user}/profile/create', [UserController::class, 'profile_create'])->name('user.profile.create');
+    Route::post('users/{user}/profile/create', [UserController::class, 'profile_store'])->name('user.profile.store');
+    Route::get('users/{user}/profile/{profile}/edit', [UserController::class, 'profile_edit'])->name('user.profile.edit');
+    Route::put('users/{user}/profile/{profile}/edit', [UserController::class, 'profile_update'])->name('user.profile.update');
+    Route::delete('users/{user}/profile/{profile}/delete', [UserController::class, 'profile_destroy'])->name('user.profile.destroy');
+
+    // admin routes
+    Route::get('admin/users', [AdminController::class, 'index'])->name('admin.users.index');
+    Route::get('admin/users/create', [AdminController::class, 'create'])->name('admin.users.create');
+    Route::post('admin/users/create', [AdminController::class, 'store'])->name('admin.users.store');
+    Route::get('admin/users/{user}/edit', [AdminController::class, 'edit'])->name('admin.users.edit');
+    Route::put('admin/users/{user}/edit', [AdminController::class, 'update'])->name('admin.users.update');
+    Route::delete('admin/users/{user}/delete', [AdminController::class, 'destroy'])->name('admin.users.destroy');
+    Route::get('admin/users/{user}/permissions', [AdminController::class, 'permissions_form'])->name('admin.user.permissions');
+    Route::post('admin/users/{user}/permissions', [AdminController::class, 'permissions_update'])->name('admin.user.permissions.update');
+    Route::get('admin/users/{user}/permissions/create', [AdminController::class, 'permissions_create'])->name('admin.user.permissions.create');
+    Route::post('admin/users/{user}/permissions/create', [AdminController::class, 'permissions_store'])->name('admin.user.permissions.store');
+    Route::get('admin/users/{user}/permissions/{permission}/edit', [AdminController::class, 'permissions_edit'])->name('admin.user.permissions.edit');
+    Route::put('admin/users/{user}/permissions/{permission}/edit', [AdminController::class, 'permissions_update'])->name('admin.user.permissions.update');
+    Route::delete('admin/users/{user}/permissions/{permission}/delete', [AdminController::class, 'permissions_destroy'])->name('admin.user.permissions.destroy');
+    Route::get('admin/users/{user}/roles', [AdminController::class, 'roles_form'])->name('admin.user.roles');
+    Route::post('admin/users/{user}/roles', [AdminController::class, 'roles_update'])->name('admin.user.roles.update');
+    Route::get('admin/users/{user}/roles/create', [AdminController::class, 'roles_create'])->name('admin.user.roles.create');
+    Route::post('admin/users/{user}/roles/create', [AdminController::class, 'roles_store'])->name('admin.user.roles.store');
+    Route::get('admin/users/{user}/roles/{role}/edit', [AdminController::class, 'roles_edit'])->name('admin.user.roles.edit');
+    Route::put('admin/users/{user}/roles/{role}/edit', [AdminController::class, 'roles_update'])->name('admin.user.roles.update');
+    Route::delete('admin/users/{user}/roles/{role}/delete', [AdminController::class, 'roles_destroy'])->name('admin.user.roles.destroy');
+
+
 
 
   

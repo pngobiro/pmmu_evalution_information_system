@@ -96,17 +96,23 @@
 
 <div class="row">
 
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         <p> Grand Total Weights: <span class="badge badge-primary">{{ $indicatorgroups->sum('total_indicators')}}</span> </p>
     </div>
 
 
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         <p> Composite Score: <span class="badge badge-success">{{ round( $total_indicator_weighted_score,3) }}</span> </p>
     </div>
 
-    <div class="col-sm-3">
-        <p> Overall Performance Grade: <span class="badge badge-danger"></span> </p>
+    <div class="col-sm-4">
+        <p> Performance Composite Score: <span class="badge badge-danger">{{ $overallScoreGrade['score'] }}</span> </p>
+    </div>
+
+    <div class="col-sm-4">
+
+        <p> Performance Grade: <span class="badge badge-info">{{ $overallScoreGrade['grade'] }}</span> </p>
+
     </div>
 
 
@@ -117,11 +123,11 @@
 <div class="row">
 
     <div class="col-sm-6">
-        <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-primary btn-sm">Download Complex PMMU</a>
+        <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-primary btn-sm">Download Simple PMMU</a>
     </div>
 
     <div class="col-sm-6">
-        <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-success btn-sm ">Download Simple PMMU</a>
+        <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-success btn-sm ">Download Complex PMMU</a>
     </div>
 
 </div>

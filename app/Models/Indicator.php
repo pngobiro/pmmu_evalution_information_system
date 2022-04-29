@@ -142,13 +142,6 @@ class Indicator extends Model
         if (!$this->indicator_achivement==NULL)
         {
 
-            switch ( $this->indicator_type_id) 
-            
-            {
-                case 1:
-
-                    //special indicator. 
-
                     if ($this->indicator_raw_score >= 1 && $this->indicator_raw_score <= 2){
                         return 'Outstanding';
                     }
@@ -174,83 +167,9 @@ class Indicator extends Model
                     }
 
 
-                    break;
-
-
-                    case 2:
-
-                        //Normal Indicator.
-    
-                        if ($this->indicator_raw_score >= 1 && $this->indicator_raw_score <= 2){
-                            return 'Outstanding';
-                        }
-                       
-                        elseif ($this->indicator_raw_score >= 2.01 && $this->indicator_raw_score <= 2.6){
-                            return 'Excellent';
-                        }
-                     
-                        elseif ($this->indicator_raw_score >= 2.61 && $this->indicator_raw_score <= 3.2){
-                            return 'Very Good';
-                        }
-                    
-                        elseif ($this->indicator_raw_score >= 3.21 && $this->indicator_raw_score <= 3.6){
-                            return 'Good';
-                        }
-                     
-                        elseif ($this->indicator_raw_score >= 3.61 && $this->indicator_raw_score <= 4){
-                            return 'Fair';
-                        }
-                
-                        elseif ($this->indicator_raw_score >= 4.02 && $this->indicator_raw_score <= 5){
-                            return 'Poor';
-                        }
-    
-    
-                        break;
-
-                        case 3:
-
-                            //Declining Indicator.
-
-                            if ($this->indicator_raw_score >= 1 && $this->indicator_raw_score <= 2){
-                                return 'Outstanding';
-                            }
-                           
-                            elseif ($this->indicator_raw_score >= 2.01 && $this->indicator_raw_score <= 2.6){
-                                return 'Excellent';
-                            }
-                         
-                            elseif ($this->indicator_raw_score >= 2.61 && $this->indicator_raw_score <= 3.2){
-                                return 'Very Good';
-                            }
-                        
-                            elseif ($this->indicator_raw_score >= 3.21 && $this->indicator_raw_score <= 3.6){
-                                return 'Good';
-                            }
-                         
-                            elseif ($this->indicator_raw_score >= 3.61 && $this->indicator_raw_score <= 4){
-                                return 'Fair';
-                            }
-                    
-                            elseif ($this->indicator_raw_score >= 4.02 && $this->indicator_raw_score <= 5){
-                                return 'Poor';
-                            }
-        
-        
-                            break;
-
-
                 }
-
-
-
        
         }
-    }
-
-
-
-    
 
 
     public function getIndicatorWeightedScoreAttribute()
@@ -304,11 +223,9 @@ class Indicator extends Model
                     if ($achivement> 2*$target){
 
                         return 200;
-                        
-                    }elseif ($achivement== NULL){
-                        return 0;
                     }
-                    else{
+                    else
+                    {
                         return $score;
                     }
                 }

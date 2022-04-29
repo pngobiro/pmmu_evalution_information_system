@@ -92,11 +92,16 @@
                 </a>
                 <div id="collapseReports" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('excel_reports') }}">Excel Reports</a>
-                     
-                      
+                        <a class="collapse-item" href="{{ route('excel_reports') }}">Master Excel </a>
+                    </div>
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('excel_reports') }}">Court Trends</a>
+                    </div>
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('excel_reports') }}">Indicator Trends</a>
                     </div>
                 </div>
+                
             </li>
         </ul>
         <!-- End of Sidebar -->

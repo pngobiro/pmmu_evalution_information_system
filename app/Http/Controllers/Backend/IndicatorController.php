@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Backend;
+use App\Http\Requests\UpdateIndicatorRequest;
 use App\Http\Controllers\Controller;
 use App\Models\UnitRank;
 use App\Models\Unit;
@@ -10,6 +11,7 @@ use App\Models\Indicator;
 use App\Models\TemplateIndicatorGroup;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Lib\IndicatorGraderHelper;
 
 class IndicatorController extends Controller
 {
@@ -96,13 +98,10 @@ class IndicatorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UnitRank $unit_rank,Unit $unit,FinancialYear $fy,IndicatorGroup $indicator_group,Request $request)
+    public function update(UnitRank $unit_rank,Unit $unit,FinancialYear $fy,IndicatorGroup $indicator_group,Indicator $indicator ,UpdateIndicatorRequest $request )
     {
-        $indicator_group->update([
-            'name' =>               $request->name,
-            'description' =>        $request->description,
-            'order' =>              $request->order,
-        ]);
+        $indicator->update($request->validated());
+
         return redirect()->route('unit-ranks.units.fy.indicator-groups.index',[$unit_rank->id, $unit->id, $fy->id])->with('message', 'Group Updated Successfully');
     }
 
@@ -132,17 +131,17 @@ class IndicatorController extends Controller
         foreach ($indicatorgroups as $indicatorgroup) {
             for ($i=0; $i < count($indicatorgroup->indicators); $i++) {
                 $total_indicator_weighted_score += $indicatorgroup->indicators[$i]->indicator_weighted_score;
-                
+
             }
         }
 
+        $performance = new  IndicatorGraderHelper();
+       $overallScoreGrade  = $performance-> getCompositeScore($total_indicator_weighted_score);
+        
 
-
-
-     
         
                                             
-        return view('admin.indicators.preview',compact('indicatorgroups','unit_rank','fy','unit','total_indicator_weighted_score'));
+        return view('admin.indicators.preview',compact('indicatorgroups','unit_rank','fy','unit','total_indicator_weighted_score','overallScoreGrade'));
 
     }
 

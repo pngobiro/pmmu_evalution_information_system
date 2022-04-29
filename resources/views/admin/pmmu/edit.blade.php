@@ -119,21 +119,6 @@
 
 
 
-                            <div class="form-group row">
-                                <label for="indicator_target"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Indicator Target') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="indicator_target" type="number" class="form-control @error('indicator_target') is-invalid @enderror"
-                                        name="indicator_target" value="{{ old('indicator_target') }}" required autocomplete="indicator_target">
-
-                                    @error('indicator_target')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
 
                    
                             <div class="form-group row mb-0">

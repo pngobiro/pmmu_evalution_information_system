@@ -38,9 +38,6 @@
                     <div>
                         <a href="{{ route('unit-ranks.fy.rank_category.template-groups.create',[$unit_rank->id,$fy->id,$rank_category ]) }}" class="btn btn-primary mb-2"><i class="fa fa-plus" aria-hidden="true"></i>
                             Create New Group </a>
-                            <!-- open modal --> 
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-indicator-group">
-                              Create New Group
                     </div>
                 </div>
             </div>
