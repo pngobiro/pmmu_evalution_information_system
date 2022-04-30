@@ -131,10 +131,12 @@ class IndicatorController extends Controller
         foreach ($indicatorgroups as $indicatorgroup) {
             for ($i=0; $i < count($indicatorgroup->indicators); $i++) {
                 $total_indicator_weighted_score += $indicatorgroup->indicators[$i]->indicator_weighted_score;
-
+               
             }
+           
         }
-
+     
+        
         $performance = new  IndicatorGraderHelper();
        $overallScoreGrade  = $performance-> getCompositeScore($total_indicator_weighted_score);
         

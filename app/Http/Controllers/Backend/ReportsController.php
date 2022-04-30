@@ -37,10 +37,18 @@ class ReportsController extends Controller
 
     $keyed= collect([]);
 
-
+                        $total_indicator_weighted_score = 0;
                         foreach ( $indicatorgroups as $group){
                             foreach ($group->indicators as $indicator){
-                                $keyed->push(['court_name'=>$group->unit->name, 'performance_score'=> $indicator->indicator_performance_score,'indicator_name'=>$indicator->master->name,'indicator_target'=> $indicator->indicator_target,'indicator_achievement'=>$indicator->indicator_achivement]);
+
+                                $total_indicator_weighted_score += $indicator->indicator_weighted_score;
+                            
+
+
+
+
+
+                                $keyed->push(['court_name'=>$group->unit->name, 'performance_score'=> $indicator->indicator_performance_score,'indicator_name'=>$indicator->master->name,'indicator_target'=> $indicator->indicator_target,'indicator_achievement'=>$indicator->indicator_achivement,'composite_score'=>$total_indicator_weighted_score]);
                             }
                         }
                 
@@ -62,8 +70,9 @@ class ReportsController extends Controller
     public function unit_excel(UnitRank $unit_rank , FinancialYear $fy){
 
         $file_name = "{$unit_rank->name} - FY {$fy->name} .xlsx";
+        $total_indicator_weighted_score = 0;
 
-        return Excel::download(new UsersExport($unit_rank->id,$fy->id),str_replace("/","-",$file_name) );
+        return Excel::download(new UsersExport($unit_rank->id,$fy->id,$total_indicator_weighted_score),str_replace("/","-",$file_name) );
 
 
     }

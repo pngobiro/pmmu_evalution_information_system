@@ -1,5 +1,6 @@
 <?php
 namespace App\Lib;
+
 class IndicatorGraderHelper{
 
   public $upperLimitScore;
@@ -20,7 +21,7 @@ class IndicatorGraderHelper{
 
   }
 
-  function getCompositeScore($actualCompositeScore)
+  public function getCompositeScore($actualCompositeScore)
   {
     switch ( $actualCompositeScore) {
       // case between 1 and 2
@@ -85,7 +86,7 @@ class IndicatorGraderHelper{
 }
 
 
-  function getGrade($result){
+ private function getGrade($result){
 
       if ($result >= 120  AND $result <= 200) 
       {

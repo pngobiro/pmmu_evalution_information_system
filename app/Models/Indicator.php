@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Lib\PerformanceScoreHelper;
 
 class Indicator extends Model
 {
@@ -80,7 +81,7 @@ class Indicator extends Model
             //special indicator. Score Not above 100%
                 if (!$target==NULL){
                     
-                    $raw_score = (((2*$target)-($achivement))/(2*$target-0)*4)+1;
+                    $raw_score = (((2*$target)-($achivement))/(2*$target)*4)+1;
 
                     if ($raw_score> 5){
                         return 5;
@@ -96,7 +97,7 @@ class Indicator extends Model
             // Normal Indicator . 
                 if (!$target==NULL){
 
-                        $raw_score = (((2*$target)-($achivement))/(2*$target-0)*4)+1;
+                        $raw_score = (((2*$target)-($achivement))/(2*$target)*4)+1;
 
                         if ($raw_score> 5){
                             return 5;
@@ -114,13 +115,21 @@ class Indicator extends Model
 
             if (!$achivement==NULL){
 
-                $raw_score =  (((2*$achivement))/($target-0))+1;
+                $raw_score =  (((2*$achivement))/($target))+1;
 
-                if ($raw_score> 5){
+                if ($raw_score> 5)
+                {
                     return 5;
-                }elseif ($raw_score< 1){
+                }
+                
+                elseif ($raw_score< 1) 
+
+                {
                     return 1;
-                } else{
+                } 
+                
+                else 
+                {
                     return $raw_score;
                 }
 
@@ -141,33 +150,10 @@ class Indicator extends Model
         //if indicator is not null
         if (!$this->indicator_achivement==NULL)
         {
-
-                    if ($this->indicator_raw_score >= 1 && $this->indicator_raw_score <= 2){
-                        return 'Outstanding';
-                    }
-                   
-                    elseif ($this->indicator_raw_score >= 2.01 && $this->indicator_raw_score <= 2.6){
-                        return 'Excellent';
-                    }
-                 
-                    elseif ($this->indicator_raw_score >= 2.61 && $this->indicator_raw_score <= 3.2){
-                        return 'Very Good';
-                    }
-                
-                    elseif ($this->indicator_raw_score >= 3.21 && $this->indicator_raw_score <= 3.6){
-                        return 'Good';
-                    }
-                 
-                    elseif ($this->indicator_raw_score >= 3.61 && $this->indicator_raw_score <= 4){
-                        return 'Fair';
-                    }
-            
-                    elseif ($this->indicator_raw_score >= 4.02 && $this->indicator_raw_score <= 5){
-                        return 'Poor';
-                    }
-
-
-                }
+            $performance_grade = new PerformanceScoreHelper;
+            $result = $performance_grade->getPerformanceGrade($this->indicator_type_id,$this->indicator_performance_score);
+            return $result;
+        }
        
         }
 
@@ -220,6 +206,7 @@ class Indicator extends Model
             // Create the function to return the score
 
                 if (!$target==NULL){
+
                     if ($achivement> 2*$target){
 
                         return 200;

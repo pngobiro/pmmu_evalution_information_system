@@ -79,6 +79,10 @@
                         <td class="right font-weight-bold" colspan="4"><span class="badge badge-pill badge-info">Group Total Weights:</span> </td>
                         <td class="right font-weight-bold"><span class="badge badge-pill badge-danger"> {{ $group->total_indicators }}</span></span></td>
                     </tr>
+                    <tr>
+                        <td class="right font-weight-bold" colspan="4"><span class="badge badge-pill badge-secondary">Group Composite Score:</span> </td>
+                        <td class="right font-weight-bold"><span class="badge badge-pill badge-danger"> </span></span></td>
+
                 </tfoot>
             </table>
             @empty
@@ -120,15 +124,28 @@
 
 </div>
 
+<div class="alert alert-success" role="alert">
+
 <div class="row">
 
-    <div class="col-sm-6">
-        <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-primary btn-sm">Download Simple PMMU</a>
+    <div class="col-sm-3">
+        <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-primary btn-sm"> <i class="fa fa-file-pdf-o"></i>  Simple PMMU PDF</a>
     </div>
 
-    <div class="col-sm-6">
-        <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-success btn-sm ">Download Complex PMMU</a>
+    <div class="col-sm-3">
+        <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-success btn-sm "><i class="fas fa-pdf"></i>  Complex PMMU PDF</a>
     </div>
+
+    <div class="col-sm-3">
+        <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-primary btn-sm"><i class="fas fa-excel"></i> Simple PMMU Excel</a>
+    </div>
+
+    <div class="col-sm-3">
+        <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-success btn-sm "><i class="fas fa-excel"></i> Complex PMMU Excel</a>
+    </div>
+
+
+</div>
 
 </div>
 
