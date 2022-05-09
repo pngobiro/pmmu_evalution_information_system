@@ -71,15 +71,13 @@ class Indicator extends Model
     public function getIndicatorRawScoreAttribute(){
 
         $target         = $this->indicator_target;
-        $achivement     = $this->indicator_achivement;
-
-        if (!$achivement==NULL){        
+        $achivement     = $this->indicator_achivement;       
      
 
         switch ( $this->indicator_type_id) {
             case 1:
             //special indicator. Score Not above 100%
-                if (!$target==NULL){
+            if (!$target==NULL && !$achivement==NULL){
                     
                     $raw_score = (((2*$target)-($achivement))/(2*$target)*4)+1;
 
@@ -95,7 +93,7 @@ class Indicator extends Model
             
             case 2:
             // Normal Indicator . 
-                if (!$target==NULL){
+            if (!$target==NULL && !$achivement==NULL){
 
                         $raw_score = (((2*$target)-($achivement))/(2*$target)*4)+1;
 
@@ -112,8 +110,8 @@ class Indicator extends Model
         
             case 3:
             // Declining Indicator. Score Not less more than 0.5T
-
-            if (!$achivement==NULL){
+            // check if $achivement OR $target are not nil 
+              if (!$target==NULL && !$achivement==NULL){
 
                 $raw_score =  (((2*$achivement))/($target))+1;
 
@@ -132,12 +130,10 @@ class Indicator extends Model
                 {
                     return $raw_score;
                 }
-
-
                    
             }
 
-        }
+    
     }
 }
 

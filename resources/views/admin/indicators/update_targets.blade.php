@@ -8,14 +8,15 @@
                 <div class="col-sm-3 font-weight-bold">Unit Type</div>
                 <div class="col-sm-3 font-weight-bold">Implementating Unit</div>
                 <div class="col-sm-3 font-weight-bold">Financial Year</div>
-                <div class="col-sm-3 font-weight-bold"></div>
+                <div class="col-sm-2 font-weight-bold"></div>
+                <div class="col-sm-1 font-weight-bold"></div>
             </div>
             <div class="row">
                 <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-primary">{{ $unit_rank->name }}</span> </div>
                 <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-success">{{ $unit->name }}</span> </div>
                 <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-warning">{{ $fy->name  }}</span>  </div>
                 <div class="col-sm-2 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-white"><i class="fas fa-eye"></i>  <a href="{{ route('pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}">Go to PMMU</a></span>  </div>     
-                <div class="col-sm-1 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-white"><i class="fas fa-eye"></i>  <a href="{{ route('unit-ranks.units.fy.indicator-groups.index', [$unit_rank->id,$unit->id,$fy->id]) }}">Edit </a></span>  </div>           
+                <div class="col-sm-1 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-white"><i class="fas fa-eye"></i>  <a href="{{ route('unit-ranks.units.fy.indicator-groups.index', [$unit_rank->id,$unit->id,$fy->id]) }}">Edit Indicators </a></span>  </div>           
             </div>
     </div>
 </div>

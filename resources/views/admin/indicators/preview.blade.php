@@ -17,21 +17,6 @@
                 <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-white"><i class="fas fa-eye"></i>  <a href="{{ route('update_targets', [$unit_rank->id,$unit->id,$fy->id]) }}">Update Weights and Targets</a></span>  </div>
             </div>
     </div>
-</div>
-
-
-
-<div class="row">
-<div>
-    @if (session()->has('message'))
-        <div class="alert alert-success">
-            {{ session('message') }}
-        </div>
-    @endif
-</div> 
-
-</div>
-
 
 
 
@@ -40,7 +25,7 @@
     <div  class="card-body ">
         @forelse($indicatorgroups as $group)
         <div class="alert alert-success" role="alert">
-            <h6 class="m-0 font-weight-bold text-primary"> {{ $group->order }} - {{ $group->name }}</h6>
+         {{ $group->order }} - {{ $group->name }}
         </div>
         <div>
             <table class="table table-bordered table table-sm text-dark">
@@ -75,13 +60,18 @@
                 @endforelse 
                 
                 <tfoot>
-                    <tr>
-                        <td class="right font-weight-bold" colspan="4"><span class="badge badge-pill badge-info">Group Total Weights:</span> </td>
-                        <td class="right font-weight-bold"><span class="badge badge-pill badge-danger"> {{ $group->total_indicators }}</span></span></td>
-                    </tr>
-                    <tr>
-                        <td class="right font-weight-bold" colspan="4"><span class="badge badge-pill badge-secondary">Group Composite Score:</span> </td>
-                        <td class="right font-weight-bold"><span class="badge badge-pill badge-danger"> </span></span></td>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col" colspan="5">
+                        Total Weights: <span class="badge badge-primary"> {{ $group->total_indicators }}</span> 
+                    </th>
+
+                    <th scope="col" colspan="7">
+                        Composite Score:: <span class="badge badge-danger">  {{ round($group->total_indicator_weighted_score(),3) }}</span> 
+                    </th>
+
+                </tr>
+               
 
                 </tfoot>
             </table>
@@ -100,22 +90,22 @@
 
 <div class="row">
 
-    <div class="col-sm-2">
-        <p> Grand Total Weights: <span class="badge badge-primary">{{ $indicatorgroups->sum('total_indicators')}}</span> </p>
+    <div class="col-sm-3">
+        Total Weights: <span class="badge badge-primary">{{ $indicatorgroups->sum('total_indicators')}}</span> 
     </div>
 
 
-    <div class="col-sm-2">
-        <p> Composite Score: <span class="badge badge-success">{{ round( $total_indicator_weighted_score,3) }}</span> </p>
+    <div class="col-sm-3">
+        Composite Score: <span class="badge badge-success">{{ round( $total_indicator_weighted_score,3) }}</span> 
     </div>
 
-    <div class="col-sm-4">
-        <p> Performance Composite Score: <span class="badge badge-danger">{{ $overallScoreGrade['score'] }}</span> </p>
+    <div class="col-sm-3">
+        Performance Score: <span class="badge badge-danger">{{ $overallScoreGrade['score'] }}</span> 
     </div>
 
-    <div class="col-sm-4">
+    <div class="col-sm-3">
 
-        <p> Performance Grade: <span class="badge badge-info">{{ $overallScoreGrade['grade'] }}</span> </p>
+        Performance Grade: <span class="badge badge-info">{{ $overallScoreGrade['grade'] }}</span> 
 
     </div>
 
@@ -124,26 +114,28 @@
 
 </div>
 
-<div class="alert alert-success" role="alert">
+<div class="alert alert-info" role="alert">
 
 <div class="row">
 
     <div class="col-sm-3">
-        <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-primary btn-sm"> <i class="fa fa-file-pdf-o"></i>  Simple PMMU PDF</a>
+        <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-primary btn-sm"> <i class="fa fa-file-pdf-o"></i>Simple PDF</a>
     </div>
 
     <div class="col-sm-3">
-        <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-success btn-sm "><i class="fas fa-pdf"></i>  Complex PMMU PDF</a>
+        <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-success btn-sm "><i class="fas fa-pdf"></i>  Complex PDF</a>
     </div>
 
     <div class="col-sm-3">
-        <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-primary btn-sm"><i class="fas fa-excel"></i> Simple PMMU Excel</a>
+        <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-primary btn-sm"><i class="fas fa-excel"></i> Simple Excel</a>
     </div>
 
     <div class="col-sm-3">
-        <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-success btn-sm "><i class="fas fa-excel"></i> Complex PMMU Excel</a>
+        <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-success btn-sm "><i class="fas fa-excel"></i> Complex Excel</a>
     </div>
 
+
+</div>
 
 </div>
 

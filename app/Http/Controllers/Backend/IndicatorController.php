@@ -10,7 +10,7 @@ use App\Models\IndicatorGroup;
 use App\Models\Indicator;
 use App\Models\TemplateIndicatorGroup;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf;
+use PDF;
 use App\Lib\IndicatorGraderHelper;
 
 class IndicatorController extends Controller
@@ -126,16 +126,14 @@ class IndicatorController extends Controller
                                             ->sortBy('indicators.indicator_order');
 
 
-           // sum of indicator_weighted_score field in all indicators in the all $indicatorgroups.
-        $total_indicator_weighted_score = 0;
-        foreach ($indicatorgroups as $indicatorgroup) {
-            for ($i=0; $i < count($indicatorgroup->indicators); $i++) {
-                $total_indicator_weighted_score += $indicatorgroup->indicators[$i]->indicator_weighted_score;
-               
-            }
-           
-        }
-     
+           // sum of $indicatorgroups total_weighted 
+              $total_indicator_weighted_score = 0;
+                foreach ($indicatorgroups as $indicatorgroup) {
+                    foreach ($indicatorgroup->indicators as $indicator) {
+                        $total_indicator_weighted_score += $indicator->indicator_weighted_score;
+                    }
+                }
+      
         
         $performance = new  IndicatorGraderHelper();
        $overallScoreGrade  = $performance-> getCompositeScore($total_indicator_weighted_score);
@@ -157,12 +155,30 @@ class IndicatorController extends Controller
         ->get(); 
 
 
-        $pdf = \App::make('dompdf.wrapper');
-      
-        $pdf = PDF::loadView('admin.pmmu.simple_pmmu' , compact($data = ['indicatorgroups','unit','fy']));
-        $pdf->setPaper('A4', 'landscape');
-        return $pdf->download("{$unit->name} - FY {$fy->name} Simple PMMU Scoresheet");
-      
+
+        PDF::SetAuthor('TCPDF');
+        PDF::SetTitle('Performance Management & Measurement Understanding Analysis');
+        PDF::SetSubject('Performance Management & Measurement Understanding Analysis');
+        PDF::SetKeywords('Performance Management & Measurement Understanding Analysis');
+        PDF::SetHeaderData('', '', 'Performance Management & Measurement Understanding Analysis', '');
+        PDF::setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+        PDF::setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+        PDF::SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        PDF::SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+        PDF::SetHeaderMargin(PDF_MARGIN_HEADER);
+        PDF::SetFooterMargin(PDF_MARGIN_FOOTER);
+        PDF::SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+        PDF::SetFont('helvetica', '', 10);
+        // orientation landscape 
+        PDF::AddPage('L', 'A4');
+        PDF::writeHTML($this->getPmmuPDF($indicatorgroups,$unit_rank,$fy,$unit), true, false, true, false, '');
+
+        //create pdf from unit name and financial year
+        $pdf = PDF::Output('PMMU_'.$unit->name.'_'.$fy->name.'.pdf');
+        return $pdf;
+        exit;
+
+
 
     }
 
@@ -231,4 +247,107 @@ class IndicatorController extends Controller
                                             ->get(); 
         return view('admin.indicators.update_targets',compact('indicatorgroups','unit_rank','fy','unit')) ;
       }
-}
+
+      private function getPmmuPDF($indicatorgroups,$unit_rank,$fy,$unit){
+        $html = '<!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Performance Management & Measurement Understanding Analysis</title>
+        <style>
+        body{
+            font-family: sans-serif;
+            font-size: 10px;}
+        table{
+            border-collapse: collapse;
+            width: 100%;}
+        th{
+            background-color: #ccc;
+            text-align: left;
+            padding: 5px;
+            border: 1px solid #ccc;}
+        td{
+            padding: 5px;
+            border: 1px solid #ccc;}
+
+        .header{
+            font-size: 14px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .sub-header{
+            font-size: 12px;
+            text-align: center;
+            font-weight: bold;}
+        }
+
+        </style>
+
+       
+        </head>
+        <body>
+        <div class="header">Performance Management & Measurement Understanding Analysis</div>
+        <div class="sub-header">Unit: '.$unit->name.'</div>
+        <div class="sub-header">FY: '.$fy->name.'</div>
+
+        </body>
+
+        </html>';
+        $html .= '<table>';
+        $html .= '<thead>';
+        $html .= '<tr>';
+        $html .= '<th>Indicator Group</th>';
+
+        $html .= '</tr>';
+        $html .= '</thead>';
+        $html .= '<tbody>';
+        foreach ($indicatorgroups as $group){
+            $html .= '<tr>';
+            $html .= '<td>'.$group->name.'</td>';
+            
+            foreach ($group->indicators as $indicator){
+                // create a new html table row per indicator
+                $html .= '<table>';
+                $html .= '<thead>';
+                $html .= '<tr>';
+                $html .= '<th>Indicator</th>';
+                $html .= '<th>Target</th>';
+                $html .= '<th>Actual</th>';
+                $html .= '<th>%</th>';
+                $html .= '</tr>';
+           
+                $html .= '</thead>';
+                $html .= '<tbody>';
+                $html .= '<tr>';
+                $html .= '<td>'.$indicator->name.'</td>';
+                $html .= '<td>'.$indicator->indicator_weight.'</td>';
+                $html .= '<td>'.$indicator.'</td>';
+                $html .= '<td>'.$indicator->target.'</td>';
+                $html .= '</tr>';
+                $html .= '</tbody>';
+                $html .= '</table>';
+                
+
+
+
+            }
+
+            $html .= '</tr>';
+
+        }
+
+        $html .= '</tbody>';
+
+        $html .= '</table>';
+
+       
+
+
+    return $html;
+
+    }
+}    
+
+git push 
