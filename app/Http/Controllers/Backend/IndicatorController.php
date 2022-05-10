@@ -169,12 +169,17 @@ class IndicatorController extends Controller
         PDF::SetFooterMargin(PDF_MARGIN_FOOTER);
         PDF::SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
         PDF::SetFont('helvetica', '', 10);
+        // show page numbers on each page
+        PDF::SetPrintHeader(false);
+        PDF::SetPrintFooter(false);
+    
+
         // orientation landscape 
         PDF::AddPage('L', 'A4');
         PDF::writeHTML($this->getPmmuPDF($indicatorgroups,$unit_rank,$fy,$unit), true, false, true, false, '');
 
         //create pdf from unit name and financial year
-        $pdf = PDF::Output('PMMU_'.$unit->name.'_'.$fy->name.'.pdf');
+        $pdf = PDF::Output('PMMU_'.$unit->name.'FY'.$fy->name.'.pdf');
         return $pdf;
         exit;
 
@@ -283,71 +288,207 @@ class IndicatorController extends Controller
             font-weight: bold;}
         }
 
+        .sub-header-1{
+            font-size: 8px;
+            text-align: center;
+            font-weight: bold;
+        } 
+        .sub-header-2{
+            font-size: 8px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        
+        .outstanding {
+        background-color: #90EE90;
+        color:#000;
+        padding:2px;
+        text-align: center;
+
+    }
+        .excellent{
+            background-color:#87CEFA;
+            color:#000;
+            padding:2px;
+            text-align: center;
+        }
+        .verygood{
+            background-color:#9370DB;
+            color:#000;
+            padding:2px;    text-align: center;
+        }
+        .good{
+            background-color:#20B2AA;
+            color:#000;
+            
+            padding:2px;    text-align: center;
+        }
+        .fair{
+            background-color:#FFD700;
+            color:#000;
+            padding:2px;    text-align: center;
+        }
+        .poor{
+            background-color:#FFA07A;
+            color:#000;
+            padding:2px;    text-align: center;
+        }
+
+        table.GeneratedTable {
+            width: 100%;
+            background-color: #ffffff;
+            border-collapse: collapse;
+            border-width: 2px;
+            border-color: #deddda;
+            border-style: solid;
+            color: #000000;
+          }
+          
+          table.GeneratedTable td, table.GeneratedTable th {
+            border-width: 2px;
+            border-color: #deddda;
+            border-style: solid;
+            padding: 3px;
+          }
+          
+          table.GeneratedTable thead {
+            background-color: #2ec27e;
+          }
+
+
         </style>
 
        
         </head>
         <body>
-        <div class="header">Performance Management & Measurement Understanding Analysis</div>
-        <div class="sub-header">Unit: '.$unit->name.'</div>
-        <div class="sub-header">FY: '.$fy->name.'</div>
+        <div class="header">PERFORMANCE MANAGEMENT AND MEASUREMENT ANALYSIS</div>
+     
+        <div class="header">'.strtoupper($unit->name).'</div>
+
+        <div class="sub-header">PERFORMANCE FOR THE FINANCIAL YEAR '.$fy->name.'</div>
+        <br>
+        <div class="sub-header-2">Generated on: '.date('d-m-Y  H:i:s', strtotime('+3 hours')).'</div>
+    
 
         </body>
 
         </html>';
-        $html .= '<table>';
-        $html .= '<thead>';
-        $html .= '<tr>';
-        $html .= '<th>Indicator Group</th>';
-
-        $html .= '</tr>';
-        $html .= '</thead>';
-        $html .= '<tbody>';
+      
         foreach ($indicatorgroups as $group){
+            $html .= '<h1>'.$group->name.'</h1>';
+
+            $html .= '<table>';
+            $html .= '<thead>';
             $html .= '<tr>';
-            $html .= '<td>'.$group->name.'</td>';
-            
-            foreach ($group->indicators as $indicator){
-                // create a new html table row per indicator
-                $html .= '<table>';
-                $html .= '<thead>';
-                $html .= '<tr>';
-                $html .= '<th>Indicator</th>';
-                $html .= '<th>Target</th>';
-                $html .= '<th>Actual</th>';
-                $html .= '<th>%</th>';
-                $html .= '</tr>';
-           
-                $html .= '</thead>';
-                $html .= '<tbody>';
-                $html .= '<tr>';
-                $html .= '<td>'.$indicator->name.'</td>';
-                $html .= '<td>'.$indicator->indicator_weight.'</td>';
-                $html .= '<td>'.$indicator.'</td>';
-                $html .= '<td>'.$indicator->target.'</td>';
-                $html .= '</tr>';
-                $html .= '</tbody>';
-                $html .= '</table>';
-                
-
-
-
-            }
-
+            $html .= '<th style="width: 20px">#</th>';
+            $html .= '<th style="width: 360px">Indicator</th>';
+            $html .= '<th style="width: 50px">Indicator Type</th>';
+            $html .= '<th  style="width: 60px" >Unit of Measure</th>';
+            $html .= '<th style="width: 40px">Weight</th>';
+            $html .= '<th style="width: 40px">Target</th>';
+            $html .= '<th style="width: 70px" >Achievement</th>';
+            $html .= '<th style="width: 70px" >Percentage Performance</th>';
+            $html .= '<th style="width: 70px" >Performance Grade</th>';
             $html .= '</tr>';
+            $html .= '</thead>';
+            $html .= '<tbody>';
 
-        }
-
-        $html .= '</tbody>';
-
-        $html .= '</table>';
-
+            foreach ($group->indicators as $indicator){
        
+                // indicators table
+                $html .= '<tr>';
+          
+                $html .= '<td style="width: 20px">'.$indicator->order.'</td>';
+                $html .= '<td  style="width: 360px">'.$indicator->name.'</td>';
+                $html .= '<td style="width: 50px">'.$indicator->type->name.'</td>';
+                $html .= '<td  style="width: 60px" >'.$indicator->measure->name.'</td>';
+                $html .= '<td style="width: 40px">'.$indicator->indicator_weight.'</td>';
+                $html .= '<td style="width: 40px" >'.$indicator->indicator_target.'</td>';
+                $html .= '<td style="width: 70px" >'.$indicator->indicator_achivement.'</td>';
+                $html .= '<td style="width: 70px" >'.round($indicator->indicator_performance_score).'</td>';
+                $html .= '<td style="width: 70px" >'.$indicator->indicator_graded_score.'</td>';
+                $html .= '</tr>';
+                // table footer
+         
 
+          
 
-    return $html;
 
     }
-}    
+    $html .= '<tr>';
+    $html .= '<td colspan="9" style="text-align: center; font-weight: bold;"> Group weigts and composite scores</td>';
+    $html .= '</tr>';
+    $html .= '</tbody>';
+    $html .= '</table>';
+    $html .= '<br>';
 
-git push 
+
+
+}
+    
+
+
+$html .= '<h1> OVERALL PERFORMANCE BASED ON WEIGHTS OF INDICATORS </h1>';
+    
+
+  $html .=  '<table class="GeneratedTable">';
+  $html .=  '<thead>';
+  $html .=    '<tr>';
+  $html .=    '<th>Overall Composite Score</th>';
+  $html .=    '<th>Overall Performance Score</th>';
+  $html .=    '<th>Overall Performance Grade</th>';
+  $html .=    '</tr>';
+  $html .=    '</thead>';
+  $html .=    ' <tbody>';
+  $html .=    '<tr>';
+  $html .=    '<td>Cell</td>';
+  $html .=  '<td>Cell</td>';
+  $html .=  '<td>Cell</td>';
+  $html .=  '</tr>';
+
+  $html .=  '</tbody>';
+  $html .=  '</table>';
+
+   $html .= '<br>';
+    $html .= '<br>';
+
+    $html .= '<div style="page-break-after: always;"></div>';
+
+        $html .=  '<table class="table" id="rowspans">';
+        $html .=  '<tbody><tr> <td> <b>KEY: Performance per Indicator (Normal &amp; Declining Indicators)</b></td>';
+        $html .=  '<td> <p class="outstanding" id="rowspans"><b>Outstanding </b><br> percentage greater than 120%</p></td> ';
+        $html .=  '<td><p class="excellent" id="rowspans"><b>Excellent</b> <br> percentage between 101%  and 119%</p> </td> ';
+        $html .=  '<td>  <p class="verygood" id="rowspans"><b>Very Good </b><br> percentage = 100% </p></td> ';
+        $html .=  '<td>  <p class="good" id="rowspans"><b>Good  </b><br> percentage between 75% and 99%</p></td> ';
+        $html .=  '<td> <p class="fair" id="rowspans"><b>Fair</b> <br> percentage between 50% and 74%</p></td> <td> ';
+        $html .=  '<p class="poor" id="rowspans"><b>Poor </b><br> percentage below 50%</p></td></tr> ';
+        $html .=  '</tbody></table>';
+
+
+        $html .=  '<table class="table" id="rowspans">';
+        $html .=  '<tbody><tr> <td> <b>KEY: Performance per Indicator (Special Indicators)</b></td>';
+        $html .=  '<td> <p class="outstanding" id="rowspans"><b>Outstanding </b><br> percentage equal to 100%</p></td> ';
+        $html .=  '<td><p class="excellent" id="rowspans"><b>Excellent</b> <br> percentage between 79%  and 99%</p> </td> ';
+        $html .=  '<td>  <p class="verygood" id="rowspans"><b>Very Good </b><br> percentage between 69%  and 78% </p></td> ';
+        $html .=  '<td>  <p class="good" id="rowspans"><b>Good  </b><br> percentage between 59% and 68%</p></td> ';
+        $html .=  '<td> <p class="fair" id="rowspans"><b>Fair</b> <br> percentage between 49% and 58%</p></td> <td>';
+        $html .=  '<p class="poor" id="rowspans"><b>Poor </b><br> percentage between 0% and 48%</p></td></tr> ';
+        $html .=  '</tbody></table>';
+
+        $html .=  '<table class="table" id="rowspans">';
+        $html .=  '<tbody><tr> <td> <b>KEY: Overall Performance Based on Weights of Indicators (composite score)</b></td>';
+        $html .=  '<td> <p class="outstanding" id="rowspans"><b>Outstanding </b><br>Composite Score of between 1.00 and 2.00</p></td> ';
+        $html .=  '<td><p class="excellent" id="rowspans"><b>Excellent</b> <br> Composite Score of between 2.01 and 2.60</p> </td> ';
+        $html .=  '<td>  <p class="verygood" id="rowspans"><b>Very Good </b><br> Composite Score of between 2.61 and 3.20 </p></td> ';
+        $html .=  '<td>  <p class="good" id="rowspans"><b>Good  </b><br> Composite Score of between 3.21 and 3.60</p></td> ';
+        $html .=  '<td> <p class="fair" id="rowspans"><b>Fair</b> <br> Composite Score of between 3.61 and 4.00</p></td> <td> ';
+        $html .=  '<p class="poor" id="rowspans"><b>Poor </b><br> Composite Score of between 4.01 and 5.00</p></td></tr> ';
+        $html .=  '</tbody></table>';
+        
+
+
+        return $html;
+
+      }
+    }
