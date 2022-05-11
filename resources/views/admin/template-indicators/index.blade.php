@@ -44,8 +44,12 @@
                         </form>
                     </div>
                     <div>
-                        <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.create',[$unit_rank->id,$fy->id,$template_group->id]) }}" class="btn btn-primary mb-2"><i class="fa fa-plus" aria-hidden="true"></i> Create New Template Indicator</a>
-                        <!-- open modal -->
+                        <!--  a link to open modal -->
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+
+                            <i class="fa fa-plus" aria-hidden="true"></i> Add Indicator</button>
+
                      
                     </div>
                 </div>
@@ -77,7 +81,11 @@
 
 
                                 <td>
-                                    <a href="{{ route('unit-ranks.fy.template-groups.template-indicators.edit', [$unit_rank->id,$fy->id,$template_group->id,$indicator->id]) }}" class="btn btn-success"><i class="fas fa-edit"></i>Edit</a>
+                                    <!-- edit modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal{{ $indicator->id }}">
+                                        <i class="fa fa-edit" aria-hidden="true"></i> Edit</button>
+
+
                             
                                 </td>
                             </tr>
@@ -105,6 +113,147 @@
 </div>
 
 @endsection
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create New Template Indicator</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('unit-ranks.fy.template-groups.template-indicators.store',[$unit_rank->id,$fy->id,$template_group->id]) }}">
+                    @csrf
+
+                 <div class="form-group">
+                    <label for="exampleInputEmail1">Master Indicator Type</label>
+                    <select class="form-control" name="master_indicator_id" id="master_indicator_id" aria-describedby="emailHelp"
+                        placeholder="Select Master Indicator" required>
+                        <option value="">Select Master Indicator</option>
+                        @foreach($master_indicators as $master_indicator)
+                            <option value="{{ $master_indicator->id }}">{{ substr($master_indicator->name, 0, 50)  }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Indicator Name</label>
+                        <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp"
+                            placeholder="Enter Indicator Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Indicator Type</label>
+                        <select class="form-control" name="indicator_type_id" id="indicator_type_id" aria-describedby="emailHelp"
+                            placeholder="Enter Indicator Type" required>
+                            @foreach ($indicator_types as $type)
+                            <option value="{{ $type->id }}">{{ $type->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Indicator Unit of Measure</label>
+                        <select class="form-control" name="indicator_unit_of_measure_id" id="indicator_unit_of_measure_id" aria-describedby="emailHelp"
+                            placeholder="Enter Indicator Unit of Measure" required>
+                            @foreach ($measures as $measure)
+                            <option value="{{ $measure->id }}">{{ $measure->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Indicator Weight</label>
+                        <input type="number" class="form-control" name="indicator_weight" id="indicator_weight" aria-describedby="emailHelp"
+                            placeholder="Enter Indicator Weight" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Indicator Order</label>
+                        <input type="number" class="form-control" name="order" id="order" aria-describedby="emailHelp"
+                            placeholder="Enter Indicator Order" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+@foreach ($template_indicators as $indicator)
+
+
+<div class="modal fade" id="editModal{{ $indicator->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Template Indicator</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('unit-ranks.fy.template-groups.template-indicators.update',[$unit_rank->id,$fy->id,$template_group->id,$indicator->id]) }}">
+                    @csrf
+                    @method('PUT')
+                 <div class="form-group">
+                    <label for="exampleInputEmail1">Master Indicator Type</label>
+                    <select class="form-control" name="master_indicator_id" id="master_indicator_id" aria-describedby="emailHelp"
+                        placeholder="Select Master Indicator" required>
+                        <option value="">Select Master Indicator</option>
+                        @foreach($master_indicators as $master_indicator)
+                            <option value="{{ $master_indicator->id }}" @if($indicator->master_indicator_id == $master_indicator->id) selected @endif>{{ substr($master_indicator->name, 0, 50)  }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Indicator Name</label>
+                        <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp"
+                            placeholder="Enter Indicator Name" required value="{{ $indicator->name }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Indicator Type</label>
+                        <select class="form-control" name="indicator_type_id" id="indicator_type_id" aria-describedby="emailHelp"
+                            placeholder="Enter Indicator Type" required>
+                            @foreach ($indicator_types as $type)
+                            <option value="{{ $type->id }}" @if($indicator->indicator_type_id == $type->id) selected @endif>{{ $type->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Indicator Unit of Measure</label>
+                        <select class="form-control" name="indicator_unit_of_measure_id" id="indicator_unit_of_measure_id" aria-describedby="emailHelp"
+                            placeholder="Enter Indicator Unit of Measure" required>
+                            @foreach ($measures as $measure)
+                            <option value="{{ $measure->id }}" @if($indicator->indicator_unit_of_measure_id == $measure->id) selected @endif>{{ $measure->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Indicator Weight</label>
+                        <input type="number" class="form-control" name="indicator_weight" id="indicator_weight" aria-describedby="emailHelp"
+                            placeholder="Enter Indicator Weight" required value="{{ $indicator->indicator_weight }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Indicator Order</label>
+                        <input type="number" class="form-control" name="order" id="order" aria-describedby="emailHelp"
+                            placeholder="Enter Indicator Order" required value="{{ $indicator->order }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
+
+
+
+
 
 
 

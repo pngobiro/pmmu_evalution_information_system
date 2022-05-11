@@ -154,7 +154,18 @@ class IndicatorController extends Controller
         ->where('financial_year_id',$fy->id)
         ->get(); 
 
+        // sum of $indicatorgroups indicators_weighted+scores for each group
+        $composite_score = 0;
+        foreach ($indicatorgroups as $indicatorgroup) {
+            foreach ($indicatorgroup->indicators as $indicator) {
+                $composite_score += $indicator->indicator_weighted_score;
+            }
+        }
 
+
+        $performance = new  IndicatorGraderHelper();
+        $overallScoreGrade  = $performance-> getCompositeScore($composite_score);
+        
 
         PDF::SetAuthor('TCPDF');
         PDF::SetTitle('Performance Management & Measurement Understanding Analysis');
@@ -176,7 +187,7 @@ class IndicatorController extends Controller
 
         // orientation landscape 
         PDF::AddPage('L', 'A4');
-        PDF::writeHTML($this->getSimplePmmuPDF($indicatorgroups,$unit_rank,$fy,$unit), true, false, true, false, '');
+        PDF::writeHTML($this->getSimplePmmuPDF($indicatorgroups,$unit_rank,$fy,$unit,$overallScoreGrade,$composite_score ), true, false, true, false, '');
 
         //create pdf from unit name and financial year
         $pdf = PDF::Output('PMMU_'.$unit->name.'FY'.$fy->name.'.pdf');
@@ -197,7 +208,16 @@ class IndicatorController extends Controller
         ->where('financial_year_id',$fy->id)
         ->get(); 
 
+        $composite_score = 0;
+        foreach ($indicatorgroups as $indicatorgroup) {
+            foreach ($indicatorgroup->indicators as $indicator) {
+                $composite_score += $indicator->indicator_weighted_score;
+            }
+        }
 
+
+        $performance = new  IndicatorGraderHelper();
+        $overallScoreGrade  = $performance-> getCompositeScore($composite_score);
 
         PDF::SetAuthor('TCPDF');
         PDF::SetTitle('Performance Management & Measurement Understanding Analysis');
@@ -219,7 +239,7 @@ class IndicatorController extends Controller
 
         // orientation landscape 
         PDF::AddPage('L', 'A4');
-        PDF::writeHTML($this->getComplexPmmuPDF($indicatorgroups,$unit_rank,$fy,$unit), true, false, true, false, '');
+        PDF::writeHTML($this->getComplexPmmuPDF($indicatorgroups,$unit_rank,$fy,$unit,$composite_score,$overallScoreGrade), true, false, true, false, '');
 
         //create pdf from unit name and financial year
         $pdf = PDF::Output('PMMU_'.$unit->name.'FY'.$fy->name.'.pdf');
@@ -275,7 +295,7 @@ class IndicatorController extends Controller
         return view('admin.indicators.update_targets',compact('indicatorgroups','unit_rank','fy','unit')) ;
       }
 
-      private function getSimplePmmuPDF($indicatorgroups,$unit_rank,$fy,$unit){
+      private function getSimplePmmuPDF($indicatorgroups,$unit_rank,$fy,$unit,$overallScoreGrade,$composite_score ){
         $html = '<!DOCTYPE html>
         <html lang="en">
         <head>
@@ -357,27 +377,7 @@ class IndicatorController extends Controller
             padding:2px;    text-align: center;
         }
 
-        table.GeneratedTable {
-            width: 100%;
-            background-color: #ffffff;
-            border-collapse: collapse;
-            border-width: 2px;
-            border-color: #deddda;
-            border-style: solid;
-            color: #000000;
-          }
-          
-          table.GeneratedTable td, table.GeneratedTable th {
-            border-width: 2px;
-            border-color: #deddda;
-            border-style: solid;
-            padding: 3px;
-          }
-          
-          table.GeneratedTable thead {
-            background-color: #2ec27e;
-          }
-
+    
 
         </style>
 
@@ -454,19 +454,19 @@ $html .= '<div style="page-break-after: always;"></div>';
 $html .= '<h1> OVERALL PERFORMANCE BASED ON WEIGHTS OF INDICATORS </h1>';
     
 
-  $html .=  '<table class="GeneratedTable">';
+  $html .=  '<table >';
   $html .=  '<thead>';
   $html .=    '<tr>';
-  $html .=    '<th>Overall Composite Score</th>';
-  $html .=    '<th>Overall Performance Score</th>';
-  $html .=    '<th>Overall Performance Grade</th>';
+  $html .=    '<th><h3> Overall Composite Score   </h3> </th>';
+  $html .=    '<th><h3> Overall Performance Score </h3> </th>';
+  $html .=    '<th><h3> Overall Performance Grade </h3> </th>';
   $html .=    '</tr>';
   $html .=    '</thead>';
   $html .=    ' <tbody>';
   $html .=    '<tr>';
-  $html .=    '<td>Cell</td>';
-  $html .=  '<td>Cell</td>';
-  $html .=  '<td>Cell</td>';
+  $html .=    '<td> <h3>'.round($composite_score,3).'</h3></td>';
+  $html .=  '<td> <h3>'.$overallScoreGrade['score'].'%</h3> </td>';
+  $html .=  '<td> <h3>'.$overallScoreGrade['grade'].'</h3> </td>';
   $html .=  '</tr>';
 
   $html .=  '</tbody>';
@@ -515,7 +515,7 @@ $html .= '<h1> OVERALL PERFORMANCE BASED ON WEIGHTS OF INDICATORS </h1>';
 
       }
 
-      private function getComplexPmmuPDF($indicatorgroups,$unit_rank,$fy,$unit){
+      private function getComplexPmmuPDF($indicatorgroups,$unit_rank,$fy,$unit,$OverallScoreGrade,$composite_score){
         $html = '<!DOCTYPE html>
         <html lang="en">
         <head>
@@ -607,16 +607,6 @@ $html .= '<h1> OVERALL PERFORMANCE BASED ON WEIGHTS OF INDICATORS </h1>';
             color: #000000;
           }
           
-          table.GeneratedTable td, table.GeneratedTable th {
-            border-width: 2px;
-            border-color: #deddda;
-            border-style: solid;
-            padding: 3px;
-          }
-          
-          table.GeneratedTable thead {
-            background-color: #2ec27e;
-          }
 
 
         </style>
@@ -698,25 +688,25 @@ $html .= '<div style="page-break-after: always;"></div>';
 $html .= '<h1> OVERALL PERFORMANCE BASED ON WEIGHTS OF INDICATORS </h1>';
     
 
-  $html .=  '<table class="GeneratedTable">';
-  $html .=  '<thead>';
-  $html .=    '<tr>';
-  $html .=    '<th>Overall Composite Score</th>';
-  $html .=    '<th>Overall Performance Score</th>';
-  $html .=    '<th>Overall Performance Grade</th>';
-  $html .=    '</tr>';
-  $html .=    '</thead>';
-  $html .=    ' <tbody>';
-  $html .=    '<tr>';
-  $html .=    '<td>Cell</td>';
-  $html .=  '<td>Cell</td>';
-  $html .=  '<td>Cell</td>';
-  $html .=  '</tr>';
+$html .=  '<table >';
+$html .=  '<thead>';
+$html .=    '<tr>';
+$html .=    '<th><h3> Overall Composite Score   </h3> </th>';
+$html .=    '<th><h3> Overall Performance Score </h3> </th>';
+$html .=    '<th><h3> Overall Performance Grade </h3> </th>';
+$html .=    '</tr>';
+$html .=    '</thead>';
+$html .=    ' <tbody>';
+$html .=    '<tr>';
+$html .=    '<td> <h3>'.round($composite_score,3).'</h3></td>';
+$html .=  '<td> <h3>'.$overallScoreGrade['score'].'%</h3> </td>';
+$html .=  '<td> <h3>'.$overallScoreGrade['grade'].'</h3> </td>';
+$html .=  '</tr>';
 
-  $html .=  '</tbody>';
-  $html .=  '</table>';
+$html .=  '</tbody>';
+$html .=  '</table>';
 
-  $html .= '<br>';
+ $html .= '<br>';
   $html .= '<br>';
   $html .= '<br>';
   $html .= '<br>';

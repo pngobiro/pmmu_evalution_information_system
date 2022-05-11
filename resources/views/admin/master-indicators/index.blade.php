@@ -30,7 +30,10 @@
                         </form>
                     </div>
                     <div>
-                        <a href="{{ route('unit-ranks.master-indicator.create',$rank_id) }}" class="btn btn-primary mb-2">Create Master Indicator</a>
+                        <!-- create modal button -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal"data-target="#createModal">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Create Master Indicator
+                        </button>
                     </div>
                 </div>
             </div>
@@ -53,7 +56,11 @@
                                 <th scope="row">{{ $indicator->id }}</th>
                                 <td>{{ $indicator->name }}</td>
                                <td>
-                                    <a href="{{ route('unit-ranks.master-indicator.edit',[$rank_id,$indicator->id]) }}" class="btn btn-success">Edit</a>
+                                    <!-- edit modal button -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"data-target="#editModal{{ $indicator->id }}">
+                                        <i class="fa fa-edit" aria-hidden="true"></i> Edit 
+                                    </button>
+
                                 </td>
                             </tr>
                         @endforeach
@@ -68,3 +75,59 @@
 
 </div>
 @endsection
+
+<!-- create modal -->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create Master Indicator</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('unit-ranks.master-indicator.store',$rank_id) }}">
+                    @csrf
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                    </div>
+            
+                 
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- edit modal -->
+@foreach ($indicators as $indicator)
+<div class="modal fade" id="editModal{{ $indicator->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Master Indicator</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('unit-ranks.master-indicator.update',[$rank_id,$indicator->id]) }}">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ $indicator->name }}" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
+
