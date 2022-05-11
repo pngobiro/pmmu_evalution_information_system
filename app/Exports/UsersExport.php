@@ -32,46 +32,39 @@ class UsersExport implements  FromView
 
         $indicatorgroups = IndicatorGroup::with('unit')->where('unit_rank_id',$this->rank)->where('financial_year_id',$this->fy)->get();
         $keyed= collect();
-        $performance_array = collect();
-        $performance = new  IndicatorGraderHelper();
-        $overallScoreGrade  = $performance-> getCompositeScore($this->total_indicator_weighted_score);
-        $composite_score = 0;
-
-        foreach ($indicatorgroups as $indicatorgroup) {
-            foreach ($indicatorgroup->indicators as $indicator) {
-            $composite_score += $indicator->indicator_weighted_score;
-            $performance_array->push('court_name',$indicatorgroup->unit->name ,'composite_score' ,$composite_score);
-
-           
-        }
-    }
-
-        dd($performance_array);
-
-        
+      
+  
         foreach ( $indicatorgroups as $group){
             foreach ($group->indicators as $indicator){
-
-
-
-            // sum all $group->total_indicator_weighted_score() as $composite_score
-            $composite_score += $indicator->indicator_weighted_score;
-
-
-
-            $keyed->push(['court_name'=>$group->unit->name, 'performance_score'=> $indicator->indicator_performance_score,'indicator_name'=>$indicator->master->name,'indicator_target'=> $indicator->indicator_target,'indicator_achievement'=>$indicator->indicator_achivement,'composite_score'=> $composite_score,'overall_performance_score'=> $overallScoreGrade['score'], 'overall_performance_grade'=>$overallScoreGrade['grade']]);
+            $keyed->push(['court_name'=>$group->unit->name, 'performance_score'=> $indicator->indicator_performance_score,'indicator_name'=>$indicator->master->name,'indicator_target'=> $indicator->indicator_target,'indicator_achievement'=>$indicator->indicator_achivement,'composite_score'=> $indicator->indicator_weighted_score]);
 
                 
             }
 
         }
 
-        dd($keyed);
+     
 
-        $grouped = $keyed->sortBy('court_name')->groupBy('court_name');
+       // group by court name and get sum of composite score for each court
+        $grouped = $keyed->groupBy('court_name')->map(function ($item, $key) {
 
+            $performance = new  IndicatorGraderHelper();
+            $overallScoreGrade  = $performance-> getCompositeScore($item->sum('composite_score'));
+            
+            $overall_performance_score = $overallScoreGrade['score'];
+            $overall_performance_grade = $overallScoreGrade['grade'];
+            $composite_score = $item->sum('composite_score');
+            $indicators = [];
+            $indicators = $item->toArray();
+            
 
+            return ['court_name'=>$key,'composite_score'=>$composite_score,'overall_performance_score'=>$overall_performance_score,'overall_performance_grade'=>$overall_performance_grade,'indicators'=>$indicators];
 
+        
+        });
+
+      
+     
         return view('exports.indicators', ['grouped'=>$grouped]);
     }
 

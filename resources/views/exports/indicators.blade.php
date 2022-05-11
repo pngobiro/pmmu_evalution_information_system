@@ -8,7 +8,10 @@
 
      @foreach ($grouped as $item => $collection )
 
-     @foreach ($collection  as $c )
+     
+
+     @foreach ($collection['indicators']  as $c )
+
 
              <td colspan="3">{{ $c['indicator_name'] }} </td>
       
@@ -28,7 +31,7 @@
          <td>Court Name</td>
     @foreach ($grouped as $item => $collection )
     
-    @foreach ($collection  as $c )
+    @foreach ($collection['indicators']  as $c )
 
           
          <td> Indicator Target</td>
@@ -56,7 +59,7 @@
          <td>{{ $item }}</td>
        
  
-             @foreach ($collection  as $c )
+             @foreach ($collection['indicators'] as $c )
  
              <td>{{ $c['indicator_target'] }} </td>
              <td>{{ $c['indicator_achievement'] }} </td>
@@ -66,9 +69,9 @@
            
              @endforeach
            
-             <td>{{ $c['composite_score'] }} </td>
-             <td>{{ $c['overall_performance_score'] }} </td>
-             <td>{{ $c['overall_performance_grade'] }} </td>>
+             <td>{{ $collection['composite_score'] }} </td>
+             <td>{{ $collection['overall_performance_score'] }} </td>
+             <td>{{ $collection['overall_performance_grade'] }} </td>
        </tr>
        
        @endforeach
