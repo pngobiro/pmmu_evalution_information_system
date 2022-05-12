@@ -19,6 +19,8 @@ class Rankunitdropdown extends Component
     public $selectedUnit ;
     public $selectedActivity ;
     public $selectedDivision ;
+    // $hasPMMUDivision is a boolean variable that is used to determine if the PMMU Division is selected
+    public $hasPMMUDivision;
 
     /**
 
@@ -42,6 +44,8 @@ class Rankunitdropdown extends Component
         $this->selectedUnit = NULL;
         $this->selectedFY = NULL;
         $this->selectedDivision = NULL;
+        $this->hasPMMUDivision = false;
+    
     }
 
   
@@ -89,7 +93,10 @@ class Rankunitdropdown extends Component
     {
         if (!is_null($selectedUnit)) {
             $this->unit = $selectedUnit;
+            $this->hasPMMUDivision = Unit::find($selectedUnit)->has_pmmu_division;
             $this->divisions = Unit::find($selectedUnit)->divisions;
+            $this->fys = FinancialYear::all();
+
             $this->selectedUnit = $selectedUnit;
         }
     }
@@ -102,6 +109,15 @@ class Rankunitdropdown extends Component
             $this->fys = FinancialYear::all();
             $this->selectedDivision = $selectedDivision;
         }
+
+        elseif (is_null($selectedDivision)){
+            $this->unit = $selectedUnit;
+            $this->fys = FinancialYear::all();
+            $this->selectedUnit = $selectedUnit;
+
+
+        }
+
     }
 
 

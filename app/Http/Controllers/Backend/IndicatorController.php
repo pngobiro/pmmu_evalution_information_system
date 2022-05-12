@@ -137,11 +137,30 @@ class IndicatorController extends Controller
         
         $performance = new  IndicatorGraderHelper();
        $overallScoreGrade  = $performance-> getCompositeScore($total_indicator_weighted_score);
-        
+
+       // sum of $indicatorgroups total weight
+
+        $group_total_indicator_weight = 0;
+        foreach ($indicatorgroups as $indicatorgroup) {
+            foreach ($indicatorgroup->indicators as $indicator) {
+                $group_total_indicator_weight += $indicator->indicator_weight;
+            }
+        }
+
+        // if any indicator achivement is null then return indicator id
+        $indicator_id_with_null_achievement = [];
+        foreach ($indicatorgroups as $indicatorgroup) {
+            foreach ($indicatorgroup->indicators as $indicator) {
+                if($indicator->indicator_achievement == null){
+                    $indicator_id_with_null_achievement[] = $indicator->name;
+                }
+            }
+        }
+              
 
         
                                             
-        return view('admin.indicators.preview',compact('indicatorgroups','unit_rank','fy','unit','total_indicator_weighted_score','overallScoreGrade'));
+        return view('admin.indicators.preview',compact('indicatorgroups','unit_rank','fy','unit','total_indicator_weighted_score','overallScoreGrade','group_total_indicator_weight','indicator_id_with_null_achievement'));
 
     }
 

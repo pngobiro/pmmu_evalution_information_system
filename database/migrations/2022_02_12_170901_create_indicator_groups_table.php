@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use App\Models\Unit;
 use App\Models\UnitRank;
 use App\Models\FinancialYear;
+use App\Models\Division;
 
 class CreateIndicatorGroupsTable extends Migration
 {
@@ -23,6 +24,7 @@ class CreateIndicatorGroupsTable extends Migration
             $table->integer('order');
             $table->dateTime('deleted_at')->nullable();
             $table->foreignIdFor(Unit::class)->nullable();
+            $table->foreignIdFor(Division::class)->default(0);
             $table->foreignIdFor(UnitRank::class)->nullable();
             $table->foreignIdFor(FinancialYear::class)->nullable();
             $table->timestamps();

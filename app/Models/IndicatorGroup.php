@@ -41,7 +41,14 @@ class IndicatorGroup extends Model
         return $this->belongsTo(Unit::class,'unit_id');
     }
 
-    //sum all the indicators weighted score in the group
+    
+
+    public function division()
+    {
+        return $this->belongsTo(Division::class,'division_id');
+    }
+
+    
 
     public function total_indicator_weighted_score()
     {

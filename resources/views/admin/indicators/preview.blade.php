@@ -18,6 +18,7 @@
             </div>
     </div>
 
+    <!-- show a div with array of indicators with null achivement-->
 
 
 
@@ -114,32 +115,56 @@
 
 </div>
 
+@if ( $group_total_indicator_weight == 100 ) 
+
 <div class="alert alert-info" role="alert">
 
-<div class="row">
-
-    <div class="col-sm-3">
-        <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-primary btn-sm"> <i class="fa fa-file-pdf-o"></i>Simple PDF</a>
+    <div class="row">
+    
+        <div class="col-sm-3">
+            <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-primary btn-sm"> <i class="fa fa-file-pdf-o"></i>Simple PDF</a>
+        </div>
+    
+        <div class="col-sm-3">
+            <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-success btn-sm "><i class="fas fa-pdf"></i>  Complex PDF</a>
+        </div>
+    
+        <div class="col-sm-3">
+            <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-primary btn-sm"><i class="fas fa-excel"></i> Simple Excel</a>
+        </div>
+    
+        <div class="col-sm-3">
+            <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-success btn-sm "><i class="fas fa-excel"></i> Complex Excel</a>
+        </div>
+    
+    
     </div>
-
-    <div class="col-sm-3">
-        <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-success btn-sm "><i class="fas fa-pdf"></i>  Complex PDF</a>
-    </div>
-
-    <div class="col-sm-3">
-        <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-primary btn-sm"><i class="fas fa-excel"></i> Simple Excel</a>
-    </div>
-
-    <div class="col-sm-3">
-        <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-success btn-sm "><i class="fas fa-excel"></i> Complex Excel</a>
-    </div>
-
-
+    
 </div>
 
-</div>
+        @else 
+
+        <!-- show error message -->
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Weights Error!</h4>
+
+            <p>
+                <strong>
+                   <!-- show error message -->
+                     Total Weights: <span class="badge badge-primary">{{  $group_total_indicator_weight }}</span>
+                </strong>
+         
+        </div>
+
+
+  
+        @endif
+
+
+
 
 </div>
 
 
 @endsection
+

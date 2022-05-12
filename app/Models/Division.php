@@ -22,4 +22,10 @@ class Division extends Model
         return $this->belongsToMany(Unit::class,'unit_division','division_id','unit_id');
     }
 
+    // has many indicatorgroups
+    public function indicatorgroups()
+    {
+        return $this->hasMany(IndicatorGroup::class);
+    }
+
 }
