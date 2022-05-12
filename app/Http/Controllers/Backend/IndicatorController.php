@@ -187,7 +187,7 @@ class IndicatorController extends Controller
 
         // orientation landscape 
         PDF::AddPage('L', 'A4');
-        PDF::writeHTML($this->getSimplePmmuPDF($indicatorgroups,$unit_rank,$fy,$unit,$overallScoreGrade,$composite_score ), true, false, true, false, '');
+        PDF::writeHTML($this->getSimplePmmuPDF($indicatorgroups,$unit_rank,$fy,$unit,$overallScoreGrade,$composite_score), true, false, true, false, '');
 
         //create pdf from unit name and financial year
         $pdf = PDF::Output('PMMU_'.$unit->name.'FY'.$fy->name.'.pdf');
@@ -239,7 +239,15 @@ class IndicatorController extends Controller
 
         // orientation landscape 
         PDF::AddPage('L', 'A4');
-        PDF::writeHTML($this->getComplexPmmuPDF($indicatorgroups,$unit_rank,$fy,$unit,$composite_score,$overallScoreGrade), true, false, true, false, '');
+
+        //write html to pdf
+
+        
+
+        
+
+
+        PDF::writeHTML($this->getComplexPmmuPDF($indicatorgroups,$unit_rank,$fy,$unit,$overallScoreGrade,$composite_score), true, false, true, false, '');
 
         //create pdf from unit name and financial year
         $pdf = PDF::Output('PMMU_'.$unit->name.'FY'.$fy->name.'.pdf');
