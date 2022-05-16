@@ -1,6 +1,13 @@
 @extends('layouts.main')
 
 @section('content')
+<!-- display flash message -->
+@if (session()->has('message'))
+<div class="alert alert-success">
+    {{ session('message') }}
+</div>
+@endif
+
 
 <div class="card bg-light" >
     <div class="card-body fs-4" >
@@ -46,7 +53,11 @@
                     @forelse ($group->indicators as $indicator)
                     <tr>
                         <th scope="row">{{ $indicator->order }}</th>
-                        <td style="word-wrap: break-word;min-width: 400px;max-width: 400px;">{{ $indicator->name }} </td>
+                        <td style="word-wrap: break-word;min-width: 400px;max-width: 400px;">{{ $indicator->name }} 
+                            <!-- link to remarks modal -->
+                            <a href="#" data-toggle="modal" data-target="#remarksModal{{ $indicator->id }}">
+                            <i class="fas fa-sticky-note"></i>
+                        </td>
                         <td>{{ $indicator->type->name }}</td>
                         <td>{{ $indicator->measure->name }}</td>
                         <td><span class="badge badge-pill badge-info">{{ $indicator->indicator_weight }}</span> </td>
@@ -167,4 +178,43 @@
 
 
 @endsection
+
+<!-- remarks modal to create and update -->
+@foreach ($indicatorgroups as $group)
+@foreach ($group->indicators as $indicator)
+<div class="modal fade" id="remarksModal{{ $indicator->id }}" tabindex="-1" role="dialog" aria-labelledby="remarksModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="remarksModalLabel">{{ $unit->name  }} - {{ $indicator->name }} Notes and Remarks</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('update-indicator-remarks', [$indicator->id]) }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="indicator_id" value="{{ $indicator->id }}">
+                    <div class="form-group">
+                        <label for="remarks">Remarks</label>
+                        <textarea class="form-control" name="remarks" id="remarks" rows="10" placeholder="Enter indicator notes and remarks here..." required>{{ $indicator->remarks }}</textarea>
+                    </div>
+                        <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+@endforeach
+
+
+<!-- remarks modal to create and update -->
+
+
+
+
+
 

@@ -21,6 +21,10 @@ class PmmuController extends Controller
 {
     public function index(UnitRank $unit_rank ,Unit $unit,FinancialYear $fy , IndicatorGroup $indicator_group ,Request $request ){
 
+        $types = IndicatorType::all();
+
+        $measures = IndicatorUnitOfMeasure::all();
+
         $indicators = Indicator::where('indicator_group_id',$indicator_group->id )->get();
 
         if ($request->has('search')) {
@@ -34,7 +38,7 @@ class PmmuController extends Controller
         }
 
 
-        return view('admin.pmmu.index',compact('unit_rank','unit','indicator_group','fy','indicators'));
+        return view('admin.pmmu.index',compact('unit_rank','unit','indicator_group','fy','indicators','types','measures'));
 
     }
 

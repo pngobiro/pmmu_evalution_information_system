@@ -36,7 +36,11 @@
                     </form>
                 </div>
                 <div>
-                    <a href="{{ route('unit-ranks.units.fy.indicator-groups.indicators.create',[$unit_rank->id,$unit->id,$fy->id,$indicator_group->id]) }}" class="btn btn-primary mb-2"><i class="fa fa-plus" aria-hidden="true"></i>Create New Indicator</a>
+                   
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Create New Indicator
+                    </button>
+
                 </div>
             </div>
         </div>
@@ -60,13 +64,17 @@
                         @foreach ($indicators  as $indicator)
                             <tr>
                                 <td>{{ $indicator->order  }}</td>
-                                <td style="word-wrap: break-word;min-width:500px;max-width: 500px;">{{ $indicator->name  }}</td>
-                                <td>{{ $indicator->type->name }}</td>
+                                <td style="word-wrap: break-word;min-width:350px;max-width: 350px;">{{ $indicator->name  }}</td>
+                                <td >{{ $indicator->type->name }}</td>
                                 <td>{{ $indicator->measure->name }}</td>
                                 <td><span class="badge badge-primary">{{ $indicator->indicator_weight }}</span> </td>
                                 <td><span class="badge badge-danger">{{ $indicator->indicator_target }}</span></td>
+
+                                <!-- edit indicator pop modal -->
                                 <td>
-                                    <a href="{{ route('unit-ranks.units.fy.indicator-groups.indicators.edit', [$unit_rank->id,$unit->id,$fy->id,$indicator_group->id,$indicator->id]) }}" class="btn btn-success"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{ $indicator->id }}">
+                                        <i class="fa fa-edit" aria-hidden="true"></i>  Edit
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -91,3 +99,131 @@
 
 
 @endsection
+
+<!-- create new indicator pop modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create New Indicator</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('unit-ranks.units.fy.indicator-groups.indicators.store',[$unit_rank->id,$unit->id,$fy->id,$indicator_group->id]) }}">
+                    @csrf
+                    <div class="form-group">
+                        <label for="name">Indicator Name</label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Indicator Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Indicator Type</label>
+                        <select class="form-control" name="type_id" id="type">
+                            @foreach ($types as $indicator_type)
+                                <option value="{{ $indicator_type->id }}">{{ $indicator_type->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="measure">Indicator Unit of Measure</label>
+                        <select class="form-control" name="measure_id" id="measure">
+                            @foreach ($measures as $measure)
+                                <option value="{{ $measure->id }}">{{ $measure->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="indicator_weight">Indicator Weight</label>
+                        <input type="number" class="form-control" name="indicator_weight" id="indicator_weight" placeholder="Indicator Weight">
+                    </div>
+                    <div class="form-group">
+                        <label for="indicator_target">Indicator Target</label>
+                        <input type="number" class="form-control" name="indicator_target" id="indicator_target" placeholder="Indicator Target">
+                    </div>
+                    <div class="form-group">
+                        <label for="order">Indicator Order</label>
+                        <input type="number" class="form-control" name="order" id="order" placeholder="Indicator Order">
+                    </div>
+              
+                    <div class="form-group">
+                        <label for="remarks">Indicator Remarks</label>
+                        <textarea class="form-control" name="remarks" id="remarks" placeholder="Indicator Remarks"></textarea>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- edit indicator pop modal -->
+@foreach ($indicators as $indicator)
+<div class="modal fade" id="exampleModal{{ $indicator->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Indicator</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('unit-ranks.units.fy.indicator-groups.indicators.update',[$unit_rank->id,$unit->id,$fy->id,$indicator_group->id,$indicator->id]) }}">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="name">Indicator Name</label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Indicator Name" value="{{ $indicator->name }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Indicator Type</label>
+                        <select class="form-control" name="type_id" id="type">
+                            @foreach ($types as $indicator_type)
+                                <option value="{{ $indicator_type->id }}" {{ $indicator->type_id == $indicator_type->id ? 'selected' : '' }}>{{ $indicator_type->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="measure">Indicator Unit of Measure</label>
+                        <select class="form-control" name="measure" id="measure">
+                            @foreach ($measures as $measure)
+                                <option value="{{ $measure->id }}" {{ $indicator->measure_id == $measure->id ? 'selected' : '' }}>{{ $measure->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="indicator_weight">Indicator Weight</label>
+                        <input type="number" class="form-control" name="indicator_weight" id="indicator_weight" placeholder="Indicator Weight" value="{{ $indicator->indicator_weight }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="indicator_target">Indicator Target</label>
+                        <input type="number" class="form-control" name="indicator_target" id="indicator_target" placeholder="Indicator Target" value="{{ $indicator->indicator_target }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="order">Indicator Order</label>
+                        <input type="number" class="form-control" name="order" id="order" placeholder="Indicator Order" value="{{ $indicator->order }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="remarks">Indicator Remarks</label>
+                        <textarea class="form-control" name="remarks" id="remarks" placeholder="Indicator Remarks">{{ $indicator->remarks }}</textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
+          

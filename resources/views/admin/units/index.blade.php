@@ -53,8 +53,19 @@
                                 <th scope="row">{{ $unit->id }}</th>
 
                                 <td>{{ $unit->name }}</td>
-                                 {{-- create check box update using ajax  --}}
-                                 <td> <input type="checkbox" wire:click="updateHasPMMUDivision({{ $unit->id }})"></td>
+                            
+                                <!-- update unit->has_pmmu_division  with a check box-->
+                                <td>
+                                    <form method="POST" action="{{ route('update-has-pmmu-division',[$unit->id])}}">
+                                        @csrf
+                                        @method('POST')
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="has_pmmu_division"
+                                                id="has_pmmu_division" value="1" {{ $unit->has_pmmu_division ? 'checked' : '' }}>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </form>
+                                    
                                  
                                  <td><a href="{{ route('unit.edit', $unit->id) }}" class="btn btn-success">Edit</a></td>
 
@@ -71,3 +82,29 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('#has_pmmu_division').change(function () {
+                var has_pmmu_division = $(this).is(':checked');
+                var unit_id = $(this).data('unit-id');
+
+                $.ajax({
+                    url: "{{ route('update-has-pmmu-division', [$unit_rank->id, 'unit_id']) }}".replace('unit_id', unit_id),
+                    method: 'POST',
+                    data: {
+                        has_pmmu_division: has_pmmu_division
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+            });
+        });
+    </script>
+ 
+@endsection
+
+
+

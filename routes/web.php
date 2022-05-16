@@ -76,6 +76,15 @@ Auth::routes();
     Route::resource('fy', FinancialYearController::class);
     Route::resource('indicator-groups', IndicatorGroupController::class);
     Route::resource('unit-ranks.units',UnitController::class);
+
+    // a post to hasPMMU in the UnitController
+    Route::post('update-has-pmmu-division/{unit_id}', [UnitController::class, 'updateHasPMMU'])->name('update-has-pmmu-division');
+
+    // a post to update_remarks in Indicator Controller
+    Route::post('update-indicator-remarks/{indicator_id}', [IndicatorController::class, 'updateIndicatorRemarks'])->name('update-indicator-remarks');
+
+
+
     //Route::resource('unit-ranks.units.fy',UnitController::class);
     Route::resource('unit-ranks.units.fy', FinancialYearController::class)->shallow();
     Route::resource('unit-ranks.fy.rank_category', RankCategoryController::class);

@@ -164,6 +164,20 @@ class IndicatorController extends Controller
 
     }
 
+    // updateRemarks on an indicator 
+    public function updateIndicatorRemarks(Request $request){
+
+        $indicator = Indicator::find($request->indicator_id);
+
+        $indicator->remarks = $request->remarks;
+        $indicator->save();
+
+        // redirect back with message
+
+        return redirect()->back()->with('message', 'Remarks Updated Successfully');
+
+    }
+
   
 
     public function createSimplePmmuPDF(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy) {

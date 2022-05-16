@@ -33,7 +33,9 @@
                                 </div>
 
                                 <div class="col">
-                                    <a href="{{ route('unit-ranks.units.fy.indicator-groups.create',[$unit_rank->id,$unit->id,$fy->id ]) }}" class="btn btn-primary mb-2"><i class="fa fa-plus" aria-hidden="true"></i>Create New Group </a>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                        <i class="fa fa-plus" aria-hidden="true"> </i>  Create New Group
+                                        </button>
                                 </div>
 
                             </div>
@@ -60,7 +62,18 @@
                                 <th> <b>{{ $group->order }} </b></th>
                                 <th> {{ $group->name }} </th> 
                                 <th> <span class="badge badge-primary">{{ $group->total_indicators}}</span> </th> 
-                                <th> <a href="{{ route('unit-ranks.units.fy.indicator-groups.edit', [$unit_rank->id ,$unit->id,$fy->id , $group->id]) }}"> <i class="fas fa-edit"></i> Edit</a>   </th>
+
+                                <!-- edit group pop modal -->
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{ $group->id }}">
+                                        Edit
+                                    </button>
+                                </td>
+
+
+
+                
+
                                 <th> <a href="{{ route('unit-ranks.units.fy.indicator-groups.indicators.index', [$unit_rank->id ,$unit->id,$fy->id,$group->id]) }}", class="btn btn-success" >Indicators <span class="badge bg-secondary">{{ $group->indicators->count() }}</span> </th>
                             </tr>
                             @endforeach
@@ -80,3 +93,96 @@
 
   
 @endsection
+
+
+<!-- create New Group Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create New Indicator Group</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ route('unit-ranks.units.fy.indicator-groups.store',[$unit_rank->id,$unit->id,$fy->id]) }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="name">Indicator Group Name</label>
+                <input type="text" class="form-control" name="name" id="name" placeholder="Enter Indicator Group Name">
+            </div>
+            <div class="form-group">
+                <label for="weight">Indicator Group Weight</label>
+                <input type="number" class="form-control" name="weight" id="weight" placeholder="Enter Indicator Group Weight">
+            </div>
+            <div class="form-group">
+                <label for="order">Indicator Group Order</label>
+                <input type="number" class="form-control" name="order" id="order" placeholder="Enter Indicator Group Order">
+            </div>
+            <div class="form-group">
+                <label for="description">Indicator Group Description</label>
+                <textarea class="form-control" name="description" id="description" placeholder="Enter Indicator Group Description"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+    </div>
+</div>
+
+<!-- edit  Group Modal -->
+@foreach ($indicatorgroups as $group)
+
+    <div class="modal fade" id="exampleModal{{ $group->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Indicator Group</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('unit-ranks.units.fy.indicator-groups.update',[$unit_rank->id,$unit->id,$fy->id,$group->id]) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="name">Indicator Group Name</label>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Enter Indicator Group Name" value="{{ $group->name }}">
+                        </div>
+               
+                        <div class="form-group">
+                            <label for="order">Indicator Group Order</label>
+                            <input type="number" class="form-control" name="order" id="order" placeholder="Enter Indicator Group Order" value="{{ $group->order }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Indicator Group Description</label>
+                            <textarea class="form-control" name="description" id="description" placeholder="Enter Indicator Group Description">{{ $group->description }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
+
+                        
+
+
+
+
+
+            
+
+
+
+
