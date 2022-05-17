@@ -44,8 +44,4 @@ class CreateIndicatorGroupsTable extends Migration
 }
 
 
-// run specific  migration
-// php artisan migrate:refresh --seed --path=database/migrations/2022_02_12_170901_create_indicator_groups_table.php
-
-
 

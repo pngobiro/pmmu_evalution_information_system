@@ -134,50 +134,40 @@ class IndicatorController extends Controller
 
     public function preview(Request $request,UnitRank $unit_rank ,Unit $unit ,Division $division ,FinancialYear $fy){
        
-       if ($unit->has_pmmu_division) {
+      
 
             $indicatorgroups = IndicatorGroup::withSum('indicators as total_indicators', 'indicator_weight')
             ->where('unit_id',$unit->id)
             ->where('financial_year_id',$fy->id)
             ->where('division_id',$division->id)
             ->get(); 
-        }
-
-        elseif($unit->has_pmmu_division) {
-
-            $indicatorgroups = IndicatorGroup::withSum('indicators as total_indicators', 'indicator_weight')
-            ->where('unit_id',$unit->id)
-            ->where('financial_year_id',$fy->id)
-            ->where('division_id',$division->id)
-            ->get(); 
-          
-        }
-       
+     
     
 
            // sum of $indicatorgroups total_weighted 
-              $total_indicator_weighted_score = 0;
+           
+              $overall_composite_score = 0;
                 foreach ($indicatorgroups as $indicatorgroup) {
                     foreach ($indicatorgroup->indicators as $indicator) {
-                        $total_indicator_weighted_score += $indicator->indicator_weighted_score;
+                        $overall_composite_score+= $indicator->indicator_weighted_score;
                     }
                 }
                 
                 $performance = new  IndicatorGraderHelper();
-                $overallScoreGrade  = $performance-> getCompositeScore($total_indicator_weighted_score);
+                $overallScoreGrade  = $performance-> getCompositeScore($overall_composite_score);
 
        // sum of $indicatorgroups total weight
 
-        $group_total_indicator_weight = 0;
+        $total_indicator_weights = 0;
         foreach ($indicatorgroups as $indicatorgroup) {
             foreach ($indicatorgroup->indicators as $indicator) {
-                $group_total_indicator_weight += $indicator->indicator_weight;
+                $total_indicator_weights += $indicator->indicator_weight;
             }
         }
 
         
                                             
-        return view('admin.indicators.preview',compact('indicatorgroups','unit_rank','division','fy','unit','total_indicator_weighted_score','overallScoreGrade','group_total_indicator_weight'));
+        return view('admin.indicators.preview',compact('indicatorgroups','unit_rank','division','fy','unit','overall_composite_score','overallScoreGrade','total_indicator_weights'));
 
     }
 
@@ -206,16 +196,16 @@ class IndicatorController extends Controller
         ->get(); 
 
         // sum of $indicatorgroups indicators_weighted+scores for each group
-        $composite_score = 0;
+        $overall_composite_score = 0;
         foreach ($indicatorgroups as $indicatorgroup) {
             foreach ($indicatorgroup->indicators as $indicator) {
-                $composite_score += $indicator->indicator_weighted_score;
+                $overall_composite_score += $indicator->indicator_weighted_score;
             }
         }
 
 
         $performance = new  IndicatorGraderHelper();
-        $overallScoreGrade  = $performance-> getCompositeScore($composite_score);
+        $overallScoreGrade  = $performance-> getCompositeScore($overall_composite_score);
         
 
         PDF::SetAuthor('TCPDF');

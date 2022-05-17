@@ -22,7 +22,10 @@ class IndicatorGraderHelper{
   }
 
   public function getCompositeScore($actualCompositeScore)
+  // if $actualCompositeScore is between 1 and 5, return the corresponding score
   {
+    
+
     switch ( $actualCompositeScore) {
       // case between 1 and 2
       case ($actualCompositeScore >= 1 && $actualCompositeScore <= 2):
@@ -72,6 +75,8 @@ class IndicatorGraderHelper{
           $this->lowerLimitWeightedScore = 5;
   
           break;
+
+    
 
     
   }

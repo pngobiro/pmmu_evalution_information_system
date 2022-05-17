@@ -102,7 +102,10 @@
                     </th>
 
                     <th scope="col" colspan="7">
-                        Composite Score:: <span class="badge badge-danger">  {{ round($group->total_indicator_weighted_score(),3) }}</span> 
+                        <!-- sum weighted score for each indicator in the group -->
+
+
+                        Composite Score:: <span class="badge badge-danger">  </span> 
                     </th>
 
                 </tr>
@@ -126,12 +129,12 @@
 <div class="row">
 
     <div class="col-sm-3">
-        Total Weights: <span class="badge badge-primary">{{ $indicatorgroups->sum('total_indicators')}}</span> 
+        Total Weights: <span class="badge badge-primary">{{ $total_indicator_weights }}</span> 
     </div>
 
 
     <div class="col-sm-3">
-        Composite Score: <span class="badge badge-success">{{ round( $total_indicator_weighted_score,3) }}</span> 
+        Composite Score: <span class="badge badge-success">{{ $overall_composite_score }}</span> 
     </div>
 
     <div class="col-sm-3">
@@ -149,7 +152,7 @@
 
 </div>
 
-@if ( $group_total_indicator_weight == 100 ) 
+@if ( $total_indicator_weights == 100 ) 
 
 <div class="alert alert-info" role="alert">
 
@@ -185,11 +188,11 @@
             <p>
                 <strong>
                    <!-- show error message -->
-                     Total Weights: <span class="badge badge-primary">{{  $group_total_indicator_weight }}</span>
+                     Total Weights: <span class="badge badge-primary">{{  $total_indicator_weights }}</span>
                 </strong>
          
         </div>
-
+s
 
   
         @endif
