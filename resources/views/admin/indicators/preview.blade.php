@@ -8,6 +8,11 @@
 </div>
 @endif
 
+<!-- show message when  internet offline  using livewire-->
+<livewire:offline/>
+
+
+
 
 <div class="card bg-light" >
     <div class="card-body fs-4" >
@@ -19,9 +24,27 @@
             </div>
             <div class="row">
                 <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-primary">{{ $unit_rank->name }}</span> </div>
-                <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-success">{{ $unit->name }}</span> </div>
+                <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-success">
+
+                    <!-- if $unit hasPmmuDivision show selected division name  otherwise show unit name-->
+
+                    @if ($unit->has_pmmu_division )
+
+                        {{ $division->name }}
+
+                        @else
+
+                        {{ $unit->name }}
+                    
+
+                    @endif
+
+                   
+
+                </span> </div>
+        
                 <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-warning">{{ $fy->name  }}</span>  </div>
-                <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-white"><i class="fas fa-eye"></i>  <a href="{{ route('update_targets', [$unit_rank->id,$unit->id,$fy->id]) }}">Update Weights and Targets</a></span>  </div>
+                <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-white"><i class="fas fa-eye"></i>  <a href="{{ route('update_targets', [$unit_rank->id,$unit->id,$division->id,$fy->id]) }}">Update Weights and Targets</a></span>  </div>
             </div>
     </div>
 
@@ -90,7 +113,7 @@
             @empty
             <div class="alert alert-warning">
                 No Indicators 
-                <a href="{{ route('download_template', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-info btn-block">Create Indicators</a>
+                <a href="{{ route('download_template', [$unit_rank->id,$unit->id,$division->id,$fy->id]) }}" class="btn btn-info btn-block">Create Indicators</a>
         </div>
         @endforelse
     </div>
@@ -133,19 +156,19 @@
     <div class="row">
     
         <div class="col-sm-3">
-            <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-primary btn-sm"> <i class="fa fa-file-pdf-o"></i>Simple PDF</a>
+            <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$division->id,$fy->id]) }}" class="btn btn-primary btn-sm"> <i class="fa fa-file-pdf-o"></i>Simple PDF</a>
         </div>
     
         <div class="col-sm-3">
-            <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-success btn-sm "><i class="fas fa-pdf"></i>  Complex PDF</a>
+            <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$division->id,$fy->id]) }}" class="btn btn-success btn-sm "><i class="fas fa-pdf"></i>  Complex PDF</a>
         </div>
     
         <div class="col-sm-3">
-            <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-primary btn-sm"><i class="fas fa-excel"></i> Simple Excel</a>
+            <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$division->id,$fy->id]) }}" class="btn btn-primary btn-sm"><i class="fas fa-excel"></i> Simple Excel</a>
         </div>
     
         <div class="col-sm-3">
-            <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}" class="btn btn-success btn-sm "><i class="fas fa-excel"></i> Complex Excel</a>
+            <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$division->id,$fy->id]) }}" class="btn btn-success btn-sm "><i class="fas fa-excel"></i> Complex Excel</a>
         </div>
     
     
@@ -211,7 +234,6 @@
 @endforeach
 
 
-<!-- remarks modal to create and update -->
 
 
 

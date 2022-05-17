@@ -19,6 +19,19 @@ class IndicatorGroup extends Model
         'unit_id'
     ];
 
+    protected $casts = [
+        'description' => 'string',
+        'order' => 'integer',
+        'unit_id' => 'integer',
+        'unit_rank_id' => 'integer',
+        'financial_year_id' => 'integer',
+    ];
+
+    // appends array
+    protected $appends = [
+        'combined_name',
+    ];
+
 
     public function indicators( )
     {
@@ -50,34 +63,22 @@ class IndicatorGroup extends Model
 
     
 
-    public function total_indicator_weighted_score()
+ // function to get the combined name of the division and unit
+    public function getCombinedNameAttribute()
     {
-        $total_indicator_weighted_score = 0;
-        foreach ($this->indicators as $indicator) {
-            $total_indicator_weighted_score += $indicator->indicator_weighted_score;
-        }
-        return $total_indicator_weighted_score;
 
-    }
+                if ($this->unit->has_pmmu_division)  {
 
-    // sum of total weights of all indicators in the group
-    public function total_indicator_weight()
-    {
-        $total_indicator_weight = 0;
-        foreach ($this->indicators as $indicator) {
-            $total_indicator_weight += $indicator->indicator_weight;
-        }
-        return $total_indicator_weight;
-    }
-
-    // group composite score
-    public function group_composite_score()
-    {
-        $group_composite_score = 0;
-        $total_indicator_weighted_score = $this->total_indicator_weighted_score();
-        $total_indicator_weight = $this->total_indicator_weight();
-        $group_composite_score = $total_indicator_weighted_score / $total_indicator_weight;
-        return $group_composite_score;
+                    return $this->unit->name . ' - ' . $this->division->name;
+            } 
+            
+                else
+            
+            {
+                
+                    return  $this->unit->name;
+            
+            }
     }
 
 

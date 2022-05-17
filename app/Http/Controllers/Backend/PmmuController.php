@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateIndicatorRequest;
 
 use App\Models\UnitRank;
 use App\Models\Unit;
+use App\Models\Division;
 use App\Models\IndicatorGroup;
 use App\Models\Indicator;
 use App\Models\IndicatorType;
@@ -19,7 +20,7 @@ use Illuminate\Http\Request;
 
 class PmmuController extends Controller
 {
-    public function index(UnitRank $unit_rank ,Unit $unit,FinancialYear $fy , IndicatorGroup $indicator_group ,Request $request ){
+    public function index(UnitRank $unit_rank ,Unit $unit,Division $division ,FinancialYear $fy , IndicatorGroup $indicator_group ,Request $request ){
 
         $types = IndicatorType::all();
 
@@ -38,7 +39,7 @@ class PmmuController extends Controller
         }
 
 
-        return view('admin.pmmu.index',compact('unit_rank','unit','indicator_group','fy','indicators','types','measures'));
+        return view('admin.pmmu.index',compact('unit_rank','unit','division','indicator_group','fy','indicators','types','measures'));
 
     }
 

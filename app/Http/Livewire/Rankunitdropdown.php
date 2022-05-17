@@ -43,7 +43,7 @@ class Rankunitdropdown extends Component
         $this->selectedRank = NULL;
         $this->selectedUnit = NULL;
         $this->selectedFY = NULL;
-        $this->selectedDivision = NULL;
+        $this->selectedDivision = 1;
         $this->hasPMMUDivision = false;
         $this->fys = FinancialYear::all();
     
@@ -145,17 +145,18 @@ class Rankunitdropdown extends Component
 
         if ($selectedActivity=='view-pmmu')  
             {
-                return redirect()->route('pmmu',[$this->selectedRank , $this->selectedUnit ,$this->selectedFY]);
+                return redirect()->route('pmmu',[$this->selectedRank , $this->selectedUnit ,$this->selectedDivision ,$this->selectedFY]);
+
             }
         
         if ($selectedActivity=='update-targets')  
             {
-                return redirect()->route('update_targets',[$this->selectedRank , $this->selectedUnit ,$this->selectedFY]);
+                return redirect()->route('update_targets',[$this->selectedRank , $this->selectedUnit ,$this->selectedDivision,$this->selectedFY]);
             }
             
         if ($selectedActivity=='download-scoresheet') 
             {
-                return redirect()->route('simple_pmmu',[$this->selectedRank , $this->selectedUnit ,$this->selectedFY]);    
+                return redirect()->route('simple_pmmu',[$this->selectedRank , $this->selectedUnit ,$this->selectedDivision,$this->selectedFY]);    
             }
 
     }

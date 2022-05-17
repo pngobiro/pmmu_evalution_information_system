@@ -7,6 +7,15 @@
     <div class="card  ">
         <div class="jumbotron">
             <h1 class="display-8">{{ $unit->name }}</h1>
+            
+            
+            @if ($unit->has_pmmu_division )
+                <h2 class="display-8">{{ $division->name }}</h2>
+            @endif
+                
+            
+            
+            
             <p class="lead">FY {{ $fy->name }}</p>
         </div>
   
@@ -25,11 +34,11 @@
                             <div class="form-row align-items-center">
 
                                 <div class="col">
-                                    <a href="{{ route('pmmu', [$unit_rank->id,$unit->id , $fy->id]) }}" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i> Preview PMMU </a>
+                                    <a href="{{ route('pmmu', [$unit_rank->id,$unit->id , $division->id, $fy->id ]) }}" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i> Preview PMMU </a>
                                 </div>
 
                                 <div class="col">
-                                    <a href="{{ route('update_targets', [$unit_rank->id,$unit->id , $fy->id]) }}" class="btn btn-warning"> <i class="fa fa-refresh" aria-hidden="true"></i> Update Targets </a>
+                                    <a href="{{ route('update_targets', [$unit_rank->id,$unit->id , $division->id, $fy->id]) }}" class="btn btn-warning"> <i class="fa fa-refresh" aria-hidden="true"></i> Update Targets </a>
                                 </div>
 
                                 <div class="col">
@@ -74,7 +83,7 @@
 
                 
 
-                                <th> <a href="{{ route('unit-ranks.units.fy.indicator-groups.indicators.index', [$unit_rank->id ,$unit->id,$fy->id,$group->id]) }}", class="btn btn-success" >Indicators <span class="badge bg-secondary">{{ $group->indicators->count() }}</span> </th>
+                                <th> <a href="{{ route('unit-ranks.units.divisions.fy.indicator-groups.indicators.index', [$unit_rank->id ,$unit->id,$division->id,$fy->id,$group->id]) }}", class="btn btn-success" >Indicators <span class="badge bg-secondary">{{ $group->indicators->count() }}</span> </th>
                             </tr>
                             @endforeach
                     </tbody>    
@@ -106,7 +115,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ route('unit-ranks.units.fy.indicator-groups.store',[$unit_rank->id,$unit->id,$fy->id]) }}" method="POST">
+        <form action="{{ route('unit-ranks.units.divisions.fy.indicator-groups.store',[$unit_rank->id,$unit->id,$division->id,$fy->id]) }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="name">Indicator Group Name</label>
@@ -148,7 +157,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('unit-ranks.units.fy.indicator-groups.update',[$unit_rank->id,$unit->id,$fy->id,$group->id]) }}" method="POST">
+                    <form action="{{ route('unit-ranks.units.divisions.fy.indicator-groups.update',[$unit_rank->id,$unit->id,$division->id,$fy->id,$group->id]) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="form-group">

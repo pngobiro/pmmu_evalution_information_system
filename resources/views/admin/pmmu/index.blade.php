@@ -4,7 +4,7 @@
 
 
 <div class="jumbotron">
-    <h1 class="display-8">{{ $unit->name }}- FY {{ $fy->name  }}</h1>
+    <h1 class="display-8">{{ $unit->name }}  @if ($unit->has_pmmu_division ) <h2 class="display-8">{{ $division->name }}</h2> @endif - FY {{ $fy->name  }}</h1>
     <p class="lead"><span class="badge badge-pill badge-primary">Group :</span>  {{  $indicator_group->name }}</p>
   </div>
 
@@ -20,7 +20,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <form method="GET" action="{{ route('unit-ranks.units.fy.indicator-groups.indicators.index',[$unit_rank->id,$unit->id,$fy->id,$indicator_group->id]) }}">
+                    <form method="GET" action="{{ route('unit-ranks.units.divisions.fy.indicator-groups.indicators.index',[$unit_rank->id,$unit->id,$division->id,$fy->id,$indicator_group->id]) }}">
                         <div class="form-row align-items-center">
                             <div class="col">
                                 <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
@@ -30,7 +30,7 @@
                                 <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
                             </div>
                             <div>
-                                <a href="{{ route('unit-ranks.units.fy.indicator-groups.index',[$unit_rank->id,$unit->id,$fy->id,$indicator_group->id]) }}" class="btn btn-secondary mb-2"><i class="fa fa-eye" aria-hidden="true"></i>View All Groups</a>
+                                <a href="{{ route('unit-ranks.units.divisions.fy.indicator-groups.index',[$unit_rank->id,$unit->id,$division->id,$fy->id,$indicator_group->id]) }}" class="btn btn-secondary mb-2"><i class="fa fa-eye" aria-hidden="true"></i>View All Groups</a>
                             </div>
                         </div>
                     </form>
@@ -111,7 +111,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('unit-ranks.units.fy.indicator-groups.indicators.store',[$unit_rank->id,$unit->id,$fy->id,$indicator_group->id]) }}">
+                <form method="POST" action="{{ route('unit-ranks.units.divisions.fy.indicator-groups.indicators.store',[$unit_rank->id,$unit->id,$division->id,$fy->id,$indicator_group->id]) }}">
                     @csrf
                     <div class="form-group">
                         <label for="name">Indicator Name</label>
@@ -174,7 +174,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('unit-ranks.units.fy.indicator-groups.indicators.update',[$unit_rank->id,$unit->id,$fy->id,$indicator_group->id,$indicator->id]) }}">
+                <form method="POST" action="{{ route('unit-ranks.units.divisions.fy.indicator-groups.indicators.update',[$unit_rank->id,$unit->id,$division->id,$fy->id,$indicator_group->id,$indicator->id]) }}">
                     @csrf
                     @method('PUT')
                     <div class="form-group">

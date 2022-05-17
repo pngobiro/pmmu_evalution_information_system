@@ -90,14 +90,19 @@ Auth::routes();
     Route::resource('unit-ranks.fy.rank_category', RankCategoryController::class);
     Route::get('unit-ranks/{unit_rank}/fy/{fy}/unit_excel',[ReportsController::class,"unit_excel"])->name('unit_excel');
     //Route::resource('unit-ranks.units.fy.indicator-groups', IndicatorGroupController::class);
-    Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/simple_pmmu',[IndicatorController::class,"createSimplePmmuPDF"])->name('simple_pmmu');
-    Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/complex_pmmu',[IndicatorController::class,"createComplexPmmuPDF"])->name('complex_pmmu');
-    Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/pmmu',[IndicatorController::class,"preview"])->name('pmmu');
-    Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/pdf',[IndicatorController::class,"createPDF"])->name('pdf');
-    Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/download_template',[IndicatorController::class,"download_template"])->name('download_template');
-    Route::get('unit-ranks/{unit_rank}/units/{unit}/fy/{fy}/indicator-groups/update_targets',[IndicatorController::class,"update_targets"])->name('update_targets');
-    Route::resource('unit-ranks.units.fy.indicator-groups',IndicatorController::class);
-    Route::resource('unit-ranks.units.fy.indicator-groups.indicators',PmmuController::class);
+    Route::get('unit-ranks/{unit_rank}/units/{unit}/division/{division}/fy/{fy}/indicator-groups/simple_pmmu',[IndicatorController::class,"createSimplePmmuPDF"])->name('simple_pmmu');
+    Route::get('unit-ranks/{unit_rank}/units/{unit}/division/{division}/fy/{fy}/indicator-groups/complex_pmmu',[IndicatorController::class,"createComplexPmmuPDF"])->name('complex_pmmu');
+
+
+    Route::get('unit-ranks/{unit_rank}/units/{unit}/division/{division}/fy/{fy}/indicator-groups/pmmu',[IndicatorController::class,"preview"])->name('pmmu');
+
+
+
+    Route::get('unit-ranks/{unit_rank}/units/{unit}/division/{division}/fy/{fy}/indicator-groups/pdf',[IndicatorController::class,"createPDF"])->name('pdf');
+    Route::get('unit-ranks/{unit_rank}/units/{unit}/division/{division}/fy/{fy}/indicator-groups/download_template',[IndicatorController::class,"download_template"])->name('download_template');
+    Route::get('unit-ranks/{unit_rank}/units/{unit}/division/{division}/fy/{fy}/indicator-groups/update_targets',[IndicatorController::class,"update_targets"])->name('update_targets');
+    Route::resource('unit-ranks.units.divisions.fy.indicator-groups',IndicatorController::class);
+    Route::resource('unit-ranks.units.divisions.fy.indicator-groups.indicators',PmmuController::class);
 
     //  user routes
     Route::post('users/{user}/change-password', [ChangePasswordController::class, 'change_password'])->name('users.change.password');

@@ -11,6 +11,9 @@
                 </div>
             </div>
 
+            <!-- search dropdown -->
+           
+
             @if (!is_null($selectedRank))
                 <div class="form-group row">
                     <label for="unit" class="col-md-4 col-form-label text-md-right">Unit</label>
@@ -26,6 +29,7 @@
                     </div>
                 </div>
             @endif
+
 
     @if ($hasPMMUDivision==true)     
 
@@ -125,6 +129,13 @@
     
     
 </div>
+
+
+<!-- script  -->
+<script>
+  
+
+</script>
 
     
 

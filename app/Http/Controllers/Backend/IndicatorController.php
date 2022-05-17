@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\UnitRank;
 use App\Models\Unit;
 use App\Models\FinancialYear;
+use App\Models\Division;
 use App\Models\IndicatorGroup;
 use App\Models\Indicator;
 use App\Models\TemplateIndicatorGroup;
@@ -20,26 +21,38 @@ class IndicatorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy )
+    public function index(Request $request,UnitRank $unit_rank ,Unit $unit , Division $division ,FinancialYear $fy )
     {
-        $indicatorgroups = IndicatorGroup::withSum('indicators as total_indicators', 'indicator_weight')
-                                            ->where('unit_id',$unit->id)
-                                            ->where('financial_year_id',$fy->id)
-                                            ->get(); 
-        if ($request->has('search')) {
-            $indicatorgroups = IndicatorGroup::where('unit_id',$unit->id)
+        if ($unit->has_pmmu_division ) {
+
+            $indicatorgroups = IndicatorGroup::withSum('indicators as total_indicators', 'indicator_weight')
+            ->where('unit_id',$unit->id)
             ->where('financial_year_id',$fy->id)
-            ->where('name', 'like', "%{$request->search}%")
-            ->get();
+            ->where('division_id',$division->id)
+            ->get(); 
         }
-        return view('admin.indicators.index',compact('indicatorgroups','unit_rank','fy','unit')) ;
+
+        else {
+
+            $indicatorgroups = IndicatorGroup::withSum('indicators as total_indicators', 'indicator_weight')
+            ->where('unit_id',$unit->id)
+            ->where('financial_year_id',$fy->id)
+            ->get(); 
+          
+        }
+
+  
+        return view('admin.indicators.index',compact('indicatorgroups','unit_rank','fy','unit','division'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy)
+
+    public function create(Request $request,UnitRank $unit_rank ,Unit $unit ,Division $division,FinancialYear $fy)
+
     {
 
 
@@ -52,7 +65,8 @@ class IndicatorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy)
+    public function store(Request $request, UnitRank $unit_rank ,Unit $unit ,Division $division,FinancialYear $fy)
+
     {
         IndicatorGroup::create([
             'name' =>               $request->name,
@@ -62,6 +76,7 @@ class IndicatorController extends Controller
             'unit_id'     =>        $unit->id,
             'financial_year_id' =>  $fy->id,
         ]);
+
         return redirect()->route('unit-ranks.units.fy.indicator-groups.index',[$unit_rank->id ,$unit->id,$fy->id])->with('message', 'Group Registered Succesfully');
 
     }
@@ -83,7 +98,7 @@ class IndicatorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(UnitRank $unit_rank,Unit $unit ,FinancialYear $fy,IndicatorGroup $indicator_group)
+    public function edit(UnitRank $unit_rank,Unit $unit ,Division $division,FinancialYear $fy,IndicatorGroup $indicator_group)
     {
 
 
@@ -98,7 +113,7 @@ class IndicatorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UnitRank $unit_rank,Unit $unit,FinancialYear $fy,IndicatorGroup $indicator_group,Indicator $indicator ,UpdateIndicatorRequest $request )
+    public function update(UnitRank $unit_rank,Unit $unit,Division $division,FinancialYear $fy,IndicatorGroup $indicator_group,Indicator $indicator ,UpdateIndicatorRequest $request )
     {
         $indicator->update($request->validated());
 
@@ -117,14 +132,28 @@ class IndicatorController extends Controller
     }
 
 
-    public function preview(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy){
-        $indicatorgroups = IndicatorGroup::with('indicators')
-                                            ->withSum('indicators as total_indicators', 'indicator_weight')
-                                            ->where('unit_id',$unit->id)
-                                            ->where('financial_year_id',$fy->id)
-                                            ->get()
-                                            ->sortBy('indicators.indicator_order');
+    public function preview(Request $request,UnitRank $unit_rank ,Unit $unit ,Division $division ,FinancialYear $fy){
+       
+       if ($unit->has_pmmu_division) {
 
+            $indicatorgroups = IndicatorGroup::withSum('indicators as total_indicators', 'indicator_weight')
+            ->where('unit_id',$unit->id)
+            ->where('financial_year_id',$fy->id)
+            ->where('division_id',$division->id)
+            ->get(); 
+        }
+
+        elseif($unit->has_pmmu_division) {
+
+            $indicatorgroups = IndicatorGroup::withSum('indicators as total_indicators', 'indicator_weight')
+            ->where('unit_id',$unit->id)
+            ->where('financial_year_id',$fy->id)
+            ->where('division_id',$division->id)
+            ->get(); 
+          
+        }
+       
+    
 
            // sum of $indicatorgroups total_weighted 
               $total_indicator_weighted_score = 0;
@@ -133,10 +162,9 @@ class IndicatorController extends Controller
                         $total_indicator_weighted_score += $indicator->indicator_weighted_score;
                     }
                 }
-      
-        
-        $performance = new  IndicatorGraderHelper();
-       $overallScoreGrade  = $performance-> getCompositeScore($total_indicator_weighted_score);
+                
+                $performance = new  IndicatorGraderHelper();
+                $overallScoreGrade  = $performance-> getCompositeScore($total_indicator_weighted_score);
 
        // sum of $indicatorgroups total weight
 
@@ -147,20 +175,9 @@ class IndicatorController extends Controller
             }
         }
 
-        // if any indicator achivement is null then return indicator id
-        $indicator_id_with_null_achievement = [];
-        foreach ($indicatorgroups as $indicatorgroup) {
-            foreach ($indicatorgroup->indicators as $indicator) {
-                if($indicator->indicator_achievement == null){
-                    $indicator_id_with_null_achievement[] = $indicator->name;
-                }
-            }
-        }
-              
-
         
                                             
-        return view('admin.indicators.preview',compact('indicatorgroups','unit_rank','fy','unit','total_indicator_weighted_score','overallScoreGrade','group_total_indicator_weight','indicator_id_with_null_achievement'));
+        return view('admin.indicators.preview',compact('indicatorgroups','unit_rank','division','fy','unit','total_indicator_weighted_score','overallScoreGrade','group_total_indicator_weight'));
 
     }
 
@@ -180,11 +197,12 @@ class IndicatorController extends Controller
 
   
 
-    public function createSimplePmmuPDF(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy) {
+    public function createSimplePmmuPDF(Request $request,UnitRank $unit_rank ,Unit $unit ,Division $division,FinancialYear $fy) {
        
         $indicatorgroups = IndicatorGroup::withSum('indicators as total_indicators', 'indicator_weight')
         ->where('unit_id',$unit->id)
         ->where('financial_year_id',$fy->id)
+        ->where('division_id',$division->id)
         ->get(); 
 
         // sum of $indicatorgroups indicators_weighted+scores for each group
@@ -233,12 +251,13 @@ class IndicatorController extends Controller
 
 
       
-      public function createComplexPmmuPDF(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy) {
+      public function createComplexPmmuPDF(Request $request,UnitRank $unit_rank ,Unit $unit ,Division $division,FinancialYear $fy) {
       
   
         $indicatorgroups = IndicatorGroup::withSum('indicators as total_indicators', 'indicator_weight')
         ->where('unit_id',$unit->id)
         ->where('financial_year_id',$fy->id)
+        ->where('division_id',$division->id)
         ->get(); 
 
         $composite_score = 0;
@@ -293,11 +312,11 @@ class IndicatorController extends Controller
     }
 
 
-    public function download_template(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy ){
+    public function download_template(Request $request,UnitRank $unit_rank ,Unit $unit ,Division $division,FinancialYear $fy ){
         $template_group = TemplateIndicatorGroup::where('unit_rank_id',$unit_rank->id)
         ->where('financial_year_id',$fy->id)->get();
-        $indicatorgroups = IndicatorGroup::where('unit_id',$unit->id)
-        ->where('financial_year_id',$fy->id)->get();
+        $indicatorgroups = IndicatorGroup::where('unit_id',$unit->id)->where('financial_year_id',$fy->id)->where('division_id',$division->id)->get();
+
      if (!$template_group->isEmpty() &&    ($indicatorgroups->isEmpty())){
         foreach ($template_group as $group ){
                 $new_group                     = new IndicatorGroup();
@@ -306,6 +325,7 @@ class IndicatorController extends Controller
                 $new_group->order              = $group->order;
                 $new_group->unit_rank_id       = $unit_rank->id;
                 $new_group->unit_id            = $unit->id;
+                $new_group->division_id        = $division->id;
                 $new_group->financial_year_id  = $fy->id;
             $new_group->save(); 
             foreach ($group->template_indicators as $indicator){
@@ -324,16 +344,16 @@ class IndicatorController extends Controller
         };
         };
     
-        return redirect()->route('unit-ranks.units.fy.indicator-groups.index',[$unit_rank->id ,$unit->id,$fy->id])->with('message', 'Template Created Succesfully');
+        return redirect()->route('unit-ranks.units.divisions.fy.indicator-groups.index',[$unit_rank->id ,$unit->id,$division->id,$fy->id])->with('message', 'Template Created Succesfully');
 
       }
 
-      public function update_targets(Request $request,UnitRank $unit_rank ,Unit $unit ,FinancialYear $fy){
+      public function update_targets(Request $request,UnitRank $unit_rank ,Unit $unit ,Division $division ,FinancialYear $fy){
         $indicatorgroups = IndicatorGroup::withSum('indicators as total_indicators', 'indicator_weight')
                                             ->where('unit_id',$unit->id)
                                             ->where('financial_year_id',$fy->id)
                                             ->get(); 
-        return view('admin.indicators.update_targets',compact('indicatorgroups','unit_rank','fy','unit')) ;
+        return view('admin.indicators.update_targets',compact('indicatorgroups','unit_rank','fy','unit','division'));
       }
 
       private function getSimplePmmuPDF($indicatorgroups,$unit_rank,$fy,$unit,$overallScoreGrade,$composite_score ){
