@@ -23,6 +23,7 @@ class CreateUnitsTable extends Migration
             $table->boolean('has_division')->default(false);
             $table->boolean('has_cts')->default(false);
             $table->boolean('is_deleted')->default(false);
+            $table->boolean('has_pmmu_division')->default(false);
             $table->foreignIdFor(UnitRank::class)->constrained();
             $table->bigInteger('head_id_fk')->unsigned();
             $table->bigInteger('subhead_id_fk')->unsigned();

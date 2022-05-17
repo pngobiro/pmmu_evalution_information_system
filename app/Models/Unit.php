@@ -44,6 +44,9 @@ class Unit extends Model
         return $this->belongsToMany(Division::class,'unit_division','unit_id','division_id');
     }
 
+
+    
+
     
 
 

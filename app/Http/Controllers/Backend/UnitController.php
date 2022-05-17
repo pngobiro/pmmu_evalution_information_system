@@ -94,4 +94,21 @@ class UnitController extends Controller
     {
         //
     }
+
+    // update has_pmmu_division with ajax
+    public function updateHasPMMU(Request $request)
+    {
+        $unit = Unit::find($request->unit_id);
+
+        if ($request->has('has_pmmu_division')) {
+            $unit->has_pmmu_division = 1;
+        } else {
+            $unit->has_pmmu_division = 0;
+        }
+
+        $unit->save();
+        
+        // flash message and redirect
+        return redirect()->back()->with('success', 'Unit has been updated successfully');
+    }
 }

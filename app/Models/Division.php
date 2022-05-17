@@ -13,13 +13,36 @@ class Division extends Model
         'is_active' => 'boolean',
     ];
 
+    // attributes that are mass assignable
+    protected $fillable = [
+        'name',
+        'is_active',
+    ];
+
+    // attributes that should be hidden for arrays
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
+ 
 
 
     // the units that belongs to this division
 
-    public function units()
+    public function unit()
     {
         return $this->belongsToMany(Unit::class,'unit_division','division_id','unit_id');
     }
+
+    // has many indicatorgroups
+    public function indicatorgroups()
+    {
+        return $this->hasMany(IndicatorGroup::class);
+    }
+
+
+
+    
 
 }

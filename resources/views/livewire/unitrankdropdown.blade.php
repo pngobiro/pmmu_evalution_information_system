@@ -11,6 +11,9 @@
                 </div>
             </div>
 
+            <!-- search dropdown -->
+           
+
             @if (!is_null($selectedRank))
                 <div class="form-group row">
                     <label for="unit" class="col-md-4 col-form-label text-md-right">Unit</label>
@@ -28,11 +31,14 @@
             @endif
 
 
+    @if ($hasPMMUDivision==true)     
+
+
             @if (!is_null($selectedUnit))
             <div class="form-group row">
-                <label for="fy" class="col-md-4 col-form-label text-md-right">Unit Division</label>
+                <label for="division" class="col-md-4 col-form-label text-md-right">Unit Division</label>
                 <div class="col-md-4">
-                    <select  wire:model="selectedDivision" class="form-control" name="fy_id">
+                    <select  wire:model="selectedDivision" class="form-control" name="division_id">
                         <option value="" selected>Choose a Division</option>
                        
                         @foreach($divisions as $division)
@@ -62,7 +68,7 @@
 
             @if (!is_null($selectedFY))
             <div class="form-group row">
-                <label for="fy" class="col-md-4 col-form-label text-md-right">Choose Activity</label>
+                <label for="activity" class="col-md-4 col-form-label text-md-right">Choose Activity</label>
                 <div class="col-md-4">
                     <select  wire:model="selectedActivity" class="form-control" name="activity">
                         <option value="" selected>Choose Activity</option>
@@ -76,10 +82,60 @@
             </div>
         @endif
 
-    
+     @elseif ($hasPMMUDivision == false)
+
+                    @if (!is_null($selectedUnit))
+                    <div class="form-group row">
+                        <label for="fy" class="col-md-4 col-form-label text-md-right">Financial Year</label>
+                        <div class="col-md-4">
+                            <select  wire:model="selectedFY" class="form-control" name="fy_id">
+                                <option value="" selected>Choose Financial Year</option>
+                                @foreach($fys as $fy)
+                                    <option value="{{ $fy->id }}">{{ $fy->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                @endif
+
+
+
+                @if (!is_null($selectedFY))
+                <div class="form-group row">
+                    <label for="fy" class="col-md-4 col-form-label text-md-right">Choose Activity</label>
+                    <div class="col-md-4">
+                        <select  wire:model="selectedActivity" class="form-control" name="activity">
+                            <option value="" selected>Choose Activity</option>
+                                <option value="view-pmmu">View PMMU</option>
+                                <option value="update-targets">Update Targets</option>
+                                <option value="download-scoresheet">Download Scoresheet</option>
+                                
+                            
+                        </select>
+                    </div>
+                </div>
+                @endif
+
+
+
+
+
+
+     
+     
+
+
+    @endif
     
     
 </div>
+
+
+<!-- script  -->
+<script>
+  
+
+</script>
 
     
 

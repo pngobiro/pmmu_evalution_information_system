@@ -36,6 +36,15 @@ class IndicatorForm extends Component
         return view('livewire.indicator-form');
     }
 
+    protected $rules = [
+
+        //'indicator.indicator_achivement' => 'required|numeric|min:0|max:100',
+
+
+
+
+    ];
+
     public function updated($name, $value) {
         $this->indicator->indicator_achivement = $value;
         $this->indicator->save();
@@ -48,17 +57,6 @@ class IndicatorForm extends Component
         session()->flash('message', 'Indicator successfully updated.');
     }
 
-    //validate indicator achivement
-    public function validateIndicatorAchivement($value) {
-        return $value > 0 && $value <= 300;
-        
-    }
-
-
-
-
-
-    
 }
 
 

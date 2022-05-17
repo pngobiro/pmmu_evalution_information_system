@@ -19,6 +19,8 @@ class Rankunitdropdown extends Component
     public $selectedUnit ;
     public $selectedActivity ;
     public $selectedDivision ;
+    // $hasPMMUDivision is a boolean variable that is used to determine if the PMMU Division is selected
+    public $hasPMMUDivision;
 
     /**
 
@@ -41,7 +43,10 @@ class Rankunitdropdown extends Component
         $this->selectedRank = NULL;
         $this->selectedUnit = NULL;
         $this->selectedFY = NULL;
-        $this->selectedDivision = NULL;
+        $this->selectedDivision = 1;
+        $this->hasPMMUDivision = false;
+        $this->fys = FinancialYear::all();
+    
     }
 
   
@@ -88,8 +93,16 @@ class Rankunitdropdown extends Component
 
     {
         if (!is_null($selectedUnit)) {
+
+   
+
             $this->unit = $selectedUnit;
+            
             $this->divisions = Unit::find($selectedUnit)->divisions;
+
+            $this->hasPMMUDivision = Unit::find($selectedUnit)->has_pmmu_division;
+
+
             $this->selectedUnit = $selectedUnit;
         }
     }
@@ -98,17 +111,27 @@ class Rankunitdropdown extends Component
 
     {
         if (!is_null($selectedDivision)) {
-            $this->unit = $selectedDivision;
-            $this->fys = FinancialYear::all();
+     
+            
             $this->selectedDivision = $selectedDivision;
         }
+
+        elseif (is_null($selectedDivision)){
+
+    
+            $this->selectedDivision = $selectedDivision;
+
+
+        }
+
     }
 
 
 
     public function updatedSelectedFY($selectedFY){
 
-        if (!is_null($selectedFY)){
+        if (!is_null($selectedFY))
+        {
             $this->selectedFY = $selectedFY;
         
         }
@@ -120,23 +143,21 @@ class Rankunitdropdown extends Component
 
     public function updatedSelectedActivity($selectedActivity){
 
-        if ($selectedActivity=='view-pmmu')  {
+        if ($selectedActivity=='view-pmmu')  
+            {
+                return redirect()->route('pmmu',[$this->selectedRank , $this->selectedUnit ,$this->selectedDivision ,$this->selectedFY]);
 
-        return redirect()->route('pmmu',[$this->selectedRank , $this->selectedUnit ,$this->selectedFY]);
-          
+            }
         
-        }
-        
-        if ($selectedActivity=='update-targets')  {
-            return redirect()->route('update_targets',[$this->selectedRank , $this->selectedUnit ,$this->selectedFY]);
-              
+        if ($selectedActivity=='update-targets')  
+            {
+                return redirect()->route('update_targets',[$this->selectedRank , $this->selectedUnit ,$this->selectedDivision,$this->selectedFY]);
             }
             
-            if ($selectedActivity=='download-scoresheet')  {
-
-                    return redirect()->route('simple_pmmu',[$this->selectedRank , $this->selectedUnit ,$this->selectedFY]);
-                      
-                    }
+        if ($selectedActivity=='download-scoresheet') 
+            {
+                return redirect()->route('simple_pmmu',[$this->selectedRank , $this->selectedUnit ,$this->selectedDivision,$this->selectedFY]);    
+            }
 
     }
 

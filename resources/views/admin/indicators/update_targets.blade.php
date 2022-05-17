@@ -13,10 +13,26 @@
             </div>
             <div class="row">
                 <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-primary">{{ $unit_rank->name }}</span> </div>
-                <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-success">{{ $unit->name }}</span> </div>
+                <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-success">
+                    
+        
+                    @if ($unit->has_pmmu_division ) 
+
+                    {{ $division->name }}  
+
+                    @else 
+                    
+                    
+                    {{ $unit->name }}  
+                    
+                    
+                    @endif
+                
+                
+                </span> </div>
                 <div class="col-sm-3 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-warning">{{ $fy->name  }}</span>  </div>
-                <div class="col-sm-2 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-white"><i class="fas fa-eye"></i>  <a href="{{ route('pmmu', [$unit_rank->id,$unit->id,$fy->id]) }}">Go to PMMU</a></span>  </div>     
-                <div class="col-sm-1 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-white"><i class="fas fa-eye"></i>  <a href="{{ route('unit-ranks.units.fy.indicator-groups.index', [$unit_rank->id,$unit->id,$fy->id]) }}">Edit Indicators </a></span>  </div>           
+                <div class="col-sm-2 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-white"><i class="fas fa-eye"></i>  <a href="{{ route('pmmu', [$unit_rank->id,$unit->id,$division->id,$fy->id]) }}">Go to PMMU</a></span>  </div>     
+                <div class="col-sm-1 m-0 font-weight-bold text-primary"><span class="badge badge-pill badge-white"><i class="fas fa-eye"></i>  <a href="{{ route('unit-ranks.units.divisions.fy.indicator-groups.index', [$unit_rank->id,$unit->id,$division->id,$fy->id]) }}">Edit Indicators </a></span>  </div>           
             </div>
     </div>
 </div>

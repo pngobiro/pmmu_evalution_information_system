@@ -32,7 +32,7 @@ class UsersExport implements  FromView
   
         foreach ( $indicatorgroups as $group){
             foreach ($group->indicators as $indicator){
-            $keyed->push(['court_name'=>$group->unit->name, 'performance_score'=> $indicator->indicator_performance_score,'indicator_name'=>$indicator->master->name,'indicator_target'=> $indicator->indicator_target,'indicator_achievement'=>$indicator->indicator_achivement,'composite_score'=> $indicator->indicator_weighted_score]);
+            $keyed->push(['court_name'=>$group->combined_name, 'performance_score'=> $indicator->indicator_performance_score,'indicator_name'=>$indicator->master->name,'indicator_target'=> $indicator->indicator_target,'indicator_achievement'=>$indicator->indicator_achivement,'composite_score'=> $indicator->indicator_weighted_score]);
 
             }
 
