@@ -240,9 +240,9 @@ class IndicatorController extends Controller
         // orientation landscape 
         PDF::AddPage('L', 'A4');
 
-        //write html to pdf
-
+        // write html to pdf
         
+
 
         
 
