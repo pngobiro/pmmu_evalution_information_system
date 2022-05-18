@@ -50,6 +50,12 @@ class User extends Authenticatable
         'phone_verified_at' => 'datetime',
     ];
 
+    protected $appends = [
+        'role_name',
+        'full_name',
+    ];
+
+
     public function getFullNameAttribute()
     {
       

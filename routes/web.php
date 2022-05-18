@@ -66,7 +66,7 @@ Auth::routes();
 
     Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::get('reports', [ReportsController::class, 'index'])->name('reports');
-    Route::get('reports/excel_reports', [ReportsController::class, 'excel_reports'])->name('excel_reports');
+    Route::get('reports/excel_reports', [ReportsController::class, 'masterExcelReports'])->name('excel_reports');
     Route::get('file-export', [ReportsController::class, 'fileExport'])->name('file-export');
     Route::get('reports/test_reports', [ReportsController::class, 'test_report'])->name('test_report');
     Route::resource('users', UserController::class);
@@ -88,10 +88,11 @@ Auth::routes();
     //Route::resource('unit-ranks.units.fy',UnitController::class);
     Route::resource('unit-ranks.units.fy', FinancialYearController::class)->shallow();
     Route::resource('unit-ranks.fy.rank_category', RankCategoryController::class);
+
+    
     Route::get('unit-ranks/{unit_rank}/fy/{fy}/unit_excel',[ReportsController::class,"unit_excel"])->name('unit_excel');
-    //Route::resource('unit-ranks.units.fy.indicator-groups', IndicatorGroupController::class);
-    Route::get('unit-ranks/{unit_rank}/units/{unit}/division/{division}/fy/{fy}/indicator-groups/simple_pmmu',[IndicatorController::class,"createSimplePmmuPDF"])->name('simple_pmmu');
-    Route::get('unit-ranks/{unit_rank}/units/{unit}/division/{division}/fy/{fy}/indicator-groups/complex_pmmu',[IndicatorController::class,"createComplexPmmuPDF"])->name('complex_pmmu');
+    Route::get('unit-ranks/{unit_rank}/units/{unit}/division/{division}/fy/{fy}/indicator-groups/simple_pmmu',[ReportsController::class,"createSimplePmmuPDF"])->name('simple_pmmu');
+    Route::get('unit-ranks/{unit_rank}/units/{unit}/division/{division}/fy/{fy}/indicator-groups/complex_pmmu',[ReportsController::class,"createComplexPmmuPDF"])->name('complex_pmmu');
 
 
     Route::get('unit-ranks/{unit_rank}/units/{unit}/division/{division}/fy/{fy}/indicator-groups/pmmu',[IndicatorController::class,"preview"])->name('pmmu');
