@@ -1,7 +1,9 @@
 /node_modules
 /public/hot
 /public/storage
-/conf
+/conf/httpd-app.conf
+/conf/httpd-prefix.conf
+/conf/httpd-vhosts.conf
 /storage/*.key
 /vendor
 .env
