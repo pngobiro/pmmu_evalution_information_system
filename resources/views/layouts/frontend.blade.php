@@ -94,7 +94,18 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <b> PERFORMANCE MANAGEMENT & MEASUREMENT UNDERSTANDING ANALYSIS </b>
+                                  <!-- show logo -->
+                    <a class="navbar-brand" href="{{ route('dashboard') }}">
+                        <img src="{{ asset('img/judiciary.png') }}" alt="logo" width="50" height="50">
+                    </a>
+            
+                    <h5 class="ml-4">
+                        <a class="navbar-brand" href="{{ route('dashboard') }}">
+                            <span>{{ config('app.name') }}</span></a>
+                    </h5>
+                                
+
+                    
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -108,7 +119,7 @@
                                     @if (Auth::user()==null)
                                     
                                     @else
-                                    <p>  PJ: {{ Auth::user()->pj_number }} </p>
+                                    <p>  PJ: {{ Auth::user()->pj_number }} <br> Name: {{ Auth::user()->full_name }} </p>
                                     @endif
                                 
                                 
