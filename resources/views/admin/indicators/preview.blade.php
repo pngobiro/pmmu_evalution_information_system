@@ -104,7 +104,7 @@
                     <th scope="col" colspan="7">
                         <!-- sum weighted score for each indicator in the group -->
 
-
+                    
                         Composite Score:: <span class="badge badge-danger">  </span> 
                     </th>
 
@@ -134,7 +134,7 @@
 
 
     <div class="col-sm-3">
-        Composite Score: <span class="badge badge-success">{{ $overall_composite_score }}</span> 
+        Composite Score: <span class="badge badge-success">{{ round($overall_composite_score,3) }}</span> 
     </div>
 
     <div class="col-sm-3">

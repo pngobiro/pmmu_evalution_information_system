@@ -152,11 +152,21 @@ class IndicatorController extends Controller
                         $overall_composite_score+= $indicator->indicator_weighted_score;
                     }
                 }
-                
+
+
+            if ($overall_composite_score >= 1 && $overall_composite_score <= 5) 
+            {
                 $performance = new  IndicatorGraderHelper();
                 $overallScoreGrade  = $performance-> getCompositeScore($overall_composite_score);
+            }
 
-       // sum of $indicatorgroups total weight
+            else 
+            
+            {
+                $overallScoreGrade['score'] = 'N/A';
+                $overallScoreGrade['grade'] = 'N/A';
+                
+            }
 
         $total_indicator_weights = 0;
         foreach ($indicatorgroups as $indicatorgroup) {
