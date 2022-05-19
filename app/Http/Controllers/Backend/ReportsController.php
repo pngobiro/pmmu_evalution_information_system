@@ -208,8 +208,8 @@ class ReportsController extends Controller
        
         </head>
         <body>
-        <div class="header">PERFORMANCE MANAGEMENT AND MEASUREMENT ANALYSIS</div>
-     
+
+        <div class="header">'.config('app.name').'</div>
         <div class="header">'.strtoupper($unit->name).'</div>
         <div class="sub-header">PERFORMANCE FOR THE FINANCIAL YEAR '.$fy->name.'</div>
         <br>

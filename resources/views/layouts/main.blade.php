@@ -122,7 +122,7 @@
 
                    <!-- show logo -->
                     <a class="navbar-brand" href="{{ route('dashboard') }}">
-                        <img src="{{ asset('img/judiciary.png') }}" alt="logo" width="50" height="50">
+                        <img src="{{ asset('img/judiciary.jpg') }}" alt="logo" width="50" height="50">
                     </a>
 
                     <!-- organisation name -->
@@ -229,12 +229,9 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.1.2/dist/alpine.js" defer></script>
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+
     @livewireScripts
 </body>
 
