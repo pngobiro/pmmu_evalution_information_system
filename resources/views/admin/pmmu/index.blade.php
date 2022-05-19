@@ -56,6 +56,7 @@
                             <th scope="col">Indicator Unit of Measure</th>
                             <th scope="col">Indicator Weight</th>
                             <th scope="col">Indicator Target</th>
+                            <th scope="col">Is Backlog</th>
                             <th scope="col">Edit</th>
                          
                         </tr>
@@ -69,6 +70,13 @@
                                 <td>{{ $indicator->measure->name }}</td>
                                 <td><span class="badge badge-primary">{{ $indicator->indicator_weight }}</span> </td>
                                 <td><span class="badge badge-danger">{{ $indicator->indicator_target }}</span></td>
+
+                                <td>
+                                    @if ($indicator->is_backlog_indicator)
+                                        <span class="badge badge-danger">Yes</span>
+                                    @else
+                                        <span class="badge badge-success">No</span>
+                                    @endif
 
                                 <!-- edit indicator pop modal -->
                                 <td>
@@ -142,6 +150,14 @@
                         <input type="number" class="form-control" name="indicator_target" id="indicator_target" placeholder="Indicator Target">
                     </div>
                     <div class="form-group">
+                        <label for="is_backlog_indicator">Is Backlog Indicator</label>
+                        <select class="form-control" name="is_backlog_indicator" id="is_backlog_indicator">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="order">Indicator Order</label>
                         <input type="number" class="form-control" name="order" id="order" placeholder="Indicator Order">
                     </div>
@@ -204,6 +220,13 @@
                     <div class="form-group">
                         <label for="indicator_target">Indicator Target</label>
                         <input type="number" class="form-control" name="indicator_target" id="indicator_target" placeholder="Indicator Target" value="{{ $indicator->indicator_target }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="is_backlog_indicator">Is Backlog Indicator</label>
+                        <select class="form-control" name="is_backlog_indicator" id="is_backlog_indicator">
+                            <option value="0" {{ $indicator->is_backlog_indicator == 0 ? 'selected' : '' }}>No</option>
+                            <option value="1" {{ $indicator->is_backlog_indicator == 1 ? 'selected' : '' }}>Yes</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="order">Indicator Order</label>

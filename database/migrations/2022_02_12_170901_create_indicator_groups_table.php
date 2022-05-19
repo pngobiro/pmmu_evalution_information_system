@@ -22,11 +22,14 @@ class CreateIndicatorGroupsTable extends Migration
             $table->string('name');
             $table->mediumText('description');
             $table->integer('order');
-            $table->dateTime('deleted_at')->nullable();
-            $table->foreignIdFor(Unit::class)->nullable();
-            $table->foreignIdFor(Division::class)->nullable();
-            $table->foreignIdFor(UnitRank::class)->nullable();
-            $table->foreignIdFor(FinancialYear::class)->nullable();
+            $table->foreignIdFor(Unit::class);
+            $table->foreignIdFor(Division::class);
+            $table->foreignIdFor(UnitRank::class);
+            $table->foreignIdFor(FinancialYear::class);
+            $table->integer('indicator_group_created_by');
+            $table->integer('indicator_group_deleted_by')->nullable();
+            $table->softDeletes($column = 'deleted_at', $precision = 0);
+
             $table->timestamps();
         
         });

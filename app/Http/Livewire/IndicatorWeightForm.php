@@ -26,6 +26,7 @@ class IndicatorWeightForm extends Component
     public function updated($name, $value)
     {
         $this->indicator->indicator_weight = $value;
+        $this->indicator->indicator_weight_created_by = auth()->user()->id;
         $this->indicator->save();
         $this->indicator_weight = $this->indicator->indicator_weight ;
 

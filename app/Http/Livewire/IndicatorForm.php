@@ -20,6 +20,7 @@ class IndicatorForm extends Component
 
     public $indicator_graded_score;
 
+
     public function mount($indicator_id) {
         
         $this->indicator = Indicator::find($indicator_id);
@@ -27,7 +28,7 @@ class IndicatorForm extends Component
         $this->indicator_performance_score = $this->indicator->indicator_performance_score;
         $this->indicator_raw_score = $this->indicator->indicator_raw_score;
         $this->indicator_weighted_score = $this->indicator->indicator_weighted_score;
-        $this->indicator_graded_score= $this->indicator->indicator_graded_score;
+        $this->indicator_graded_score = $this->indicator->indicator_graded_score;
 
     }
 
@@ -47,6 +48,7 @@ class IndicatorForm extends Component
 
     public function updated($name, $value) {
         $this->indicator->indicator_achivement = $value;
+        $this->indicator->indicator_achivement_created_by = auth()->user()->id;
         $this->indicator->save();
         $this->indicator_achivement = $this->indicator->indicator_achivement ;
         $this->indicator_performance_score = $this->indicator->indicator_performance_score;

@@ -1,7 +1,9 @@
-@extends('layouts.main')
+@extends('layouts.frontend')
 
 @section('content')
-<!-- display flash message -->
+
+
+<!-- show session message div -->
 @if (session()->has('message'))
 <div class="alert alert-success">
     {{ session('message') }}
@@ -10,7 +12,6 @@
 
 <!-- show message when  internet offline  using livewire-->
 <livewire:offline/>
-
 
 
 

@@ -193,7 +193,7 @@
     </a>
 
     <script src="{{ mix('js/app.js') }}"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    
 
 
     <!-- Custom scripts for all pages-->

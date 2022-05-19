@@ -14,6 +14,7 @@ use App\Models\Indicator;
 use App\Models\IndicatorType;
 use App\Models\IndicatorUnitOfMeasure;
 use App\Models\FinancialYear;
+use Illuminate\Support\Facades\Auth;
 
 
 use Illuminate\Http\Request;
@@ -55,7 +56,7 @@ class PmmuController extends Controller
 
     }
 
-    public function store(UnitRank $unit_rank ,Unit $unit, FinancialYear $fy ,IndicatorGroup $indicator_group, Request $request){
+    public function store(UnitRank $unit_rank ,Unit $unit,Division $division, FinancialYear $fy ,IndicatorGroup $indicator_group, Request $request){
 
 
         Indicator::create([
@@ -69,11 +70,13 @@ class PmmuController extends Controller
                  'unit_rank_id'                  => $unit_rank->id,
                  'indicator_group_id'            => $indicator_group->id,
                  'master_indicator_id'           => $indicator_group->master_indicator_id,
+                 'indicator_created_by'          => Auth::user()->id,
+                 'is_backlog_indicator'          => $request->is_backlog_indicator,
                  
 
         ]);
  
-         return redirect()->route('unit-ranks.units.fy.indicator-groups.indicators.index',[$unit_rank->id, $unit->id, $fy->id,$indicator_group->id])->with('message', 'Indicator Created Successfully');
+         return redirect()->route('unit-ranks.units.divisions.fy.indicator-groups.indicators.index',[$unit_rank->id, $unit->id,$division, $fy->id,$indicator_group->id])->with('message', 'Indicator Created Successfully');
  
          
      }
@@ -94,7 +97,7 @@ class PmmuController extends Controller
     }
 
 
-    public function update(UnitRank $unit_rank ,Unit $unit, FinancialYear $fy ,IndicatorGroup $indicator_group, Indicator $indicator,UpdateIndicatorRequest $request){
+    public function update(UnitRank $unit_rank ,Unit $unit,Division $division ,FinancialYear $fy ,IndicatorGroup $indicator_group, Indicator $indicator,UpdateIndicatorRequest $request){
 
 
 
@@ -107,12 +110,14 @@ class PmmuController extends Controller
             'indicator_type_id'             => $request->indicator_type_id,
             'indicator_weight'              => $request->indicator_weight,
             'master_indicator_id'           => $request->master_indicator_id,
+            'is_backlog_indicator'          => $request->is_backlog_indicator,
+
         ]);
 
 
       
 
-        return redirect()->route('unit-ranks.units.fy.indicator-groups.indicators.index',[$unit_rank->id,$unit->id ,$fy->id,$indicator_group->id])->with('message', 'Indicator Updated Successfully');
+        return redirect()->route('unit-ranks.units.divisions.fy.indicator-groups.indicators.index',[$unit_rank->id,$unit->id, $division,$fy->id,$indicator_group->id])->with('message', 'Indicator Updated Successfully');
 
     }
 
