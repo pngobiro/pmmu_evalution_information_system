@@ -30,7 +30,8 @@ class UpdateIndicatorRequest extends FormRequest
             'indicator_type_id'             => ['required','numeric','min:1'],
             'indicator_unit_of_measure_id'  => ['required','numeric','min:1'],
             'indicator_target'              => ['required','numeric','min:1'],
-            'is_backlog_indicator'         => ['required','boolean'],
+            'is_backlog_indicator'          => ['required','boolean'],
+            'remarks'                       => ['nullable','string'],
          
             
         ];
