@@ -20,8 +20,9 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{ asset('css/sb-admin.min.css') }}" rel="stylesheet">
-    @livewireStyles
+    <link href="<?php echo e(asset('css/sb-admin.min.css')); ?>" rel="stylesheet">
+    <?php echo \Livewire\Livewire::styles(); ?>
+
 </head>
 
 <body id="page-top">
@@ -42,7 +43,7 @@
             <hr class="sidebar-divider">
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin-dashboard') }}">
+                <a class="nav-link" href="<?php echo e(route('admin-dashboard')); ?>">
                     <span>Go to Admin Dashboard</span></a>
             </li>
 
@@ -64,11 +65,11 @@
                 <div id="collapseUserAccount" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- if user is null redirect login form -->
-                        @if(Auth::user())
-                            <a class="collapse-item" href="{{ route('user_change_password_form',Auth::user()->id) }}">Change Password</a>
-                        @else
-                            <a class="collapse-item" href="{{ route('login') }}">Login</a>
-                        @endif
+                        <?php if(Auth::user()): ?>
+                            <a class="collapse-item" href="<?php echo e(route('user_change_password_form',Auth::user()->id)); ?>">Change Password</a>
+                        <?php else: ?>
+                            <a class="collapse-item" href="<?php echo e(route('login')); ?>">Login</a>
+                        <?php endif; ?>
 
                     </div>
                 </div>
@@ -100,13 +101,13 @@
                     </button>
 
                                   <!-- show logo -->
-                    <a class="navbar-brand" href="{{ route('dashboard') }}">
-                        <img src="{{ asset('img/judiciary.png') }}" alt="logo" width="50" height="50">
+                    <a class="navbar-brand" href="<?php echo e(route('dashboard')); ?>">
+                        <img src="<?php echo e(asset('img/judiciary.png')); ?>" alt="logo" width="50" height="50">
                     </a>
             
                     <h5 class="ml-4">
-                        <a class="navbar-brand" href="{{ route('dashboard') }}">
-                            <span>{{ config('app.name') }}</span></a>
+                        <a class="navbar-brand" href="<?php echo e(route('dashboard')); ?>">
+                            <span><?php echo e(config('app.name')); ?></span></a>
                     </h5>
                                 
 
@@ -121,11 +122,11 @@
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     
                         
-                                    @if (Auth::user()==null)
+                                    <?php if(Auth::user()==null): ?>
                                     
-                                    @else
-                                    <p>  PJ: {{ Auth::user()->pj_number }} <br> Name: {{ Auth::user()->full_name }} </p>
-                                    @endif
+                                    <?php else: ?>
+                                    <p>  PJ: <?php echo e(Auth::user()->pj_number); ?> <br> Name: <?php echo e(Auth::user()->full_name); ?> </p>
+                                    <?php endif; ?>
                                 
                                 
                                 </span>
@@ -149,13 +150,13 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <a class="dropdown-item" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
+                                <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
+                                    <?php echo csrf_field(); ?>
                                 </form>
                             </div>
                         </li>
@@ -167,7 +168,7 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    @yield('content')
+                    <?php echo $__env->yieldContent('content'); ?>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -179,7 +180,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; {{date('Y')}} The Chief Registrar of The Judiciary, Supreme Court of Kenya,
+                        <span>Copyright &copy; <?php echo e(date('Y')); ?> The Chief Registrar of The Judiciary, Supreme Court of Kenya,
                             City Hall Way, P.O. BOX 30041-00100, Nairobi-Kenya. info@judiciary.go.ke  </span>
                     </div>
                 </div>
@@ -198,16 +199,17 @@
     </a>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="<?php echo e(mix('js/app.js')); ?>"></script>
 
 
     <!-- Custom scripts for all pages-->
-    <script src="{{ asset('js/sb-admin.min.js') }}"></script>
+    <script src="<?php echo e(asset('js/sb-admin.min.js')); ?>"></script>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
    
 
-    @livewireScripts
+    <?php echo \Livewire\Livewire::scripts(); ?>
+
 </body>
 
-</html>
+</html><?php /**PATH /home/ngobiro/lampstack-8.1.2-0/frameworks/laravel/resources/views/layouts/frontend.blade.php ENDPATH**/ ?>

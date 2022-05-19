@@ -20,8 +20,9 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{ asset('css/sb-admin.min.css') }}" rel="stylesheet">
-    @livewireStyles
+    <link href="<?php echo e(asset('css/sb-admin.min.css')); ?>" rel="stylesheet">
+    <?php echo \Livewire\Livewire::styles(); ?>
+
 </head>
 
 <body id="page-top">
@@ -35,41 +36,30 @@
             <li class="nav-item active">
                 <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Admin Dashboard</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin-dashboard') }}">
-                    <span>Go to Admin Dashboard</span></a>
+                <a class="nav-link" href="<?php echo e(route('dashboard')); ?>">
+                    <span>User Dashboard</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Pages Collapse Menu -->
-           
-
-           
-
-            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUserAccount"
-                    aria-expanded="true" aria-controls="collapseUserAccount">
-                    <i class="fas fa-fw fa-user "></i>
-                    <span>My Account</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSystem"
+                    aria-expanded="true" aria-controls="collapseSystem">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>System Management</span>
                 </a>
-                <div id="collapseUserAccount" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseSystem" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <!-- if user is null redirect login form -->
-                        @if(Auth::user())
-                            <a class="collapse-item" href="{{ route('user_change_password_form',Auth::user()->id) }}">Change Password</a>
-                        @else
-                            <a class="collapse-item" href="{{ route('login') }}">Login</a>
-                        @endif
-
+                        <a class="collapse-item" href="<?php echo e(route('unit-ranks.index')); ?>">Manage Unit Rank</a>
                     </div>
                 </div>
             </li>
@@ -79,8 +69,40 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-            
-             
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser"
+                    aria-expanded="true" aria-controls="collapseUser">
+                    <i class="fas fa-fw fa-user "></i>
+                    <span>Users Management</span>
+                </a>
+                <div id="collapseUser" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<?php echo e(route('users.index')); ?>">Users</a>
+                        <a class="collapse-item" href="cards.html">Role</a>
+                        <a class="collapse-item" href="cards.html">Permission</a>
+                    </div>
+                </div>
+            </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReports"
+                    aria-expanded="true" aria-controls="collapseReports">
+                    <i class="fas fa-fw fa-file"></i>
+                    <span>Reports</span>
+                </a>
+                <div id="collapseReports" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<?php echo e(route('excel_reports')); ?>">Master Excel </a>
+                    </div>
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<?php echo e(route('excel_reports')); ?>">Court Trends</a>
+                    </div>
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<?php echo e(route('excel_reports')); ?>">Indicator Trends</a>
+                    </div>
+                </div>
+                
             </li>
         </ul>
         <!-- End of Sidebar -->
@@ -99,40 +121,46 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                                  <!-- show logo -->
-                    <a class="navbar-brand" href="{{ route('dashboard') }}">
-                        <img src="{{ asset('img/judiciary.png') }}" alt="logo" width="50" height="50">
+                   <!-- show logo -->
+                    <a class="navbar-brand" href="<?php echo e(route('dashboard')); ?>">
+                        <img src="<?php echo e(asset('img/judiciary.png')); ?>" alt="logo" width="50" height="50">
                     </a>
-            
-                    <h5 class="ml-4">
-                        <a class="navbar-brand" href="{{ route('dashboard') }}">
-                            <span>{{ config('app.name') }}</span></a>
-                    </h5>
-                                
 
-                    
+                    <!-- organisation name -->
+                    <h5 class="ml-4">
+                        <a class="navbar-brand" href="<?php echo e(route('dashboard')); ?>">
+                            <span><?php echo e(config('app.name')); ?></span>
+                        </a>
+                    </h5>
+
+                   
+
+
+
+
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    
-                        
-                                    @if (Auth::user()==null)
-                                    
-                                    @else
-                                    <p>  PJ: {{ Auth::user()->pj_number }} <br> Name: {{ Auth::user()->full_name }} </p>
-                                    @endif
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                 
+                    
+                                <?php if(Auth::user()==null): ?>
                                 
-                                </span>
-                                
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
-                            </a>
+                                <?php else: ?>
+                                <p>  PJ: <?php echo e(Auth::user()->pj_number); ?> <br> Name: <?php echo e(Auth::user()->full_name); ?> </p>
+
+                                <?php endif; ?>
+                            
+                            
+                            </span>
+                            
+                            <img class="img-profile rounded-circle"
+                                src="img/undraw_profile.svg">
+                        </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
@@ -149,13 +177,13 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <a class="dropdown-item" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
+                                <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
+                                    <?php echo csrf_field(); ?>
                                 </form>
                             </div>
                         </li>
@@ -167,7 +195,7 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    @yield('content')
+                    <?php echo $__env->yieldContent('content'); ?>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -179,7 +207,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; {{date('Y')}} The Chief Registrar of The Judiciary, Supreme Court of Kenya,
+                        <span>Copyright &copy; <?php echo e(date('Y')); ?> The Chief Registrar of The Judiciary, Supreme Court of Kenya,
                             City Hall Way, P.O. BOX 30041-00100, Nairobi-Kenya. info@judiciary.go.ke  </span>
                     </div>
                 </div>
@@ -198,16 +226,16 @@
     </a>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ mix('js/app.js') }}"></script>
-
+    <script src="<?php echo e(mix('js/app.js')); ?>"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{{ asset('js/sb-admin.min.js') }}"></script>
+    <script src="<?php echo e(asset('js/sb-admin.min.js')); ?>"></script>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-   
 
-    @livewireScripts
+    <?php echo \Livewire\Livewire::scripts(); ?>
+
 </body>
 
 </html>
+<?php /**PATH /home/ngobiro/lampstack-8.1.2-0/frameworks/laravel/resources/views/layouts/main.blade.php ENDPATH**/ ?>

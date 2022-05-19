@@ -12,15 +12,23 @@
     "devDependencies": {
         "@vue/compiler-sfc": "^3.2.31",
         "axios": "^0.21",
-        "bootstrap": "^4.6.0",
+        "bootstrap": "^4.6.1",
         "jquery": "^3.6",
-        "laravel-mix": "^6.0.43",
+        "laravel-mix": "^6.0.0-beta.17",
         "lodash": "^4.17.19",
         "popper.js": "^1.16.1",
         "postcss": "^8.1.14",
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1",
-        "webpack-dev-server": "^4.9.0"
+        "vue": "^3.2.29",
+        "vue-loader": "^17.0.0",
+        "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "@types/jquery": "^3.5.14",
+        "moment": "^2.29.1",
+        "vue-router": "^3.5.1",
+        "vuejs-datepicker": "^1.6.2"
     }
 }
