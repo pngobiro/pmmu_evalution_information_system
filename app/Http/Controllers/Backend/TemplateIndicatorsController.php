@@ -83,6 +83,7 @@ class TemplateIndicatorsController extends Controller
             'master_indicator_id'                             =>   $request->master_indicator_id,
             'remarks'                                         =>   $request->remarks,
             'order'                                           =>   $request->order,
+            'is_backlog_indicator'                            =>   $request->is_backlog_indicator,
 
         ]);
 

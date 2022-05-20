@@ -29,7 +29,8 @@ class StoreTemplateIndicatorRequest extends FormRequest
             'indicator_weight'              => ['required','numeric','min:1'],
             'indicator_type_id'             => ['required','numeric','min:1'],
             'indicator_unit_of_measure_id'  => ['required','numeric','min:1'],
-            'master_indicator_id'           => ['required','numeric','min:1']
+            'master_indicator_id'           => ['required','numeric','min:1'],
+            'is_backlog_indicator'          => ['required','boolean'],
             
 
         ];
@@ -48,6 +49,8 @@ class StoreTemplateIndicatorRequest extends FormRequest
             'indicator_type_id.min' => 'The Indicator type is too short',
             'indicator_unit_of_measure_id.required' => 'An indicator unit of measure is required',
             'master_indicator_id.required' => 'A master indicator is required',
+            
+
         ];
     }
     public function attributes()
@@ -59,6 +62,7 @@ class StoreTemplateIndicatorRequest extends FormRequest
             'indicator_type_id' => 'Indicator Type',
             'indicator_unit_of_measure_id' => 'Indicator Unit of Measure',
             'master_indicator_id' => 'Master Indicator',
+            'is_backlog_indicator' => 'Is Backlog Indicator',
         ];
     }
 

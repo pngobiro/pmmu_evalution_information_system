@@ -102,7 +102,7 @@
 
                                   <!-- show logo -->
                     <a class="navbar-brand" href="<?php echo e(route('dashboard')); ?>">
-                        <img src="<?php echo e(asset('img/judiciary.png')); ?>" alt="logo" width="50" height="50">
+                        <img src="<?php echo e(asset('img/judiciary.jpg')); ?>" alt="logo" width="50" height="50">
                     </a>
             
                     <h5 class="ml-4">
@@ -198,16 +198,13 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Bootstrap core JavaScript-->
     <script src="<?php echo e(mix('js/app.js')); ?>"></script>
+    
+
 
 
     <!-- Custom scripts for all pages-->
     <script src="<?php echo e(asset('js/sb-admin.min.js')); ?>"></script>
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-   
-
     <?php echo \Livewire\Livewire::scripts(); ?>
 
 </body>

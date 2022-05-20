@@ -64,6 +64,7 @@
                             <th scope="col">Indicator Type</th>
                             <th scope="col">Indicator Unit of Measure</th>
                             <th scope="col">Indicator Weight</th>
+                            <th scope="col">Is Backlog</th>
                             <th scope="col">Edit</th>
                          
                         </tr>
@@ -77,6 +78,12 @@
                                 <td>{{ $indicator->type->name }}</td>
                                 <td>{{ $indicator->measure->name }}</td>
                                 <td><span class="badge badge-pill badge-info">{{ $indicator->indicator_weight }}</span></td>
+                                <td>
+                                    @if ($indicator->is_backlog_indicator == 1)
+                                        <span class="badge badge-pill badge-success">Yes</span>
+                                    @else
+                                        <span class="badge badge-pill badge-danger">No</span>
+                                    @endif
                            
 
 
@@ -242,6 +249,20 @@
                         <input type="number" class="form-control" name="order" id="order" aria-describedby="emailHelp"
                             placeholder="Enter Indicator Order" required value="{{ $indicator->order }}">
                     </div>
+
+                    <!-- IS BACKLOG INDICATOR-->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Is Backlog Indicator</label>
+                        <select class="form-control" name="is_backlog_indicator" id="is_backlog_indicator" aria-describedby="emailHelp"
+                            placeholder="Enter Indicator Order" required>
+                            <option value="0" @if($indicator->is_backlog_indicator == 0) selected @endif>No</option>
+                            <option value="1" @if($indicator->is_backlog_indicator == 1) selected @endif>Yes</option>
+                        </select>
+                    </div>
+
+
+
+
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

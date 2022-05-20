@@ -13,6 +13,7 @@ use App\Models\TemplateIndicatorGroup;
 use Illuminate\Http\Request;
 use PDF;
 use App\Lib\IndicatorGraderHelper;
+use Illuminate\Support\Facades\Auth;
 
 class IndicatorController extends Controller
 {
@@ -57,12 +58,14 @@ class IndicatorController extends Controller
 
     {
         IndicatorGroup::create([
-            'name' =>               $request->name,
-            'description' =>        $request->description,
-            'order' =>              $request->order,
-            'unit_rank_id' =>       $unit_rank->id,
-            'unit_id'     =>        $unit->id,
-            'financial_year_id' =>  $fy->id,
+            'name' =>                           $request->name,
+            'description' =>                    $request->description,
+            'order' =>                          $request->order,
+            'unit_rank_id' =>                   $unit_rank->id,
+            'unit_id'     =>                    $unit->id,
+            'division_id' =>                    $division->id,
+            'financial_year_id' =>              $fy->id,
+            'indicator_group_created_by' =>     Auth::user()->id,
         ]);
 
         return redirect()->route('unit-ranks.units.fy.indicator-groups.index',[$unit_rank->id ,$unit->id,$fy->id])->with('message', 'Group Registered Succesfully');
@@ -190,14 +193,15 @@ class IndicatorController extends Controller
 
      if (!$template_group->isEmpty() &&    ($indicatorgroups->isEmpty())){
         foreach ($template_group as $group ){
-                $new_group                     = new IndicatorGroup();
-                $new_group->name               = $group->name;
-                $new_group->description        = $group->description;
-                $new_group->order              = $group->order;
-                $new_group->unit_rank_id       = $unit_rank->id;
-                $new_group->unit_id            = $unit->id;
-                $new_group->division_id        = $division->id;
-                $new_group->financial_year_id  = $fy->id;
+                $new_group                              = new IndicatorGroup();
+                $new_group->name                        = $group->name;
+                $new_group->description                 = $group->description;
+                $new_group->order                       = $group->order;
+                $new_group->unit_rank_id                = $unit_rank->id;
+                $new_group->unit_id                     = $unit->id;
+                $new_group->division_id                 = $division->id;
+                $new_group->financial_year_id           = $fy->id;
+                $new_group->indicator_group_created_by  = Auth::user()->id;
             $new_group->save(); 
             foreach ($group->template_indicators as $indicator){
                     $new_indicator                                  = new Indicator();
@@ -208,7 +212,9 @@ class IndicatorController extends Controller
                     $new_indicator->indicator_type_id               = $indicator->indicator_type_id;
                     $new_indicator->indicator_weight                = $indicator->indicator_weight;
                     $new_indicator->indicator_unit_of_measure_id    = $indicator->indicator_unit_of_measure_id;
+                    $new_indicator->is_backlog_indicator            = $indicator->is_backlog_indicator;
                     $new_indicator->order                           = $indicator->order;
+                    $new_indicator->indicator_created_by            = Auth::user()->id;
             $new_group->indicators()->save($new_indicator);
 
             };

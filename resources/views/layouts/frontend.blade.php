@@ -101,7 +101,7 @@
 
                                   <!-- show logo -->
                     <a class="navbar-brand" href="{{ route('dashboard') }}">
-                        <img src="{{ asset('img/judiciary.png') }}" alt="logo" width="50" height="50">
+                        <img src="{{ asset('img/judiciary.jpg') }}" alt="logo" width="50" height="50">
                     </a>
             
                     <h5 class="ml-4">
@@ -122,6 +122,12 @@
                                     
                         
                                     @if (Auth::user()==null)
+
+                                    <!--- if user is null redirect login form -->
+                                    <a class="nav-link" href="{{ route('login') }}">
+                                        <span>Login</span></a>
+                                    </a>
+
                                     
                                     @else
                                     <p>  PJ: {{ Auth::user()->pj_number }} <br> Name: {{ Auth::user()->full_name }} </p>
@@ -197,16 +203,13 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Bootstrap core JavaScript-->
     <script src="{{ mix('js/app.js') }}"></script>
+    
+
 
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin.min.js') }}"></script>
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-   
-
     @livewireScripts
 </body>
 

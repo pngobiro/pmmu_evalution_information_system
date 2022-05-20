@@ -6,16 +6,20 @@
     <p class="lead"><span class="badge badge-pill badge-primary">Group :</span>  <?php echo e($indicator_group->name); ?></p>
   </div>
 
+  <!-- show flash message if session contains message-->
+    <?php if(Session::has('message')): ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> <?php echo e(Session::get('message')); ?>
+
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php endif; ?>
+    
+
 <div class="row">
     <div class="card  mx-auto">
-        <div>
-            <?php if(session()->has('message')): ?>
-                <div class="alert alert-success">
-                    <?php echo e(session('message')); ?>
-
-                </div>
-            <?php endif; ?>
-        </div>
         <div class="card-header">
             <div class="row">
                 <div class="col">
@@ -55,6 +59,7 @@
                             <th scope="col">Indicator Unit of Measure</th>
                             <th scope="col">Indicator Weight</th>
                             <th scope="col">Indicator Target</th>
+                            <th scope="col">Is Backlog</th>
                             <th scope="col">Edit</th>
                          
                         </tr>
@@ -68,6 +73,13 @@
                                 <td><?php echo e($indicator->measure->name); ?></td>
                                 <td><span class="badge badge-primary"><?php echo e($indicator->indicator_weight); ?></span> </td>
                                 <td><span class="badge badge-danger"><?php echo e($indicator->indicator_target); ?></span></td>
+
+                                <td>
+                                    <?php if($indicator->is_backlog_indicator): ?>
+                                        <span class="badge badge-danger">Yes</span>
+                                    <?php else: ?>
+                                        <span class="badge badge-success">No</span>
+                                    <?php endif; ?>
 
                                 <!-- edit indicator pop modal -->
                                 <td>
@@ -117,16 +129,16 @@
                         <input type="text" class="form-control" name="name" id="name" placeholder="Indicator Name">
                     </div>
                     <div class="form-group">
-                        <label for="type">Indicator Type</label>
-                        <select class="form-control" name="type_id" id="type">
+                        <label for="indicator_type_id">Indicator Type</label>
+                        <select class="form-control" name="indicator_type_id" id="indicator_type_id">
                             <?php $__currentLoopData = $types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $indicator_type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($indicator_type->id); ?>"><?php echo e($indicator_type->name); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="measure">Indicator Unit of Measure</label>
-                        <select class="form-control" name="measure_id" id="measure">
+                        <label for="indicator_unit_of_measure_id">Indicator Unit of Measure</label>
+                        <select class="form-control" name="indicator_unit_of_measure_id" id="indicator_unit_of_measure_id">
                             <?php $__currentLoopData = $measures; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $measure): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($measure->id); ?>"><?php echo e($measure->name); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -140,6 +152,14 @@
                         <label for="indicator_target">Indicator Target</label>
                         <input type="number" class="form-control" name="indicator_target" id="indicator_target" placeholder="Indicator Target">
                     </div>
+                    <div class="form-group">
+                        <label for="is_backlog_indicator">Is Backlog Indicator</label>
+                        <select class="form-control" name="is_backlog_indicator" id="is_backlog_indicator">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="order">Indicator Order</label>
                         <input type="number" class="form-control" name="order" id="order" placeholder="Indicator Order">
@@ -182,7 +202,7 @@
                     </div>
                     <div class="form-group">
                         <label for="type">Indicator Type</label>
-                        <select class="form-control" name="type_id" id="type">
+                        <select class="form-control" name="indicator_type_id" id="indicator_type_id">
                             <?php $__currentLoopData = $types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $indicator_type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($indicator_type->id); ?>" <?php echo e($indicator->type_id == $indicator_type->id ? 'selected' : ''); ?>><?php echo e($indicator_type->name); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -190,7 +210,7 @@
                     </div>
                     <div class="form-group">
                         <label for="measure">Indicator Unit of Measure</label>
-                        <select class="form-control" name="measure" id="measure">
+                        <select class="form-control" name="indicator_unit_of_measure_id" id="indicator_unit_of_measure_id">
                             <?php $__currentLoopData = $measures; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $measure): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($measure->id); ?>" <?php echo e($indicator->measure_id == $measure->id ? 'selected' : ''); ?>><?php echo e($measure->name); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -203,6 +223,13 @@
                     <div class="form-group">
                         <label for="indicator_target">Indicator Target</label>
                         <input type="number" class="form-control" name="indicator_target" id="indicator_target" placeholder="Indicator Target" value="<?php echo e($indicator->indicator_target); ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="is_backlog_indicator">Is Backlog Indicator</label>
+                        <select class="form-control" name="is_backlog_indicator" id="is_backlog_indicator">
+                            <option value="0" <?php echo e($indicator->is_backlog_indicator == 0 ? 'selected' : ''); ?>>No</option>
+                            <option value="1" <?php echo e($indicator->is_backlog_indicator == 1 ? 'selected' : ''); ?>>Yes</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="order">Indicator Order</label>

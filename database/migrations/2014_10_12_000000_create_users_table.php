@@ -26,7 +26,8 @@ class CreateUsersTable extends Migration
             $table->string('role')->nullable();
             $table->string('password');
             $table->boolean('is_active')->default(true);
-            $table->dateTime('deleted_at')->nullable();
+            $table->softDeletes($column = 'deleted_at', $precision = 0);
+            $table->unsignedBigInteger('deleted_by')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

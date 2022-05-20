@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 
@@ -91,5 +90,4 @@
     </div>
 </body>
 
-</html>
-<?php /**PATH /home/ngobiro/lampstack-8.1.2-0/frameworks/laravel/resources/views/layouts/app.blade.php ENDPATH**/ ?>
+</html><?php /**PATH /home/ngobiro/lampstack-8.1.2-0/frameworks/laravel/resources/views/layouts/app.blade.php ENDPATH**/ ?>

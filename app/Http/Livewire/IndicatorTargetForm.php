@@ -24,6 +24,7 @@ class IndicatorTargetForm extends Component
 
     public function updated($name, $value) {
         $this->indicator->indicator_target = $value;
+        $this->indicator->indicator_target_created_by = auth()->user()->id;
         $this->indicator->save();
         $this->indicator_target = $this->indicator->indicator_target ;
 

@@ -8,15 +8,19 @@
     <p class="lead"><span class="badge badge-pill badge-primary">Group :</span>  {{  $indicator_group->name }}</p>
   </div>
 
+  <!-- show flash message if session contains message-->
+    @if (Session::has('message'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> {{ Session::get('message') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+    
+
 <div class="row">
     <div class="card  mx-auto">
-        <div>
-            @if (session()->has('message'))
-                <div class="alert alert-success">
-                    {{ session('message') }}
-                </div>
-            @endif
-        </div>
         <div class="card-header">
             <div class="row">
                 <div class="col">
@@ -56,6 +60,7 @@
                             <th scope="col">Indicator Unit of Measure</th>
                             <th scope="col">Indicator Weight</th>
                             <th scope="col">Indicator Target</th>
+                            <th scope="col">Is Backlog</th>
                             <th scope="col">Edit</th>
                          
                         </tr>
@@ -69,6 +74,13 @@
                                 <td>{{ $indicator->measure->name }}</td>
                                 <td><span class="badge badge-primary">{{ $indicator->indicator_weight }}</span> </td>
                                 <td><span class="badge badge-danger">{{ $indicator->indicator_target }}</span></td>
+
+                                <td>
+                                    @if ($indicator->is_backlog_indicator)
+                                        <span class="badge badge-danger">Yes</span>
+                                    @else
+                                        <span class="badge badge-success">No</span>
+                                    @endif
 
                                 <!-- edit indicator pop modal -->
                                 <td>
@@ -118,16 +130,16 @@
                         <input type="text" class="form-control" name="name" id="name" placeholder="Indicator Name">
                     </div>
                     <div class="form-group">
-                        <label for="type">Indicator Type</label>
-                        <select class="form-control" name="type_id" id="type">
+                        <label for="indicator_type_id">Indicator Type</label>
+                        <select class="form-control" name="indicator_type_id" id="indicator_type_id">
                             @foreach ($types as $indicator_type)
                                 <option value="{{ $indicator_type->id }}">{{ $indicator_type->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="measure">Indicator Unit of Measure</label>
-                        <select class="form-control" name="measure_id" id="measure">
+                        <label for="indicator_unit_of_measure_id">Indicator Unit of Measure</label>
+                        <select class="form-control" name="indicator_unit_of_measure_id" id="indicator_unit_of_measure_id">
                             @foreach ($measures as $measure)
                                 <option value="{{ $measure->id }}">{{ $measure->name }}</option>
                             @endforeach
@@ -141,6 +153,14 @@
                         <label for="indicator_target">Indicator Target</label>
                         <input type="number" class="form-control" name="indicator_target" id="indicator_target" placeholder="Indicator Target">
                     </div>
+                    <div class="form-group">
+                        <label for="is_backlog_indicator">Is Backlog Indicator</label>
+                        <select class="form-control" name="is_backlog_indicator" id="is_backlog_indicator">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="order">Indicator Order</label>
                         <input type="number" class="form-control" name="order" id="order" placeholder="Indicator Order">
@@ -183,7 +203,7 @@
                     </div>
                     <div class="form-group">
                         <label for="type">Indicator Type</label>
-                        <select class="form-control" name="type_id" id="type">
+                        <select class="form-control" name="indicator_type_id" id="indicator_type_id">
                             @foreach ($types as $indicator_type)
                                 <option value="{{ $indicator_type->id }}" {{ $indicator->type_id == $indicator_type->id ? 'selected' : '' }}>{{ $indicator_type->name }}</option>
                             @endforeach
@@ -191,7 +211,7 @@
                     </div>
                     <div class="form-group">
                         <label for="measure">Indicator Unit of Measure</label>
-                        <select class="form-control" name="measure" id="measure">
+                        <select class="form-control" name="indicator_unit_of_measure_id" id="indicator_unit_of_measure_id">
                             @foreach ($measures as $measure)
                                 <option value="{{ $measure->id }}" {{ $indicator->measure_id == $measure->id ? 'selected' : '' }}>{{ $measure->name }}</option>
                             @endforeach
@@ -204,6 +224,13 @@
                     <div class="form-group">
                         <label for="indicator_target">Indicator Target</label>
                         <input type="number" class="form-control" name="indicator_target" id="indicator_target" placeholder="Indicator Target" value="{{ $indicator->indicator_target }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="is_backlog_indicator">Is Backlog Indicator</label>
+                        <select class="form-control" name="is_backlog_indicator" id="is_backlog_indicator">
+                            <option value="0" {{ $indicator->is_backlog_indicator == 0 ? 'selected' : '' }}>No</option>
+                            <option value="1" {{ $indicator->is_backlog_indicator == 1 ? 'selected' : '' }}>Yes</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="order">Indicator Order</label>

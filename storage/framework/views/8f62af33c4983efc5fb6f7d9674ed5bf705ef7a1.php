@@ -123,7 +123,7 @@
 
                    <!-- show logo -->
                     <a class="navbar-brand" href="<?php echo e(route('dashboard')); ?>">
-                        <img src="<?php echo e(asset('img/judiciary.png')); ?>" alt="logo" width="50" height="50">
+                        <img src="<?php echo e(asset('img/judiciary.jpg')); ?>" alt="logo" width="50" height="50">
                     </a>
 
                     <!-- organisation name -->

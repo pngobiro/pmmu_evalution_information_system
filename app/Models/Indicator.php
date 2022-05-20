@@ -19,7 +19,8 @@ class Indicator extends Model
         'indicator_weight',
         'indicator_target',
         'indicator_achievement',
-        'order'
+        'order',
+        'is_backlog_indicator'
     ];
 
     protected $appends = [
@@ -37,6 +38,7 @@ class Indicator extends Model
         'indicator_raw_score' => 'float',
         'indicator_weighted_score' => 'float',
         'indicator_graded_score' => 'string',
+        'is_backlog_indicator' => 'boolean',
     ];
 
 
@@ -73,6 +75,7 @@ class Indicator extends Model
         $target         = $this->indicator_target;
         $achivement     = $this->indicator_achivement;       
      
+
 
         switch ( $this->indicator_type_id) {
             case 1:
@@ -133,9 +136,8 @@ class Indicator extends Model
                    
             }
 
-    
+        }
     }
-}
 
 
 
@@ -157,13 +159,11 @@ class Indicator extends Model
     public function getIndicatorWeightedScoreAttribute()
     
     {
-
-            if (!$this->indicator_achivement==NULL)
-            {        
-                    if (!$this->indicator_raw_score==NULL){
-                        return ($this->indicator_raw_score * $this->indicator_weight)/100;
-                    }
-            }
+        if (!$this->indicator_raw_score==NULL)
+        {
+            return ($this->indicator_raw_score * $this->indicator_weight)/100;
+        }
+        
     }
 
 
@@ -173,7 +173,7 @@ class Indicator extends Model
         $target         = $this->indicator_target;
         $achivement     = $this->indicator_achivement;
         
-        if (!$target==NULL){
+        if (!$target==NULL && !$achivement==NULL){
             $score = $achivement/$target*100;
             $max_score = (2*$target)/($target*100);
         }
@@ -185,6 +185,8 @@ class Indicator extends Model
             $declining_score = $target/$achivement*100;
         }
 
+        if ($this->is_backlog_indicator==false){
+            
         switch ($this->indicator_type_id) {
             case 1:
             //special indicator. Score Not above 100%
@@ -227,18 +229,29 @@ class Indicator extends Model
                     return $declining_score;
                 }
 
-                   
-                
                  
             }
-              break;
+              
           }
+
+
         }
 
+        else
+        {
 
- 
+            if ($target >= $achivement){
+                return 100;
+            }
 
+            elseif ($target < $achivement){
 
+                return 0;
+            }
+
+        }
+
+        }
 
 
 }

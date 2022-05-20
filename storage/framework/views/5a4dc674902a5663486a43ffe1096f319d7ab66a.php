@@ -1,5 +1,7 @@
 <?php $__env->startSection('content'); ?>
-<!-- display flash message -->
+
+
+<!-- show session message div -->
 <?php if(session()->has('message')): ?>
 <div class="alert alert-success">
     <?php echo e(session('message')); ?>
@@ -11,19 +13,18 @@
 <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('offline', [])->html();
-} elseif ($_instance->childHasBeenRendered('QUFc58S')) {
-    $componentId = $_instance->getRenderedChildComponentId('QUFc58S');
-    $componentTag = $_instance->getRenderedChildComponentTagName('QUFc58S');
+} elseif ($_instance->childHasBeenRendered('fcGBafm')) {
+    $componentId = $_instance->getRenderedChildComponentId('fcGBafm');
+    $componentTag = $_instance->getRenderedChildComponentTagName('fcGBafm');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('QUFc58S');
+    $_instance->preserveRenderedChild('fcGBafm');
 } else {
     $response = \Livewire\Livewire::mount('offline', []);
     $html = $response->html();
-    $_instance->logRenderedChild('QUFc58S', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('fcGBafm', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
-
 
 
 
@@ -104,15 +105,15 @@ echo $html;
                         <td> <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('indicator-form', ['indicatorId' => $indicator->id,'indicator_id' => $indicator->id])->html();
-} elseif ($_instance->childHasBeenRendered('twbQOsh')) {
-    $componentId = $_instance->getRenderedChildComponentId('twbQOsh');
-    $componentTag = $_instance->getRenderedChildComponentTagName('twbQOsh');
+} elseif ($_instance->childHasBeenRendered('DzUjZxP')) {
+    $componentId = $_instance->getRenderedChildComponentId('DzUjZxP');
+    $componentTag = $_instance->getRenderedChildComponentTagName('DzUjZxP');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('twbQOsh');
+    $_instance->preserveRenderedChild('DzUjZxP');
 } else {
     $response = \Livewire\Livewire::mount('indicator-form', ['indicatorId' => $indicator->id,'indicator_id' => $indicator->id]);
     $html = $response->html();
-    $_instance->logRenderedChild('twbQOsh', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('DzUjZxP', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>  </td>
@@ -247,4 +248,4 @@ s
 
 
 
-<?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/ngobiro/lampstack-8.1.2-0/frameworks/laravel/resources/views/admin/indicators/preview.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.frontend', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/ngobiro/lampstack-8.1.2-0/frameworks/laravel/resources/views/admin/indicators/preview.blade.php ENDPATH**/ ?>

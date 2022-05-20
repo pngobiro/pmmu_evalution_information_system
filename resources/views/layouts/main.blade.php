@@ -122,7 +122,7 @@
 
                    <!-- show logo -->
                     <a class="navbar-brand" href="{{ route('dashboard') }}">
-                        <img src="{{ asset('img/judiciary.png') }}" alt="logo" width="50" height="50">
+                        <img src="{{ asset('img/judiciary.jpg') }}" alt="logo" width="50" height="50">
                     </a>
 
                     <!-- organisation name -->
