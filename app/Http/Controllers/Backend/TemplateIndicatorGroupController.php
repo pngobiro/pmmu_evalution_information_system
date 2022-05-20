@@ -17,21 +17,11 @@ class TemplateIndicatorGroupController extends Controller
     public function index(Request $request ,UnitRank $unit_rank,FinancialYear $fy , RankCategory $rank_category)
 
     {
-        //list all template groups where unit_ranks   and rank_category and financial year
-        // sum of all indicators weights in group
-        // sum of all indicators weights in group
-
-        // order by indicator order field
-        // order by indicator order field
-
         $templateindicatorgroups  = TemplateIndicatorGroup::withSum('template_indicators as total_indicators', 'indicator_weight')
                                                 ->where('unit_rank_id',$unit_rank->id)
                                                 ->where('rank_category_id',$rank_category->id)
                                                 ->where('financial_year_id',$fy->id)
                                                 ->get();  
-
-
-
         return view('admin.template_indicator_groups.index',compact('templateindicatorgroups','unit_rank','fy','rank_category'));
     }
 

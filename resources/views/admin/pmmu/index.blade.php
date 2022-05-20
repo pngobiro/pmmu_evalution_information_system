@@ -132,7 +132,7 @@
                     <div class="form-group">
                         <label for="indicator_type_id">Indicator Type</label>
                         <select class="form-control" name="indicator_type_id" id="indicator_type_id">
-                            @foreach ($types as $indicator_type)
+                            @foreach ($indicator_types as $indicator_type)
                                 <option value="{{ $indicator_type->id }}">{{ $indicator_type->name }}</option>
                             @endforeach
                         </select>
@@ -184,11 +184,13 @@
 
 <!-- edit indicator pop modal -->
 @foreach ($indicators as $indicator)
+
+
 <div class="modal fade" id="exampleModal{{ $indicator->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Indicator</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit  Indicator</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -197,60 +199,69 @@
                 <form method="POST" action="{{ route('unit-ranks.units.divisions.fy.indicator-groups.indicators.update',[$unit_rank->id,$unit->id,$division->id,$fy->id,$indicator_group->id,$indicator->id]) }}">
                     @csrf
                     @method('PUT')
+                 <div class="form-group">
+                    <label for="exampleInputEmail1">Master Indicator Type</label>
+                    <select class="form-control" name="master_indicator_id" id="master_indicator_id" aria-describedby="emailHelp"
+                        placeholder="Select Master Indicator" required>
+                        <option value="">Select Master Indicator</option>
+                        @foreach($master_indicators as $master_indicator)
+                            <option value="{{ $master_indicator->id }}" @if($indicator->master_indicator_id == $master_indicator->id) selected @endif>{{ substr($master_indicator->name, 0, 50)  }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                     <div class="form-group">
-                        <label for="name">Indicator Name</label>
-                        <input type="text" class="form-control" name="name" id="name" placeholder="Indicator Name" value="{{ $indicator->name }}">
+                        <label for="exampleInputEmail1">Indicator Name</label>
+                        <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp"
+                            placeholder="Enter Indicator Name" required value="{{ $indicator->name }}">
                     </div>
+
                     <div class="form-group">
-                        <label for="type">Indicator Type</label>
-                        <select class="form-control" name="indicator_type_id" id="indicator_type_id">
-                            @foreach ($types as $indicator_type)
-                                <option value="{{ $indicator_type->id }}" {{ $indicator->type_id == $indicator_type->id ? 'selected' : '' }}>{{ $indicator_type->name }}</option>
+                        <label for="exampleInputEmail1">Indicator Type</label>
+                        <select class="form-control" name="indicator_type_id" id="indicator_type_id" aria-describedby="emailHelp"
+                            placeholder="Enter Indicator Type" required>
+                            @foreach ($indicator_types as $type)
+                            <option value="{{ $type->id }}" @if($indicator->indicator_type_id == $type->id) selected @endif>{{ $type->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="measure">Indicator Unit of Measure</label>
-                        <select class="form-control" name="indicator_unit_of_measure_id" id="indicator_unit_of_measure_id">
+                        <label for="exampleInputEmail1">Indicator Unit of Measure</label>
+                        <select class="form-control" name="indicator_unit_of_measure_id" id="indicator_unit_of_measure_id" aria-describedby="emailHelp"
+                            placeholder="Enter Indicator Unit of Measure" required>
                             @foreach ($measures as $measure)
-                                <option value="{{ $measure->id }}" {{ $indicator->measure_id == $measure->id ? 'selected' : '' }}>{{ $measure->name }}</option>
+                            <option value="{{ $measure->id }}" @if($indicator->indicator_unit_of_measure_id == $measure->id) selected @endif>{{ $measure->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="indicator_weight">Indicator Weight</label>
-                        <input type="number" class="form-control" name="indicator_weight" id="indicator_weight" placeholder="Indicator Weight" value="{{ $indicator->indicator_weight }}">
+                        <label for="exampleInputEmail1">Indicator Weight</label>
+                        <input type="number" class="form-control" name="indicator_weight" id="indicator_weight" aria-describedby="emailHelp"
+                            placeholder="Enter Indicator Weight" required value="{{ $indicator->indicator_weight }}">
                     </div>
                     <div class="form-group">
-                        <label for="indicator_target">Indicator Target</label>
-                        <input type="number" class="form-control" name="indicator_target" id="indicator_target" placeholder="Indicator Target" value="{{ $indicator->indicator_target }}">
+                        <label for="exampleInputEmail1">Indicator Order</label>
+                        <input type="number" class="form-control" name="order" id="order" aria-describedby="emailHelp"
+                            placeholder="Enter Indicator Order" required value="{{ $indicator->order }}">
                     </div>
+
+                    <!-- IS BACKLOG INDICATOR-->
                     <div class="form-group">
-                        <label for="is_backlog_indicator">Is Backlog Indicator</label>
-                        <select class="form-control" name="is_backlog_indicator" id="is_backlog_indicator">
-                            <option value="0" {{ $indicator->is_backlog_indicator == 0 ? 'selected' : '' }}>No</option>
-                            <option value="1" {{ $indicator->is_backlog_indicator == 1 ? 'selected' : '' }}>Yes</option>
+                        <label for="exampleInputEmail1">Is Backlog Indicator</label>
+                        <select class="form-control" name="is_backlog_indicator" id="is_backlog_indicator" aria-describedby="emailHelp"
+                            placeholder="Enter Indicator Order" required>
+                            <option value="0" @if($indicator->is_backlog_indicator == 0) selected @endif>No</option>
+                            <option value="1" @if($indicator->is_backlog_indicator == 1) selected @endif>Yes</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="order">Indicator Order</label>
-                        <input type="number" class="form-control" name="order" id="order" placeholder="Indicator Order" value="{{ $indicator->order }}">
-                    </div>
 
-                    <div class="form-group">
-                        <label for="remarks">Indicator Remarks</label>
-                        <textarea class="form-control" name="remarks" id="remarks" placeholder="Indicator Remarks">{{ $indicator->remarks }}</textarea>
-                    </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 @endforeach
-
-          

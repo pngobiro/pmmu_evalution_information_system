@@ -56,7 +56,9 @@
 <div class="card">
     <div  class="card-body ">
         @forelse($indicatorgroups as $group)
-        <div class="alert alert-success" role="alert">
+
+        <div class="alert alert-info" role="alert">
+            
          {{ $group->order }} - {{ $group->name }}
         </div>
         <div>
@@ -74,7 +76,12 @@
                     </tr>
                 </thead>     
                 <tbody>
-                    @forelse ($group->indicators as $indicator)
+                    <!-- calculate each  group indicators weigted_score-->
+                    
+
+                    <!-- sort by indicator_order -->
+                    @forelse ($group->indicators->sortBy('order') as $indicator)
+                    
                     <tr>
                         <th scope="row">{{ $indicator->order }}</th>
                         <td style="word-wrap: break-word;min-width: 400px;max-width: 400px;">{{ $indicator->name }} 
@@ -98,16 +105,26 @@
                 <tfoot>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col" colspan="5">
-                        Total Weights: <span class="badge badge-primary"> {{ $group->total_indicators }}</span> 
+                    <th scope="col" colspan="1">
+                       Group Sub Totals:
                     </th>
-
-                    <th scope="col" colspan="7">
-                        <!-- sum weighted score for each indicator in the group -->
-
+                    <th scope="col" colspan="6">
                     
-                        Composite Score:: <span class="badge badge-danger">  </span> 
+                        Weights  <span class="badge badge-primary"> {{ $group->total_indicators }}</span> 
+                        Composite Score: <span class="badge badge-danger">
+                            <?php 
+                                $weighted_score = 0;
+                                foreach ($group->indicators as $indicator) {
+                                    $weighted_score += $indicator->indicator_weighted_score;
+                                }
+                                echo round($weighted_score,3);
+                            ?>
+                        
+                        </span> 
+
+
                     </th>
+
 
                 </tr>
                

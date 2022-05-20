@@ -28,6 +28,7 @@ class IndicatorTargetForm extends Component
         $this->indicator->save();
         $this->indicator_target = $this->indicator->indicator_target ;
 
+
  
         session()->flash('message', 'Indicator successfully updated.');
     }
