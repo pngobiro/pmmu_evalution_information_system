@@ -16,12 +16,8 @@
   
     <div class="d-flex justify-content-center .mb-15" >
         <div class="row ">
-            <h1 class="h3 mb-0 text-gray-800">{{ $unit_rank->name }} {{ $fy->name }}</h1>
-
-        
-
+            <h1 class="h3 mb-0 text-gray-800">{{ $unit_rank->name }} FY {{ $fy->name }}</h1>
         </div>
-       
     </div>
 
 
