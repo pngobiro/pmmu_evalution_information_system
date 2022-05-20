@@ -14,6 +14,7 @@ use App\Models\Indicator;
 use App\Models\IndicatorType;
 use App\Models\IndicatorUnitOfMeasure;
 use App\Models\FinancialYear;
+use App\Models\MasterIndicator;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -23,16 +24,18 @@ class PmmuController extends Controller
 {
     public function index(UnitRank $unit_rank ,Unit $unit,Division $division ,FinancialYear $fy , IndicatorGroup $indicator_group ,Request $request ){
 
-        $types = IndicatorType::all();
-
+        
+        $indicator_types = IndicatorType::all();
+        $master_indicators = MasterIndicator::where('unit_rank_id',$unit_rank->id)->get();
         $measures = IndicatorUnitOfMeasure::all();
-
-        $indicators = Indicator::where('indicator_group_id',$indicator_group->id )->get();
+        $indicators = Indicator::where('indicator_group_id',$indicator_group->id )
+                                ->orderBy('order')
+                                ->get();
 
         if ($request->has('search')) {
 
             $indicators = Indicator::where('name', 'like', "%{$request->search}%")
-
+            ->orderBy('order')
             ->where('indicator_group_id',$indicator_group->id )
 
             ->get();
@@ -40,7 +43,7 @@ class PmmuController extends Controller
         }
 
 
-        return view('admin.pmmu.index',compact('unit_rank','unit','division','indicator_group','fy','indicators','types','measures'));
+        return view('admin.pmmu.index',compact('unit_rank','unit','division','indicator_group','fy','indicators','indicator_types','measures','master_indicators'));
 
     }
 
@@ -97,21 +100,17 @@ class PmmuController extends Controller
     }
 
 
-    public function update(UnitRank $unit_rank ,Unit $unit,Division $division ,FinancialYear $fy ,IndicatorGroup $indicator_group, Indicator $indicator,UpdateIndicatorRequest $request){
-
-
+    public function update(UnitRank $unit_rank ,Unit $unit,Division $division ,FinancialYear $fy ,IndicatorGroup $indicator_group, Indicator $indicator,Request $request){
 
         $indicator->update([
-
             'name'                          => $request->name,
             'indicator_type_id'             => $request->indicator_type_id,
             'order'                         => $request->order,
             'indicator_unit_of_measure_id'  => $request->indicator_unit_of_measure_id,
             'indicator_type_id'             => $request->indicator_type_id,
             'indicator_weight'              => $request->indicator_weight,
-            'master_indicator_id'           => $request->master_indicator_id,
+            'master_indicator_id'           => $indicator_group->master_indicator_id,
             'is_backlog_indicator'          => $request->is_backlog_indicator,
-
         ]);
 
 

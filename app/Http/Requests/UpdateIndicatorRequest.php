@@ -24,7 +24,10 @@ class UpdateIndicatorRequest extends FormRequest
     public function rules()
     {
         return [
+            
             'name'                          => ['required','string'],
+            'unit_rank_id'                  => ['required','integer'],
+            'indicator_group_id'            => ['required','integer'],
             'order'                         => ['required','numeric','min:1'],
             'indicator_weight'              => ['required','numeric','min:1'],
             'indicator_type_id'             => ['required','numeric','min:1'],
@@ -32,8 +35,6 @@ class UpdateIndicatorRequest extends FormRequest
             'indicator_target'              => ['required','numeric','min:1'],
             'is_backlog_indicator'          => ['required','boolean'],
             'remarks'                       => ['nullable','string'],
-         
-            
         ];
     }
 }

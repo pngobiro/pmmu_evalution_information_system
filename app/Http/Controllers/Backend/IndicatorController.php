@@ -145,19 +145,23 @@ class IndicatorController extends Controller
                 }
 
 
-            if ($overall_composite_score >= 1 && $overall_composite_score <= 5) 
-            {
-                $performance = new  IndicatorGraderHelper();
-                $overallScoreGrade  = $performance-> getCompositeScore($overall_composite_score);
-            }
+                // if overall_composite_score is less than 1 or greater than 5
 
-            else 
-            
+              
+            if($overall_composite_score < 1 || $overall_composite_score > 5  || $overall_composite_score == 0 || $overall_composite_score == NULL)
+
             {
                 $overallScoreGrade['score'] = 'N/A';
                 $overallScoreGrade['grade'] = 'N/A';
-                
             }
+
+            else 
+            {
+                $performance = new  IndicatorGraderHelper();
+                $overallScoreGrade  = $performance-> getCompositeScore(round($overall_composite_score,2));
+            }
+
+
 
         $total_indicator_weights = 0;
         foreach ($indicatorgroups as $indicatorgroup) {
@@ -192,6 +196,7 @@ class IndicatorController extends Controller
         $indicatorgroups = IndicatorGroup::where('unit_id',$unit->id)->where('financial_year_id',$fy->id)->where('division_id',$division->id)->get();
 
      if (!$template_group->isEmpty() &&    ($indicatorgroups->isEmpty())){
+
         foreach ($template_group as $group ){
                 $new_group                              = new IndicatorGroup();
                 $new_group->name                        = $group->name;
@@ -202,7 +207,8 @@ class IndicatorController extends Controller
                 $new_group->division_id                 = $division->id;
                 $new_group->financial_year_id           = $fy->id;
                 $new_group->indicator_group_created_by  = Auth::user()->id;
-            $new_group->save(); 
+                $new_group->save(); 
+
             foreach ($group->template_indicators as $indicator){
                     $new_indicator                                  = new Indicator();
                     $new_indicator->indicator_group_id              = $new_group->id;
@@ -215,7 +221,7 @@ class IndicatorController extends Controller
                     $new_indicator->is_backlog_indicator            = $indicator->is_backlog_indicator;
                     $new_indicator->order                           = $indicator->order;
                     $new_indicator->indicator_created_by            = Auth::user()->id;
-            $new_group->indicators()->save($new_indicator);
+                    $new_group->indicators()->save($new_indicator);
 
             };
         };

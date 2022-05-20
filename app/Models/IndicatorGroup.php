@@ -37,7 +37,7 @@ class IndicatorGroup extends Model
     {
 
     
-        return $this->hasMany(Indicator::class,'indicator_group_id');
+        return $this->hasMany(Indicator::class,'indicator_group_id')->orderBy('order');;
     }
 
     

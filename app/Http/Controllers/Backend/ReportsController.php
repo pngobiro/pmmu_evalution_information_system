@@ -252,8 +252,8 @@ class ReportsController extends Controller
                 $html .= '</tr>';
                 }
                 $html .= '<tr>';
-                $html .= '<td colspan="9" style="text-align: center; font-weight: bold;"> Group weigts and composite scores</td>';
-                $html .= '</tr>';
+                $html .= '<td colspan="3" style="text-align: center; font-weight: bold;"> Group Total Weights</td>';
+                $html .= '<td colspan="9" style="text-align: center; font-weight: bold;"> Group Composite scores</td>';                $html .= '</tr>';
                 $html .= '</tbody>';
                 $html .= '</table>';
                 $html .= '<br>';
@@ -315,7 +315,7 @@ class ReportsController extends Controller
       }
       
       
-      private function getComplexPmmuPDF($indicatorgroups,$unit_rank,$fy,$unit,$OverallScoreGrade,$composite_score){
+      private function getComplexPmmuPDF($indicatorgroups,$unit_rank,$fy,$unit,$overallScoreGrade,$composite_score){
         $html = '<!DOCTYPE html>
         <html lang="en">
         <head>
@@ -447,7 +447,7 @@ class ReportsController extends Controller
                 $html .= '<td style="width: 40px">'.$indicator->indicator_weight.'</td>';
                 $html .= '<td style="width: 40px" >'.$indicator->indicator_target.'</td>';
                 $html .= '<td style="width: 70px" >'.$indicator->indicator_achivement.'</td>';
-                $html .= '<td style="width: 40px" >'.round($indicator->indicator_raw_score).'</td>';
+                $html .= '<td style="width: 40px" >'.round($indicator->indicator_raw_score,1).'</td>';
                 $html .= '<td style="width: 40px" >'.round($indicator->indicator_weighted_score,2).'</td>';
                 $html .= '<td style="width: 70px" >'.round($indicator->indicator_performance_score).'</td>';
                 $html .= '<td style="width: 60px" >'.$indicator->indicator_graded_score.'</td>';
@@ -456,7 +456,9 @@ class ReportsController extends Controller
                 }
 
                 $html .= '<tr>';
-                $html .= '<td colspan="9" style="text-align: center; font-weight: bold;"> Group weigts and composite scores</td>';
+                $html .= '<td colspan="3" style="text-align: center; font-weight: bold;"> Group Total Weights</td>';
+                $html .= '<td colspan="9" style="text-align: center; font-weight: bold;"> Group Composite scores</td>';
+
                 $html .= '</tr>';
                 $html .= '</tbody>';
                 $html .= '</table>';
