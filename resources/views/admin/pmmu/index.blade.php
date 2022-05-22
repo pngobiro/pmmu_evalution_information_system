@@ -77,10 +77,12 @@
 
                                 <td>
                                     @if ($indicator->is_backlog_indicator)
-                                        <span class="badge badge-danger">Yes</span>
+                                        <span class="badge badge-success">Yes</span>
                                     @else
-                                        <span class="badge badge-success">No</span>
+                                        <span class="badge badge-danger">No</span>
                                     @endif
+
+                                </td>
 
                                 <!-- edit indicator pop modal -->
                                 <td>
@@ -244,8 +246,7 @@
                         <input type="number" class="form-control" name="order" id="order" aria-describedby="emailHelp"
                             placeholder="Enter Indicator Order" required value="{{ $indicator->order }}">
                     </div>
-
-                    <!-- IS BACKLOG INDICATOR-->
+                    <!-- is_backlog_indicator -->
                     <div class="form-group">
                         <label for="exampleInputEmail1">Is Backlog Indicator</label>
                         <select class="form-control" name="is_backlog_indicator" id="is_backlog_indicator" aria-describedby="emailHelp"
@@ -253,8 +254,6 @@
                             <option value="0" @if($indicator->is_backlog_indicator == 0) selected @endif>No</option>
                             <option value="1" @if($indicator->is_backlog_indicator == 1) selected @endif>Yes</option>
                         </select>
-                    </div>
-
 
 
 

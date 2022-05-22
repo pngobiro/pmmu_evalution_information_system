@@ -38,6 +38,7 @@ class TemplateIndicatorsController extends Controller
 
             $template_indicators = TemplateIndicator::where('name', 'like', "%{$request->search}%")
                                                 ->where('indicator_group_id',$template_group->id)
+                                                ->orderBy('order','asc')
                                                 ->get();
 
         }
@@ -63,25 +64,18 @@ class TemplateIndicatorsController extends Controller
 
     }
 
-    public function store(UnitRank $unit_rank , FinancialYear $fy ,TemplateIndicatorGroup $template_group, StoreTemplateIndicatorRequest $request){
+    public function store(UnitRank $unit_rank , FinancialYear $fy ,TemplateIndicatorGroup $template_group, Request $request){
 
-    
-
-        // Save Template Indicator
-
+   
+      
         $template_indicator = TemplateIndicator::create([
 
             'name'                                            =>   $request->name,
-            'unit_rank_id'                                    =>   $request->unit_rank->id,
-            'unit_id'                                         =>   $request->unit_id,
             'indicator_group_id'                              =>   $template_group->id,
             'indicator_type_id'                               =>   $request->indicator_type_id,
             'indicator_unit_of_measure_id'                    =>   $request->indicator_unit_of_measure_id,
             'indicator_weight'                                =>   $request->indicator_weight,
-            'indicator_target'                                =>   $request->indicator_target,
-            'indicator_achivement'                            =>   $request->indicator_achivement,
             'master_indicator_id'                             =>   $request->master_indicator_id,
-            'remarks'                                         =>   $request->remarks,
             'order'                                           =>   $request->order,
             'is_backlog_indicator'                            =>   $request->is_backlog_indicator,
 
@@ -107,10 +101,19 @@ class TemplateIndicatorsController extends Controller
     }
 
 
-    public function update (UnitRank $unit_rank , FinancialYear $fy ,TemplateIndicatorGroup $template_group,TemplateIndicator $template_indicator, UpdateTemplateIndicatorRequest $request){
+    public function update (UnitRank $unit_rank , FinancialYear $fy ,TemplateIndicatorGroup $template_group,TemplateIndicator $template_indicator, Request $request){
 
-
-        $template_indicator->update($request->validated());
+        $template_indicator->update([
+            'name'                                            =>   $request->name,
+            'indicator_group_id'                              =>   $template_group->id,
+            'indicator_type_id'                               =>   $request->indicator_type_id,
+            'indicator_unit_of_measure_id'                    =>   $request->indicator_unit_of_measure_id,
+            'indicator_weight'                                =>   $request->indicator_weight,
+            'master_indicator_id'                             =>   $request->master_indicator_id,
+            'order'                                           =>   $request->order,
+            'is_backlog_indicator'                            =>   $request->is_backlog_indicator,
+        ]);
+        
 
         return redirect()->route('unit-ranks.fy.template-groups.template-indicators.index',[$unit_rank->id, $fy->id,$template_group->id])->with('message', 'Template Indicator Updated Successfully');
 

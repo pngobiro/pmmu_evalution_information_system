@@ -13,15 +13,15 @@
 <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('offline', [])->html();
-} elseif ($_instance->childHasBeenRendered('fcGBafm')) {
-    $componentId = $_instance->getRenderedChildComponentId('fcGBafm');
-    $componentTag = $_instance->getRenderedChildComponentTagName('fcGBafm');
+} elseif ($_instance->childHasBeenRendered('wcsLQ5O')) {
+    $componentId = $_instance->getRenderedChildComponentId('wcsLQ5O');
+    $componentTag = $_instance->getRenderedChildComponentTagName('wcsLQ5O');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('fcGBafm');
+    $_instance->preserveRenderedChild('wcsLQ5O');
 } else {
     $response = \Livewire\Livewire::mount('offline', []);
     $html = $response->html();
-    $_instance->logRenderedChild('fcGBafm', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('wcsLQ5O', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -71,7 +71,9 @@ echo $html;
 <div class="card">
     <div  class="card-body ">
         <?php $__empty_1 = true; $__currentLoopData = $indicatorgroups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-        <div class="alert alert-success" role="alert">
+
+        <div class="alert alert-info" role="alert">
+            
          <?php echo e($group->order); ?> - <?php echo e($group->name); ?>
 
         </div>
@@ -90,7 +92,12 @@ echo $html;
                     </tr>
                 </thead>     
                 <tbody>
-                    <?php $__empty_2 = true; $__currentLoopData = $group->indicators; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $indicator): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_2 = false; ?>
+                    <!-- calculate each  group indicators weigted_score-->
+                    
+
+                    <!-- sort by indicator_order -->
+                    <?php $__empty_2 = true; $__currentLoopData = $group->indicators->sortBy('order'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $indicator): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_2 = false; ?>
+                    
                     <tr>
                         <th scope="row"><?php echo e($indicator->order); ?></th>
                         <td style="word-wrap: break-word;min-width: 400px;max-width: 400px;"><?php echo e($indicator->name); ?> 
@@ -105,15 +112,15 @@ echo $html;
                         <td> <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('indicator-form', ['indicatorId' => $indicator->id,'indicator_id' => $indicator->id])->html();
-} elseif ($_instance->childHasBeenRendered('DzUjZxP')) {
-    $componentId = $_instance->getRenderedChildComponentId('DzUjZxP');
-    $componentTag = $_instance->getRenderedChildComponentTagName('DzUjZxP');
+} elseif ($_instance->childHasBeenRendered('gLhqSjG')) {
+    $componentId = $_instance->getRenderedChildComponentId('gLhqSjG');
+    $componentTag = $_instance->getRenderedChildComponentTagName('gLhqSjG');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('DzUjZxP');
+    $_instance->preserveRenderedChild('gLhqSjG');
 } else {
     $response = \Livewire\Livewire::mount('indicator-form', ['indicatorId' => $indicator->id,'indicator_id' => $indicator->id]);
     $html = $response->html();
-    $_instance->logRenderedChild('DzUjZxP', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('gLhqSjG', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>  </td>
@@ -128,16 +135,26 @@ echo $html;
                 <tfoot>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col" colspan="5">
-                        Total Weights: <span class="badge badge-primary"> <?php echo e($group->total_indicators); ?></span> 
+                    <th scope="col" colspan="1">
+                       Group Sub Totals:
                     </th>
-
-                    <th scope="col" colspan="7">
-                        <!-- sum weighted score for each indicator in the group -->
-
+                    <th scope="col" colspan="6">
                     
-                        Composite Score:: <span class="badge badge-danger">  </span> 
+                        Weights  <span class="badge badge-primary"> <?php echo e($group->total_indicators); ?></span> 
+                        Composite Score: <span class="badge badge-danger">
+                            <?php 
+                                $weighted_score = 0;
+                                foreach ($group->indicators as $indicator) {
+                                    $weighted_score += $indicator->indicator_weighted_score;
+                                }
+                                echo round($weighted_score,3);
+                            ?>
+                        
+                        </span> 
+
+
                     </th>
+
 
                 </tr>
                
@@ -223,7 +240,7 @@ echo $html;
                 </strong>
          
         </div>
-s
+
 
   
         <?php endif; ?>

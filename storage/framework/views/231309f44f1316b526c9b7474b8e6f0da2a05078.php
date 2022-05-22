@@ -1,13 +1,11 @@
-@extends('layouts.main')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 
     <div class="jumbotron">
-        <h1 class="display-6">{{ $unit_rank->name }} - FY {{ $fy->name  }}</h1>
-        <p class="lead"> <span class="badge badge-primary">Group</span>  <b> {{  $template_group->name }}</p>
+        <h1 class="display-6"><?php echo e($unit_rank->name); ?> - FY <?php echo e($fy->name); ?></h1>
+        <p class="lead"> <span class="badge badge-primary">Group</span>  <b> <?php echo e($template_group->name); ?></p>
         <hr class="my-8">
-        <p><span class="badge badge-warning">Group Description:</span>   {{  $template_group->description  }}</p>
+        <p><span class="badge badge-warning">Group Description:</span>   <?php echo e($template_group->description); ?></p>
       </div>
 
     
@@ -17,16 +15,17 @@
             <div class="row">
                 <div class="card  mx-auto">
                     <div>
-                @if (session()->has('message'))
+                <?php if(session()->has('message')): ?>
                 <div class="alert alert-success">
-                    {{ session('message') }}
+                    <?php echo e(session('message')); ?>
+
                 </div>
-                @endif
+                <?php endif; ?>
             </div>
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <form method="GET" action="{{ route('unit-ranks.fy.template-groups.template-indicators.index',[$unit_rank->id,$fy->id,$template_group->id]) }}">
+                        <form method="GET" action="<?php echo e(route('unit-ranks.fy.template-groups.template-indicators.index',[$unit_rank->id,$fy->id,$template_group->id])); ?>">
                             <div class="form-row align-items-center">
                                 <div class="col">
                                     <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
@@ -37,7 +36,7 @@
                                         Search Indicator</button>
                                 </div>
                                 <div class="col ">
-                                    <a href="{{ route('unit-ranks.fy.rank_category.template-groups.index', [$unit_rank->id,$fy->id,$template_group->rank_category]) }}" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i>
+                                    <a href="<?php echo e(route('unit-ranks.fy.rank_category.template-groups.index', [$unit_rank->id,$fy->id,$template_group->rank_category])); ?>" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i>
                                         View All Groups</a>
                                 </div>
                             </div>
@@ -70,39 +69,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($template_indicators  as $indicator)
+                        <?php $__currentLoopData = $template_indicators; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $indicator): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
                                 
-                                <td>{{ $indicator->order  }}</td>
-                                <td>{{ $indicator->name  }}</td>
-                                <td>{{ $indicator->type->name }}</td>
-                                <td>{{ $indicator->measure->name }}</td>
-                                <td><span class="badge badge-pill badge-info">{{ $indicator->indicator_weight }}</span></td>
+                                <td><?php echo e($indicator->order); ?></td>
+                                <td><?php echo e($indicator->name); ?></td>
+                                <td><?php echo e($indicator->type->name); ?></td>
+                                <td><?php echo e($indicator->measure->name); ?></td>
+                                <td><span class="badge badge-pill badge-info"><?php echo e($indicator->indicator_weight); ?></span></td>
                                 <td>
-                                    @if ($indicator->is_backlog_indicator==1)
+                                    <?php if($indicator->is_backlog_indicator==1): ?>
                                         <span class="badge badge-success">Yes</span>
-                                    @elseif ($indicator->is_backlog_indicator==0)
+                                    <?php elseif($indicator->is_backlog_indicator==0): ?>
                                         <span class="badge badge-danger">No</span>
-                                    @endif
+                                    <?php endif; ?>
 
                                 </td>
                                 <td>
                                     <!-- edit modal -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal{{ $indicator->id }}">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal<?php echo e($indicator->id); ?>">
                                         <i class="fa fa-edit" aria-hidden="true"></i> Edit</button>
 
 
                             
                                 </td>
                             </tr>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
 
                     <tfoot>
                         <tr>
                             <td class="right font-weight-bold" colspan="4"><span class="badge badge-success">Group Total Weights</span> </td>
-                            <td class="right font-weight-bold"><span class="badge badge-pill badge-danger">{{ $template_group->template_indicators->sum('indicator_weight')}}</span> </td>
-                            {{-- <td class="right">{{ $group->indicators->sum('indicator_weight')}}</span></td> --}}
+                            <td class="right font-weight-bold"><span class="badge badge-pill badge-danger"><?php echo e($template_group->template_indicators->sum('indicator_weight')); ?></span> </td>
+                            
                         </tr>
                     </tfoot>
 
@@ -118,7 +117,7 @@
 </div>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -131,17 +130,17 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('unit-ranks.fy.template-groups.template-indicators.store',[$unit_rank->id,$fy->id,$template_group->id]) }}">
-                    @csrf
+                <form method="POST" action="<?php echo e(route('unit-ranks.fy.template-groups.template-indicators.store',[$unit_rank->id,$fy->id,$template_group->id])); ?>">
+                    <?php echo csrf_field(); ?>
 
                  <div class="form-group">
                     <label for="exampleInputEmail1">Master Indicator Type</label>
                     <select class="form-control" name="master_indicator_id" id="master_indicator_id" aria-describedby="emailHelp"
                         placeholder="Select Master Indicator" required>
                         <option value="">Select Master Indicator</option>
-                        @foreach($master_indicators as $master_indicator)
-                            <option value="{{ $master_indicator->id }}">{{ substr($master_indicator->name, 0, 50)  }}</option>
-                        @endforeach
+                        <?php $__currentLoopData = $master_indicators; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $master_indicator): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($master_indicator->id); ?>"><?php echo e(substr($master_indicator->name, 0, 50)); ?></option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                 </div>
 
@@ -155,18 +154,18 @@
                         <label for="exampleInputEmail1">Indicator Type</label>
                         <select class="form-control" name="indicator_type_id" id="indicator_type_id" aria-describedby="emailHelp"
                             placeholder="Enter Indicator Type" required>
-                            @foreach ($indicator_types as $type)
-                            <option value="{{ $type->id }}">{{ $type->name }}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $indicator_types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($type->id); ?>"><?php echo e($type->name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Indicator Unit of Measure</label>
                         <select class="form-control" name="indicator_unit_of_measure_id" id="indicator_unit_of_measure_id" aria-describedby="emailHelp"
                             placeholder="Enter Indicator Unit of Measure" required>
-                            @foreach ($measures as $measure)
-                            <option value="{{ $measure->id }}">{{ $measure->name }}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $measures; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $measure): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($measure->id); ?>"><?php echo e($measure->name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
                     <div class="form-group">
@@ -195,10 +194,10 @@
 </div>
 
 <!-- Edit Modal -->
-@foreach ($template_indicators as $indicator)
+<?php $__currentLoopData = $template_indicators; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $indicator): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
 
-<div class="modal fade" id="editModal{{ $indicator->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal<?php echo e($indicator->id); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -208,53 +207,53 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('unit-ranks.fy.template-groups.template-indicators.update',[$unit_rank->id,$fy->id,$template_group->id,$indicator->id]) }}">
-                    @csrf
-                    @method('PUT')
+                <form method="POST" action="<?php echo e(route('unit-ranks.fy.template-groups.template-indicators.update',[$unit_rank->id,$fy->id,$template_group->id,$indicator->id])); ?>">
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('PUT'); ?>
                  <div class="form-group">
                     <label for="exampleInputEmail1">Master Indicator Type</label>
                     <select class="form-control" name="master_indicator_id" id="master_indicator_id" aria-describedby="emailHelp"
                         placeholder="Select Master Indicator" required>
                         <option value="">Select Master Indicator</option>
-                        @foreach($master_indicators as $master_indicator)
-                            <option value="{{ $master_indicator->id }}" @if($indicator->master_indicator_id == $master_indicator->id) selected @endif>{{ substr($master_indicator->name, 0, 50)  }}</option>
-                        @endforeach
+                        <?php $__currentLoopData = $master_indicators; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $master_indicator): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($master_indicator->id); ?>" <?php if($indicator->master_indicator_id == $master_indicator->id): ?> selected <?php endif; ?>><?php echo e(substr($master_indicator->name, 0, 50)); ?></option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                 </div>
 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Indicator Name</label>
                         <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp"
-                            placeholder="Enter Indicator Name" required value="{{ $indicator->name }}">
+                            placeholder="Enter Indicator Name" required value="<?php echo e($indicator->name); ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Indicator Type</label>
                         <select class="form-control" name="indicator_type_id" id="indicator_type_id" aria-describedby="emailHelp"
                             placeholder="Enter Indicator Type" required>
-                            @foreach ($indicator_types as $type)
-                            <option value="{{ $type->id }}" @if($indicator->indicator_type_id == $type->id) selected @endif>{{ $type->name }}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $indicator_types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($type->id); ?>" <?php if($indicator->indicator_type_id == $type->id): ?> selected <?php endif; ?>><?php echo e($type->name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Indicator Unit of Measure</label>
                         <select class="form-control" name="indicator_unit_of_measure_id" id="indicator_unit_of_measure_id" aria-describedby="emailHelp"
                             placeholder="Enter Indicator Unit of Measure" required>
-                            @foreach ($measures as $measure)
-                            <option value="{{ $measure->id }}" @if($indicator->indicator_unit_of_measure_id == $measure->id) selected @endif>{{ $measure->name }}</option>
-                            @endforeach
+                            <?php $__currentLoopData = $measures; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $measure): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($measure->id); ?>" <?php if($indicator->indicator_unit_of_measure_id == $measure->id): ?> selected <?php endif; ?>><?php echo e($measure->name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Indicator Weight</label>
                         <input type="number" class="form-control" name="indicator_weight" id="indicator_weight" aria-describedby="emailHelp"
-                            placeholder="Enter Indicator Weight" required value="{{ $indicator->indicator_weight }}">
+                            placeholder="Enter Indicator Weight" required value="<?php echo e($indicator->indicator_weight); ?>">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Indicator Order</label>
                         <input type="number" class="form-control" name="order" id="order" aria-describedby="emailHelp"
-                            placeholder="Enter Indicator Order" required value="{{ $indicator->order }}">
+                            placeholder="Enter Indicator Order" required value="<?php echo e($indicator->order); ?>">
                     </div>
 
                     <!-- IS BACKLOG INDICATOR-->
@@ -262,8 +261,8 @@
                         <label for="exampleInputEmail1">Is Backlog Indicator</label>
                         <select class="form-control" name="is_backlog_indicator" id="is_backlog_indicator" aria-describedby="emailHelp"
                             placeholder="Is Backlog" required>
-                            <option value="0" @if($indicator->is_backlog_indicator == 0) selected @endif>No</option>
-                            <option value="1" @if($indicator->is_backlog_indicator == 1) selected @endif>Yes</option>
+                            <option value="0" <?php if($indicator->is_backlog_indicator == 0): ?> selected <?php endif; ?>>No</option>
+                            <option value="1" <?php if($indicator->is_backlog_indicator == 1): ?> selected <?php endif; ?>>Yes</option>
                         </select>
                     </div>
 
@@ -273,7 +272,7 @@
         </div>
     </div>
 </div>
-@endforeach
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
 
@@ -283,3 +282,5 @@
 
 
 
+
+<?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/ngobiro/lampstack-8.1.2-0/frameworks/laravel/resources/views/admin/template-indicators/index.blade.php ENDPATH**/ ?>

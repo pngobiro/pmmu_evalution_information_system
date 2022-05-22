@@ -123,6 +123,12 @@
                                     
                         
                                     <?php if(Auth::user()==null): ?>
+
+                                    <!--- if user is null redirect login form -->
+                                    <a class="nav-link" href="<?php echo e(route('login')); ?>">
+                                        <span>Login</span></a>
+                                    </a>
+
                                     
                                     <?php else: ?>
                                     <p>  PJ: <?php echo e(Auth::user()->pj_number); ?> <br> Name: <?php echo e(Auth::user()->full_name); ?> </p>

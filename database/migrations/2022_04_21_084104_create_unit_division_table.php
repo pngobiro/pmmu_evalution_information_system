@@ -31,7 +31,7 @@ class CreateUnitDivisionTable extends Migration
     {
         Schema::dropIfExists('unit_division');
     }
+
 }
 
-//generate unit_division database seeder
-//php artisan make:seeder UnitDivisionSeeder
+

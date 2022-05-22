@@ -71,7 +71,14 @@
                             <td>{{ $rank_category->name }}</td>
                             <td>{{ $rank_category->description }}</td>
                             <td> <a href="{{ route('unit-ranks.fy.rank_category.template-groups.index',[$unit_rank->id,$fy->id,$rank_category->id]) }}" class="btn btn-success">Indicators</a></td> 
-                            <td><a href="{{ route('unit-ranks.fy.rank_category.edit',[$unit_rank->id,$fy->id,$rank_category->id]) }}" class="btn btn-primary">Edit</a></td>
+                             
+
+                            <td>
+                                <!-- edit rank_category modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal{{ $rank_category->id }}">
+                                    Edit
+                            </td>
+
                             <td>
                                 <form action="{{ route('unit-ranks.fy.rank_category.destroy',[$unit_rank->id,$fy->id,$rank_category->id]) }}" method="POST">
                                     @csrf
@@ -89,3 +96,38 @@
          
 
 @endsection
+
+<!-- edit rank_category modal -->
+@foreach ($rank_categories as $rank_category)
+
+    <div class="modal fade" id="editModal{{ $rank_category->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Rank Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('unit-ranks.fy.rank_category.update',[$unit_rank->id,$fy->id,$rank_category->id]) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" name="name" value="{{ $rank_category->name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" name="description" value="{{ $rank_category->description }}">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach

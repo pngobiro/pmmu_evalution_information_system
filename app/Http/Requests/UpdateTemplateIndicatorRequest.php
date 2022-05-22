@@ -25,11 +25,13 @@ class UpdateTemplateIndicatorRequest extends FormRequest
     {
         return [
             'name'                          => ['required','string'],
+            'indicator_group_id'            => ['required','integer'],
             'order'                         => ['required','numeric','min:1'],
             'indicator_weight'              => ['required','numeric','min:1'],
-            'master_indicator_id'           => ['required'],
+            'master_indicator_id'           => ['required','numeric'],
             'indicator_type_id'             => ['required','numeric','min:1'],
             'indicator_unit_of_measure_id'  => ['required','numeric','min:1'],
+            'is_backlog_indicator'         =>  ['required','boolean'],
         ];
     }
 }

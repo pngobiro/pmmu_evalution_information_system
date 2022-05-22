@@ -24,7 +24,7 @@ class CreateTemplateIndicatorsTable extends Migration
             $table->id();
             $table->foreignIdFor(MasterIndicator::class);
             $table->mediumText('name');
-            $table->foreignIdFor(UnitRank::class);
+            $table->foreignIdFor(UnitRank::class)->nullable();
             $table->foreignIdFor(Unit::class)->nullable();
             $table->foreignIdFor(IndicatorGroup::class);
             $table->foreignIdFor(IndicatorType::class);

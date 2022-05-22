@@ -15,12 +15,8 @@
   
     <div class="d-flex justify-content-center .mb-15" >
         <div class="row ">
-            <h1 class="h3 mb-0 text-gray-800"><?php echo e($unit_rank->name); ?> <?php echo e($fy->name); ?></h1>
-
-        
-
+            <h1 class="h3 mb-0 text-gray-800"><?php echo e($unit_rank->name); ?> FY <?php echo e($fy->name); ?></h1>
         </div>
-       
     </div>
 
 
@@ -74,7 +70,14 @@
                             <td><?php echo e($rank_category->name); ?></td>
                             <td><?php echo e($rank_category->description); ?></td>
                             <td> <a href="<?php echo e(route('unit-ranks.fy.rank_category.template-groups.index',[$unit_rank->id,$fy->id,$rank_category->id])); ?>" class="btn btn-success">Indicators</a></td> 
-                            <td><a href="<?php echo e(route('unit-ranks.fy.rank_category.edit',[$unit_rank->id,$fy->id,$rank_category->id])); ?>" class="btn btn-primary">Edit</a></td>
+                             
+
+                            <td>
+                                <!-- edit rank_category modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal<?php echo e($rank_category->id); ?>">
+                                    Edit
+                            </td>
+
                             <td>
                                 <form action="<?php echo e(route('unit-ranks.fy.rank_category.destroy',[$unit_rank->id,$fy->id,$rank_category->id])); ?>" method="POST">
                                     <?php echo csrf_field(); ?>
@@ -92,4 +95,40 @@
          
 
 <?php $__env->stopSection(); ?>
+
+<!-- edit rank_category modal -->
+<?php $__currentLoopData = $rank_categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rank_category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+    <div class="modal fade" id="editModal<?php echo e($rank_category->id); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Rank Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="<?php echo e(route('unit-ranks.fy.rank_category.update',[$unit_rank->id,$fy->id,$rank_category->id])); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
+                        <?php echo method_field('PUT'); ?>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" name="name" value="<?php echo e($rank_category->name); ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" name="description" value="<?php echo e($rank_category->description); ?>">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
 <?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/ngobiro/lampstack-8.1.2-0/frameworks/laravel/resources/views/admin/rank_categories/index.blade.php ENDPATH**/ ?>

@@ -35,3 +35,8 @@ class UnitRankSeeder extends Seeder
     
     }
 }
+
+// seed unit_ranks table
+// Path: database/seeders/UnitRankSeeder.php
+
+

@@ -29,11 +29,11 @@ class DivisionSeeder extends Seeder
 
                 Division::create([
 
-                    "id"            =>   $data['0'],
-                    "name"          =>   $data['1'],
-                    "is_active"        =>   $data['2'],
-                    "code"          =>   $data['3'],
-                    "deleted_at"    =>   NULL,
+                    "id"                =>   $data['0'],
+                    "name"              =>   $data['1'],
+                    "is_active"         =>   $data['2'],
+                    "code"              =>   $data['3'],
+                    "deleted_at"        =>   NULL,
 
                 ]);    
 
