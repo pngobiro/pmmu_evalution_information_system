@@ -35,5 +35,16 @@ class MasterIndicator extends Model
     {
         return $this->hasMany(Indicator::class);
     }
+
+
+
+       public function setIndicatorNameAttribute($value)
+       {
+   
+              $this->name = $this->master_indicator->name;
+        
+           
+       }
+
    
 }

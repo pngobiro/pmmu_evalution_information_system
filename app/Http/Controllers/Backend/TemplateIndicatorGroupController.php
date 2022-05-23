@@ -21,6 +21,7 @@ class TemplateIndicatorGroupController extends Controller
                                                 ->where('unit_rank_id',$unit_rank->id)
                                                 ->where('rank_category_id',$rank_category->id)
                                                 ->where('financial_year_id',$fy->id)
+                                                ->orderBy('order','asc')
                                                 ->get();  
         return view('admin.template_indicator_groups.index',compact('templateindicatorgroups','unit_rank','fy','rank_category'));
     }
@@ -70,4 +71,6 @@ class TemplateIndicatorGroupController extends Controller
     }
 
 }
+
+
 

@@ -111,11 +111,19 @@ class TemplateIndicatorsController extends Controller
             'indicator_weight'                                =>   $request->indicator_weight,
             'master_indicator_id'                             =>   $request->master_indicator_id,
             'order'                                           =>   $request->order,
-            'is_backlog_indicator'                            =>   $request->is_backlog_indicator,
+            'is_backlog_indicator'                            =>   $request->is_backlog_indicator
         ]);
         
 
         return redirect()->route('unit-ranks.fy.template-groups.template-indicators.index',[$unit_rank->id, $fy->id,$template_group->id])->with('message', 'Template Indicator Updated Successfully');
+
+    }
+
+    public function destroy (UnitRank $unit_rank , FinancialYear $fy ,TemplateIndicatorGroup $template_group,TemplateIndicator $template_indicator){
+
+        $template_indicator->delete();
+
+        return redirect()->route('unit-ranks.fy.template-groups.template-indicators.index',[$unit_rank->id, $fy->id,$template_group->id])->with('message', 'Template Indicator Deleted Successfully');
 
     }
 }

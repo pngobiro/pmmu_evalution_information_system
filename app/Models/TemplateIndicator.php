@@ -18,7 +18,8 @@ class TemplateIndicator extends Model
         'indicator_weight',
         'indicator_target',
         'indicator_unit_of_measure_id',
-        'order'
+        'order',
+        'is_backlog_indicator' 
     ];
 
 

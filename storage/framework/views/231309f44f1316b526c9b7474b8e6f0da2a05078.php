@@ -65,6 +65,7 @@
                             <th scope="col">Indicator Weight</th>
                             <th scope="col">Is Backlog</th>
                             <th scope="col">Edit</th>
+                            <th scope="col"> Delete </th>
                          
                         </tr>
                     </thead>
@@ -93,6 +94,20 @@
 
                             
                                 </td>
+                            
+                                <td>
+                                    <!-- delete indicator  button -->
+                                    <!-- show delete prompt to confirm delete -->
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal<?php echo e($indicator->id); ?>">
+                                        <i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+
+                                </td>
+                             
+
+            
+
+
+
                             </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
@@ -273,6 +288,33 @@
     </div>
 </div>
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+<!-- Delete Modal -->
+<?php $__currentLoopData = $template_indicators; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $indicator): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<div class="modal fade" id="deleteModal<?php echo e($indicator->id); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Template Indicator</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="<?php echo e(route('unit-ranks.fy.template-groups.template-indicators.destroy',[$unit_rank->id,$fy->id,$template_group->id,$indicator->id])); ?>">
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('DELETE'); ?>
+                    <p>Are you sure you want to delete this template indicator?</p>
+                    <button type="submit" class="btn btn-primary">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
 
 
 

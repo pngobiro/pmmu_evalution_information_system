@@ -19,7 +19,8 @@ class Indicator extends Model
         'indicator_weight',
         'indicator_target',
         'indicator_achievement',
-        'order'
+        'order',
+        'is_backlog_indicator'
     ];
 
     protected $appends = [
@@ -268,4 +269,5 @@ class Indicator extends Model
           ////////////////////////////////////////
         }
 
+     
 }

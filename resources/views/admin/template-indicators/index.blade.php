@@ -66,6 +66,7 @@
                             <th scope="col">Indicator Weight</th>
                             <th scope="col">Is Backlog</th>
                             <th scope="col">Edit</th>
+                            <th scope="col"> Delete </th>
                          
                         </tr>
                     </thead>
@@ -94,6 +95,20 @@
 
                             
                                 </td>
+                            
+                                <td>
+                                    <!-- delete indicator  button -->
+                                    <!-- show delete prompt to confirm delete -->
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $indicator->id }}">
+                                        <i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+
+                                </td>
+                             
+
+            
+
+
+
                             </tr>
                         @endforeach
                     </tbody>
@@ -274,6 +289,33 @@
     </div>
 </div>
 @endforeach
+
+<!-- Delete Modal -->
+@foreach ($template_indicators as $indicator)
+<div class="modal fade" id="deleteModal{{ $indicator->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Template Indicator</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('unit-ranks.fy.template-groups.template-indicators.destroy',[$unit_rank->id,$fy->id,$template_group->id,$indicator->id]) }}">
+                    @csrf
+                    @method('DELETE')
+                    <p>Are you sure you want to delete this template indicator?</p>
+                    <button type="submit" class="btn btn-primary">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
 
 
 

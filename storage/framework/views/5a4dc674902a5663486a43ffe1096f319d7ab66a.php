@@ -13,15 +13,15 @@
 <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('offline', [])->html();
-} elseif ($_instance->childHasBeenRendered('wcsLQ5O')) {
-    $componentId = $_instance->getRenderedChildComponentId('wcsLQ5O');
-    $componentTag = $_instance->getRenderedChildComponentTagName('wcsLQ5O');
+} elseif ($_instance->childHasBeenRendered('y7vtdpk')) {
+    $componentId = $_instance->getRenderedChildComponentId('y7vtdpk');
+    $componentTag = $_instance->getRenderedChildComponentTagName('y7vtdpk');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('wcsLQ5O');
+    $_instance->preserveRenderedChild('y7vtdpk');
 } else {
     $response = \Livewire\Livewire::mount('offline', []);
     $html = $response->html();
-    $_instance->logRenderedChild('wcsLQ5O', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('y7vtdpk', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -112,15 +112,15 @@ echo $html;
                         <td> <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('indicator-form', ['indicatorId' => $indicator->id,'indicator_id' => $indicator->id])->html();
-} elseif ($_instance->childHasBeenRendered('gLhqSjG')) {
-    $componentId = $_instance->getRenderedChildComponentId('gLhqSjG');
-    $componentTag = $_instance->getRenderedChildComponentTagName('gLhqSjG');
+} elseif ($_instance->childHasBeenRendered('riPquKx')) {
+    $componentId = $_instance->getRenderedChildComponentId('riPquKx');
+    $componentTag = $_instance->getRenderedChildComponentTagName('riPquKx');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('gLhqSjG');
+    $_instance->preserveRenderedChild('riPquKx');
 } else {
     $response = \Livewire\Livewire::mount('indicator-form', ['indicatorId' => $indicator->id,'indicator_id' => $indicator->id]);
     $html = $response->html();
-    $_instance->logRenderedChild('gLhqSjG', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('riPquKx', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>  </td>
@@ -252,6 +252,42 @@ echo $html;
 
 
 <?php $__env->stopSection(); ?>
+
+<!-- indicator remarks modal . save remarks-->
+
+<!-- remarks modal to create and update -->
+<?php $__currentLoopData = $indicatorgroups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<?php $__currentLoopData = $group->indicators; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $indicator): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<div class="modal fade" id="remarksModal<?php echo e($indicator->id); ?>" tabindex="-1" role="dialog" aria-labelledby="remarksModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="remarksModalLabel"><?php echo e($unit->name); ?> - <?php echo e($indicator->name); ?> Notes and Remarks</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="<?php echo e(route('update-indicator-remarks', [$indicator->id])); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
+                    <input type="hidden" name="indicator_id" value="<?php echo e($indicator->id); ?>">
+                    <div class="form-group">
+                        <label for="remarks">Remarks</label>
+                        <textarea class="form-control" name="remarks" id="remarks" rows="10" placeholder="Enter indicator notes and remarks here..." required><?php echo e($indicator->remarks); ?></textarea>
+                    </div>
+                        <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+
+
 
 
 
