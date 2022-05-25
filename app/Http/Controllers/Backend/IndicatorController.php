@@ -10,6 +10,7 @@ use App\Models\Division;
 use App\Models\IndicatorGroup;
 use App\Models\Indicator;
 use App\Models\TemplateIndicatorGroup;
+use App\Models\RankCategory;
 use Illuminate\Http\Request;
 use PDF;
 use App\Lib\IndicatorGraderHelper;
@@ -132,6 +133,8 @@ class IndicatorController extends Controller
             ->where('financial_year_id',$fy->id)
             ->where('division_id',$division->id)
             ->get(); 
+
+            $rank_categories = RankCategory::where('unit_rank_id',$unit_rank->id)->get();
      
     
 
@@ -172,7 +175,7 @@ class IndicatorController extends Controller
 
         
                                             
-        return view('admin.indicators.preview',compact('indicatorgroups','unit_rank','division','fy','unit','overall_composite_score','overallScoreGrade','total_indicator_weights'));
+        return view('admin.indicators.preview',compact('indicatorgroups','unit_rank','division','fy','unit','overall_composite_score','overallScoreGrade','total_indicator_weights','rank_categories'));
 
     }
 
@@ -190,46 +193,7 @@ class IndicatorController extends Controller
 
   
 
-    public function download_template(Request $request,UnitRank $unit_rank ,Unit $unit ,Division $division,FinancialYear $fy ){
-        $template_group = TemplateIndicatorGroup::where('unit_rank_id',$unit_rank->id)
-        ->where('financial_year_id',$fy->id)->get();
-        $indicatorgroups = IndicatorGroup::where('unit_id',$unit->id)->where('financial_year_id',$fy->id)->where('division_id',$division->id)->get();
 
-     if (!$template_group->isEmpty() &&    ($indicatorgroups->isEmpty())){
-
-        foreach ($template_group as $group ){
-                $new_group                              = new IndicatorGroup();
-                $new_group->name                        = $group->name;
-                $new_group->description                 = $group->description;
-                $new_group->order                       = $group->order;
-                $new_group->unit_rank_id                = $unit_rank->id;
-                $new_group->unit_id                     = $unit->id;
-                $new_group->division_id                 = $division->id;
-                $new_group->financial_year_id           = $fy->id;
-                $new_group->indicator_group_created_by  = Auth::user()->id;
-                $new_group->save(); 
-
-            foreach ($group->template_indicators as $indicator){
-                    $new_indicator                                  = new Indicator();
-                    $new_indicator->indicator_group_id              = $new_group->id;
-                    $new_indicator->master_indicator_id             = $indicator->master_indicator_id ;
-                    $new_indicator->order                           = $indicator->order;
-                    $new_indicator->name                            = $indicator->name;
-                    $new_indicator->indicator_type_id               = $indicator->indicator_type_id;
-                    $new_indicator->indicator_weight                = $indicator->indicator_weight;
-                    $new_indicator->indicator_unit_of_measure_id    = $indicator->indicator_unit_of_measure_id;
-                    $new_indicator->is_backlog_indicator            = $indicator->is_backlog_indicator;
-                    $new_indicator->order                           = $indicator->order;
-                    $new_indicator->indicator_created_by            = Auth::user()->id;
-                    $new_group->indicators()->save($new_indicator);
-
-            };
-        };
-        };
-    
-        return redirect()->route('unit-ranks.units.divisions.fy.indicator-groups.index',[$unit_rank->id ,$unit->id,$division->id,$fy->id])->with('message', 'Template Created Succesfully');
-
-      }
 
       public function update_targets(Request $request,UnitRank $unit_rank ,Unit $unit ,Division $division ,FinancialYear $fy){
           $indicatorgroups = IndicatorGroup::withSum('indicators as total_indicators', 'indicator_weight')

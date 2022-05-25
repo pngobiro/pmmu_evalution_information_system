@@ -23,23 +23,27 @@
             </div>
             <div class="card-header">
                 <div class="row">
+
+                    <?php if(count($templateindicatorgroups) == 0): ?>
                     <div class="col">
-                        <form method="GET" action="<?php echo e(route('unit-ranks.fy.show',[$unit_rank->id,$fy->id ])); ?>">
-                            <div class="form-row align-items-center">
-                             
-                                <div class="col">
-                                    <a href="<?php echo e(route('unit-ranks.fy.rank_category.template-groups.index', [$unit_rank->id,$fy->id,$rank_category->id])); ?>" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i>
-                                        Preview PMMU Template </a>
-                                </div>
-                            </div>
-                        </form>
+                        <a href="<?php echo e(route('download_previous_fy_template', [$unit_rank->id,$fy->id,$rank_category->id])); ?>" class="btn btn-success"><i class="fa fa-clone" aria-hidden="true"></i>
+                            Copy Template </a>
+                            <!--- show infomation hover tip -->
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="Copy Template from previuos financial year">
+                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            </a>
                     </div>
-                    <div>
+                    <?php endif; ?>
+
+                    <div class="col" >
                         <!-- create modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
                             <i class="fa fa-plus" aria-hidden="true"></i> Create Template Indicator Group
                        
                     </div>
+                        
+                   
+       
                 </div>
             </div>
                 <table class="table table-bordered" >

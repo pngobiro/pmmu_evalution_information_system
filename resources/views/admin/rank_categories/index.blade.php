@@ -37,7 +37,8 @@
                     </div>
                 </form>
             </div>
-            <div>
+          
+            <div class="col">
                 <a href="{{ route('unit-ranks.fy.rank_category.create',[$unit_rank->id,$fy->id ]) }}" class="btn btn-primary mb-2">Create</a>
             </div>
         </div>

@@ -67,6 +67,8 @@ class Indicator extends Model
         return $this->belongsTo(MasterIndicator::class,'master_indicator_id');
     }
 
+    // 
+
 
 
     public function getIndicatorRawScoreAttribute(){
@@ -266,7 +268,7 @@ class Indicator extends Model
 
         }
 
-          ////////////////////////////////////////
+          
         }
 
      

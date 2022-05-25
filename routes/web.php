@@ -100,9 +100,16 @@ Auth::routes();
 
 
     Route::get('unit-ranks/{unit_rank}/units/{unit}/division/{division}/fy/{fy}/indicator-groups/pdf',[IndicatorController::class,"createPDF"])->name('pdf');
-    Route::get('unit-ranks/{unit_rank}/units/{unit}/division/{division}/fy/{fy}/indicator-groups/download_template',[IndicatorController::class,"download_template"])->name('download_template');
+
+    Route::get('unit-ranks/{unit_rank}/units/{unit}/division/{division}/fy/{fy}/indicator-groups/download_template',[PmmuController::class,"download_template"])->name('download_template');
+
+
+    Route::get('unit-ranks/{unit_rank}/fy/{fy}/rank_categories/{rank_category}/download_previous_fy_template',[PmmuController::class,"download_previous_fy_template"])->name('download_previous_fy_template');
+
     Route::get('unit-ranks/{unit_rank}/units/{unit}/division/{division}/fy/{fy}/indicator-groups/update_targets',[IndicatorController::class,"update_targets"])->name('update_targets');
+
     Route::resource('unit-ranks.units.divisions.fy.indicator-groups',IndicatorController::class);
+
     Route::resource('unit-ranks.units.divisions.fy.indicator-groups.indicators',PmmuController::class);
 
     //  user routes

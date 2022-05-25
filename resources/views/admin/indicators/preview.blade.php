@@ -33,7 +33,7 @@
 
                         {{ $division->name }}
 
-                        @else
+                    @else
 
                         {{ $unit->name }}
                     
@@ -131,11 +131,34 @@
 
                 </tfoot>
             </table>
-            @empty
-            <div class="alert alert-warning">
-                No Indicators 
-                <a href="{{ route('download_template', [$unit_rank->id,$unit->id,$division->id,$fy->id]) }}" class="btn btn-info btn-block">Create Indicators</a>
-        </div>
+        @empty
+            <div class="alert alert-danger">
+         
+            <!-- show large sad emoji-->
+            <span class="emoji-icon" > No Indicators 😢</span>
+            <!-- show a form with submit  -->
+            <form action="{{ route('download_template', [$unit_rank->id,$unit->id,$division->id,$fy->id]) }}" method="GET">
+                @csrf
+                <!-- show a select field with all units -->
+                <div class="form-group">
+                    <select name="category_id" id="category_id" class="form-control">
+                        <option value="">Select Category</option>
+                        @foreach ($rank_categories as  $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                           
+                            @endforeach
+                    </select>
+                   
+
+                </div>
+               
+                <div class="form-group">
+                    <button class="btn btn-primary">Download Template</button>
+                </div>
+            </form>
+
+            </div>
+        
         @endforelse
     </div>
 </div>
@@ -255,6 +278,15 @@
 </div>
 @endforeach
 @endforeach
+
+<!--pass selected category_id as a hidden field javascript -->
+<script>
+    function selectCategory(category_id) {
+        document.getElementById("category_id").value = category_id;
+    }
+</script>
+
+
 
 
 

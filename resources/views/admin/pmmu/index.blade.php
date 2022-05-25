@@ -115,6 +115,8 @@
 @endsection
 
 <!-- create new indicator pop modal -->
+    
+
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -187,7 +189,6 @@
 <!-- edit indicator pop modal -->
 @foreach ($indicators as $indicator)
 
-
 <div class="modal fade" id="exampleModal{{ $indicator->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -254,9 +255,7 @@
                             <option value="0" @if($indicator->is_backlog_indicator == 0) selected @endif>No</option>
                             <option value="1" @if($indicator->is_backlog_indicator == 1) selected @endif>Yes</option>
                         </select>
-
-
-
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

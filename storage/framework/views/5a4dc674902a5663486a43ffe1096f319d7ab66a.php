@@ -13,15 +13,15 @@
 <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('offline', [])->html();
-} elseif ($_instance->childHasBeenRendered('y7vtdpk')) {
-    $componentId = $_instance->getRenderedChildComponentId('y7vtdpk');
-    $componentTag = $_instance->getRenderedChildComponentTagName('y7vtdpk');
+} elseif ($_instance->childHasBeenRendered('2OJLqzD')) {
+    $componentId = $_instance->getRenderedChildComponentId('2OJLqzD');
+    $componentTag = $_instance->getRenderedChildComponentTagName('2OJLqzD');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('y7vtdpk');
+    $_instance->preserveRenderedChild('2OJLqzD');
 } else {
     $response = \Livewire\Livewire::mount('offline', []);
     $html = $response->html();
-    $_instance->logRenderedChild('y7vtdpk', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('2OJLqzD', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -47,7 +47,7 @@ echo $html;
                         <?php echo e($division->name); ?>
 
 
-                        <?php else: ?>
+                    <?php else: ?>
 
                         <?php echo e($unit->name); ?>
 
@@ -112,15 +112,15 @@ echo $html;
                         <td> <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('indicator-form', ['indicatorId' => $indicator->id,'indicator_id' => $indicator->id])->html();
-} elseif ($_instance->childHasBeenRendered('riPquKx')) {
-    $componentId = $_instance->getRenderedChildComponentId('riPquKx');
-    $componentTag = $_instance->getRenderedChildComponentTagName('riPquKx');
+} elseif ($_instance->childHasBeenRendered('9PzJ8A2')) {
+    $componentId = $_instance->getRenderedChildComponentId('9PzJ8A2');
+    $componentTag = $_instance->getRenderedChildComponentTagName('9PzJ8A2');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('riPquKx');
+    $_instance->preserveRenderedChild('9PzJ8A2');
 } else {
     $response = \Livewire\Livewire::mount('indicator-form', ['indicatorId' => $indicator->id,'indicator_id' => $indicator->id]);
     $html = $response->html();
-    $_instance->logRenderedChild('riPquKx', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('9PzJ8A2', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>  </td>
@@ -161,11 +161,34 @@ echo $html;
 
                 </tfoot>
             </table>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-            <div class="alert alert-warning">
-                No Indicators 
-                <a href="<?php echo e(route('download_template', [$unit_rank->id,$unit->id,$division->id,$fy->id])); ?>" class="btn btn-info btn-block">Create Indicators</a>
-        </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+            <div class="alert alert-danger">
+         
+            <!-- show large sad emoji-->
+            <span class="emoji-icon" > No Indicators 😢</span>
+            <!-- show a form with submit  -->
+            <form action="<?php echo e(route('download_template', [$unit_rank->id,$unit->id,$division->id,$fy->id])); ?>" method="GET">
+                <?php echo csrf_field(); ?>
+                <!-- show a select field with all units -->
+                <div class="form-group">
+                    <select name="category_id" id="category_id" class="form-control">
+                        <option value="">Select Category</option>
+                        <?php $__currentLoopData = $rank_categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($category->id); ?>"><?php echo e($category->name); ?></option>
+                           
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </select>
+                   
+
+                </div>
+               
+                <div class="form-group">
+                    <button class="btn btn-primary">Download Template</button>
+                </div>
+            </form>
+
+            </div>
+        
         <?php endif; ?>
     </div>
 </div>
@@ -285,6 +308,15 @@ echo $html;
 </div>
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+<!--pass selected category_id as a hidden field javascript -->
+<script>
+    function selectCategory(category_id) {
+        document.getElementById("category_id").value = category_id;
+    }
+</script>
+
+
 
 
 
