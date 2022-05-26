@@ -31,14 +31,10 @@ class UsersExport implements  FromView
 
     {
         $master_indicators = MasterIndicator::where('unit_rank_id', $this->rank)->get();
-        $units = Unit::where('unit_rank_id',$this->rank)->get();
-        // units 
+
         $indicatorgroups = IndicatorGroup::with('unit')->where('unit_rank_id',$this->rank)->where('financial_year_id',$this->fy)->get();
 
        
-
-        
-
         $keyed= collect();
    
         foreach ( $indicatorgroups as $group)
@@ -60,16 +56,11 @@ class UsersExport implements  FromView
                 }
            
             }
-
-         
-
         
     }
     
     
-                     
-
-
+                    
         $grouped = $keyed->groupBy('court_name')->map(function ($item, $key) {
 
             $performance = new  IndicatorGraderHelper();
@@ -104,5 +95,3 @@ class UsersExport implements  FromView
         return view('exports.test', ['grouped'=>$grouped]);
     }
 }
-
-
