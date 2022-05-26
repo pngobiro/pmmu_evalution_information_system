@@ -25,7 +25,6 @@ class TemplateGroupIndicatorsSeeder extends Seeder
                     "name"              => $data['1'],
                     "description"       => $data['2'],
                     "order"             => $data['3'],
-                    "unit_id"           => $data['4'],
                     "unit_rank_id"      => $data['5'],
                     "financial_year_id" => $data['6'],
                     "rank_category_id"  => $data['7'],
