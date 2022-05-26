@@ -121,7 +121,6 @@ class ReportsController extends Controller
         $pdf = PDF::Output('PMMU_'.$unit->name.'FY'.$fy->name.'.pdf');
         return $pdf;
         exit;
-
     }
 
 
