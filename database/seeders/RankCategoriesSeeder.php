@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\RankCategory;
 use Illuminate\Database\Seeder;
 
 class RankCategoriesSeeder extends Seeder
