@@ -31,7 +31,6 @@
         "jquery-ui": "^1.13.1",
         "jquery.easing": "^1.4.1"
     },
-
     "engines": {
         "node": ">=8.0.0",
         "npm": ">=6.0.0"
