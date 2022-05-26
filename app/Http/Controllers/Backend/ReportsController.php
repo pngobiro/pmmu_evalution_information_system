@@ -537,5 +537,5 @@ class ReportsController extends Controller
 
 
 
-
+// php artisan migrate:rollback
 
