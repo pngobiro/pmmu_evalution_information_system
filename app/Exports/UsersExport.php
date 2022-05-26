@@ -18,12 +18,12 @@ class UsersExport implements  FromView
     public $data;
    
 
-    public function __construct($unit_rank,$fy,$total_indicator_weighted_score)
+    public function __construct($unit_rank,$fy)
 {
 
     $this->rank= $unit_rank;
     $this->fy= $fy;
-    $this->total_indicator_weighted_score= $total_indicator_weighted_score;
+    
 
 }
 
