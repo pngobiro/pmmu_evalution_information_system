@@ -50,3 +50,8 @@ class CreateTemplateIndicatorsTable extends Migration
         Schema::dropIfExists('template_indicators');
     }
 }
+
+// run this 2022_02_18_092354_create_template_indicators_table.php migration
+
+php artisan migrate --path=database/migrations/2022_02_18_092354_create_template_indicators_table.php
+
