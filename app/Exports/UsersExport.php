@@ -50,20 +50,30 @@ class UsersExport implements  FromView
             {
                 $indicator = Indicator::where('master_indicator_id',$master->id)->where('indicator_group_id',$group->id)->first();
 
+                if($indicator!=null)
+                {
                     $keyed->push(['court_name'=>$group->combined_name, 'performance_score'=> $indicator->indicator_performance_score ?? 0,'indicator_name'=>$master->name,'indicator_target'=> $indicator->indicator_target ?? 0,'indicator_achievement'=>$indicator->indicator_achivement ?? 0,'composite_score'=> $indicator->indicator_weighted_score ?? 0]);
-
-                
+                }
+                else
+                {
+                        continue;
+                }
+           
             }
+
+         
+
         
     }
     
     
-     
+                     
+
 
         $grouped = $keyed->groupBy('court_name')->map(function ($item, $key) {
 
             $performance = new  IndicatorGraderHelper();
-            $overallScoreGrade  = $performance-> getCompositeScore($item->sum('composite_score'));
+            $overallScoreGrade  = $performance-> getCompositeScore(round($item->sum('composite_score'),3));
             
             $overall_performance_score = $overallScoreGrade['score'];
             $overall_performance_grade = $overallScoreGrade['grade'];

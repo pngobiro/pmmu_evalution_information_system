@@ -13,15 +13,15 @@
 <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('offline', [])->html();
-} elseif ($_instance->childHasBeenRendered('2OJLqzD')) {
-    $componentId = $_instance->getRenderedChildComponentId('2OJLqzD');
-    $componentTag = $_instance->getRenderedChildComponentTagName('2OJLqzD');
+} elseif ($_instance->childHasBeenRendered('6xaLqvM')) {
+    $componentId = $_instance->getRenderedChildComponentId('6xaLqvM');
+    $componentTag = $_instance->getRenderedChildComponentTagName('6xaLqvM');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('2OJLqzD');
+    $_instance->preserveRenderedChild('6xaLqvM');
 } else {
     $response = \Livewire\Livewire::mount('offline', []);
     $html = $response->html();
-    $_instance->logRenderedChild('2OJLqzD', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('6xaLqvM', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -112,15 +112,15 @@ echo $html;
                         <td> <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('indicator-form', ['indicatorId' => $indicator->id,'indicator_id' => $indicator->id])->html();
-} elseif ($_instance->childHasBeenRendered('9PzJ8A2')) {
-    $componentId = $_instance->getRenderedChildComponentId('9PzJ8A2');
-    $componentTag = $_instance->getRenderedChildComponentTagName('9PzJ8A2');
+} elseif ($_instance->childHasBeenRendered('533pFyf')) {
+    $componentId = $_instance->getRenderedChildComponentId('533pFyf');
+    $componentTag = $_instance->getRenderedChildComponentTagName('533pFyf');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('9PzJ8A2');
+    $_instance->preserveRenderedChild('533pFyf');
 } else {
     $response = \Livewire\Livewire::mount('indicator-form', ['indicatorId' => $indicator->id,'indicator_id' => $indicator->id]);
     $html = $response->html();
-    $_instance->logRenderedChild('9PzJ8A2', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('533pFyf', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>  </td>
@@ -230,8 +230,11 @@ echo $html;
     <div class="row">
     
         <div class="col-sm-3">
+            <!-- show tool tip -->
+            <span data-toggle="tooltip" data-placement="top" title=" Download Simple Excel">
+                <i class="fas fa-info-circle"></i>
             <a href="<?php echo e(route('simple_pmmu', [$unit_rank->id,$unit->id,$division->id,$fy->id])); ?>" class="btn btn-primary btn-sm"> <i class="fa fa-file-pdf-o"></i>Simple PDF</a>
-        </div>
+        </div> 
     
         <div class="col-sm-3">
             <a href="<?php echo e(route('complex_pmmu', [$unit_rank->id,$unit->id,$division->id,$fy->id])); ?>" class="btn btn-success btn-sm "><i class="fas fa-pdf"></i>  Complex PDF</a>

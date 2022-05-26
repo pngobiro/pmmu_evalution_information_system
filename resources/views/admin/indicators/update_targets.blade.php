@@ -74,8 +74,18 @@
                         <td>{{ $indicator->type->name }}</td>
                         <td>{{ $indicator->measure->name }}</td>
                         <td> <livewire:indicator-weight-form :indicator_id="$indicator->id" >  </td>
-                        {{--  <td>{{ $indicator->indicator_achivement }}</td> --}}
-                        <td> <livewire:indicator-target-form :indicator_id="$indicator->id" >  </td>
+                     
+
+                        <td> 
+                            
+                            <livewire:indicator-target-form :indicator_id="$indicator->id" >  
+
+                            @if ($indicator->is_backlog_indicator)
+                                                    <span data-toggle="tooltip" data-placement="top" title="Set a negative number">
+                                                        <i class="fas fa-info-circle"></i>
+                            @endif
+
+                            </td>
                      
                      
 

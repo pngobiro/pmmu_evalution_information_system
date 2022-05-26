@@ -200,8 +200,11 @@
     <div class="row">
     
         <div class="col-sm-3">
+            <!-- show tool tip -->
+            <span data-toggle="tooltip" data-placement="top" title=" Download Simple Excel">
+                <i class="fas fa-info-circle"></i>
             <a href="{{ route('simple_pmmu', [$unit_rank->id,$unit->id,$division->id,$fy->id]) }}" class="btn btn-primary btn-sm"> <i class="fa fa-file-pdf-o"></i>Simple PDF</a>
-        </div>
+        </div> 
     
         <div class="col-sm-3">
             <a href="{{ route('complex_pmmu', [$unit_rank->id,$unit->id,$division->id,$fy->id]) }}" class="btn btn-success btn-sm "><i class="fas fa-pdf"></i>  Complex PDF</a>

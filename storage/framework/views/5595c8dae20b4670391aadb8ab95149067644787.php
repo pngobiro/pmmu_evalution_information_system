@@ -75,34 +75,44 @@
                         <td> <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('indicator-weight-form', ['indicatorId' => $indicator->id,'indicator_id' => $indicator->id])->html();
-} elseif ($_instance->childHasBeenRendered('Bs4uwuI')) {
-    $componentId = $_instance->getRenderedChildComponentId('Bs4uwuI');
-    $componentTag = $_instance->getRenderedChildComponentTagName('Bs4uwuI');
+} elseif ($_instance->childHasBeenRendered('mN9DwZV')) {
+    $componentId = $_instance->getRenderedChildComponentId('mN9DwZV');
+    $componentTag = $_instance->getRenderedChildComponentTagName('mN9DwZV');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('Bs4uwuI');
+    $_instance->preserveRenderedChild('mN9DwZV');
 } else {
     $response = \Livewire\Livewire::mount('indicator-weight-form', ['indicatorId' => $indicator->id,'indicator_id' => $indicator->id]);
     $html = $response->html();
-    $_instance->logRenderedChild('Bs4uwuI', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('mN9DwZV', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>  </td>
-                        
-                        <td> <?php
+                     
+
+                        <td> 
+                            
+                            <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('indicator-target-form', ['indicatorId' => $indicator->id,'indicator_id' => $indicator->id])->html();
-} elseif ($_instance->childHasBeenRendered('08CayrP')) {
-    $componentId = $_instance->getRenderedChildComponentId('08CayrP');
-    $componentTag = $_instance->getRenderedChildComponentTagName('08CayrP');
+} elseif ($_instance->childHasBeenRendered('frTy06P')) {
+    $componentId = $_instance->getRenderedChildComponentId('frTy06P');
+    $componentTag = $_instance->getRenderedChildComponentTagName('frTy06P');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('08CayrP');
+    $_instance->preserveRenderedChild('frTy06P');
 } else {
     $response = \Livewire\Livewire::mount('indicator-target-form', ['indicatorId' => $indicator->id,'indicator_id' => $indicator->id]);
     $html = $response->html();
-    $_instance->logRenderedChild('08CayrP', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('frTy06P', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
-?>  </td>
+?>  
+
+                            <?php if($indicator->is_backlog_indicator): ?>
+                                                    <span data-toggle="tooltip" data-placement="top" title="Set a negative number">
+                                                        <i class="fas fa-info-circle"></i>
+                            <?php endif; ?>
+
+                            </td>
                      
                      
 
