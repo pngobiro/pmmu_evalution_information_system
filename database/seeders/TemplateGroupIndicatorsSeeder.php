@@ -21,15 +21,14 @@ class TemplateGroupIndicatorsSeeder extends Seeder
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
             if (!$firstline) {
                 TemplateIndicatorGroup::create([
-                    "id" => $data['0'],
-                    "name" => $data['1'],
-                    "description" => $data['2'],
-                    "order" => $data['3'],
-                    "unit_id" => $data['4'],
-                    "unit_rank_id" => $data['5'],
+                    "id"                => $data['0'],
+                    "name"              => $data['1'],
+                    "description"       => $data['2'],
+                    "order"             => $data['3'],
+                    "unit_id"           => $data['4'],
+                    "unit_rank_id"      => $data['5'],
                     "financial_year_id" => $data['6'],
-                    "created_at" => $data['7'],
-                    "updated_at" => $data['8'],
+                    "rank_category_id"  => $data['7'],
                 ]);  
             }
 
