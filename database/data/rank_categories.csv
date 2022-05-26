@@ -1,0 +1,9 @@
+id,name,description,unit_rank_id,deleted_at,created_at,updated_at
+1,Sample High Court,Normal HC Court Handling both Criminal and Civil Cases,3,NULL,5/21/2022 13:35,5/21/2022 14:17
+2,Normal MC Court,Normal MC Court Handling both Criminal and Civil Cases,6,NULL,5/22/2022 5:29,5/22/2022 5:29
+3,Supreme Court,Supreme court,1,NULL,5/23/2022 1:57,5/23/2022 1:57
+4,Sample Court Appeal,Sample Court Appeal,2,NULL,5/23/2022 2:36,5/23/2022 2:36
+5,Sample ELRC,Sample ELRC,4,NULL,5/23/2022 3:12,5/23/2022 7:05
+6,Sample ELC,Sample ELC,5,NULL,5/23/2022 9:07,5/23/2022 9:07
+7,Sample Kadhi Court,Sample Kadhi Court,7,NULL,5/23/2022 11:24,5/23/2022 11:24
+8,Stand Alone Kadhi Court,Stand Alone Kadhi Court,7,NULL,5/23/2022 12:04,5/23/2022 12:04

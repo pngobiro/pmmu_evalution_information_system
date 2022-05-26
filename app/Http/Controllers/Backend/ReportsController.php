@@ -521,13 +521,6 @@ class ReportsController extends Controller
 
 
  
-
-    
-   
-    public function fileExport() 
-    {
-        return Excel::download(new UsersExport, 'Magistrate Court FY 2021-22.xlsx');
-    }
     
     public function unit_excel(UnitRank $unit_rank , FinancialYear $fy){
         $file_name = "{$unit_rank->name} - FY {$fy->name} .xlsx";
@@ -535,7 +528,5 @@ class ReportsController extends Controller
     }
 }
 
-
-
-// php artisan migrate:rollback
-
+// create a seeder called RankCategotiesSeeder
+// php artisan make:seeder RankCategoriesSeeder
