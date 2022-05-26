@@ -49,7 +49,7 @@ class TemplateIndicatorSeeder extends Seeder
                         "indicator_target"                                      =>   $data['10'],
                         "indicator_achivement"                                  =>   $data['11'],
                         "is_backlog_indicator"                                  =>   $data['12'],
-                        "remarks"                                               =>   $data['13'],
+                        "remarks"                                               =>   $data['13'] ?? null,
                         "order"                                                 =>   $data['15'],
                 
 
