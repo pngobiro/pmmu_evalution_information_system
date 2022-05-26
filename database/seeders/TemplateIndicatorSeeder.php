@@ -39,18 +39,19 @@ class TemplateIndicatorSeeder extends Seeder
 
                     TemplateIndicator::create([
 
-                        "id"                                            =>   $data['0'],
-                        "name"                                          =>   $data['1'],
-                        "unit_rank_id"                                  =>   $data['2'],
-                        "unit_id"                                       =>   $data['3'],
-                        "indicator_group_id"                            =>   $data['4'],
-                        "indicator_type_id"                             =>   $data['5'],
-                        "indicator_unit_of_measure_id"                  =>   $data['6'],
-                        "indicator_weight"                              =>   $data['7'],
-                        "indicator_target"                              =>   $data['8'],
-                        "indicator_achivement"                          =>   $data['9'],
-                        "remarks"                                       =>   $data['10'],
-                        "order"                                         =>   $data['11'],
+                        "id"                                                    =>   $data['0'],
+                        "master_indicator_id"                                   =>   $data['1'],
+                        "name"                                                  =>   $data['3'],
+                        "indicator_group_id"                                    =>   $data['6'],
+                        "indicator_type_id"                                     =>   $data['7'],
+                        "indicator_unit_of_measure_id"                          =>   $data['8'],
+                        "indicator_weight"                                      =>   $data['9'],
+                        "indicator_target"                                      =>   $data['10'],
+                        "indicator_achivement"                                  =>   $data['11'],
+                        "is_backlog_indicator"                                  =>   $data['12'],
+                        "remarks"                                               =>   $data['13'],
+                        "order"                                                 =>   $data['15'],
+                
 
                     ]);    
 

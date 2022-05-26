@@ -527,6 +527,3 @@ class ReportsController extends Controller
         return Excel::download(new UsersExport($unit_rank->id,$fy->id),str_replace("/","-",$file_name) );
     }
 }
-
-// create a seeder called RankCategotiesSeeder
-// php artisan make:seeder RankCategoriesSeeder
