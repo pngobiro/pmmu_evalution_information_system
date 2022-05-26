@@ -46,7 +46,7 @@ class TemplateIndicatorSeeder extends Seeder
                         "indicator_type_id"                                     =>   $data['6'],
                         "indicator_unit_of_measure_id"                          =>   $data['7'],
                         "indicator_weight"                                      =>   $data['8'] ?? 0,
-                        "indicator_target"                                      =>   $data['9'],
+                        "indicator_target"                                      =>   $data['9']?? 0,
                         "indicator_achivement"                                  =>   $data['10'],
                         "is_backlog_indicator"                                  =>   $data['11'],
                         "remarks"                                               =>   $data['12'] ,
