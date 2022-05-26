@@ -33,9 +33,7 @@ class RankCategoriesSeeder extends Seeder
                     "name"                  =>   $data['1'],
                     "description"           =>   $data['2'],
                     "unit_rank_id"          =>   $data['3'],
-                    "deleted_at"            =>   $data['4'],
-                    "created_at"            =>   date("Y-m-d H:i:s"),
-                    "updated_at"            =>   date("Y-m-d H:i:s"),
+              
 
                 ]);    
 
