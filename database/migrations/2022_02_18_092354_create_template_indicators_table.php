@@ -29,7 +29,7 @@ class CreateTemplateIndicatorsTable extends Migration
             $table->foreignIdFor(IndicatorGroup::class);
             $table->foreignIdFor(IndicatorType::class);
             $table->foreignIdFor(IndicatorUnitOfMeasure::class);
-            $table->integer('indicator_weight');
+            $table->integer('indicator_weight')->nullable();
             $table->integer('indicator_target')->nullable();
             $table->integer('indicator_achivement')->nullable();
             $table->boolean('is_backlog_indicator')->default(false);
