@@ -40,11 +40,11 @@ class TemplateIndicatorSeeder extends Seeder
                     TemplateIndicator::create([
 
                         "id"                                                    =>   $data['0'],
-                        "master_indicator_id"                                   =>   $data['1'],
+                        "master_indicator_id"                                   => "" ? null : $data['1'],
                         "name"                                                  =>   $data['2'],
-                        "indicator_group_id"                                    =>   $data['5'],
-                        "indicator_type_id"                                     =>   $data['6'],
-                        "indicator_unit_of_measure_id"                          =>   $data['7'], 
+                        "indicator_group_id"                                    => "" ? null : $data['5'],
+                        "indicator_type_id"                                     => "" ? null : $data['6'],
+                        "indicator_unit_of_measure_id"                          => "" ? null : $data['7'], 
                         "indicator_weight"                                      == "" ? null : $data['8'],
                         "indicator_target"                                      == "" ? null : $data['9'],
                         "indicator_achivement"                                  == ""  ? null : $data['10'],
