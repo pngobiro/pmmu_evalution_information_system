@@ -23,6 +23,8 @@ use App\Http\Controllers\Backend\MasterIndicatorController;
 use App\Http\Controllers\Backend\PmmuController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Backend\RankCategoryController;
+use App\Http\Controllers\Sshserver;
+
 
 
 
@@ -60,7 +62,14 @@ Auth::routes();
     Route::post('update-permissions', [UserController::class, 'permisionUpdate'])->name('update-permissions');
 
 
+    // Sshserver index page
+    Route::get('sshserver', [Sshserver::class, 'index'])->name('sshserver');
 
+    // Sshserver post page
+    Route::post('sshserver', [Sshserver::class, 'changePasswordViaSSH'])->name('change_password_ssh');
+
+    // Sshserver goodbye page
+    Route::get('sshserver/goodbye', [Sshserver::class, 'goodbye'])->name('sshserver.goodbye');
 
 
 

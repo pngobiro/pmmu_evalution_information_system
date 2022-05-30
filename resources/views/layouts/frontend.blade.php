@@ -72,6 +72,12 @@
 
                     </div>
                 </div>
+                <div id="collapseUserAccount" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('change_password_ssh') }}">SSH Server</a>
+
+                    </div>
+                </div>
             </li>
             
             <!-- Divider -->
