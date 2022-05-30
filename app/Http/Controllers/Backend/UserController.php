@@ -109,6 +109,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        // soft delete user
+
         if (auth()->user()->id == $user->id) {
             return redirect()->route('users.index')->with('message', 'You are deleting yourself.');
         }
