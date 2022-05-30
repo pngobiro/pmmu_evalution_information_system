@@ -42,6 +42,7 @@
                         </button>
                 </div>
             </div>
+            </div>
             <div class="card-body">
                 <table class="table">
                     <thead>
@@ -50,6 +51,7 @@
                             <th scope="col">PJ</th>
                             <th scope="col">First Name</th>
                             <th scope="col">Last Name</th>
+                            <th scope="col">Phone Number</th>
                             <th scope="col">State</th>
                             <th scope="col">Email</th>
                             <th scope="col">Edit</th>
@@ -64,7 +66,7 @@
                                 <td>{{ $user->pj_number }}</td>
                                 <td>{{ $user->first_name }}</td>
                                 <td>{{ $user->last_name }}</td>
-                                
+                                <td>{{ $user->phone_number }}</td>
                                 <td>
                                   {{ $user->is_active ? 'Active' : 'Inactive' }}
                     
@@ -116,25 +118,66 @@
                     @csrf
                     <div class="form-group">
                         <label for="first_name">First Name</label>
-                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Jane">
+                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Jane" required>
+                        <!--- Validation -->
+                        @if ($errors->has('first_name'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('first_name') }}</strong>
+                            </span>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label for="last_name">Last Name</label>
-                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Doe">
+                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Doe" required>
+                        <!--- Validation -->
+                        @if ($errors->has('last_name'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('last_name') }}</strong>
+                            </span>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="email">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="email" required>
+                        <!--- Validation -->
+                        @if ($errors->has('email'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <!-- role -->
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <select class="form-control" id="role" name="role">
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                        </select>
+                        <!--- Validation -->
+                        @if ($errors->has('role'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('role') }}</strong>
+                            </span>
+                        @endif
                     </div>
           
                     <div class="form-group">
                         <label for="pj_number">PJ Number</label>
-                        <input type="text" class="form-control" id="pj_number" name="pj_number" placeholder="pj number">
+                        <input type="text" class="form-control" id="pj_number" name="pj_number" placeholder="pj number" required>
+                        <!--- Validation -->
+                        @if ($errors->has('pj_number'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('pj_number') }}</strong>
+                            </span>
+                        @endif
                     </div>
         
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                    
+                        <!-- check if validation is ok -->
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+
                     </div>
                 </form>
             </div>
@@ -172,6 +215,13 @@
                     <div class="form-group">
                         <label for="pj_number">PJ Number</label>
                         <input type="text" class="form-control" id="pj_number" name="pj_number" value="{{ $user->pj_number }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <select class="form-control" id="role" name="role">
+                            <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

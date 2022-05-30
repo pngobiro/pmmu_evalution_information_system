@@ -25,9 +25,9 @@ class CreateIndicatorsTable extends Migration
             $table->foreignIdFor(IndicatorGroup::class);
             $table->foreignIdFor(IndicatorType::class);
             $table->foreignIdFor(IndicatorUnitOfMeasure::class);
-            $table->integer('indicator_weight');
-            $table->integer('indicator_target')->nullable();
-            $table->integer('indicator_achivement')->nullable();
+            $table->decimal('indicator_weight', 5, 2)->nullable();
+            $table->decimal('indicator_target', 10, 2)->nullable();
+            $table->decimal('indicator_achivement', 10, 2)->nullable();
             $table->boolean('is_backlog_indicator')->default(false);
             $table->integer('indicator_status')->nullable();
             $table->mediumText('remarks')->nullable();
@@ -53,3 +53,5 @@ class CreateIndicatorsTable extends Migration
     }
 }
 
+
+//php migrate --path=database/migrations/2022_02_12_171809_create_indicators_table.php

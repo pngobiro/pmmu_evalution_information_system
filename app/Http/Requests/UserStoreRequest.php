@@ -30,6 +30,7 @@ class UserStoreRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
             'phone_number' => ['required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10'],
+            'default_password_set' => ['required'],
         ];
     }
 }

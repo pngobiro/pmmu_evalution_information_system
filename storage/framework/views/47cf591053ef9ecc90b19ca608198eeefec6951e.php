@@ -1,0 +1,1 @@
+<?php /**PATH /home/ngobiro/lampstack-8.1.1-0/frameworks/laravel/resources/views/admin/rank_categories/create_rank_category.blade.php ENDPATH**/ ?>

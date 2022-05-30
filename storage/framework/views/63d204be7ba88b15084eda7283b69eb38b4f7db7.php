@@ -81,4 +81,4 @@
        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
       
  
- </table><?php /**PATH /home/ngobiro/lampstack-8.1.2-0/frameworks/laravel/resources/views/exports/test.blade.php ENDPATH**/ ?>
+ </table><?php /**PATH /home/ngobiro/lampstack-8.1.1-0/frameworks/laravel/resources/views/exports/test.blade.php ENDPATH**/ ?>

@@ -56,12 +56,16 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
+        
+
         User::create([
-            'username' => $request->username,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'pj_number'                 => $request->pj_number,
+            'first_name'                => $request->first_name,
+            'last_name'                 => $request->last_name,
+            'email'                     => $request->email,
+            'phone_number'              => $request->phone_number,
+            'default_password_set'      => true,
+            'password' => Hash::make($request->pj_number),
         ]);
 
         return redirect()->route('admin.users.index')->with('message', 'User Register Succesfully');
