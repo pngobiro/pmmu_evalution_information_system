@@ -24,3 +24,5 @@ class DatabaseSeeder extends Seeder
 
     }
 }
+
+// php artisan migrate:refresh /pa
