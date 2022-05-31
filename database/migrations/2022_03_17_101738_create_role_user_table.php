@@ -12,9 +12,9 @@ class CreateRoleUserTable extends Migration
             $table->primary(['role_id', 'user_id']);
             $table->foreignId('role_id')->constrained()->cascadeOnDelete();
             $table->dateTime('deleted_at')->nullable();
-            //$table->foreignId('user_id')->constrained()->cascadeOnDelete();
-          
-
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            // drop cascade user_id
+            
 
         });
     }
