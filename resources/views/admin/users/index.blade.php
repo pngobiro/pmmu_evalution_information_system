@@ -1,113 +1,133 @@
 @extends('layouts.main')
 
 @section('content')
+<!-- show session message -->
+@if(Session::has('message'))
+<div class="alert alert-info">
+    {{ Session::get('message') }}
+</div>
+@endif
 
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Users</h1>
-    </div>
+<!-- show validation errors -->
+@if($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+
+<section class="content-header">
+  <h1>
+    Users
+    <small>Control Panel</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Users</li>
+  </ol>
+</section>
+
+<!-- Main content with search and add new user-->
+
+<section class="content">
     <div class="row">
-        <div class="card">
-            <div>
-                @if (session()->has('message'))
-                    <div class="alert alert-success">
-                        {{ session('message') }}
-                    </div>
-                @endif
-            </div>
-            <div class="card-header">
-                
-                        <form method="GET" action="{{ route('users.index') }}">
-                            <div class="form-row align-items-center">
-                                <div class="col">
-                                    <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
-                                        placeholder="Jane Doe">
-                                </div>
-                                <div class="col">
-                                    <button type="submit" class="btn btn-primary mb-2">
-                                        <i class="fa fa-search" aria-hidden="true"></i>
-                                        Search
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    
-                  
-                    <div>
-                        <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#createUserModal">
-                            <i class="fa fa-user-plus" aria-hidden="true"></i>
+      <div class="col-xs-12">
+        <div class="box">
+          <div class="box-header">
+            <h3 class="box-title">Users</h3>
+            <div class="box-tools">
+              <div class="input-group input-group-sm" style="width: 600px;">
+                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                <div class="input-group-btn">
+                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                </div>
 
-                            Create New User                
+                <!--- Add new user button  align div to right--->
+
+                <div class="pull-right">
+                  <!-- add new user button , open modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">
+                        <i class="fa fa-plus"></i> Add New User
+                    </button>
+                </div>
+        
+
+            </div>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <tr>
+                <th>ID</th>
+                <th>PJ</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Designation </th>
+                <th>Is Active</th>
+                <th>Edit</th>
+                <th>Delete</th>
+       
+              </tr>
+              @foreach($users as $user)
+              <tr>
+                <td>{{ $user->id }}</td>
+                <td>{{ $user->pj_number }}</td>
+                <td>{{ $user->first_name }}</td>
+                <td>{{ $user->last_name }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->designation }}</td>
+                <td>
+                    {{ $user->is_active == 1 ? 'Active' : 'Not Active' }}
+                <td>
+                  <!-- edit user button , open modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUserModal{{ $user->id }}">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                </td>   
+                <td>
+                   
+                    @if ($user->is_active == 1)
+                    
+                        <button onclick="deactivate_user(<?php echo $user->id ?>);" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Deactivate">
+                            <i class="fa fa-user-times"></i>
                         </button>
-                
-            </div>
-            </div>
-
-        </div>
-    </div>
-        
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#Id</th>
-                            <th scope="col">PJ</th>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Last Name</th>
-                            <th scope="col">Phone Number</th>
-                            <th scope="col">State</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Edit</th>
-                            <th scope="col">Role</th>
-                            <th scope="col">DeActivate User</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($users as $user)
-                            <tr>
-                                <th scope="row">{{ $user->id }}</th>
-                                <td>{{ $user->pj_number }}</td>
-                                <td>{{ $user->first_name }}</td>
-                                <td>{{ $user->last_name }}</td>
-                                <td>{{ $user->phone_number }}</td>
-                                <td>
-                                  {{ $user->is_active ? 'Active' : 'Inactive' }}
-                    
-                                </td>   
-                                <td>{{ $user->email }}</td>
-                           
-                            
-                                <!-- Edit Button  pass user ID-->
-
-                                <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUserModal{{ $user->id }}">
-                                        <i class="fa fa-user-edit" aria-hidden="true"></i>
-                                    </button>
-                                <td>
-
-
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#userPermissionsModal{{ $user->id }}">
-                                        <i class="fas fa-user-lock" aria-hidden="true"></i>
-                                    </button>
                         
-                           
-                                <td>
-                                    <button onclick="deactivate_user(<?php echo $user->id ?>);" class="btn btn-danger btn-sm"
-                                        data-toggle="tooltip" data-placement="top" title="Deactivate">
-                                         <i class="fa fa-user-times"></i>
-                                    </button>
+                    @else
+                        <button onclick="activate_user(<?php echo $user->id ?>);" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Activate">
+                            <i class="fa fa-user-times"></i>
+                        </button>
+                    @endif
+                  
 
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+
+                </td>
         
-    </div>
+              </tr>
+              @endforeach
+            </table>
+          </div>
+          <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+          </div>
+          <!-- /.col -->
+          </div>
+          <!-- /.row -->
+          </section>
+          <!-- /.content -->
+  
+
+
+
+
 @endsection
 <!-- New User Modal -->
-<div class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -149,17 +169,23 @@
                             </span>
                         @endif
                     </div>
-                    <!-- role -->
                     <div class="form-group">
-                        <label for="role">Role</label>
-                        <select class="form-control" id="role" name="role">
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
-                        </select>
+                        <label for="designation">Designation </label>
+                        <input type="text" class="form-control" id="designation" name="designation" placeholder="designation" required>
                         <!--- Validation -->
-                        @if ($errors->has('role'))
+                        @if ($errors->has('designation'))
                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('role') }}</strong>
+                                <strong>{{ $errors->first('designation') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number">Phone Number</label>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Phone Number" required>
+                        <!--- Validation -->
+                        @if ($errors->has('phone_number'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('phone_number') }}</strong>
                             </span>
                         @endif
                     </div>
@@ -177,8 +203,6 @@
         
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    
-                        <!-- check if validation is ok -->
                         <button type="submit" class="btn btn-primary">Save Changes</button>
 
                     </div>
@@ -202,7 +226,6 @@
             <div class="modal-body">
                 <form method="POST" action="{{ route('users.update', $user->id) }}">
                     @csrf
-                    @method('PUT')
                     <div class="form-group">
                         <label for="first_name">First Name</label>
                         <input type="text" class="form-control" id="first_name" name="first_name" value="{{ $user->first_name }}">
@@ -216,16 +239,14 @@
                         <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}">
                     </div>
                     <div class="form-group">
+                        <label for="designation">Designation </label>
+                        <input type="text" class="form-control" id="designation" name="designation" value="{{ $user->designation }}">
+                    </div>
+                    <div class="form-group">
                         <label for="pj_number">PJ Number</label>
                         <input type="text" class="form-control" id="pj_number" name="pj_number" value="{{ $user->pj_number }}">
                     </div>
-                    <div class="form-group">
-                        <label for="role">Role</label>
-                        <select class="form-control" id="role" name="role">
-                            <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
-                            <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
-                        </select>
-                    </div>
+           
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Update</button>
@@ -274,6 +295,7 @@
 </div>
 
 @endforeach
+
 
 
 

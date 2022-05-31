@@ -22,7 +22,11 @@ class User extends Authenticatable
         'email',
         'password',
         'phone_number',
-        'pj_number'
+        'pj_number',
+        'designation',
+        'default_password_set',
+        'is_active',
+
     ];
 
     public function roles()

@@ -54,21 +54,29 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserStoreRequest $request)
+    public function store(Request $request)
     {
-        
-
-        User::create([
-            'pj_number'                 => $request->pj_number,
-            'first_name'                => $request->first_name,
-            'last_name'                 => $request->last_name,
-            'email'                     => $request->email,
-            'phone_number'              => $request->phone_number,
-            'default_password_set'      => true,
-            'password' => Hash::make($request->pj_number),
+        $request->validate([
+            'pj_number' => 'required|string|max:255|unique:users',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'designation' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:10',
         ]);
 
-        return redirect()->route('admin.users.index')->with('message', 'User Register Succesfully');
+        User::create([
+            'pj_number'                     => $request->pj_number,
+            'first_name'                    => $request->first_name,
+            'last_name'                     => $request->last_name,
+            'email'                         => $request->email,
+            'phone_number'                  => $request->phone_number,
+            'designation'                   => $request->designation,
+            'default_password_set'          => 1, 
+            'password'                      => Hash::make($request->pj_number),
+        ]);
+
+        return redirect()->route('users.index')->with('message', 'User Register Succesfully');
     }
 
     /**
@@ -89,14 +97,20 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserUpdateRequest $request, User $user)
+    public function update(Request $request, User $user)
+
     {
+
         $user->update([
-            'username' => $request->username,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
+            'pj_number'                     => $request->pj_number,
+            'first_name'                    => $request->first_name,
+            'last_name'                     => $request->last_name,
+            'email'                         => $request->email,
+            'designation'                   => $request->designation,
+
         ]);
+
+
 
         return redirect()->route('users.index')->with('message', 'User Updated Succesfully');
     }
@@ -133,6 +147,8 @@ class UserController extends Controller
             'email' => $request->email,
             'phone_number' => $request->phone_number,
             'pj_number' => $request->pj_number,
+            'designation' => $request->designation,
+
         ]);
 
         return redirect()->route('users.profile')->with('message', 'Profile Updated Succesfully');
@@ -159,7 +175,7 @@ class UserController extends Controller
     public function deactivate(User $user){
 
         $user->update([
-            'active' => 0,
+            'is_active' => 0,
         ]);
 
         return redirect()->route('users.index')->with('message', 'User Deactivated Succesfully');
@@ -169,10 +185,19 @@ class UserController extends Controller
     public function activate(User $user){
 
         $user->update([
-            'active' => 1,
+            'is_active' => 1,
         ]);
 
         return redirect()->route('users.index')->with('message', 'User Activated Succesfully');
+    }
+
+    public function reset_password(User $user){
+
+        $user->update([
+            'password' => Hash::make($user->pj_number),
+        ]);
+
+        return redirect()->route('users.index')->with('message', 'User Password Reset Succesfully');
     }
 
 }
