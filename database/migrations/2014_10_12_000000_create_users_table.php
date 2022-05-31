@@ -14,6 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
+            // drop 
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
@@ -26,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('phone_verified_at')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('role')->nullable();
+            $table->string('role')->nullable(); // drop cascade
             $table->string('password');        
             $table->timestamp('password_reset_time')->nullable();
             $table->boolean('default_password_set')->default(false);
@@ -47,6 +48,7 @@ class CreateUsersTable extends Migration
     {
 
         Schema::dropIfExists('users');
+
       
     
     }
