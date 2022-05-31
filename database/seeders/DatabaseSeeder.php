@@ -15,16 +15,10 @@ class DatabaseSeeder extends Seeder
     {
        
         $this->call([
-            UserSeeder::class,
-            FinancialYearSeeder::class,
-            UnitRankSeeder::class,
-            UnitSeeder::class,
-            IndicatorTypeSeeder::class,
-            UnitOfMeasureSeeder::class,
-            IndicatorGroupSeeder::class,
-            MasterIndicatorSeeder::class,
+      
+
             TemplateGroupIndicatorsSeeder::class,
-            TemplateIndicatorsSeeder::class
+            TemplateIndicatorsSeeder::class,
 
         ]);
 
