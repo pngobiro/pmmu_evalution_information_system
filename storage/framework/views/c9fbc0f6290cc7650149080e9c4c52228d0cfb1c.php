@@ -226,6 +226,7 @@
             <div class="modal-body">
                 <form method="POST" action="<?php echo e(route('users.update', $user->id)); ?>">
                     <?php echo csrf_field(); ?>
+                    <?php echo method_field('PUT'); ?>
                     <div class="form-group">
                         <label for="first_name">First Name</label>
                         <input type="text" class="form-control" id="first_name" name="first_name" value="<?php echo e($user->first_name); ?>">

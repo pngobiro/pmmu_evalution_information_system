@@ -226,6 +226,7 @@
             <div class="modal-body">
                 <form method="POST" action="{{ route('users.update', $user->id) }}">
                     @csrf
+                    @method('PUT')
                     <div class="form-group">
                         <label for="first_name">First Name</label>
                         <input type="text" class="form-control" id="first_name" name="first_name" value="{{ $user->first_name }}">
