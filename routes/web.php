@@ -125,6 +125,11 @@ Auth::routes();
     Route::post('users/{user}/change-password', [ChangePasswordController::class, 'change_password'])->name('users.change.password');
     Route::get('users/{user}/change-password', [ChangePasswordController::class, 'change_password_form'])->name('user_change_password_form');
 
+      // user activate and deactivate with ajax route
+    Route::post('users/{user}/activate', [UserController::class, 'activate'])->name('users.activate');
+    
+    Route::post('users/{user}/deactivate', [UserController::class, 'deactivate'])->name('users.deactivate');
+
 
 
 

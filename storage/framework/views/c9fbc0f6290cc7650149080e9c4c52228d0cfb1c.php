@@ -1,110 +1,133 @@
 <?php $__env->startSection('content'); ?>
+<!-- show session message -->
+<?php if(Session::has('message')): ?>
+<div class="alert alert-info">
+    <?php echo e(Session::get('message')); ?>
 
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Users</h1>
-    </div>
+</div>
+<?php endif; ?>
+
+<!-- show validation errors -->
+<?php if($errors->any()): ?>
+<div class="alert alert-danger">
+    <ul>
+        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <li><?php echo e($error); ?></li>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </ul>
+</div>
+<?php endif; ?>
+
+
+<section class="content-header">
+  <h1>
+    Users
+    <small>Control Panel</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Users</li>
+  </ol>
+</section>
+
+<!-- Main content with search and add new user-->
+
+<section class="content">
     <div class="row">
-        <div class="card  mx-auto">
-            <div>
-                <?php if(session()->has('message')): ?>
-                    <div class="alert alert-success">
-                        <?php echo e(session('message')); ?>
-
-                    </div>
-                <?php endif; ?>
-            </div>
-            <div class="card-header">
-                <div class="row">
-                    <div class="col">
-                        <form method="GET" action="<?php echo e(route('users.index')); ?>">
-                            <div class="form-row align-items-center">
-                                <div class="col">
-                                    <input type="search" name="search" class="form-control mb-2" id="inlineFormInput"
-                                        placeholder="Jane Doe">
-                                </div>
-                                <div class="col">
-                                    <button type="submit" class="btn btn-primary mb-2">
-                                        <i class="fa fa-search" aria-hidden="true"></i>
-                                        Search
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                  
-                    <div>
-                        <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#createUserModal">
-                            <i class="fa fa-user-plus" aria-hidden="true"></i>
-
-                            Create New User                
-                        </button>
+      <div class="col-xs-12">
+        <div class="box">
+          <div class="box-header">
+            <h3 class="box-title">Users</h3>
+            <div class="box-tools">
+              <div class="input-group input-group-sm" style="width: 600px;">
+                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                <div class="input-group-btn">
+                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                 </div>
-            </div>
-            </div>
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#Id</th>
-                            <th scope="col">PJ</th>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Last Name</th>
-                            <th scope="col">Phone Number</th>
-                            <th scope="col">State</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Edit</th>
-                            <th scope="col">Role</th>
-                            <th scope="col">DeActivate User</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <tr>
-                                <th scope="row"><?php echo e($user->id); ?></th>
-                                <td><?php echo e($user->pj_number); ?></td>
-                                <td><?php echo e($user->first_name); ?></td>
-                                <td><?php echo e($user->last_name); ?></td>
-                                <td><?php echo e($user->phone_number); ?></td>
-                                <td>
-                                  <?php echo e($user->is_active ? 'Active' : 'Inactive'); ?>
 
+                <!--- Add new user button  align div to right--->
+
+                <div class="pull-right">
+                  <!-- add new user button , open modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">
+                        <i class="fa fa-plus"></i> Add New User
+                    </button>
+                </div>
+        
+
+            </div>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <tr>
+                <th>ID</th>
+                <th>PJ</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Designation </th>
+                <th>Is Active</th>
+                <th>Edit</th>
+                <th>Delete</th>
+       
+              </tr>
+              <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+              <tr>
+                <td><?php echo e($user->id); ?></td>
+                <td><?php echo e($user->pj_number); ?></td>
+                <td><?php echo e($user->first_name); ?></td>
+                <td><?php echo e($user->last_name); ?></td>
+                <td><?php echo e($user->email); ?></td>
+                <td><?php echo e($user->designation); ?></td>
+                <td>
+                    <?php echo e($user->is_active == 1 ? 'Active' : 'Not Active'); ?>
+
+                <td>
+                  <!-- edit user button , open modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUserModal<?php echo e($user->id); ?>">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                </td>   
+                <td>
+                   
+                    <?php if($user->is_active == 1): ?>
                     
-                                </td>   
-                                <td><?php echo e($user->email); ?></td>
-                           
-                            
-                                <!-- Edit Button  pass user ID-->
-
-                                <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUserModal<?php echo e($user->id); ?>">
-                                        <i class="fa fa-user-edit" aria-hidden="true"></i>
-                                    </button>
-                                <td>
-
-
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#userPermissionsModal<?php echo e($user->id); ?>">
-                                        <i class="fas fa-user-lock" aria-hidden="true"></i>
-                                    </button>
+                        <button onclick="deactivate_user(<?php echo $user->id ?>);" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Deactivate">
+                            <i class="fa fa-user-times"></i>
+                        </button>
                         
-                           
-                                <td>
-                                    <button onclick="deactivate_user(<?php echo $user->id ?>);" class="btn btn-danger btn-sm"
-                                        data-toggle="tooltip" data-placement="top" title="Deactivate">
-                                         <i class="fa fa-user-times"></i>
-                                    </button>
+                    <?php else: ?>
+                        <button onclick="activate_user(<?php echo $user->id ?>);" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Activate">
+                            <i class="fa fa-user-times"></i>
+                        </button>
+                    <?php endif; ?>
+                  
 
-                                </td>
-                            </tr>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+
+                </td>
+        
+              </tr>
+              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </table>
+          </div>
+          <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+          </div>
+          <!-- /.col -->
+          </div>
+          <!-- /.row -->
+          </section>
+          <!-- /.content -->
+  
+
+
+
+
 <?php $__env->stopSection(); ?>
 <!-- New User Modal -->
-<div class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -146,17 +169,23 @@
                             </span>
                         <?php endif; ?>
                     </div>
-                    <!-- role -->
                     <div class="form-group">
-                        <label for="role">Role</label>
-                        <select class="form-control" id="role" name="role">
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
-                        </select>
+                        <label for="designation">Designation </label>
+                        <input type="text" class="form-control" id="designation" name="designation" placeholder="designation" required>
                         <!--- Validation -->
-                        <?php if($errors->has('role')): ?>
+                        <?php if($errors->has('designation')): ?>
                             <span class="invalid-feedback" role="alert">
-                                <strong><?php echo e($errors->first('role')); ?></strong>
+                                <strong><?php echo e($errors->first('designation')); ?></strong>
+                            </span>
+                        <?php endif; ?>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number">Phone Number</label>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Phone Number" required>
+                        <!--- Validation -->
+                        <?php if($errors->has('phone_number')): ?>
+                            <span class="invalid-feedback" role="alert">
+                                <strong><?php echo e($errors->first('phone_number')); ?></strong>
                             </span>
                         <?php endif; ?>
                     </div>
@@ -174,8 +203,6 @@
         
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    
-                        <!-- check if validation is ok -->
                         <button type="submit" class="btn btn-primary">Save Changes</button>
 
                     </div>
@@ -199,7 +226,6 @@
             <div class="modal-body">
                 <form method="POST" action="<?php echo e(route('users.update', $user->id)); ?>">
                     <?php echo csrf_field(); ?>
-                    <?php echo method_field('PUT'); ?>
                     <div class="form-group">
                         <label for="first_name">First Name</label>
                         <input type="text" class="form-control" id="first_name" name="first_name" value="<?php echo e($user->first_name); ?>">
@@ -213,16 +239,14 @@
                         <input type="email" class="form-control" id="email" name="email" value="<?php echo e($user->email); ?>">
                     </div>
                     <div class="form-group">
+                        <label for="designation">Designation </label>
+                        <input type="text" class="form-control" id="designation" name="designation" value="<?php echo e($user->designation); ?>">
+                    </div>
+                    <div class="form-group">
                         <label for="pj_number">PJ Number</label>
                         <input type="text" class="form-control" id="pj_number" name="pj_number" value="<?php echo e($user->pj_number); ?>">
                     </div>
-                    <div class="form-group">
-                        <label for="role">Role</label>
-                        <select class="form-control" id="role" name="role">
-                            <option value="admin" <?php echo e($user->role == 'admin' ? 'selected' : ''); ?>>Admin</option>
-                            <option value="user" <?php echo e($user->role == 'user' ? 'selected' : ''); ?>>User</option>
-                        </select>
-                    </div>
+           
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Update</button>
@@ -271,6 +295,7 @@
 </div>
 
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
 
 
 
