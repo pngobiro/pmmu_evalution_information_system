@@ -31,8 +31,6 @@ class CreateTemplateIndicatorsTable extends Migration
             $table->decimal('indicator_target', 10, 2)->nullable();
             $table->decimal('indicator_achivement', 10, 2)->nullable();
             $table->boolean('is_backlog_indicator')->default(false);
-            $table->mediumText('remarks')->nullable();
-            $table->dateTime('deleted_at')->nullable();
             $table->integer('order');
             $table->timestamps();
         });
