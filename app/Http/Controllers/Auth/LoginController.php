@@ -84,25 +84,25 @@ class LoginController extends Controller
    
     protected function authenticated(Request $request, $user)
     {
-            if ($user->default_password_set == 1) 
-            {
+//if ($user->default_password_set == 1) 
+            ///{
                redirect()->route('user_change_password_form', $user->id);
-            }
-            else 
+           /// }
+          ///  else 
             
-            {
-                    if ($request->user()->IsAdmin()) {
+          ///  {
+                 ///   if ($request->user()->IsAdmin()) {
 
-                            return redirect('/admin-dashboard')->with('message', 'Logged In Successfully');;
-                    }
+///                            return redirect('/admin-dashboard')->with('message', 'Logged In Successfully');;
+                   /// }
 
-                    else{
+                   /// else{
                         
-                            return redirect('/dashboard')->with('message', 'Logged In Successfully');;
-                    }
+                        ///    return redirect('/dashboard')->with('message', 'Logged In Successfully');;
+                   /// }
                     
 
-    }
+    //}
 }
 
 
