@@ -2,6 +2,14 @@
 
 @section('content')
 
+<!-- show  message -->
+@if(Session::has('message'))
+<div class="alert alert-success">
+    {{ Session::get('message') }}
+</div>
+@endif
+
+
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">

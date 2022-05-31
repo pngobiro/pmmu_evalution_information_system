@@ -1,5 +1,14 @@
 <?php $__env->startSection('content'); ?>
 
+<!-- show  message -->
+<?php if(Session::has('message')): ?>
+<div class="alert alert-success">
+    <?php echo e(Session::get('message')); ?>
+
+</div>
+<?php endif; ?>
+
+
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
@@ -11,15 +20,15 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('rankunitdropdown', [])->html();
-} elseif ($_instance->childHasBeenRendered('gbxSw6u')) {
-    $componentId = $_instance->getRenderedChildComponentId('gbxSw6u');
-    $componentTag = $_instance->getRenderedChildComponentTagName('gbxSw6u');
+} elseif ($_instance->childHasBeenRendered('ytpKNPX')) {
+    $componentId = $_instance->getRenderedChildComponentId('ytpKNPX');
+    $componentTag = $_instance->getRenderedChildComponentTagName('ytpKNPX');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('gbxSw6u');
+    $_instance->preserveRenderedChild('ytpKNPX');
 } else {
     $response = \Livewire\Livewire::mount('rankunitdropdown', []);
     $html = $response->html();
-    $_instance->logRenderedChild('gbxSw6u', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('ytpKNPX', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?> 

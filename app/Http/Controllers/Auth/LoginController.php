@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -53,6 +54,13 @@ class LoginController extends Controller
 
     public function login(Request $request){
 
+        // update the login attempts
+
+        $user = User::where('pj_number', $request->pj_number)->first();
+        $user->login_attempts = $user->login_attempts + 1;
+        $user->save();
+        
+
         $this->validateLogin($request);
 
         if ($this->hasTooManyLoginAttempts($request)) {
@@ -62,10 +70,15 @@ class LoginController extends Controller
         }
 
         if ($this->attemptLogin($request)) {
+
             return $this->sendLoginResponse($request);
         }
 
         $this->incrementLoginAttempts($request);
+
+        // save attempt in users table column login_attempts
+    
+
 
         return $this->sendFailedLoginResponse($request);
     }
@@ -84,26 +97,24 @@ class LoginController extends Controller
    
     protected function authenticated(Request $request, $user)
     {
-//if ($user->default_password_set == 1) 
-            ///{
-               redirect()->route('user_change_password_form', $user->id);
-           /// }
-          ///  else 
-            
-          ///  {
-                 ///   if ($request->user()->IsAdmin()) {
 
-///                            return redirect('/admin-dashboard')->with('message', 'Logged In Successfully');;
-                   /// }
+        
+        if ($user->default_password_set == 1) 
+        
+        {
+            return redirect()->route('user_change_password_form', $user->id )->with('status', 'Please change your password.');
 
-                   /// else{
-                        
-                        ///    return redirect('/dashboard')->with('message', 'Logged In Successfully');;
-                   /// }
-                    
+        }
 
-    //}
-}
+        
+        else
+        {
+            return redirect()->route('dashboard')->with('status', 'You are logged in!');
+        }
+
+
+
+    }
 
 
 }

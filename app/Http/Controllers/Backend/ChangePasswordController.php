@@ -12,6 +12,17 @@ class ChangePasswordController extends Controller
    
   public function change_password_form(Request $request, User $user){
 
+  
+  
+
+    // Get the user from the database
+ 
+    $user->default_password_set = 0;
+    $user->password = Hash::make($request->password);
+    $user->save();
+
+    return redirect()->route('dashboard')->with('status', 'Password changed successfully.');
+
 
 
     return view('admin.users.change_password_form',compact('user'));
